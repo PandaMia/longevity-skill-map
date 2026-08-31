@@ -1366,6 +1366,7 @@
     {"from":"school_computer_science","to":"python_data_analysis","type":"prerequisite","strength":"required","rationale":"Data analysis involves basic programming."},
     {"from":"school_computer_science","to":"algorithms_data_structures","type":"prerequisite","strength":"required","rationale":"Algorithms are best learned after basic programming constructs."},
     {"from":"discrete_math_graphs","to":"algorithms_data_structures","type":"prerequisite","strength":"recommended","rationale":"Discrete structures provide a mathematical basis for algorithms."},
+    {"from":"algorithms_data_structures","to":"bioinformatics_foundations","type":"recommended_before","strength":"recommended","rationale":"Sequence analysis and scalable biological data processing benefit from algorithmic design and appropriate data structures."},
     {"from":"school_computer_science","to":"reproducible_computing","type":"prerequisite","strength":"recommended","rationale":"Version control and environments are easier to understand after basic programming."},
     {"from":"scientific_reasoning","to":"data_management_fair","type":"prerequisite","strength":"recommended","rationale":"Data management follows from the requirements of verifiability of the study."},
 
@@ -1425,6 +1426,7 @@
     {"from":"school_physics","to":"microscopy_flow_cytometry","type":"recommended_before","strength":"recommended","rationale":"Optics and fluorescence are based on the physics of light."},
     {"from":"experimental_design_biostatistics","to":"animal_models_aging","type":"prerequisite","strength":"required","rationale":"Animal studies require power, randomization, and control."},
     {"from":"geroscience_hallmarks","to":"animal_models_aging","type":"prerequisite","strength":"required","rationale":"The model is selected for specific aging mechanism and outcome."},
+    {"from":"animal_models_aging","to":"drug_discovery_development","type":"recommended_before","strength":"recommended","rationale":"Preclinical development requires choosing informative models and interpreting their efficacy, safety, and translational limits."},
     {"from":"cell_culture_functional_assays","to":"assay_development_screening","type":"prerequisite","strength":"required","rationale":"Screening scales up validated functional assay."},
     {"from":"experimental_design_biostatistics","to":"assay_development_screening","type":"prerequisite","strength":"required","rationale":"Assay quality requires controls and statistical metrics."},
     {"from":"pharmacology_toxicology","to":"assay_development_screening","type":"recommended_before","strength":"recommended","rationale":"Dose-response and counter-screens require pharmacology."},
@@ -1456,6 +1458,7 @@
     {"from":"python_data_analysis","to":"structural_biology_computational_chemistry","type":"prerequisite","strength":"recommended","rationale":"Modeling and structure analysis are programmatic."},
     {"from":"microscopy_flow_cytometry","to":"bioimage_analysis","type":"prerequisite","strength":"required","rationale":"Quantification requires an understanding of image acquisition and artifacts."},
     {"from":"python_data_analysis","to":"bioimage_analysis","type":"prerequisite","strength":"required","rationale":"Image pipelines are implemented programmatically."},
+    {"from":"bioimage_analysis","to":"assay_development_screening","type":"recommended_before","strength":"recommended","rationale":"High-content screening depends on robust segmentation, feature extraction, and image-level quality control."},
 
     {"from":"python_data_analysis","to":"machine_learning_foundations","type":"prerequisite","strength":"required","rationale":"ML exercises and pipelines require Python."},
     {"from":"linear_algebra","to":"machine_learning_foundations","type":"prerequisite","strength":"required","rationale":"Models and embeddings use matrices and vectors."},
@@ -1492,6 +1495,7 @@
     {"from":"genetics_genomics","to":"crispr_genome_editing","type":"prerequisite","strength":"required","rationale":"Target and off-target interpretation require genetics."},
     {"from":"crispr_genome_editing","to":"epigenome_editing","type":"prerequisite","strength":"required","rationale":"Epigenome editing uses programmable targeting."},
     {"from":"epigenetics_chromatin","to":"epigenome_editing","type":"prerequisite","strength":"required","rationale":"The effect depends on the chromatin and regulatory context."},
+    {"from":"epigenome_editing","to":"epigenetic_rejuvenation","type":"recommended_before","strength":"recommended","rationale":"Targeted activation, repression, or chromatin rewriting is one route for testing and implementing epigenetic rejuvenation programs."},
     {"from":"molecular_biology","to":"gene_therapy_delivery","type":"prerequisite","strength":"required","rationale":"Expression cassette and vector biology require molecular biology."},
     {"from":"immunology","to":"gene_therapy_delivery","type":"prerequisite","strength":"required","rationale":"Innate/adaptive immune responses."},
     {"from":"pharmacology_toxicology","to":"gene_therapy_delivery","type":"prerequisite","strength":"required","rationale":"Dose, biodistribution and toxicity should be evaluated."},

@@ -141,6 +141,8 @@ def main() -> int:
             fail(errors, f"{node_id}: target is not reachable from a school-level node")
         if node.get("level") != "school" and inbound_learning[node_id] == 0:
             fail(errors, f"{node_id}: non-school node has no learning prerequisite")
+        if node.get("kind") not in TARGET_KINDS and not learning_graph[node_id]:
+            fail(errors, f"{node_id}: non-target node has no learning dependent")
 
     if errors:
         print("Graph validation failed:")

@@ -21,7 +21,34 @@ class ApplicationTests(unittest.TestCase):
     def test_full_graph_is_available(self) -> None:
         response = build_graph_response(GraphQuery())
         self.assertEqual(len(response.nodes), 106)
-        self.assertEqual(len(response.edges), 276)
+        self.assertEqual(len(response.edges), 280)
+
+    def test_only_research_targets_are_terminal_learning_nodes(self) -> None:
+        learning_types = {"prerequisite", "recommended_before"}
+        nodes_with_dependents = {
+            edge.from_
+            for edge in GRAPH.edges
+            if edge.type.value in learning_types
+        }
+        terminal_nodes = [node for node in GRAPH.nodes if node.id not in nodes_with_dependents]
+        self.assertTrue(terminal_nodes)
+        self.assertTrue(
+            all(node.kind.value in {"research_direction", "integration_goal"} for node in terminal_nodes)
+        )
+
+    def test_intermediate_nodes_have_intended_learning_continuations(self) -> None:
+        learning_pairs = {
+            (edge.from_, edge.to)
+            for edge in GRAPH.edges
+            if edge.type.value in {"prerequisite", "recommended_before"}
+        }
+        expected_pairs = {
+            ("algorithms_data_structures", "bioinformatics_foundations"),
+            ("animal_models_aging", "drug_discovery_development"),
+            ("bioimage_analysis", "assay_development_screening"),
+            ("epigenome_editing", "epigenetic_rejuvenation"),
+        }
+        self.assertLessEqual(expected_pairs, learning_pairs)
 
     def test_layout_is_deterministic(self) -> None:
         first_positions, first_bounds, first_lanes = deterministic_layout(GRAPH)
