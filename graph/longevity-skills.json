@@ -1,0 +1,1673 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-08-29",
+  "language": "en",
+  "edge_direction": "prerequisite_to_dependent",
+  "status_values": [
+    "foundational",
+    "established_biology",
+    "active_preclinical",
+    "early_clinical",
+    "clinical_platform",
+    "speculative"
+  ],
+  "nodes": [
+    {
+      "id": "school_algebra_functions",
+      "title": "Algebra, functions and graphs",
+      "summary": "School algebra: equations, powers, logarithms, functions, graphs, and proportions. It is needed for chemical kinetics, statistics, physiological models, and machine learning.",
+      "kind": "foundation",
+      "topics": ["quantitative_sciences"],
+      "level": "school",
+      "status": "foundational",
+      "resources": [
+        {"title": "OpenStax Algebra and Trigonometry 2e", "url": "https://openstax.org/details/books/algebra-and-trigonometry-2e", "type": "textbook", "provider": "OpenStax / Rice University", "level": "school"}
+      ]
+    },
+    {
+      "id": "school_calculus",
+      "title": "Mathematical analysis",
+      "summary": "Limits, derivatives, integrals, and continuous change. Forms a language for reaction kinetics, population dynamics, optimization and differential models.",
+      "kind": "foundation",
+      "topics": ["quantitative_sciences"],
+      "level": "introductory",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 18.01SC Single Variable Calculus", "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/", "type": "course", "provider": "MIT OpenCourseWare", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "linear_algebra",
+      "title": "Linear algebra",
+      "summary": "Vectors, matrices, linear transformations, eigenvalues, and matrix decompositions. A shared prerequisite for multi-omics, ML, network models, and image analysis.",
+      "kind": "foundation",
+      "topics": ["quantitative_sciences", "ml_ai"],
+      "level": "introductory",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 18.06SC Linear Algebra", "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/", "type": "course", "provider": "MIT OpenCourseWare", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "probability_statistics",
+      "title": "Probability and statistics",
+      "summary": "Random values, distributions, estimation, confidence intervals and hypothesis testing. Reused in all experimental, clinical and computational branches.",
+      "kind": "foundation",
+      "topics": ["quantitative_sciences"],
+      "level": "introductory",
+      "status": "foundational",
+      "resources": [
+        {"title": "OpenStax Introductory Statistics 2e", "url": "https://openstax.org/details/books/introductory-statistics-2e", "type": "textbook", "provider": "OpenStax / Rice University", "level": "introductory"},
+        {"title": "MIT 18.05 Introduction to Probability and Statistics", "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "differential_equations_dynamics",
+      "title": "Differential equations and dynamical systems",
+      "summary": "Models of change over time, stability, feedback and nonlinear dynamics. Necessary for signaling networks, cell populations, pharmacokinetics and systemic physiology.",
+      "kind": "skill",
+      "topics": ["quantitative_sciences", "bioinformatics_omics"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 18.03SC Differential Equations", "url": "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "discrete_math_graphs",
+      "title": "Discrete mathematics and graph theory",
+      "summary": "Combinatorics, graphs, recurrence relations, and proofs. Required for biological networks, knowledge graphs, lineage trees, and graph ML models.",
+      "kind": "foundation",
+      "topics": ["quantitative_sciences", "computing_data"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 6.042J Mathematics for Computer Science", "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "school_physics",
+      "title": "School physics and energy",
+      "summary": "Mechanics, energy, electricity, diffusion, waves and basic thermodynamics. Supports biophysics, imaging, electrophysiology and transport phenomena.",
+      "kind": "foundation",
+      "topics": ["quantitative_sciences"],
+      "level": "school",
+      "status": "foundational",
+      "resources": [
+        {"title": "OpenStax College Physics 2e", "url": "https://openstax.org/details/books/college-physics-2e", "type": "textbook", "provider": "OpenStax / Rice University", "level": "school"},
+        {"title": "MIT 8.01SC Classical Mechanics", "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/", "type": "course", "provider": "MIT OpenCourseWare", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "school_chemistry",
+      "title": "General chemistry",
+      "summary": "Atomic structure, chemical bonds, stoichiometry, equilibrium, acids and bases, thermodynamics and kinetics. Basis for biochemistry, pharmacology and materials science.",
+      "kind": "foundation",
+      "topics": ["chemistry_pharmacology"],
+      "level": "school",
+      "status": "foundational",
+      "resources": [
+        {"title": "OpenStax Chemistry 2e", "url": "https://openstax.org/details/books/chemistry-2e", "type": "textbook", "provider": "OpenStax / Rice University", "level": "school"},
+        {"title": "MIT 5.111SC Principles of Chemical Science", "url": "https://ocw.mit.edu/courses/5-111sc-principles-of-chemical-science-fall-2014/", "type": "course", "provider": "MIT OpenCourseWare", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "organic_chemistry",
+      "title": "Organic chemistry",
+      "summary": "Structure and reactivity of organic molecules, functional groups, stereochemistry and reaction mechanisms. It is necessary for biochemistry and medicinal chemistry.",
+      "kind": "discipline",
+      "topics": ["chemistry_pharmacology"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 5.12 Organic Chemistry I", "url": "https://ocw.mit.edu/courses/5-12-organic-chemistry-i-spring-2005/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "school_biology",
+      "title": "School biology",
+      "summary": "Cell, heredity, evolution, metabolism, physiology and ecology. The starting point for all longevity biological routes.",
+      "kind": "foundation",
+      "topics": ["molecular_cell_biology"],
+      "level": "school",
+      "status": "foundational",
+      "resources": [
+        {"title": "OpenStax Biology 2e", "url": "https://openstax.org/details/books/biology-2e/", "type": "textbook", "provider": "OpenStax / Rice University", "level": "school"},
+        {"title": "Khan Academy: Preparing to study biology", "url": "https://www.khanacademy.org/science/ap-biology/ap-intro-to-biology/ap-what-is-biology/a/prep-to-study-biology", "type": "article", "provider": "Khan Academy", "level": "school"}
+      ]
+    },
+    {
+      "id": "school_computer_science",
+      "title": "Fundamentals of programming",
+      "summary": "Variables, conditionals, loops, functions, data structures, and debugging. A foundation for data analysis, bioinformatics, ML, and experiment automation.",
+      "kind": "foundation",
+      "topics": ["computing_data"],
+      "level": "school",
+      "status": "foundational",
+      "resources": [
+        {"title": "CS50x Introduction to Computer Science", "url": "https://cs50.harvard.edu/x/", "type": "course", "provider": "Harvard University", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "scientific_reasoning",
+      "title": "Scientific thinking and working with evidence",
+      "summary": "Hypotheses, causality, controls, reproducibility, sources of error, and levels of evidence. Protects the map from conflating correlations, preclinical results, and clinical efficacy.",
+      "kind": "foundation",
+      "topics": ["research_clinical"],
+      "level": "school",
+      "status": "foundational",
+      "resources": [
+        {"title": "NIH Training for Rigor and Reproducibility", "url": "https://grants.nih.gov/policy-and-compliance/policy-topics/reproducibility/training", "type": "course_collection", "provider": "NIH", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "introductory_biology",
+      "title": "Introductory university biology",
+      "summary": "A unified framework of biochemistry, genetics, molecular and cellular biology with an emphasis on the mechanisms of living systems and experimental evidence.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 7.016 Introductory Biology", "url": "https://ocw.mit.edu/courses/7-016-introductory-biology-fall-2018/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "biochemistry",
+      "title": "Biochemistry",
+      "summary": "Protein structure and function, enzymes, membranes, metabolism, bioenergetics, and molecular recognition. The shared language of most molecular longevity research.",
+      "kind": "discipline",
+      "topics": ["chemistry_pharmacology"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 7.05 General Biochemistry", "url": "https://ocw.mit.edu/courses/7-05-general-biochemistry-spring-2020/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "molecular_biology",
+      "title": "Molecular biology",
+      "summary": "DNA replication and repair, transcription, RNA processing, gene translation and regulation. Needed for genome maintenance, editing, omics and reprogramming.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 7.28x Molecular Biology", "url": "https://ocw.mit.edu/courses/res-7-008-7-28x-molecular-biology/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "cell_biology",
+      "title": "Cell biology",
+      "summary": "Organelles, membrane transport, cytoskeleton, cell cycle, signaling, apoptosis, and tissue cellular organization. The basis of senescence, autophagy and regenerative medicine.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 7.06 Cell Biology", "url": "https://ocw.mit.edu/courses/7-06-cell-biology-spring-2007/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "genetics_genomics",
+      "title": "Genetics and genomics",
+      "summary": "Inheritance, recombination, linkage, population variation, genome structure, and genotype-phenotype connections. Comparative biology, cancer evolution and genome editing.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 7.03 Genetics", "url": "https://ocw.mit.edu/courses/7-03-genetics-fall-2004/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "epigenetics_chromatin",
+      "title": "Epigenetics and chromatin",
+      "summary": "DNA methylation, histone modifications, chromatin remodeling, 3D genome and cellular inheritance. Central base for aging clocks, epigenome editing and reprogramming.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "The Nature of Epigenetic Aging from a Single-Cell Perspective", "url": "https://www.nature.com/articles/s43587-024-00616-0", "type": "review", "provider": "Nature Aging", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "physiology_homeostasis",
+      "title": "Physiology and homeostasis",
+      "summary": "Organ functions, endocrine and neural control, blood circulation, respiration, kidneys, exchange and inter-organ coordination. It is necessary for the transition from cellular effects to whole-body outcomes.",
+      "kind": "discipline",
+      "topics": ["physiology_neuroscience"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "OpenStax Anatomy and Physiology 2e", "url": "https://openstax.org/details/books/anatomy-and-physiology-2e", "type": "textbook", "provider": "OpenStax / Rice University", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "immunology",
+      "title": "Immunology",
+      "summary": "Innate and adaptive immunity, antigen presentation, tolerance, inflammation, immune memory and tumor surveillance. Base for inflammaging, thymus/HSC and cancer proofing.",
+      "kind": "discipline",
+      "topics": ["immunology_cancer"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 7.016 Introductory Biology — Immunology materials", "url": "https://ocw.mit.edu/courses/7-016-introductory-biology-fall-2018/pages/lecture-videos/", "type": "course_module", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "microbiology_microbial_ecology",
+      "title": "Microbiology and Microbial Ecology",
+      "summary": "Bacterial physiology, communities, host-microbe interactions, ecology, and microbial metabolism. The basis for the causal study of microbiome and dysbiosis.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "OpenStax Microbiology", "url": "https://openstax.org/details/books/microbiology", "type": "textbook", "provider": "OpenStax / Rice University", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "developmental_stem_cell_biology",
+      "title": "Developmental and stem cell biology",
+      "summary": "Cell fate, differentiation, morphogens, stem-cell niches, regeneration and iPSC. Common base for tissue repair, organoids, HSC and partial reprogramming.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology", "regenerative_medicine"],
+      "level": "undergraduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "MIT 7.013 Introductory Biology — development and stem cells readings", "url": "https://ocw.mit.edu/courses/7-013-introductory-biology-spring-2013/pages/readings/", "type": "course_module", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "neuroscience",
+      "title": "Neuroscience",
+      "summary": "Neurons and glia, synapses, circuits, myelin, neurovascular unit and plasticity. Brain aging, microglia and neural replacement.",
+      "kind": "discipline",
+      "topics": ["physiology_neuroscience"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 9.01 Introduction to Neuroscience", "url": "https://ocw.mit.edu/courses/9-01-introduction-to-neuroscience-fall-2007/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "cancer_biology",
+      "title": "Cancer Biology and Tumor Evolution",
+      "summary": "Oncogenes, tumor suppressors, genome instability, clonal evolution, microenvironment, immune escape and metastasis. Mandatory safety pre-requisite for telomerase, reprogramming and regeneration.",
+      "kind": "discipline",
+      "topics": ["immunology_cancer", "molecular_cell_biology"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "MIT 7.013 Introductory Biology — Cancer readings", "url": "https://ocw.mit.edu/courses/7-013-introductory-biology-spring-2013/pages/readings/", "type": "course_module", "provider": "MIT OpenCourseWare", "level": "undergraduate"},
+        {"title": "The Hallmarks of Cancer", "url": "https://doi.org/10.1016/j.cell.2011.02.013", "type": "review", "provider": "Cell", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "geroscience_hallmarks",
+      "title": "Geroscience and Hallmarks of Aging",
+      "summary": "Integrative model of mechanisms of aging, their relationships and criteria of causality. Provides top-level navigation, but does not prove the effectiveness of specific therapies.",
+      "kind": "discipline",
+      "topics": ["geroscience"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "Hallmarks of Aging: An Expanding Universe", "url": "https://pubmed.ncbi.nlm.nih.gov/36599349/", "type": "review", "provider": "Cell", "level": "graduate"},
+        {"title": "Open Longevity Research Roadmap", "url": "https://www.openlongevity.org/research_roadmap_1", "type": "roadmap", "provider": "Open Longevity", "level": "graduate"},
+        {"title": "USC PhD in Biology of Aging Curriculum", "url": "https://gero.usc.edu/students/current-students/ph-d-students/phd-in-biology-of-aging-student-handbook/", "type": "university_program", "provider": "USC Leonard Davis School of Gerontology / Buck Institute", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "metabolism_redox",
+      "title": "Metabolism, Bioenergetics and Redox",
+      "summary": "Glycolysis, TCA, oxidative phosphorylation, NAD/NADH, ROS, nutrient sensing and metabolic flux. Common base for mTOR/AMPK, NAD+, mitochondria and cancer metabolism.",
+      "kind": "discipline",
+      "topics": ["chemistry_pharmacology", "physiology_neuroscience"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "MIT 7.05 General Biochemistry", "url": "https://ocw.mit.edu/courses/7-05-general-biochemistry-spring-2020/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"},
+        {"title": "NAD in Aging Biology: Potential Applications and Many Unknowns", "url": "https://academic.oup.com/edrv/article/44/6/1047/7207987", "type": "review", "provider": "Endocrine Reviews", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "proteostasis_autophagy",
+      "title": "Proteostasis, autophagy and lysosomes",
+      "summary": "Protein folding, chaperones, ubiquitin-proteasome system, macroautophagy, CMA and lysosomal degradation. Required for protein aggregates, lipofuscin and mitophagy.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology", "geroscience"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "Mechanisms of Autophagy–Lysosome Dysfunction in Neurodegenerative Diseases", "url": "https://www.nature.com/articles/s41580-024-00757-5", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "mitochondrial_biology",
+      "title": "Mitochondrial biology and quality control",
+      "summary": "Electron transport, mtDNA, dynamics, biogenesis, unfolded-protein response and mitophagy. Allows you to distinguish energy defects, signaling and removal of damaged organelles.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology", "chemistry_pharmacology"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "Suppressed Basal Mitophagy Drives Cellular Aging Phenotypes", "url": "https://pubmed.ncbi.nlm.nih.gov/38897197/", "type": "research_article", "provider": "Cell Reports", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "cellular_senescence",
+      "title": "Cellular senescence",
+      "summary": "Stable cell-cycle arrest, SASP, biomarkers, beneficial and pathological roles, heterogeneity and immune clearance. Common base for senolytics, senomorphics and senescence-aware safety.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology", "geroscience"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "Roles of Chromatin and Genome Instability in Cellular Senescence", "url": "https://www.nature.com/articles/s41580-024-00775-3", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "extracellular_matrix_biology",
+      "title": "Extracellular matrix and mechanobiology",
+      "summary": "Collagen, elastin, proteoglycans, cross-links, matrix turnover, stiffness, mechanotransduction and fibrosis. ECM rejuvenation, AGE and tissue engineering.",
+      "kind": "discipline",
+      "topics": ["molecular_cell_biology", "regenerative_medicine"],
+      "level": "graduate",
+      "status": "established_biology",
+      "resources": [
+        {"title": "Strategic Outline of Interventions Targeting Extracellular Matrix", "url": "https://journals.physiology.org/doi/10.1152/ajpcell.00060.2023", "type": "review_and_roadmap", "provider": "American Journal of Physiology", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "pharmacology_toxicology",
+      "title": "Pharmacology and toxicology",
+      "summary": "Dose-response, receptors, ADME, pharmacokinetics, pharmacodynamics, therapeutic window and safety. Mandatory before developing or interpreting gerotherapeutics.",
+      "kind": "discipline",
+      "topics": ["chemistry_pharmacology", "research_clinical"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 20.201 Mechanisms of Drug Actions", "url": "https://ocw.mit.edu/courses/20-201-mechanisms-of-drug-actions-fall-2013/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "systems_biology",
+      "title": "Systems biology and biological networks",
+      "summary": "Pathways, feedback loops, network motifs, multi-scale models and emergent behavior. It connects individual hallmarks and is needed for combination therapies.",
+      "kind": "discipline",
+      "topics": ["bioinformatics_omics", "quantitative_sciences"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 20.305 Principles of Synthetic Biology", "url": "https://ocw.mit.edu/courses/20-305j-principles-of-synthetic-biology-fall-2015/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"},
+        {"title": "EMBL-EBI Methods in Bioinformatics: Biological Networks", "url": "https://www.ebi.ac.uk/training/online/courses/methods-in-bioinformatics/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "python_data_analysis",
+      "title": "Python and data analysis",
+      "summary": "Python, NumPy, pandas, notebooks, testing and tabular data processing. A common practical node for bioinformatics, ML, statistics and automation.",
+      "kind": "skill",
+      "topics": ["computing_data"],
+      "level": "introductory",
+      "status": "foundational",
+      "resources": [
+        {"title": "The Python Tutorial", "url": "https://docs.python.org/3/tutorial/", "type": "documentation", "provider": "Python Software Foundation", "level": "introductory"},
+        {"title": "pandas Getting Started", "url": "https://pandas.pydata.org/docs/getting_started/index.html", "type": "tutorial", "provider": "pandas", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "algorithms_data_structures",
+      "title": "Algorithms and data structures",
+      "summary": "Complexity, arrays, hash tables, trees, graphs, and algorithmic design. It is necessary for scalable processing of omics and knowledge graphs.",
+      "kind": "skill",
+      "topics": ["computing_data"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 6.006 Introduction to Algorithms", "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "reproducible_computing",
+      "title": "Linux, Git and Reproducible Computing",
+      "summary": "Command Prompt, version control, environments, containers, tests, and provenance computing. Makes analysis testable and repeatable.",
+      "kind": "skill",
+      "topics": ["computing_data", "research_clinical"],
+      "level": "introductory",
+      "status": "foundational",
+      "resources": [
+        {"title": "The Turing Way: Reproducible Research", "url": "https://book.the-turing-way.org/reproducible-research/reproducible-research", "type": "handbook", "provider": "The Alan Turing Institute", "level": "introductory"},
+        {"title": "GitHub Skills", "url": "https://skills.github.com/", "type": "interactive_course", "provider": "GitHub", "level": "introductory"}
+      ]
+    },
+    {
+      "id": "data_management_fair",
+      "title": "Scientific Data Management and FAIR",
+      "summary": "Metadata, identifiers, formats, ontologies, repositories, privacy and FAIR principles. Needed for large cohorts, multi-omics and results sharing.",
+      "kind": "skill",
+      "topics": ["computing_data", "research_clinical"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "EMBL-EBI: Bringing Data to Life — Data Management", "url": "https://www.ebi.ac.uk/training/online/courses/bringing-data-to-life-data-management-for-the-biomolecular-sciences/", "type": "course", "provider": "EMBL-EBI", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "experimental_design_biostatistics",
+      "title": "Experimental design and biostatistics",
+      "summary": "Controls, randomization, blinding, power, sample size, repeated measures, multiple testing and effect sizes. It is mandatory to evaluate any intervention of longevity.",
+      "kind": "skill",
+      "topics": ["quantitative_sciences", "research_clinical"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "NIH Rigor and Reproducibility Training", "url": "https://grants.nih.gov/policy-and-compliance/policy-topics/reproducibility/training", "type": "course_collection", "provider": "NIH", "level": "undergraduate"},
+        {"title": "ARRIVE Guidelines 2.0", "url": "https://arriveguidelines.org/arrive-guidelines", "type": "guideline", "provider": "NC3Rs", "level": "professional"}
+      ]
+    },
+    {
+      "id": "causal_inference",
+      "title": "Causal inference",
+      "summary": "Confounding, DAGs, counterfactuals, target trial emulation and causal estimands. It helps distinguish the biomarker association from the causal mechanism or effect of the intervention.",
+      "kind": "skill",
+      "topics": ["quantitative_sciences", "research_clinical"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "Causal Inference: What If", "url": "https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/", "type": "textbook", "provider": "Harvard T.H. Chan School of Public Health", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "evidence_synthesis",
+      "title": "Systematic reviews and meta-analysis",
+      "summary": "Question formulation, research search, risk of bias, synthesis, GRADE and interpretation of uncertainty. You need to check claims in fast-changing longevity.",
+      "kind": "skill",
+      "topics": ["research_clinical"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "Cochrane Handbook for Systematic Reviews of Interventions", "url": "https://training.cochrane.org/handbook/current", "type": "handbook", "provider": "Cochrane", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "clinical_research_trials",
+      "title": "Clinical research and trials",
+      "summary": "Protocol design, endpoints, randomization, monitoring, adverse events, ethics and regulatory context. It is necessary to translate geroscience from models to humans.",
+      "kind": "skill",
+      "topics": ["research_clinical", "quantitative_sciences"],
+      "level": "professional",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "NIH Introduction to the Principles and Practice of Clinical Research", "url": "https://ocreco.od.nih.gov/courses/ippcr.html", "type": "course", "provider": "NIH Clinical Center", "level": "professional"}
+      ]
+    },
+    {
+      "id": "regulatory_ethics",
+      "title": "Bioethics and regulation",
+      "summary": "Human subjects, informed consent, germline issues, gene therapy oversight, animal welfare, data privacy and dual-use risk. Necessary for secure broadcasting of frontier technologies.",
+      "kind": "skill",
+      "topics": ["research_clinical"],
+      "level": "professional",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "HHS Human Research Protection Training", "url": "https://www.hhs.gov/ohrp/education-and-outreach/human-research-protection-training/index.html", "type": "course_collection", "provider": "U.S. HHS OHRP", "level": "professional"}
+      ]
+    },
+    {
+      "id": "molecular_biology_lab",
+      "title": "Practical molecular biology",
+      "summary": "Pipetting, nucleic-acid purification, PCR, cloning, electrophoresis, quantitative assays and lab records. Basic wet-lab competence for genome and gene-expression research.",
+      "kind": "skill",
+      "topics": ["molecular_cell_biology", "research_clinical"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 7.003 Applied Molecular Biology Laboratory", "url": "https://ocw.mit.edu/courses/7-003-applied-molecular-biology-lab-spring-2022/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "cell_culture_functional_assays",
+      "title": "Cell Culture and Functional Assays",
+      "summary": "Aseptic technique, primary/immortalized cells, organotypic models, viability, proliferation, senescence and perturbation assays. It is necessary for preclinical testing of interventions.",
+      "kind": "skill",
+      "topics": ["molecular_cell_biology", "research_clinical"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "ATCC Animal Cell Culture Guide", "url": "https://www.atcc.org/resources/culture-guides/animal-cell-culture-guide", "type": "guide", "provider": "ATCC", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "microscopy_flow_cytometry",
+      "title": "Microscopy, imaging and flow cytometry",
+      "summary": "Optical microscopy, fluorescence, image quantification, flow cytometry and sorting. Allows measurement of cell states, immune populations and tissue phenotypes.",
+      "kind": "skill",
+      "topics": ["molecular_cell_biology", "research_clinical"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "iBiology Microscopy Series", "url": "https://www.ibiology.org/online-biology-courses/microscopy-series/", "type": "course", "provider": "iBiology", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "animal_models_aging",
+      "title": "Model organisms and aging research",
+      "summary": "Yeast, worms, flies, fish and mice; lifespan/healthspan assays, strain/sex effects, welfare and translational limits. It is necessary for correct reading of preclinical results.",
+      "kind": "skill",
+      "topics": ["geroscience", "research_clinical"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "ARRIVE Guidelines 2.0", "url": "https://arriveguidelines.org/arrive-guidelines", "type": "guideline", "provider": "NC3Rs", "level": "professional"}
+      ]
+    },
+    {
+      "id": "assay_development_screening",
+      "title": "Assay development and high-throughput screening",
+      "summary": "Assay quality, controls, Z-prime, dose-response, automation and hit validation. CRISPR/drug screens and search for senolytics or pathway modulators.",
+      "kind": "skill",
+      "topics": ["chemistry_pharmacology", "research_clinical"],
+      "level": "professional",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Assay Guidance Manual", "url": "https://www.ncbi.nlm.nih.gov/books/NBK53196/", "type": "handbook", "provider": "NCATS / NCBI Bookshelf", "level": "professional"}
+      ]
+    },
+    {
+      "id": "bioinformatics_foundations",
+      "title": "Basics of bioinformatics",
+      "summary": "Biological databases, sequence analysis, annotation, workflows and reproducibility. It combines molecular biology with computational analysis.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "EMBL-EBI Methods in Bioinformatics", "url": "https://www.ebi.ac.uk/training/online/courses/methods-in-bioinformatics/", "type": "course", "provider": "EMBL-EBI", "level": "undergraduate"},
+        {"title": "EMBL-EBI Competency Hub and Career Profiles", "url": "https://www.ebi.ac.uk/training/online/courses/bioinformatics-for-principal-investigators-collection/building-your-team-competencies/", "type": "competency_framework", "provider": "EMBL-EBI", "level": "professional"}
+      ]
+    },
+    {
+      "id": "ngs_genomic_analysis",
+      "title": "NGS and analysis of genomic variants",
+      "summary": "Sequencing technologies, QC, alignment, variant calling, annotation and interpretation. Somatic mutations, CRISPR screens and comparative genomics.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics", "molecular_cell_biology"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "EMBL-EBI Methods in Bioinformatics — Genomic Variants", "url": "https://www.ebi.ac.uk/training/online/courses/methods-in-bioinformatics/", "type": "course_module", "provider": "EMBL-EBI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "transcriptomics",
+      "title": "Transcriptomics and gene expression analysis",
+      "summary": "RNA-seq design, normalization, differential expression, pathway enrichment and confounders. Required for aging signatures, perturbations and reprogramming.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "RNA-seq Analysis Is Easy as 1-2-3 with Limma, Glimma and edgeR", "url": "https://bioconductor.org/packages/release/workflows/html/RNAseq123.html", "type": "workflow", "provider": "Bioconductor", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "single_cell_spatial_omics",
+      "title": "Single-cell and spatial omics",
+      "summary": "Experimental design, QC, dimensionality reduction, cell annotation, batch correction, trajectories and spatial context. Tissue-specific aging and rejuvenation atlases.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "EMBL-EBI Starting Single-Cell RNA-seq Analysis", "url": "https://www.ebi.ac.uk/training/events/starting-single-cell-rna-seq-analysis-virtual/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "proteomics_metabolomics",
+      "title": "Proteomics, metabolomics and lipidomics",
+      "summary": "Mass spectrometry, feature identification, normalization, pathway analysis and measurement uncertainty. It is necessary for proteostasis, metabolism, biomarkers and multi-omics.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics", "chemistry_pharmacology"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "EMBL-EBI Methods in Bioinformatics — Mass Spectrometry Proteomics", "url": "https://www.ebi.ac.uk/training/online/courses/methods-in-bioinformatics/", "type": "course_module", "provider": "EMBL-EBI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "multiomics_integration",
+      "title": "Integration of multi-omics",
+      "summary": "Joint analysis of genomics, epigenomics, transcriptomics, proteomics, metabolomics and microbiome, taking into account batch, missingness and different scales.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics", "quantitative_sciences"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "Nonlinear Dynamics of Multi-Omics Profiles during Human Aging", "url": "https://www.nature.com/articles/s43587-024-00692-2", "type": "research_article", "provider": "Nature Aging", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "comparative_phylogenetics",
+      "title": "Comparative biology and phylogenetic methods",
+      "summary": "Phylogenetic trees, comparative models, orthology, convergent evolution and cross-species omics. It is necessary to search for natural mechanisms of longevity without pseudoreplication of species.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics", "molecular_cell_biology"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "EMBL-EBI Phylogenetics", "url": "https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "structural_biology_computational_chemistry",
+      "title": "Structural biology and computational chemistry",
+      "summary": "Protein structure, binding, molecular dynamics, docking and free-energy reasoning. AI protein design and structure-based drug discovery.",
+      "kind": "skill",
+      "topics": ["chemistry_pharmacology", "ml_ai"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "EMBL-EBI AlphaFold Training", "url": "https://www.ebi.ac.uk/training/online/courses/alphafold/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "bioimage_analysis",
+      "title": "Computational analysis of bioimages",
+      "summary": "Segmentation, tracking, feature extraction, quality control and deep-learning microscopy. Required for senescence, histology, organoids and high-content screening.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics", "ml_ai", "molecular_cell_biology"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "Bioimage Analysis", "url": "https://bioimagebook.github.io/", "type": "textbook", "provider": "Pete Bankhead / University of Edinburgh", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "machine_learning_foundations",
+      "title": "Basics of machine learning",
+      "summary": "Supervised/unsupervised learning, train/validation/test, regularization, leakage, metrics and error analysis. Common base for clocks, omics, imaging and drug discovery.",
+      "kind": "skill",
+      "topics": ["ml_ai", "quantitative_sciences"],
+      "level": "undergraduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "Google Machine Learning Crash Course", "url": "https://developers.google.com/machine-learning/crash-course/", "type": "course", "provider": "Google for Developers", "level": "introductory"},
+        {"title": "Stanford CS229 Machine Learning Notes", "url": "https://cs229.stanford.edu/materials.html-full", "type": "course", "provider": "Stanford University", "level": "undergraduate"}
+      ]
+    },
+    {
+      "id": "deep_learning",
+      "title": "Deep learning",
+      "summary": "Neural networks, backpropagation, optimization, convolution, representation learning and uncertainty. Imaging, foundation models and generative design.",
+      "kind": "skill",
+      "topics": ["ml_ai"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT Introduction to Deep Learning", "url": "https://introtodeeplearning.com/", "type": "course", "provider": "MIT", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "transformers_llms",
+      "title": "Transformers and large language models",
+      "summary": "Attention, pretraining, tokenization, fine-tuning, retrieval, evaluation and failure modes. It is used for biomedical NLP but does not replace primary source testing.",
+      "kind": "skill",
+      "topics": ["ml_ai"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "Stanford CS224N: NLP with Deep Learning", "url": "https://web.stanford.edu/class/cs224n/", "type": "course", "provider": "Stanford University", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "biomedical_nlp_knowledge_graphs",
+      "title": "Biomedical NLP and knowledge graphs",
+      "summary": "Entity normalization, relation extraction, ontologies, RAG, provenance and expert validation. Applied to literature mining and building a verifiable knowledge map.",
+      "kind": "skill",
+      "topics": ["ml_ai", "computing_data", "bioinformatics_omics"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "Large Language Models for Biomedicine: Best Practices", "url": "https://pubmed.ncbi.nlm.nih.gov/38657567/", "type": "review", "provider": "Journal of the American Medical Informatics Association", "level": "graduate"},
+        {"title": "iKraph Biomedical Knowledge Graph", "url": "https://www.nature.com/articles/s42256-025-01014-w", "type": "research_article", "provider": "Nature Machine Intelligence", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "biological_foundation_models",
+      "title": "Foundation models for cells and biological sequences",
+      "summary": "Transformer-like models for single-cell, DNA, RNA and protein data; pretraining, transfer and benchmarking against simple baselines.",
+      "kind": "skill",
+      "topics": ["ml_ai", "bioinformatics_omics"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "Large-Scale Foundation Model on Single-Cell Transcriptomics", "url": "https://www.nature.com/articles/s41592-024-02305-7", "type": "research_article", "provider": "Nature Methods", "level": "frontier"},
+        {"title": "Gene Perturbation Prediction Does Not Yet Outperform Linear Baselines", "url": "https://www.nature.com/articles/s41592-025-02772-6", "type": "research_article", "provider": "Nature Methods", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "aging_clocks_ml",
+      "title": "Machine-learning aging clocks",
+      "summary": "Building and validating clocks from methylation, omics, imaging, and clinical data; calibration, external validation, and distinction between prediction and causal aging.",
+      "kind": "skill",
+      "topics": ["ml_ai", "geroscience", "bioinformatics_omics"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Epigenetic Ageing Clocks: Statistical Methods and Challenges", "url": "https://www.nature.com/articles/s41576-024-00807-w", "type": "review", "provider": "Nature Reviews Genetics", "level": "frontier"},
+        {"title": "Validation of Biomarkers of Aging", "url": "https://doi.org/10.1038/S41591-023-02784-9", "type": "review", "provider": "Nature Medicine", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "ai_drug_discovery",
+      "title": "AI for Target Identification and Drug Discovery",
+      "summary": "Representation learning, virtual screening, generative chemistry, ADMET prediction and prospective validation. A model score is not a substitute for experimental and clinical validation.",
+      "kind": "skill",
+      "topics": ["ml_ai", "chemistry_pharmacology"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Creating an AI-First Drug Discovery Engine", "url": "https://pubmed.ncbi.nlm.nih.gov/39271792/", "type": "review", "provider": "Nature Reviews Drug Discovery", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "ai_protein_design",
+      "title": "AI protein structure and design",
+      "summary": "Structure prediction, sequence generation, binder design, protein language models and wet-lab validation. Applies to enzymes, biologics, sensors and repair tools.",
+      "kind": "skill",
+      "topics": ["ml_ai", "genetic_synthetic_engineering"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "AlphaProteo Generates Novel Protein Binders", "url": "https://deepmind.google/blog/alphaproteo-generates-novel-proteins-for-biology-and-health-research/", "type": "research_overview", "provider": "Google DeepMind", "level": "frontier"},
+        {"title": "EMBL-EBI AlphaFold Training", "url": "https://www.ebi.ac.uk/training/online/courses/alphafold/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "laboratory_automation_active_learning",
+      "title": "Laboratory automation and active learning",
+      "summary": "Robotics, liquid handling, experiment scheduling, Bayesian optimization, closed-loop design-test-learn and provenance-complete execution.",
+      "kind": "skill",
+      "topics": ["ml_ai", "research_clinical"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Self-Driving Laboratories for Protein Fitness Landscapes", "url": "https://www.nature.com/articles/s44286-023-00002-4", "type": "research_article", "provider": "Nature Chemical Engineering", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "biomedical_ai_validation",
+      "title": "Validation and Security of Biomedical AI",
+      "summary": "Dataset shift, leakage, bias, calibration, uncertainty, human evaluation, audit trails and adversarial/poisoning risks. A mandatory node before using AI in clinical and evidence workflows.",
+      "kind": "skill",
+      "topics": ["ml_ai", "research_clinical"],
+      "level": "professional",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "QUEST Framework for Human Evaluation of Healthcare LLMs", "url": "https://www.nature.com/articles/s41746-024-01258-7", "type": "research_article", "provider": "npj Digital Medicine", "level": "professional"},
+        {"title": "Poisoning Medical Knowledge Using Large Language Models", "url": "https://www.nature.com/articles/s42256-024-00899-3", "type": "research_article", "provider": "Nature Machine Intelligence", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "simulation_systems_pharmacology",
+      "title": "Modeling and systems pharmacology",
+      "summary": "Mechanistic models, PK/PD, network simulations, parameter fitting, sensitivity and uncertainty. Combination therapy and multi-target intervention planning.",
+      "kind": "skill",
+      "topics": ["bioinformatics_omics", "chemistry_pharmacology", "quantitative_sciences"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "MIT 20.320 Analysis of Biomolecular and Cellular Systems", "url": "https://ocw.mit.edu/courses/20-320-analysis-of-biomolecular-and-cellular-systems-fall-2012/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "crispr_genome_editing",
+      "title": "CRISPR and genome editing",
+      "summary": "CRISPR-Cas nucleases, base/prime editing, guide design, delivery, off-target analysis and functional screens. A platform for gene testing and targeted therapeutic interventions.",
+      "kind": "technology",
+      "topics": ["genetic_synthetic_engineering", "molecular_cell_biology"],
+      "level": "graduate",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Addgene CRISPR Guide", "url": "https://www.addgene.org/guides/crispr/", "type": "guide", "provider": "Addgene", "level": "graduate"},
+        {"title": "CRISPR–Cas9 Screens Reveal Regulators of Ageing in Neural Stem Cells", "url": "https://www.nature.com/articles/s41586-024-07972-2", "type": "research_article", "provider": "Nature", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "gene_therapy_delivery",
+      "title": "Gene therapy and delivery",
+      "summary": "AAV/lentiviral vectors, non-viral nanoparticles, tissue tropism, expression control, immunogenicity, manufacturing and biodistribution. The main bottleneck of system genetic interventions.",
+      "kind": "technology",
+      "topics": ["genetic_synthetic_engineering", "chemistry_pharmacology"],
+      "level": "professional",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "FDA Cellular & Gene Therapy Guidances", "url": "https://www.fda.gov/vaccines-blood-biologics/biologics-guidances/cellular-gene-therapy-guidances", "type": "guideline_collection", "provider": "U.S. FDA", "level": "professional"}
+      ]
+    },
+    {
+      "id": "epigenome_editing",
+      "title": "Epigenome editing",
+      "summary": "dCas-targeted activation/repression and record methylation/chromatin marks without breaking DNA. Used for causal tests and potential gene-expression recovery programs.",
+      "kind": "technology",
+      "topics": ["molecular_cell_biology", "genetic_synthetic_engineering"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "Epigenome Editing Technologies for Discovery and Medicine", "url": "https://pubmed.ncbi.nlm.nih.gov/39075148/", "type": "review", "provider": "Nature Reviews Methods Primers", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "synthetic_biology_circuits",
+      "title": "Synthetic biology and gene circuits",
+      "summary": "Design-build-test-learn, promoters, sensors, logic gates, feedback, kill switches and engineered cells/microbes. A platform for monitoring and conditional response to damage states.",
+      "kind": "technology",
+      "topics": ["genetic_synthetic_engineering", "bioinformatics_omics"],
+      "level": "graduate",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "MIT 20.305 Principles of Synthetic Biology", "url": "https://ocw.mit.edu/courses/20-305j-principles-of-synthetic-biology-fall-2015/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"},
+        {"title": "Synthetic Macromolecular Switches for Therapeutic Cells", "url": "https://www.nature.com/articles/s44222-024-00235-9", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "protein_engineering",
+      "title": "Protein engineering",
+      "summary": "Directed evolution, rational design, library screening, affinity/specificity, stability and developmentability. Enzymes, binders, biologics and synthetic repair systems.",
+      "kind": "technology",
+      "topics": ["genetic_synthetic_engineering", "chemistry_pharmacology"],
+      "level": "graduate",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "MIT 20.109 Laboratory Fundamentals in Biological Engineering", "url": "https://ocw.mit.edu/courses/20-109-laboratory-fundamentals-in-biological-engineering-spring-2010/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"},
+        {"title": "Self-Driving Protein Engineering Laboratory", "url": "https://www.nature.com/articles/s44286-023-00002-4", "type": "research_article", "provider": "Nature Chemical Engineering", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "drug_discovery_development",
+      "title": "Drug discovery and development",
+      "summary": "Target validation, hit discovery, lead optimization, ADME/Tox, preclinical models, CMC and clinical development. Turns the mechanism into a testable drug intervention.",
+      "kind": "skill",
+      "topics": ["chemistry_pharmacology", "research_clinical"],
+      "level": "professional",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "UC San Diego Drug Discovery", "url": "https://www.coursera.org/learn/drug-discovery", "type": "course", "provider": "University of California San Diego", "level": "graduate"},
+        {"title": "Assay Guidance Manual", "url": "https://www.ncbi.nlm.nih.gov/books/NBK53196/", "type": "handbook", "provider": "NCATS / NCBI Bookshelf", "level": "professional"}
+      ]
+    },
+    {
+      "id": "ipsc_organoids",
+      "title": "iPSC, differentiation and organoids",
+      "summary": "Reprogramming to pluripotency, directed differentiation, organoid self-organization, maturation and disease modeling. Tissue replacement and humanized aging models.",
+      "kind": "technology",
+      "topics": ["regenerative_medicine", "molecular_cell_biology"],
+      "level": "graduate",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "A Framework for Neural Organoids, Assembloids and Transplantation Studies", "url": "https://www.nature.com/articles/s41586-024-08487-6", "type": "framework", "provider": "Nature", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "tissue_engineering_biomaterials",
+      "title": "Tissue engineering and biomaterials",
+      "summary": "Scaffolds, hydrogels, mechanics, cell-material interactions, vascularization and bioreactors. It is necessary for the growth and integration of functional tissues.",
+      "kind": "technology",
+      "topics": ["regenerative_medicine"],
+      "level": "graduate",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "MIT Tissue Engineering and Organ Regeneration", "url": "https://ocw.mit.edu/courses/2-787j-tissue-engineering-and-organ-regeneration-fall-2024/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "bioprinting_biofabrication",
+      "title": "3D bioprinting and biofabrication",
+      "summary": "Bioinks, printing modalities, spatial patterning, organoid building blocks, perfusion and quality control. Active platform, but whole-organ manufacturing remains immature.",
+      "kind": "technology",
+      "topics": ["regenerative_medicine"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "Organoid Bioprinting: From Cells to Functional Tissues", "url": "https://www.nature.com/articles/s44222-024-00268-0", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "transplantation_xenobiology",
+      "title": "Transplantation immunology and xenobiology",
+      "summary": "Rejection, tolerance, immunosuppression, donor engineering, zoonotic risk, surgery and graft monitoring. Organ replacement and xenotransplantation.",
+      "kind": "technology",
+      "topics": ["regenerative_medicine", "immunology_cancer", "genetic_synthetic_engineering"],
+      "level": "professional",
+      "status": "early_clinical",
+      "resources": [
+        {"title": "Design and Testing of a Humanized Porcine Donor", "url": "https://www.nature.com/articles/s41586-023-06594-4", "type": "research_article", "provider": "Nature", "level": "frontier"},
+        {"title": "First Gene-Edited Pig Kidney Transplant", "url": "https://www.nature.com/articles/s41587-024-02223-1", "type": "research_highlight", "provider": "Nature Biotechnology", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "cryobiology_organ_preservation",
+      "title": "Cryobiology and organ preservation",
+      "summary": "Ice formation, vitrification, cryoprotectant toxicity, perfusion, thermal stress and nanowarming. Real transplant-enabling area; whole-body revival not shown",
+      "kind": "technology",
+      "topics": ["regenerative_medicine"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "Cryopreservation Techniques for Biological Systems", "url": "https://www.nature.com/nature-index/topics/l4/cryopreservation-techniques-for-biological-systems", "type": "topic_review", "provider": "Nature Index", "level": "graduate"},
+        {"title": "Organ Preservation: History, Advancements, and Perspectives", "url": "https://doi.org/10.1016/j.eng.2024.12.020", "type": "review", "provider": "Engineering", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "immune_cell_engineering",
+      "title": "Immune-cell engineering",
+      "summary": "Engineered T/NK/macrophage cells, receptors, logic gates, persistence, exhaustion and safety switches. Potentially applied to cancer surveillance and senescent-cell clearance.",
+      "kind": "technology",
+      "topics": ["immunology_cancer", "genetic_synthetic_engineering"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Synthetic Macromolecular Switches for Precision Control of Therapeutic Cells", "url": "https://www.nature.com/articles/s44222-024-00235-9", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "biomarker_validation",
+      "title": "Development and Validation of Biomarkers",
+      "summary": "Analytical validity, biological validity, prognostic value, responsiveness, external replication and clinical utility. It is mandatory before using clocks as endpoints.",
+      "kind": "skill",
+      "topics": ["geroscience", "research_clinical", "quantitative_sciences"],
+      "level": "professional",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Validation of Biomarkers of Aging", "url": "https://doi.org/10.1038/S41591-023-02784-9", "type": "review", "provider": "Nature Medicine", "level": "professional"},
+        {"title": "Endpoints for Geroscience Clinical Trials", "url": "https://pubmed.ncbi.nlm.nih.gov/36260264/", "type": "consensus_article", "provider": "GeroScience", "level": "professional"}
+      ]
+    },
+    {
+      "id": "combination_therapy_design",
+      "title": "Design of combinations and multi-intervention trials",
+      "summary": "Interaction models, dose/schedule optimization, factorial/adaptive designs, safety constraints and component attribution. It is necessary for the transition from individual repairs to a system set of interventions.",
+      "kind": "skill",
+      "topics": ["research_clinical", "bioinformatics_omics", "chemistry_pharmacology"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "resources": [
+        {"title": "Cochrane Handbook — Intervention Complexity", "url": "https://training.cochrane.org/handbook/current/chapter-17", "type": "handbook_chapter", "provider": "Cochrane", "level": "graduate"},
+        {"title": "NIH IPPCR", "url": "https://ocreco.od.nih.gov/courses/ippcr.html", "type": "course", "provider": "NIH Clinical Center", "level": "professional"}
+      ]
+    },
+    {
+      "id": "metabolic_nutrient_sensing",
+      "title": "Metabolic interventions and nutrient sensing",
+      "summary": "Research on mTOR, AMPK, insulin/IGF-1, sirtuins, caloric restriction mimetics, and the relationship of nutrient state to growth, autophagy, and repair.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "chemistry_pharmacology"],
+      "level": "frontier",
+      "status": "early_clinical",
+      "evidence_note": "The pathways are causally related to lifespan in model organisms; individual interventions have been investigated in humans, but human life extension and general rejuvenation have not been proven.",
+      "resources": [
+        {"title": "Hallmarks of Aging: Deregulated Nutrient Sensing", "url": "https://pubmed.ncbi.nlm.nih.gov/36599349/", "type": "review", "provider": "Cell", "level": "frontier"},
+        {"title": "Aging in Heart Failure: Biology over Chronology", "url": "https://www.jacc.org/doi/10.1016/j.jchf.2024.02.021", "type": "review", "provider": "JACC: Heart Failure", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "nad_redox_interventions",
+      "title": "NAD+ and redox restoration",
+      "summary": "NAD biosynthesis/consumption, redox state, PARP, sirtuins and tissue-specific effects of NAD precursors.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "chemistry_pharmacology", "research_clinical"],
+      "level": "frontier",
+      "status": "early_clinical",
+      "evidence_note": "Precursors increase NAD in humans, but the clinical effects of healthy aging are generally limited and ambiguous.",
+      "resources": [
+        {"title": "NAD+ Precursor Supplementation in Human Ageing", "url": "https://pubmed.ncbi.nlm.nih.gov/41083806/", "type": "review", "provider": "Nature Metabolism", "level": "frontier"},
+        {"title": "NAD in Aging Biology: Potential Applications and Many Unknowns", "url": "https://academic.oup.com/edrv/article/44/6/1047/7207987", "type": "review", "provider": "Endocrine Reviews", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "senescence_therapeutics",
+      "title": "Senolytics and senomorphics",
+      "summary": "Selective destruction of senescent cells, suppression of SASP and immune-mediated clearance, taking into account the heterogeneity and useful roles of senescence.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "chemistry_pharmacology"],
+      "level": "frontier",
+      "status": "early_clinical",
+      "evidence_note": "The preclinical causal base is strong, but human studies are early; specificity, toxicity, and biomarkers selection remain challenges.",
+      "resources": [
+        {"title": "How to Kill the Zombie Cells That Make You Age", "url": "https://www.nature.com/articles/d41586-024-01370-4", "type": "research_overview", "provider": "Nature", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "proteostasis_damage_clearance",
+      "title": "Proteostasis restoration and removal of intracellular debris",
+      "summary": "Enhance chaperones, proteasome, autophagy/lysosomes and remove protein aggregates or hard-to-destruct cargo, including lipofuscin-like damage.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "physiology_neuroscience"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Loss of proteostasis and disabled macroautophagy are established hallmarks; safe systemic enhancement and clearance of different aggregates require disease- and tissue-specific solutions.",
+      "resources": [
+        {"title": "Mechanisms of Autophagy–Lysosome Dysfunction", "url": "https://www.nature.com/articles/s41580-024-00757-5", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "mitochondrial_rejuvenation",
+      "title": "Mitochondrial rejuvenation and mitophagy",
+      "summary": "Restoration of mitochondrial quality through biogenesis, fusion/fission, mtDNA maintenance, redox control and removal of damaged organelles.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "chemistry_pharmacology"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Mitochondrial dysfunction is causally associated with aging, but there is no universal therapy for different tissues; most intervention evidence is preclinical.",
+      "resources": [
+        {"title": "Suppressed Basal Mitophagy Drives Cellular Aging Phenotypes", "url": "https://pubmed.ncbi.nlm.nih.gov/38897197/", "type": "research_article", "provider": "Cell Reports", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "genome_maintenance_somatic_control",
+      "title": "Genome maintenance and somatic clone control",
+      "summary": "DNA repair, replication stress, somatic mutation detection, clonal hematopoiesis, lineage dynamics and prevention of pathological clonal expansion.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "immunology_cancer"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "The accumulation of mutations and clonal expansion are established, but the safe control of all tissues and the causal contribution of different clones remain open challenges.",
+      "resources": [
+        {"title": "Somatic Mutations and Drivers of Clonal Hematopoiesis", "url": "https://www.nature.com/articles/s41588-024-01755-1", "type": "research_article", "provider": "Nature Genetics", "level": "frontier"},
+        {"title": "Longitudinal Analysis of Clonal Hematopoiesis", "url": "https://www.nature.com/articles/s41467-024-52302-9", "type": "research_article", "provider": "Nature Communications", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "telomere_interventions",
+      "title": "Telomere restoration and telomerase therapy",
+      "summary": "Study of telomere attrition, telomerase/ALT, replicative senescence and tissue-specific telomere repair capabilities.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "immunology_cancer"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Telomere attrition is a hallmark, but telomerase supports replicative immortality of tumors; systemic activation requires strict cancer control.",
+      "resources": [
+        {"title": "Targeting Telomeres: Telomere Maintenance and Cancer", "url": "https://www.nature.com/articles/s41568-022-00490-1", "type": "review", "provider": "Nature Reviews Cancer", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "epigenetic_rejuvenation",
+      "title": "Partial reprogramming and epigenetic rejuvenation",
+      "summary": "Transient reprogramming factors, chemical reprogramming and targeted epigenome changes to restore a young cell state without loss of identity.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "genetic_synthetic_engineering"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "There are rejuvenation phenotypes in cells and mice; delivery, dedifferentiation, tissue-specific lethality and oncogenic risk are not solved, human rejuvenation is not proven.",
+      "resources": [
+        {"title": "Mechanisms and Strategies for Rejuvenation through Epigenetic Reprogramming", "url": "https://pubmed.ncbi.nlm.nih.gov/38102454/", "type": "review", "provider": "Nature Aging", "level": "frontier"},
+        {"title": "Partial Cellular Reprogramming: A Deep Dive", "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/acel.14039", "type": "review", "provider": "Aging Cell", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "immune_inflammaging_rejuvenation",
+      "title": "Inflammaging, immunosenescence, HSC and thymus rejuvenation",
+      "summary": "Chronic inflammation, myeloid bias, T-cell repertoire, thymic epithelial cells, HSC quality and immune surveillance recovery.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "immunology_cancer", "regenerative_medicine"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Immune aging is established; depleting myeloid-biased HSC and thymus regeneration are promising in models, but systemic human rejuvenation is not shown.",
+      "resources": [
+        {"title": "Restoring a Youthful Immune System", "url": "https://www.nature.com/articles/d41573-024-00061-z", "type": "research_highlight", "provider": "Nature Reviews Drug Discovery", "level": "frontier"},
+        {"title": "Age-Related Epithelial Defects Limit Thymic Regeneration", "url": "https://www.nature.com/articles/s41590-024-01915-9", "type": "research_article", "provider": "Nature Immunology", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "microbiome_longevity",
+      "title": "Microbiome manipulation for healthy aging",
+      "summary": "Host-microbe interactions, barrier integrity, microbial metabolites, diet, phages/probiotics and causal intervention design.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "bioinformatics_omics"],
+      "level": "frontier",
+      "status": "early_clinical",
+      "evidence_note": "Dysbiosis is a hallmark, but associations depend on environment and health; transferability between cohorts is limited and causality remains difficult to establish.",
+      "resources": [
+        {"title": "The Human Gut Microbiome and Aging", "url": "https://pubmed.ncbi.nlm.nih.gov/38831607/", "type": "review", "provider": "Gut Microbes", "level": "frontier"},
+        {"title": "Diet-Derived Microbiota Metabolites in Ageing", "url": "https://www.sciencedirect.com/science/article/pii/S1568163724002691", "type": "review", "provider": "Ageing Research Reviews", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "systemic_circulating_factors",
+      "title": "Systemic rejuvenation and circulating factors",
+      "summary": "Endocrine, immune and extracellular-vesicle signals, plasma exchange and parabiosis models of interstitial aging.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "physiology_neuroscience", "immunology_cancer"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Parabiosis shows systemic effects of blood in animals, but the specific mechanisms and clinical efficacy of young plasma have not been established.",
+      "resources": [
+        {"title": "Aging Insights from Heterochronic Parabiosis Models", "url": "https://www.nature.com/articles/s41514-024-00166-0", "type": "review", "provider": "npj Aging", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "stem_cell_regeneration",
+      "title": "Stem-cell rejuvenation and regenerative signaling",
+      "summary": "Aged stem-cell niches, quiescence/activation, lineage bias, Wnt/Notch/TGF-β and tissue regenerative function restoration.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "regenerative_medicine"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Tissue-specific stem-cell defects are established; general activation of regeneration carries risks of aberrant differentiation, fibrosis, and cancer.",
+      "resources": [
+        {"title": "Cellular Rejuvenation: Mechanisms and Therapeutic Interventions", "url": "https://www.nature.com/articles/s41392-023-01343-5", "type": "review", "provider": "Signal Transduction and Targeted Therapy", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "cell_competition_replacement",
+      "title": "Cell competition and selective replacement",
+      "summary": "Using fitness differences to remove damaged cells and gradually populate tissues with more functional cells.",
+      "kind": "research_direction",
+      "topics": ["molecular_cell_biology", "immunology_cancer", "regenerative_medicine"],
+      "level": "frontier",
+      "status": "speculative",
+      "evidence_note": "The fundamental biology is active, but therapeutic manipulation may select tumor-like cheaters; safe tissue replacement has not been demonstrated.",
+      "resources": [
+        {"title": "Cell Competition and the Regulation of Protein Homeostasis", "url": "https://www.sciencedirect.com/science/article/pii/S0955067424000024", "type": "review", "provider": "Current Opinion in Cell Biology", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "ecm_crosslinks_fibrosis",
+      "title": "ECM rejuvenation, cross-links, AGE and fibrosis",
+      "summary": "Matrix turnover, collagen/elastin damage, glycation cross-links, proteolysis, mechanotransduction and organ-specific fibrosis reversal.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "regenerative_medicine"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "ECM aging is recognized as important, but there is no universal cross-link breaker or method for systemic matrix renewal; the field remains underexplored.",
+      "resources": [
+        {"title": "Strategic Outline of ECM Interventions for Healthy Longevity", "url": "https://journals.physiology.org/doi/10.1152/ajpcell.00060.2023", "type": "review_and_roadmap", "provider": "American Journal of Physiology", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "vascular_rejuvenation",
+      "title": "Vascular rejuvenation and atherosclerosis reversal",
+      "summary": "Endothelium, lipid retention, inflammation, senescence, thrombosis, plaque imaging, and disease-specific vascular repair.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "physiology_neuroscience", "immunology_cancer"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "evidence_note": "The management of cardiovascular risk and individual forms of plaque regression are clinically feasible; the complete elimination of accumulated vascular damage remains an immature goal.",
+      "resources": [
+        {"title": "Atherosclerotic Cardiovascular Disease in Aging", "url": "https://www.nature.com/articles/s44325-024-00012-y", "type": "review", "provider": "npj Cardiovascular Health", "level": "frontier"},
+        {"title": "Efferocytosis in Atherosclerosis", "url": "https://www.nature.com/articles/s41569-024-01037-7", "type": "review", "provider": "Nature Reviews Cardiology", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "cancer_proofing_surveillance",
+      "title": "Cancer-proofing and tumor surveillance",
+      "summary": "Genome stability, early detection, immune surveillance, engineered immune cells and safety constraints for regenerative and reprogramming therapies.",
+      "kind": "research_direction",
+      "topics": ["immunology_cancer", "geroscience"],
+      "level": "frontier",
+      "status": "established_biology",
+      "evidence_note": "Cancer control is mandatory for radical longevity, but there is no single cancer-proofing technology; the mechanisms depend on tissue and tumor evolution.",
+      "resources": [
+        {"title": "Peto's Paradox and Natural Cancer Resistance", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10973980/", "type": "systematic_review", "provider": "Biomedical Journal", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "comparative_longevity_biology",
+      "title": "Comparative longevity biology",
+      "summary": "Comparison of long-lived species to search for convergent mechanisms of DNA repair, proteostasis, metabolism, and cancer resistance.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "molecular_cell_biology", "bioinformatics_omics"],
+      "level": "frontier",
+      "status": "established_biology",
+      "evidence_note": "Active discovery; transfer of candidate mechanisms to humans requires causal functional validation.",
+      "resources": [
+        {"title": "Peto's Paradox: Natural Strategies for Long Lifespans", "url": "https://www.sciencedirect.com/science/article/pii/S2319417023000914", "type": "systematic_review", "provider": "Biomedical Journal", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "gene_synthetic_longevity",
+      "title": "Gene therapy and synthetic biology for longevity",
+      "summary": "Tissue-specific delivery of genes/epigenetic regulators, engineered sensors, circuits and therapeutic cells to control damage pathways.",
+      "kind": "research_direction",
+      "topics": ["genetic_synthetic_engineering", "geroscience"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Enabling technologies are clinically real in individual diseases, but systemic longevity interventions remain preclinical and limited to delivery/safety.",
+      "resources": [
+        {"title": "Synthetic Macromolecular Switches for Therapeutic Cells", "url": "https://www.nature.com/articles/s44222-024-00235-9", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"},
+        {"title": "FDA Cellular & Gene Therapy Guidances", "url": "https://www.fda.gov/vaccines-blood-biologics/biologics-guidances/cellular-gene-therapy-guidances", "type": "guideline_collection", "provider": "U.S. FDA", "level": "professional"}
+      ]
+    },
+    {
+      "id": "brain_microglial_rejuvenation",
+      "title": "Brain rejuvenation, microglia and neuroregeneration",
+      "summary": "Neurons, synapses, myelin, microglia, neural stem cells, vasculature, and network integration in brain aging.",
+      "kind": "research_direction",
+      "topics": ["physiology_neuroscience", "immunology_cancer", "regenerative_medicine"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Separate cellular targets and replacement strategies are active, but restoring complex circuits and preserving functions requires tissue- and network-level validation.",
+      "resources": [
+        {"title": "A Framework for Neural Organoids and Transplantation Studies", "url": "https://www.nature.com/articles/s41586-024-08487-6", "type": "framework", "provider": "Nature", "level": "frontier"},
+        {"title": "CRISPR Screens Reveal Regulators of Ageing in Neural Stem Cells", "url": "https://www.nature.com/articles/s41586-024-07972-2", "type": "research_article", "provider": "Nature", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "cell_tissue_organ_replacement",
+      "title": "Cell, tissue and organ replacement",
+      "summary": "Cell and tissue replacement, organoids, engineered grafts, stem-cell-derived organs, bioprinting and whole-organ engineering.",
+      "kind": "research_direction",
+      "topics": ["regenerative_medicine"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "evidence_note": "Transplantation and some cell therapies are clinically mature; fully engineered vascularized organs and extensive replacement of old tissue remain preclinical.",
+      "resources": [
+        {"title": "MIT Tissue Engineering and Organ Regeneration", "url": "https://ocw.mit.edu/courses/2-787j-tissue-engineering-and-organ-regeneration-fall-2024/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"},
+        {"title": "Toward Developing Human Organs via Embryo Models and Chimeras", "url": "https://www.sciencedirect.com/science/article/pii/S0092867424005361", "type": "review", "provider": "Cell", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "xenotransplantation_direction",
+      "title": "Xenotransplantation",
+      "summary": "Genetically modified animal organs as a source of replacement, including immune compatibility, zoonosis and longitudinal graft monitoring.",
+      "kind": "research_direction",
+      "topics": ["regenerative_medicine", "immunology_cancer", "genetic_synthetic_engineering"],
+      "level": "frontier",
+      "status": "early_clinical",
+      "evidence_note": "The first transplants of gene-edited pig organs were carried out in humans; durability, rejection, infection and trial-scale safety are still being investigated.",
+      "resources": [
+        {"title": "First Gene-Edited Pig Kidney Transplant", "url": "https://www.nature.com/articles/s41587-024-02223-1", "type": "research_highlight", "provider": "Nature Biotechnology", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "biomarkers_multiomics_direction",
+      "title": "Biomarkers, aging clocks and multi-omics",
+      "summary": "Measure biological aging, patient stratification and intervention response through molecular, functional, imaging and longitudinal data.",
+      "kind": "research_direction",
+      "topics": ["geroscience", "bioinformatics_omics", "ml_ai", "research_clinical"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "evidence_note": "Many clocks predict age/outcomes, but responsiveness and surrogate validity for rejuvenation therapies still need system validation.",
+      "resources": [
+        {"title": "Validation of Biomarkers of Aging", "url": "https://doi.org/10.1038/S41591-023-02784-9", "type": "review", "provider": "Nature Medicine", "level": "frontier"},
+        {"title": "Nonlinear Dynamics of Human Aging Multi-Omics", "url": "https://www.nature.com/articles/s43587-024-00692-2", "type": "research_article", "provider": "Nature Aging", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "ai_longevity_discovery",
+      "title": "AI-driven longevity discovery",
+      "summary": "AI for clocks, omics, target discovery, molecule/protein design, literature knowledge graphs and closed-loop experimentation.",
+      "kind": "research_direction",
+      "topics": ["ml_ai", "geroscience"],
+      "level": "frontier",
+      "status": "clinical_platform",
+      "evidence_note": "AI accelerates individual steps, but does not automatically create clinical validity; prospective wet-lab and trial validation are mandatory.",
+      "resources": [
+        {"title": "Creating an AI-First Drug Discovery Engine", "url": "https://pubmed.ncbi.nlm.nih.gov/39271792/", "type": "review", "provider": "Nature Reviews Drug Discovery", "level": "frontier"},
+        {"title": "Self-Driving Laboratories for Protein Engineering", "url": "https://www.nature.com/articles/s44286-023-00002-4", "type": "research_article", "provider": "Nature Chemical Engineering", "level": "frontier"},
+        {"title": "Stanford AI and Computational Biomedicine Curriculum", "url": "https://med.stanford.edu/iddm/course.html", "type": "university_program", "provider": "Stanford Medicine", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "biostasis_bridge",
+      "title": "Biostasis and organ cryopreservation",
+      "summary": "Vitrification and reversible organ preservation as a bridge to transplantation/regenerative technologies rather than the proven revitalization of the whole person.",
+      "kind": "research_direction",
+      "topics": ["regenerative_medicine"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Progress has been made for cells, tissues and animal organs; reversible human whole-body or brain preservation has not been demonstrated.",
+      "resources": [
+        {"title": "Cryopreservation Techniques for Biological Systems", "url": "https://www.nature.com/nature-index/topics/l4/cryopreservation-techniques-for-biological-systems", "type": "topic_review", "provider": "Nature Index", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "reproductive_germline_rejuvenation",
+      "title": "Germline rejuvenation and intergenerational resetting",
+      "summary": "Research on epigenetic resetting, oocyte/sperm aging, embryonic reprogramming and mechanisms that allow new generation to start from a young state.",
+      "kind": "research_direction",
+      "topics": ["molecular_cell_biology", "research_clinical"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "evidence_note": "Valuable for understanding rejuvenation mechanisms and reproductive aging; germline interventions carry special intergenerational and ethical risks.",
+      "resources": [
+        {"title": "Mechanisms and Strategies for Rejuvenation through Epigenetic Reprogramming", "url": "https://pubmed.ncbi.nlm.nih.gov/38102454/", "type": "review", "provider": "Nature Aging", "level": "frontier"}
+      ]
+    },
+    {
+      "id": "whole_body_combination_goal",
+      "title": "Combination rejuvenation and whole-body integration",
+      "summary": "The ultimate system goal is to safely combine measurement, damage repair, regeneration, cancer control and organ-specific interventions over time.",
+      "kind": "integration_goal",
+      "topics": ["geroscience", "bioinformatics_omics", "research_clinical"],
+      "level": "frontier",
+      "status": "speculative",
+      "evidence_note": "It is not an existing therapy. Combinatorial complexity, interactions, sequencing, monitoring and safety make this a separate system-engineering task.",
+      "resources": [
+        {"title": "Cochrane Handbook — Intervention Complexity", "url": "https://training.cochrane.org/handbook/current/chapter-17", "type": "handbook_chapter", "provider": "Cochrane", "level": "graduate"},
+        {"title": "Hallmarks of Aging: An Expanding Universe", "url": "https://pubmed.ncbi.nlm.nih.gov/36599349/", "type": "review", "provider": "Cell", "level": "frontier"}
+      ]
+    }
+  ],
+  "edges": [
+    {"from":"school_algebra_functions","to":"school_calculus","type":"prerequisite","strength":"required","rationale":"Derivatives and integrals rely on functions and algebraic transformations."},
+    {"from":"school_algebra_functions","to":"linear_algebra","type":"prerequisite","strength":"required","rationale":"Matrices and linear systems require solid algebra skills."},
+    {"from":"school_algebra_functions","to":"probability_statistics","type":"prerequisite","strength":"required","rationale":"Probabilistic models use equations, functions, and graphs."},
+    {"from":"school_calculus","to":"differential_equations_dynamics","type":"prerequisite","strength":"required","rationale":"Differential equations are based on derivatives and integrals."},
+    {"from":"school_algebra_functions","to":"discrete_math_graphs","type":"prerequisite","strength":"recommended","rationale":"Algebra facilitates work with formal discrete structures."},
+    {"from":"school_algebra_functions","to":"school_physics","type":"prerequisite","strength":"required","rationale":"Quantitative physics uses equations and graphs."},
+    {"from":"school_algebra_functions","to":"school_chemistry","type":"prerequisite","strength":"recommended","rationale":"Stoichiometry, equilibrium, and kinetics require proportions and functions."},
+    {"from":"school_chemistry","to":"organic_chemistry","type":"prerequisite","strength":"required","rationale":"Organic chemistry involves bonds, acidity and thermodynamics."},
+    {"from":"school_biology","to":"introductory_biology","type":"prerequisite","strength":"required","rationale":"The university course develops school ideas about the cell and heredity."},
+    {"from":"school_chemistry","to":"introductory_biology","type":"prerequisite","strength":"recommended","rationale":"Molecular biology is more easily understood through the basics of chemistry."},
+    {"from":"school_computer_science","to":"python_data_analysis","type":"prerequisite","strength":"required","rationale":"Data analysis involves basic programming."},
+    {"from":"school_computer_science","to":"algorithms_data_structures","type":"prerequisite","strength":"required","rationale":"Algorithms are best learned after basic programming constructs."},
+    {"from":"discrete_math_graphs","to":"algorithms_data_structures","type":"prerequisite","strength":"recommended","rationale":"Discrete structures provide a mathematical basis for algorithms."},
+    {"from":"school_computer_science","to":"reproducible_computing","type":"prerequisite","strength":"recommended","rationale":"Version control and environments are easier to understand after basic programming."},
+    {"from":"scientific_reasoning","to":"data_management_fair","type":"prerequisite","strength":"recommended","rationale":"Data management follows from the requirements of verifiability of the study."},
+
+    {"from":"school_chemistry","to":"biochemistry","type":"prerequisite","strength":"required","rationale":"Biochemistry uses equilibrium, kinetics, and molecular interactions."},
+    {"from":"organic_chemistry","to":"biochemistry","type":"prerequisite","strength":"required","rationale":"The structure of biomolecules and the mechanisms of enzymes require organic chemistry."},
+    {"from":"introductory_biology","to":"biochemistry","type":"prerequisite","strength":"required","rationale":"Biochemical processes are interpreted in the context of a living cell."},
+    {"from":"introductory_biology","to":"molecular_biology","type":"prerequisite","strength":"required","rationale":"Molecular biology assumes basic knowledge of genes, proteins, and cells."},
+    {"from":"introductory_biology","to":"cell_biology","type":"prerequisite","strength":"required","rationale":"Cell biology deepens the introductory organization of the cell."},
+    {"from":"introductory_biology","to":"genetics_genomics","type":"prerequisite","strength":"required","rationale":"Genetics develops the foundations of heredity and evolution."},
+    {"from":"molecular_biology","to":"epigenetics_chromatin","type":"prerequisite","strength":"required","rationale":"Epigenetics requires the mechanisms of expression and structure of the genome."},
+    {"from":"genetics_genomics","to":"epigenetics_chromatin","type":"prerequisite","strength":"required","rationale":"We need to distinguish between sequence change and genome regulation."},
+    {"from":"introductory_biology","to":"physiology_homeostasis","type":"prerequisite","strength":"required","rationale":"Physiology is based on cellular and organ biology."},
+    {"from":"cell_biology","to":"physiology_homeostasis","type":"prerequisite","strength":"recommended","rationale":"Organ functions arise from the functions of cells and tissues."},
+    {"from":"introductory_biology","to":"immunology","type":"prerequisite","strength":"required","rationale":"Immunology requires cells, genetics, and molecular recognition."},
+    {"from":"molecular_biology","to":"immunology","type":"prerequisite","strength":"recommended","rationale":"Antigen receptors and signaling require a molecular base."},
+    {"from":"introductory_biology","to":"microbiology_microbial_ecology","type":"prerequisite","strength":"required","rationale":"Microbiology uses cell biology and evolution."},
+    {"from":"introductory_biology","to":"developmental_stem_cell_biology","type":"prerequisite","strength":"required","rationale":"Developmental biology requires cell fate and gene regulation."},
+    {"from":"cell_biology","to":"developmental_stem_cell_biology","type":"prerequisite","strength":"recommended","rationale":"Differentiation and morphogenesis rely on cellular processes."},
+    {"from":"introductory_biology","to":"neuroscience","type":"prerequisite","strength":"required","rationale":"Neuroscience requires cell biology and physiology."},
+    {"from":"school_physics","to":"neuroscience","type":"recommended_before","strength":"recommended","rationale":"Electrical signals and membrane potentials use physics."},
+    {"from":"cell_biology","to":"cancer_biology","type":"prerequisite","strength":"required","rationale":"Cancer biology involves cell cycle, death and signaling."},
+    {"from":"genetics_genomics","to":"cancer_biology","type":"prerequisite","strength":"required","rationale":"Tumors develop through mutation and clonal selection."},
+    {"from":"immunology","to":"cancer_biology","type":"recommended_before","strength":"recommended","rationale":"Tumor surveillance and immune escape require immunology."},
+    {"from":"cell_biology","to":"geroscience_hallmarks","type":"prerequisite","strength":"required","rationale":"Hallmarks describe violations of cellular mechanisms."},
+    {"from":"physiology_homeostasis","to":"geroscience_hallmarks","type":"prerequisite","strength":"required","rationale":"Aging is assessed at the cellular, tissue and system levels."},
+    {"from":"scientific_reasoning","to":"geroscience_hallmarks","type":"prerequisite","strength":"required","rationale":"You need to understand the criteria of the causal hallmark and the limitations of the model."},
+    {"from":"biochemistry","to":"metabolism_redox","type":"prerequisite","strength":"required","rationale":"Metabolism and redox are based on enzymes and energy."},
+    {"from":"physiology_homeostasis","to":"metabolism_redox","type":"recommended_before","strength":"recommended","rationale":"Tissue metabolic effects depend on systemic physiology."},
+    {"from":"biochemistry","to":"proteostasis_autophagy","type":"prerequisite","strength":"required","rationale":"Proteostasis requires structure, folding and degradation of proteins."},
+    {"from":"cell_biology","to":"proteostasis_autophagy","type":"prerequisite","strength":"required","rationale":"Autophagy and lysosomes are cellular systems."},
+    {"from":"biochemistry","to":"mitochondrial_biology","type":"prerequisite","strength":"required","rationale":"Oxidative phosphorylation and redox require biochemistry."},
+    {"from":"cell_biology","to":"mitochondrial_biology","type":"prerequisite","strength":"required","rationale":"Mitochondrial dynamics and mitophagy occur in a cellular context."},
+    {"from":"cell_biology","to":"cellular_senescence","type":"prerequisite","strength":"required","rationale":"Senescence requires cell cycle, stress responses, and signaling."},
+    {"from":"molecular_biology","to":"cellular_senescence","type":"recommended_before","strength":"recommended","rationale":"SASP and damage responses are regulated at the gene expression level."},
+    {"from":"cell_biology","to":"extracellular_matrix_biology","type":"prerequisite","strength":"required","rationale":"ECM is viewed through cell-matrix interactions."},
+    {"from":"school_physics","to":"extracellular_matrix_biology","type":"recommended_before","strength":"recommended","rationale":"Stiffness and mechanotransduction use the mechanics of materials."},
+    {"from":"biochemistry","to":"pharmacology_toxicology","type":"prerequisite","strength":"required","rationale":"Drug targets and metabolism require biochemistry."},
+    {"from":"physiology_homeostasis","to":"pharmacology_toxicology","type":"prerequisite","strength":"required","rationale":"PK/PD and toxicity depend on organs and systems."},
+    {"from":"differential_equations_dynamics","to":"systems_biology","type":"prerequisite","strength":"required","rationale":"Dynamic pathway models use ODE and sustainability."},
+    {"from":"discrete_math_graphs","to":"systems_biology","type":"prerequisite","strength":"required","rationale":"Biological networks are described by graphs."},
+    {"from":"molecular_biology","to":"systems_biology","type":"prerequisite","strength":"required","rationale":"Network nodes and edges must have a biological interpretation."},
+
+    {"from":"probability_statistics","to":"experimental_design_biostatistics","type":"prerequisite","strength":"required","rationale":"Power, uncertainty and testing are based on statistics."},
+    {"from":"scientific_reasoning","to":"experimental_design_biostatistics","type":"prerequisite","strength":"required","rationale":"Design implements the control of causal hypotheses."},
+    {"from":"experimental_design_biostatistics","to":"causal_inference","type":"prerequisite","strength":"required","rationale":"Causal estimands require an understanding of design and bias."},
+    {"from":"probability_statistics","to":"causal_inference","type":"prerequisite","strength":"required","rationale":"Estimating causal effects uses statistical models."},
+    {"from":"scientific_reasoning","to":"evidence_synthesis","type":"prerequisite","strength":"required","rationale":"Synthesis of evidence requires critical evaluation of research."},
+    {"from":"probability_statistics","to":"evidence_synthesis","type":"prerequisite","strength":"required","rationale":"Meta-analysis uses effect sizes and uncertainty."},
+    {"from":"experimental_design_biostatistics","to":"clinical_research_trials","type":"prerequisite","strength":"required","rationale":"Trials are specialized experimental designs."},
+    {"from":"physiology_homeostasis","to":"clinical_research_trials","type":"prerequisite","strength":"recommended","rationale":"Clinical endpoints require an understanding of body functions."},
+    {"from":"scientific_reasoning","to":"regulatory_ethics","type":"prerequisite","strength":"recommended","rationale":"Ethical risk is assessed in the context of scientific validity."},
+    {"from":"molecular_biology","to":"molecular_biology_lab","type":"prerequisite","strength":"required","rationale":"The technique must be based on an understanding of molecular mechanisms."},
+    {"from":"scientific_reasoning","to":"molecular_biology_lab","type":"prerequisite","strength":"required","rationale":"Wet-lab work requires controls and records."},
+    {"from":"cell_biology","to":"cell_culture_functional_assays","type":"prerequisite","strength":"required","rationale":"Cell culture requires an understanding of cell states and environment."},
+    {"from":"molecular_biology_lab","to":"cell_culture_functional_assays","type":"prerequisite","strength":"recommended","rationale":"Cellular assays use molecular readouts."},
+    {"from":"cell_biology","to":"microscopy_flow_cytometry","type":"prerequisite","strength":"required","rationale":"Measurable structures and markers must have cellular meaning."},
+    {"from":"school_physics","to":"microscopy_flow_cytometry","type":"recommended_before","strength":"recommended","rationale":"Optics and fluorescence are based on the physics of light."},
+    {"from":"experimental_design_biostatistics","to":"animal_models_aging","type":"prerequisite","strength":"required","rationale":"Animal studies require power, randomization, and control."},
+    {"from":"geroscience_hallmarks","to":"animal_models_aging","type":"prerequisite","strength":"required","rationale":"The model is selected for specific aging mechanism and outcome."},
+    {"from":"cell_culture_functional_assays","to":"assay_development_screening","type":"prerequisite","strength":"required","rationale":"Screening scales up validated functional assay."},
+    {"from":"experimental_design_biostatistics","to":"assay_development_screening","type":"prerequisite","strength":"required","rationale":"Assay quality requires controls and statistical metrics."},
+    {"from":"pharmacology_toxicology","to":"assay_development_screening","type":"recommended_before","strength":"recommended","rationale":"Dose-response and counter-screens require pharmacology."},
+
+    {"from":"python_data_analysis","to":"bioinformatics_foundations","type":"prerequisite","strength":"required","rationale":"Modern bioinformatics workflows require programming."},
+    {"from":"molecular_biology","to":"bioinformatics_foundations","type":"prerequisite","strength":"required","rationale":"Computational objects must have molecular meaning."},
+    {"from":"reproducible_computing","to":"bioinformatics_foundations","type":"prerequisite","strength":"recommended","rationale":"Bioinformatics pipelines require environments and provenance."},
+    {"from":"bioinformatics_foundations","to":"ngs_genomic_analysis","type":"prerequisite","strength":"required","rationale":"NGS analysis uses basic databases and workflows."},
+    {"from":"genetics_genomics","to":"ngs_genomic_analysis","type":"prerequisite","strength":"required","rationale":"Variant interpretation requires genetics."},
+    {"from":"probability_statistics","to":"ngs_genomic_analysis","type":"prerequisite","strength":"recommended","rationale":"Calling and QC use probabilistic models."},
+    {"from":"bioinformatics_foundations","to":"transcriptomics","type":"prerequisite","strength":"required","rationale":"RNA-seq analysis is a specialized bioinformatics workflow."},
+    {"from":"molecular_biology","to":"transcriptomics","type":"prerequisite","strength":"required","rationale":"Expression readouts require transcription and RNA processing."},
+    {"from":"probability_statistics","to":"transcriptomics","type":"prerequisite","strength":"required","rationale":"Differential expression depends on statistical models."},
+    {"from":"transcriptomics","to":"single_cell_spatial_omics","type":"prerequisite","strength":"required","rationale":"Single-cell analysis extends bulk expression workflows."},
+    {"from":"cell_biology","to":"single_cell_spatial_omics","type":"prerequisite","strength":"required","rationale":"Cell types and states require cellular interpretation."},
+    {"from":"experimental_design_biostatistics","to":"single_cell_spatial_omics","type":"prerequisite","strength":"required","rationale":"Batch, replication and pseudo-replication are critical."},
+    {"from":"biochemistry","to":"proteomics_metabolomics","type":"prerequisite","strength":"required","rationale":"Molecular features require biochemistry and pathways."},
+    {"from":"bioinformatics_foundations","to":"proteomics_metabolomics","type":"prerequisite","strength":"required","rationale":"Mass-spec data requires computational processing."},
+    {"from":"ngs_genomic_analysis","to":"multiomics_integration","type":"prerequisite","strength":"required","rationale":"Multi-omics includes genomic layers."},
+    {"from":"transcriptomics","to":"multiomics_integration","type":"prerequisite","strength":"required","rationale":"Expression is the key omics layer."},
+    {"from":"proteomics_metabolomics","to":"multiomics_integration","type":"prerequisite","strength":"required","rationale":"Molecular phenotype complements genome and transcriptome."},
+    {"from":"linear_algebra","to":"multiomics_integration","type":"prerequisite","strength":"required","rationale":"Integration uses latent factors and matrix decompositions."},
+    {"from":"data_management_fair","to":"multiomics_integration","type":"prerequisite","strength":"recommended","rationale":"Different conditions require consistent metadata."},
+    {"from":"genetics_genomics","to":"comparative_phylogenetics","type":"prerequisite","strength":"required","rationale":"Cross-species comparison requires genome and orthology."},
+    {"from":"bioinformatics_foundations","to":"comparative_phylogenetics","type":"prerequisite","strength":"required","rationale":"Phylogenetic workflows use sequence databases and software."},
+    {"from":"probability_statistics","to":"comparative_phylogenetics","type":"prerequisite","strength":"required","rationale":"Comparative models control phylogenetic dependence statistically."},
+    {"from":"biochemistry","to":"structural_biology_computational_chemistry","type":"prerequisite","strength":"required","rationale":"Structure/function and binding require biochemistry."},
+    {"from":"school_physics","to":"structural_biology_computational_chemistry","type":"recommended_before","strength":"recommended","rationale":"Energy and molecular forces are based on physics."},
+    {"from":"python_data_analysis","to":"structural_biology_computational_chemistry","type":"prerequisite","strength":"recommended","rationale":"Modeling and structure analysis are programmatic."},
+    {"from":"microscopy_flow_cytometry","to":"bioimage_analysis","type":"prerequisite","strength":"required","rationale":"Quantification requires an understanding of image acquisition and artifacts."},
+    {"from":"python_data_analysis","to":"bioimage_analysis","type":"prerequisite","strength":"required","rationale":"Image pipelines are implemented programmatically."},
+
+    {"from":"python_data_analysis","to":"machine_learning_foundations","type":"prerequisite","strength":"required","rationale":"ML exercises and pipelines require Python."},
+    {"from":"linear_algebra","to":"machine_learning_foundations","type":"prerequisite","strength":"required","rationale":"Models and embeddings use matrices and vectors."},
+    {"from":"probability_statistics","to":"machine_learning_foundations","type":"prerequisite","strength":"required","rationale":"Generalization, probability and metrics require statistics."},
+    {"from":"machine_learning_foundations","to":"deep_learning","type":"prerequisite","strength":"required","rationale":"Deep learning extends the general principles of ML."},
+    {"from":"school_calculus","to":"deep_learning","type":"prerequisite","strength":"required","rationale":"Backpropagation and optimization use derivatives."},
+    {"from":"deep_learning","to":"transformers_llms","type":"prerequisite","strength":"required","rationale":"Transformers are deep neural architectures."},
+    {"from":"transformers_llms","to":"biomedical_nlp_knowledge_graphs","type":"prerequisite","strength":"required","rationale":"Modern biomedical NLP uses transformer/LLM models."},
+    {"from":"bioinformatics_foundations","to":"biomedical_nlp_knowledge_graphs","type":"prerequisite","strength":"required","rationale":"Biomedical entities and databases require domain knowledge."},
+    {"from":"discrete_math_graphs","to":"biomedical_nlp_knowledge_graphs","type":"prerequisite","strength":"recommended","rationale":"Knowledge graph structure requires graph concepts."},
+    {"from":"evidence_synthesis","to":"biomedical_nlp_knowledge_graphs","type":"recommended_before","strength":"recommended","rationale":"Automatic extraction must take into account evidence quality."},
+    {"from":"deep_learning","to":"biological_foundation_models","type":"prerequisite","strength":"required","rationale":"Foundation models are based on large-scale neural pretraining."},
+    {"from":"single_cell_spatial_omics","to":"biological_foundation_models","type":"prerequisite","strength":"required","rationale":"Single-cell models require an understanding of data generation and cell states."},
+    {"from":"machine_learning_foundations","to":"aging_clocks_ml","type":"prerequisite","strength":"required","rationale":"Clocks are predictive models."},
+    {"from":"epigenetics_chromatin","to":"aging_clocks_ml","type":"prerequisite","strength":"required","rationale":"Most clocks use methylation and chromatin data."},
+    {"from":"biomarker_validation","to":"aging_clocks_ml","type":"prerequisite","strength":"required","rationale":"Predictive clock must pass biomarker validation."},
+    {"from":"machine_learning_foundations","to":"ai_drug_discovery","type":"prerequisite","strength":"required","rationale":"AI discovery uses supervised and generative models."},
+    {"from":"drug_discovery_development","to":"ai_drug_discovery","type":"prerequisite","strength":"required","rationale":"The model should optimize the actual stages of discovery."},
+    {"from":"structural_biology_computational_chemistry","to":"ai_drug_discovery","type":"recommended_before","strength":"recommended","rationale":"Structure-based applications require physical interpretation."},
+    {"from":"deep_learning","to":"ai_protein_design","type":"prerequisite","strength":"required","rationale":"Protein language and diffusion models are deep models."},
+    {"from":"structural_biology_computational_chemistry","to":"ai_protein_design","type":"prerequisite","strength":"required","rationale":"Design requires structure, binding and stability."},
+    {"from":"protein_engineering","to":"ai_protein_design","type":"prerequisite","strength":"required","rationale":"Generated proteins must go through the wet-lab engineering cycle."},
+    {"from":"assay_development_screening","to":"laboratory_automation_active_learning","type":"prerequisite","strength":"required","rationale":"Automation scales the formalized assay."},
+    {"from":"python_data_analysis","to":"laboratory_automation_active_learning","type":"prerequisite","strength":"required","rationale":"Workflow control and data integration require code."},
+    {"from":"machine_learning_foundations","to":"laboratory_automation_active_learning","type":"recommended_before","strength":"recommended","rationale":"Active learning selects the following experiments."},
+    {"from":"machine_learning_foundations","to":"biomedical_ai_validation","type":"prerequisite","strength":"required","rationale":"Testing AI requires an understanding of training and metrics."},
+    {"from":"experimental_design_biostatistics","to":"biomedical_ai_validation","type":"prerequisite","strength":"required","rationale":"External validation and bias are study-design tasks."},
+    {"from":"regulatory_ethics","to":"biomedical_ai_validation","type":"prerequisite","strength":"required","rationale":"Clinical AI has safety, privacy and accountability constraints."},
+    {"from":"differential_equations_dynamics","to":"simulation_systems_pharmacology","type":"prerequisite","strength":"required","rationale":"Mechanistic PK/PD models use ODE."},
+    {"from":"systems_biology","to":"simulation_systems_pharmacology","type":"prerequisite","strength":"required","rationale":"Systems pharmacology combines pathways and drug effects."},
+    {"from":"pharmacology_toxicology","to":"simulation_systems_pharmacology","type":"prerequisite","strength":"required","rationale":"Model parameters must have PK/PD meaning."},
+
+    {"from":"molecular_biology_lab","to":"crispr_genome_editing","type":"prerequisite","strength":"required","rationale":"Editing requires cloning, delivery, and molecular assays."},
+    {"from":"genetics_genomics","to":"crispr_genome_editing","type":"prerequisite","strength":"required","rationale":"Target and off-target interpretation require genetics."},
+    {"from":"crispr_genome_editing","to":"epigenome_editing","type":"prerequisite","strength":"required","rationale":"Epigenome editing uses programmable targeting."},
+    {"from":"epigenetics_chromatin","to":"epigenome_editing","type":"prerequisite","strength":"required","rationale":"The effect depends on the chromatin and regulatory context."},
+    {"from":"molecular_biology","to":"gene_therapy_delivery","type":"prerequisite","strength":"required","rationale":"Expression cassette and vector biology require molecular biology."},
+    {"from":"immunology","to":"gene_therapy_delivery","type":"prerequisite","strength":"required","rationale":"Innate/adaptive immune responses."},
+    {"from":"pharmacology_toxicology","to":"gene_therapy_delivery","type":"prerequisite","strength":"required","rationale":"Dose, biodistribution and toxicity should be evaluated."},
+    {"from":"regulatory_ethics","to":"gene_therapy_delivery","type":"prerequisite","strength":"required","rationale":"Gene therapy has specialized regulation."},
+    {"from":"systems_biology","to":"synthetic_biology_circuits","type":"prerequisite","strength":"required","rationale":"Circuit design uses network motifs and feedback."},
+    {"from":"molecular_biology_lab","to":"synthetic_biology_circuits","type":"prerequisite","strength":"required","rationale":"Circuits must be collected and tested."},
+    {"from":"biochemistry","to":"protein_engineering","type":"prerequisite","strength":"required","rationale":"Protein design requires structure/function."},
+    {"from":"assay_development_screening","to":"protein_engineering","type":"prerequisite","strength":"required","rationale":"Variants are selected by validated assay."},
+    {"from":"structural_biology_computational_chemistry","to":"protein_engineering","type":"recommended_before","strength":"recommended","rationale":"Structural reasoning guides libraries and mutations."},
+    {"from":"pharmacology_toxicology","to":"drug_discovery_development","type":"prerequisite","strength":"required","rationale":"Development optimizes efficiency, PK and safety."},
+    {"from":"assay_development_screening","to":"drug_discovery_development","type":"prerequisite","strength":"required","rationale":"Hit discovery starts with a reliable assay."},
+    {"from":"clinical_research_trials","to":"drug_discovery_development","type":"prerequisite","strength":"recommended","rationale":"The Translational Plan should include clinical endpoints."},
+    {"from":"developmental_stem_cell_biology","to":"ipsc_organoids","type":"prerequisite","strength":"required","rationale":"Differentiation protocols repeat developmental signals."},
+    {"from":"cell_culture_functional_assays","to":"ipsc_organoids","type":"prerequisite","strength":"required","rationale":"Organoids require advanced culture and phenotyping."},
+    {"from":"epigenetics_chromatin","to":"ipsc_organoids","type":"recommended_before","strength":"recommended","rationale":"Reprogramming and cell identity are epigenetic processes."},
+    {"from":"extracellular_matrix_biology","to":"tissue_engineering_biomaterials","type":"prerequisite","strength":"required","rationale":"Scaffolds replace or direct ECM functions."},
+    {"from":"developmental_stem_cell_biology","to":"tissue_engineering_biomaterials","type":"prerequisite","strength":"required","rationale":"Tissue formation requires differentiation and morphogenesis."},
+    {"from":"school_physics","to":"tissue_engineering_biomaterials","type":"recommended_before","strength":"recommended","rationale":"Materials and transport require mechanics and diffusion."},
+    {"from":"tissue_engineering_biomaterials","to":"bioprinting_biofabrication","type":"prerequisite","strength":"required","rationale":"Bioprinting spatially implements scaffold/cell design."},
+    {"from":"ipsc_organoids","to":"bioprinting_biofabrication","type":"prerequisite","strength":"recommended","rationale":"Organoid building blocks are often used as bioink units."},
+    {"from":"immunology","to":"transplantation_xenobiology","type":"prerequisite","strength":"required","rationale":"Rejection and tolerance are immune processes."},
+    {"from":"physiology_homeostasis","to":"transplantation_xenobiology","type":"prerequisite","strength":"required","rationale":"Graft should be integrated into organ physiology."},
+    {"from":"crispr_genome_editing","to":"transplantation_xenobiology","type":"recommended_before","strength":"recommended","rationale":"Xeno donors are modified by genome editing."},
+    {"from":"regulatory_ethics","to":"transplantation_xenobiology","type":"prerequisite","strength":"required","rationale":"Zoonosis and experimental transplantation require oversight."},
+    {"from":"school_physics","to":"cryobiology_organ_preservation","type":"prerequisite","strength":"required","rationale":"Heat transfer and phase transitions define freezing/rewarming."},
+    {"from":"school_chemistry","to":"cryobiology_organ_preservation","type":"prerequisite","strength":"required","rationale":"Cryoprotectants, osmolarity and toxicity require chemistry."},
+    {"from":"transplantation_xenobiology","to":"cryobiology_organ_preservation","type":"recommended_before","strength":"recommended","rationale":"Preservation is evaluated by transplant function."},
+    {"from":"immunology","to":"immune_cell_engineering","type":"prerequisite","strength":"required","rationale":"Cell therapy requires immune-cell function and signaling."},
+    {"from":"synthetic_biology_circuits","to":"immune_cell_engineering","type":"prerequisite","strength":"required","rationale":"Engineered cells use receptors, logic and safety circuits."},
+    {"from":"gene_therapy_delivery","to":"immune_cell_engineering","type":"recommended_before","strength":"recommended","rationale":"Genetic modification requires delivery and manufacturing."},
+    {"from":"experimental_design_biostatistics","to":"biomarker_validation","type":"prerequisite","strength":"required","rationale":"Validation requires reliability and predictive performance."},
+    {"from":"causal_inference","to":"biomarker_validation","type":"prerequisite","strength":"required","rationale":"The Marker Association should not be misinterpreted as a mechanism."},
+    {"from":"clinical_research_trials","to":"biomarker_validation","type":"prerequisite","strength":"required","rationale":"Utility and responsiveness are tested in clinical cohorts/trials."},
+    {"from":"simulation_systems_pharmacology","to":"combination_therapy_design","type":"prerequisite","strength":"required","rationale":"Combinations require interactions and schedules."},
+    {"from":"clinical_research_trials","to":"combination_therapy_design","type":"prerequisite","strength":"required","rationale":"Multi-intervention designs are a trial methodology."},
+    {"from":"biomarker_validation","to":"combination_therapy_design","type":"prerequisite","strength":"required","rationale":"You need validated readouts of component and system effects."},
+
+    {"from":"geroscience_hallmarks","to":"metabolic_nutrient_sensing","type":"prerequisite","strength":"required","rationale":"The branch is hallmark-specific intervention research."},
+    {"from":"metabolism_redox","to":"metabolic_nutrient_sensing","type":"prerequisite","strength":"required","rationale":"mTOR/AMPK/IGF/sirtuins integrate metabolic state."},
+    {"from":"pharmacology_toxicology","to":"metabolic_nutrient_sensing","type":"prerequisite","strength":"required","rationale":"Interventions require dose, PK and safety."},
+    {"from":"metabolism_redox","to":"nad_redox_interventions","type":"prerequisite","strength":"required","rationale":"NAD is a metabolic/redox cofactor."},
+    {"from":"mitochondrial_biology","to":"nad_redox_interventions","type":"prerequisite","strength":"required","rationale":"NAD effects are closely related to mitochondrial energetics."},
+    {"from":"pharmacology_toxicology","to":"nad_redox_interventions","type":"prerequisite","strength":"required","rationale":"Precursor effectiveness requires clinical pharmacology."},
+    {"from":"cellular_senescence","to":"senescence_therapeutics","type":"prerequisite","strength":"required","rationale":"Targeting requires senescent-state biology."},
+    {"from":"assay_development_screening","to":"senescence_therapeutics","type":"prerequisite","strength":"required","rationale":"Senolytics are selected by selective functional assays."},
+    {"from":"immunology","to":"senescence_therapeutics","type":"recommended_before","strength":"recommended","rationale":"Natural and engineered immune clearance is an important modality."},
+    {"from":"proteostasis_autophagy","to":"proteostasis_damage_clearance","type":"prerequisite","strength":"required","rationale":"It uses protein quality-control systems."},
+    {"from":"assay_development_screening","to":"proteostasis_damage_clearance","type":"prerequisite","strength":"required","rationale":"Cargo and disease-specific functional assays are required."},
+    {"from":"mitochondrial_biology","to":"mitochondrial_rejuvenation","type":"prerequisite","strength":"required","rationale":"Interventions should distinguish between mitochondrial subsystems."},
+    {"from":"metabolism_redox","to":"mitochondrial_rejuvenation","type":"prerequisite","strength":"required","rationale":"Energetic and redox outcomes are central."},
+    {"from":"cell_culture_functional_assays","to":"mitochondrial_rejuvenation","type":"prerequisite","strength":"required","rationale":"Quality-control hypotheses are checked by functional assays."},
+    {"from":"molecular_biology","to":"genome_maintenance_somatic_control","type":"prerequisite","strength":"required","rationale":"DNA damage/repair requires molecular mechanisms."},
+    {"from":"ngs_genomic_analysis","to":"genome_maintenance_somatic_control","type":"prerequisite","strength":"required","rationale":"Somatic variants and clones are measured by sequencing."},
+    {"from":"cancer_biology","to":"genome_maintenance_somatic_control","type":"prerequisite","strength":"required","rationale":"Clonal selection and malignant risk require cancer evolution."},
+    {"from":"molecular_biology","to":"telomere_interventions","type":"prerequisite","strength":"required","rationale":"Telomere replication and telomerase are molecular processes."},
+    {"from":"cancer_biology","to":"telomere_interventions","type":"prerequisite","strength":"required","rationale":"Telomere maintenance — cancer-enabling mechanism."},
+    {"from":"gene_therapy_delivery","to":"telomere_interventions","type":"recommended_before","strength":"recommended","rationale":"Telomerase therapy requires controlled delivery."},
+    {"from":"epigenetics_chromatin","to":"epigenetic_rejuvenation","type":"prerequisite","strength":"required","rationale":"Rejuvenation claims refer to the chromatin state."},
+    {"from":"ipsc_organoids","to":"epigenetic_rejuvenation","type":"prerequisite","strength":"required","rationale":"Partial reprogramming occurs on a trajectory to pluripotency."},
+    {"from":"gene_therapy_delivery","to":"epigenetic_rejuvenation","type":"prerequisite","strength":"required","rationale":"In vivo factors require tissue-specific expression."},
+    {"from":"cancer_biology","to":"epigenetic_rejuvenation","type":"prerequisite","strength":"required","rationale":"Dedifferentiation and oncogenic risk are key constraints."},
+    {"from":"biomarker_validation","to":"epigenetic_rejuvenation","type":"prerequisite","strength":"required","rationale":"Clock reset should be separated from functional rejuvenation."},
+    {"from":"immunology","to":"immune_inflammaging_rejuvenation","type":"prerequisite","strength":"required","rationale":"It describes age-related immune changes."},
+    {"from":"developmental_stem_cell_biology","to":"immune_inflammaging_rejuvenation","type":"prerequisite","strength":"required","rationale":"HSC and thymus regeneration require stem/developmental biology."},
+    {"from":"single_cell_spatial_omics","to":"immune_inflammaging_rejuvenation","type":"recommended_before","strength":"recommended","rationale":"Immune aging heterogeneity is measured by single-cell methods."},
+    {"from":"microbiology_microbial_ecology","to":"microbiome_longevity","type":"prerequisite","strength":"required","rationale":"Interventions require microbial ecology and metabolism."},
+    {"from":"physiology_homeostasis","to":"microbiome_longevity","type":"prerequisite","strength":"required","rationale":"Host effects run through barrier, immune and metabolic systems."},
+    {"from":"multiomics_integration","to":"microbiome_longevity","type":"prerequisite","strength":"recommended","rationale":"Microbiome causality requires host and microbial layers."},
+    {"from":"causal_inference","to":"microbiome_longevity","type":"prerequisite","strength":"required","rationale":"Confounding diet, drugs and disease is very large."},
+    {"from":"physiology_homeostasis","to":"systemic_circulating_factors","type":"prerequisite","strength":"required","rationale":"Circulating factors work through interorganic physiology."},
+    {"from":"immunology","to":"systemic_circulating_factors","type":"prerequisite","strength":"required","rationale":"Many factors and responses are immune."},
+    {"from":"proteomics_metabolomics","to":"systemic_circulating_factors","type":"prerequisite","strength":"required","rationale":"Plasma factors are measured by molecular profiling."},
+    {"from":"causal_inference","to":"systemic_circulating_factors","type":"prerequisite","strength":"required","rationale":"Parabiosis associations require causal dissection."},
+    {"from":"developmental_stem_cell_biology","to":"stem_cell_regeneration","type":"prerequisite","strength":"required","rationale":"It uses stem fate and niches."},
+    {"from":"cell_culture_functional_assays","to":"stem_cell_regeneration","type":"prerequisite","strength":"required","rationale":"Regenerative function is checked ex vivo/in vitro assays."},
+    {"from":"cancer_biology","to":"stem_cell_regeneration","type":"prerequisite","strength":"required","rationale":"Stem expansion and developmental signaling may increase cancer risk."},
+    {"from":"cell_biology","to":"cell_competition_replacement","type":"prerequisite","strength":"required","rationale":"Competition is defined by cell fitness and interactions."},
+    {"from":"cancer_biology","to":"cell_competition_replacement","type":"prerequisite","strength":"required","rationale":"Selection may favor malignant cheaters."},
+    {"from":"developmental_stem_cell_biology","to":"cell_competition_replacement","type":"prerequisite","strength":"recommended","rationale":"Cell competition is widely studied in development."},
+    {"from":"extracellular_matrix_biology","to":"ecm_crosslinks_fibrosis","type":"prerequisite","strength":"required","rationale":"Direction directly targets ECM damage."},
+    {"from":"organic_chemistry","to":"ecm_crosslinks_fibrosis","type":"recommended_before","strength":"recommended","rationale":"AGE and cross-link chemistry require organic mechanisms."},
+    {"from":"tissue_engineering_biomaterials","to":"ecm_crosslinks_fibrosis","type":"recommended_before","strength":"recommended","rationale":"Young matrix design and mechanics use biomaterials."},
+    {"from":"physiology_homeostasis","to":"vascular_rejuvenation","type":"prerequisite","strength":"required","rationale":"Vascular outcomes are systemic physiology."},
+    {"from":"immunology","to":"vascular_rejuvenation","type":"prerequisite","strength":"required","rationale":"Atherosclerosis and endothelial aging are associated with inflammation."},
+    {"from":"extracellular_matrix_biology","to":"vascular_rejuvenation","type":"recommended_before","strength":"recommended","rationale":"Vessel stiffness and basement membrane depend on ECM."},
+    {"from":"clinical_research_trials","to":"vascular_rejuvenation","type":"prerequisite","strength":"required","rationale":"Disease regression and events require clinical endpoints."},
+    {"from":"cancer_biology","to":"cancer_proofing_surveillance","type":"prerequisite","strength":"required","rationale":"Cancer proofing begins with tumor evolution and escape."},
+    {"from":"immunology","to":"cancer_proofing_surveillance","type":"prerequisite","strength":"required","rationale":"Surveillance uses innate/adaptive immunity."},
+    {"from":"ngs_genomic_analysis","to":"cancer_proofing_surveillance","type":"prerequisite","strength":"required","rationale":"Somatic evolution and early detection require genomic assays."},
+    {"from":"immune_cell_engineering","to":"cancer_proofing_surveillance","type":"recommended_before","strength":"recommended","rationale":"Engineered immune cells are a potential surveillance modality."},
+    {"from":"comparative_phylogenetics","to":"comparative_longevity_biology","type":"prerequisite","strength":"required","rationale":"Cross-species claims must control phylogeny."},
+    {"from":"geroscience_hallmarks","to":"comparative_longevity_biology","type":"prerequisite","strength":"required","rationale":"Candidate traits are compared to aging mechanisms."},
+    {"from":"multiomics_integration","to":"comparative_longevity_biology","type":"recommended_before","strength":"recommended","rationale":"Conserved signatures are searched on multiple molecular layers."},
+    {"from":"gene_therapy_delivery","to":"gene_synthetic_longevity","type":"prerequisite","strength":"required","rationale":"In vivo interventions require delivery."},
+    {"from":"synthetic_biology_circuits","to":"gene_synthetic_longevity","type":"prerequisite","strength":"required","rationale":"Monitoring and conditional repair are implemented circuits."},
+    {"from":"crispr_genome_editing","to":"gene_synthetic_longevity","type":"recommended_before","strength":"recommended","rationale":"Editing is a form of genetic control."},
+    {"from":"cancer_biology","to":"gene_synthetic_longevity","type":"prerequisite","strength":"required","rationale":"Long-lived expression and cell engineering require oncogenic safety."},
+    {"from":"neuroscience","to":"brain_microglial_rejuvenation","type":"prerequisite","strength":"required","rationale":"Brain repair requires circuits, glia and plasticity."},
+    {"from":"immunology","to":"brain_microglial_rejuvenation","type":"prerequisite","strength":"required","rationale":"Microglia are tissue-resident immune cells."},
+    {"from":"single_cell_spatial_omics","to":"brain_microglial_rejuvenation","type":"recommended_before","strength":"recommended","rationale":"Brain aging heterogeneity requires cell/spatial resolution."},
+    {"from":"ipsc_organoids","to":"brain_microglial_rejuvenation","type":"recommended_before","strength":"recommended","rationale":"Neural models and replacements use iPSC derivatives."},
+    {"from":"ipsc_organoids","to":"cell_tissue_organ_replacement","type":"prerequisite","strength":"required","rationale":"Stem-derived cells and organoids are building blocks."},
+    {"from":"tissue_engineering_biomaterials","to":"cell_tissue_organ_replacement","type":"prerequisite","strength":"required","rationale":"Replacement tissues require scaffold and integration."},
+    {"from":"transplantation_xenobiology","to":"cell_tissue_organ_replacement","type":"prerequisite","strength":"required","rationale":"Functional grafts require transplantation knowledge."},
+    {"from":"bioprinting_biofabrication","to":"cell_tissue_organ_replacement","type":"recommended_before","strength":"recommended","rationale":"Bioprinting is an organ fabrication route."},
+    {"from":"transplantation_xenobiology","to":"xenotransplantation_direction","type":"prerequisite","strength":"required","rationale":"It uses the xeno immune/surgical platform."},
+    {"from":"crispr_genome_editing","to":"xenotransplantation_direction","type":"prerequisite","strength":"required","rationale":"Donor pigs get a lot of genome edits."},
+    {"from":"gene_therapy_delivery","to":"xenotransplantation_direction","type":"recommended_before","strength":"recommended","rationale":"Human transgenes and manufacturing are related to genetic engineering."},
+    {"from":"biomarker_validation","to":"biomarkers_multiomics_direction","type":"prerequisite","strength":"required","rationale":"Validity and utility markers should be evaluated."},
+    {"from":"aging_clocks_ml","to":"biomarkers_multiomics_direction","type":"prerequisite","strength":"required","rationale":"Clocks are one of the central conditions."},
+    {"from":"multiomics_integration","to":"biomarkers_multiomics_direction","type":"prerequisite","strength":"required","rationale":"Multi-omics biomarkers require integrated analysis."},
+    {"from":"clinical_research_trials","to":"biomarkers_multiomics_direction","type":"prerequisite","strength":"required","rationale":"Responsiveness and endpoints are checked in cohorts/trials."},
+    {"from":"biomedical_nlp_knowledge_graphs","to":"ai_longevity_discovery","type":"prerequisite","strength":"required","rationale":"Literature-scale evidence mining is the key AI use case."},
+    {"from":"biological_foundation_models","to":"ai_longevity_discovery","type":"prerequisite","strength":"required","rationale":"Cell and sequence models support target/perturbation discovery."},
+    {"from":"ai_drug_discovery","to":"ai_longevity_discovery","type":"prerequisite","strength":"required","rationale":"Drug discovery is the primary translational AI route."},
+    {"from":"ai_protein_design","to":"ai_longevity_discovery","type":"recommended_before","strength":"recommended","rationale":"Designed proteins can be repair/measurement tools."},
+    {"from":"laboratory_automation_active_learning","to":"ai_longevity_discovery","type":"recommended_before","strength":"recommended","rationale":"Closed-loop experiments associate predictions with validation."},
+    {"from":"biomedical_ai_validation","to":"ai_longevity_discovery","type":"prerequisite","strength":"required","rationale":"Biomedical AI must be externally and prospectively validated."},
+    {"from":"cryobiology_organ_preservation","to":"biostasis_bridge","type":"prerequisite","strength":"required","rationale":"Biostasis relies on vitrification and rewarming."},
+    {"from":"tissue_engineering_biomaterials","to":"biostasis_bridge","type":"recommended_before","strength":"recommended","rationale":"Preservation damage is measured at tissue/material level."},
+    {"from":"transplantation_xenobiology","to":"biostasis_bridge","type":"recommended_before","strength":"recommended","rationale":"The functionality of the preserved organ is proven by transplantation."},
+    {"from":"developmental_stem_cell_biology","to":"reproductive_germline_rejuvenation","type":"prerequisite","strength":"required","rationale":"Germline reset occurs in development."},
+    {"from":"epigenetics_chromatin","to":"reproductive_germline_rejuvenation","type":"prerequisite","strength":"required","rationale":"Age reset includes epigenetic reprogramming."},
+    {"from":"regulatory_ethics","to":"reproductive_germline_rejuvenation","type":"prerequisite","strength":"required","rationale":"Germline interventions have intergenerational consequences."},
+
+    {"from":"ai_drug_discovery","to":"metabolic_nutrient_sensing","type":"applied_in","strength":"contextual","rationale":"AI is used for target/compound discovery in metabolic pathways."},
+    {"from":"ai_drug_discovery","to":"senescence_therapeutics","type":"applied_in","strength":"contextual","rationale":"Models help virtual screening and senolytic optimization."},
+    {"from":"ai_drug_discovery","to":"proteostasis_damage_clearance","type":"applied_in","strength":"contextual","rationale":"AI applies to modulators folding/autophagy and aggregate targeting."},
+    {"from":"ai_protein_design","to":"gene_synthetic_longevity","type":"applied_in","strength":"contextual","rationale":"Designed binders and enzymes extend synthetic repair toolkit."},
+    {"from":"biological_foundation_models","to":"epigenetic_rejuvenation","type":"applied_in","strength":"contextual","rationale":"Models can predict perturbation and cell-state transitions."},
+    {"from":"single_cell_spatial_omics","to":"stem_cell_regeneration","type":"applied_in","strength":"contextual","rationale":"Single-cell atlases measure stem niches and trajectories."},
+    {"from":"bioimage_analysis","to":"senescence_therapeutics","type":"applied_in","strength":"contextual","rationale":"High-content imaging phenotypes senescent states."},
+    {"from":"aging_clocks_ml","to":"epigenetic_rejuvenation","type":"applied_in","strength":"contextual","rationale":"Clocks are used as research readouts with caveats."},
+    {"from":"biomedical_nlp_knowledge_graphs","to":"comparative_longevity_biology","type":"applied_in","strength":"contextual","rationale":"Literature graphs combine cross-species evidence."},
+
+    {"from":"combination_therapy_design","to":"whole_body_combination_goal","type":"prerequisite","strength":"required","rationale":"Integration requires formal design combinations."},
+    {"from":"biomarkers_multiomics_direction","to":"whole_body_combination_goal","type":"prerequisite","strength":"required","rationale":"The system effect should be measured by multi-level biomarkers and outcomes."},
+    {"from":"cancer_proofing_surveillance","to":"whole_body_combination_goal","type":"prerequisite","strength":"required","rationale":"Any prolonged rejuvenation should control cancer risk."},
+    {"from":"epigenetic_rejuvenation","to":"whole_body_combination_goal","type":"recommended_before","strength":"recommended","rationale":"Reprogramming introduces repair of cell state."},
+    {"from":"senescence_therapeutics","to":"whole_body_combination_goal","type":"recommended_before","strength":"recommended","rationale":"Senescent-cell control covers one class of damage."},
+    {"from":"proteostasis_damage_clearance","to":"whole_body_combination_goal","type":"recommended_before","strength":"recommended","rationale":"Intracellular damage clearance complements regeneration."},
+    {"from":"immune_inflammaging_rejuvenation","to":"whole_body_combination_goal","type":"recommended_before","strength":"recommended","rationale":"Immune system affects all tissues and safety."},
+    {"from":"stem_cell_regeneration","to":"whole_body_combination_goal","type":"recommended_before","strength":"recommended","rationale":"Tissue maintenance requires regenerative capacity."},
+    {"from":"ecm_crosslinks_fibrosis","to":"whole_body_combination_goal","type":"recommended_before","strength":"recommended","rationale":"Cell rejuvenation without matrix repair may not restore tissue function."},
+    {"from":"cell_tissue_organ_replacement","to":"whole_body_combination_goal","type":"recommended_before","strength":"recommended","rationale":"Unrepairable components may require replacement."}
+  ],
+  "excluded_directions": [
+    {
+      "id": "whole_brain_emulation",
+      "reason": "Not included in the biological longevity graph: there is no demonstrated pipeline full scan, functional reconstruction, and identity preservation check.",
+      "disposition": "A separate future map of neurotechnology/futures."
+    },
+    {
+      "id": "brain_connectome_preservation_as_longevity",
+      "reason": "Preservation of brain structure is being investigated, but the sufficiency of connectome for memory/personality and the possibility of recovery have not been established.",
+      "disposition": "Cryobiology and neuroscience preserved; independent outcome excluded."
+    },
+    {
+      "id": "young_blood_therapy",
+      "reason": "Parabiosis gives mechanistic evidence in animals, but clinical rejuvenation with young plasma has not been proven.",
+      "disposition": "Included in systemic circulating factors as a research model."
+    },
+    {
+      "id": "lipofuscin_removal_standalone",
+      "reason": "There is not enough reason to consider the removal of lipofuscin as an independent universal strategy.",
+      "disposition": "Includes proteostasis damage clearance and lysosomal biology."
+    },
+    {
+      "id": "sens_as_therapy",
+      "reason": "SENS is an engineering classification of damage, not a single mechanism or proven therapy.",
+      "disposition": "Categories are divided into senescence, proteostasis, mitochondria, ECM and replacement."
+    },
+    {
+      "id": "universal_telomerase_nad_sirtuin_treatment",
+      "reason": "None of these modalities has been confirmed as universal anti-aging therapy for humans; there are tissue-specific trade-offs and safety risks.",
+      "disposition": "Mechanistic branches are preserved with conservative statuses."
+    }
+  ]
+}
