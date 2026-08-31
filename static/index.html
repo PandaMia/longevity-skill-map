@@ -13,10 +13,21 @@
         <strong>Longevity Skill Map</strong>
         <span id="meta">Loading graph…</span>
       </div>
-      <div class="legend" aria-label="Edge types">
-        <span class="legend-item"><i class="legend-line"></i> prerequisite</span>
-        <span class="legend-item"><i class="legend-line recommended"></i> recommended</span>
-        <span class="legend-item"><i class="legend-line applied"></i> applied in</span>
+      <div id="search-shell" class="search-shell">
+        <label class="visually-hidden" for="node-search">Search nodes and their content</label>
+        <span class="search-icon" aria-hidden="true"></span>
+        <input
+          id="node-search"
+          type="search"
+          placeholder="Search nodes and content…"
+          autocomplete="off"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-controls="search-results"
+          aria-expanded="false"
+        >
+        <div id="search-results" class="search-results" role="listbox" hidden></div>
+        <span id="search-status" class="visually-hidden" aria-live="polite"></span>
       </div>
       <div class="toolbar">
         <button id="fit" type="button">Fit graph</button>
@@ -57,6 +68,14 @@
         </div>
         <div class="legend-panel-body">
           <section class="legend-section">
+            <h3>Edge types</h3>
+            <div class="edge-legend-list">
+              <div class="edge-legend-item"><i class="legend-line"></i><span>prerequisite</span></div>
+              <div class="edge-legend-item"><i class="legend-line recommended"></i><span>recommended</span></div>
+              <div class="edge-legend-item"><i class="legend-line applied"></i><span>applied in</span></div>
+            </div>
+          </section>
+          <section class="legend-section">
             <h3>Status dots</h3>
             <div id="status-legend-list" class="status-legend-grid"></div>
           </section>
@@ -66,7 +85,6 @@
           </section>
         </div>
       </aside>
-      <div class="hint">Trackpad: two fingers — pan · pinch — zoom · hover — edges · click — details</div>
     </main>
   </div>
   <script src="/static/app.js" defer></script>

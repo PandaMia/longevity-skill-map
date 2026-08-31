@@ -12,6 +12,10 @@
       const detailId = document.getElementById("detail-id");
       const detailBody = document.getElementById("detail-body");
       const meta = document.getElementById("meta");
+      const searchShell = document.getElementById("search-shell");
+      const searchInput = document.getElementById("node-search");
+      const searchResults = document.getElementById("search-results");
+      const searchStatus = document.getElementById("search-status");
       const legendPanel = document.getElementById("legend-panel");
       const legendToggle = document.getElementById("legend-toggle");
       const statusLegendList = document.getElementById("status-legend-list");
@@ -19,7 +23,7 @@
 
       const NODE_W = 224;
       const NODE_H = 72;
-      const state = { graph: null, scale: 1, tx: 0, ty: 0, panning: false, moved: false, startX: 0, startY: 0, startTx: 0, startTy: 0, activeNode: null, hoverNode: null, gestureScale: 1 };
+      const state = { graph: null, scale: 1, tx: 0, ty: 0, panning: false, moved: false, startX: 0, startY: 0, startTx: 0, startTy: 0, activeNode: null, hoverNode: null, gestureScale: 1, searchMatches: [], searchSelection: -1 };
       const nodeElements = new Map();
       const edgeElements = [];
       const topicDefinitions = new Map();
@@ -51,6 +55,157 @@
 
       function humanizeLabel(value) {
         return value.replaceAll("_", " ");
+      }
+
+      function normalizeSearchText(value) {
+        return String(value || "")
+          .toLocaleLowerCase()
+          .normalize("NFKD")
+          .replace(/\p{M}/gu, "")
+          .replaceAll("_", " ")
+          .replace(/[^\p{L}\p{N}]+/gu, " ")
+          .trim();
+      }
+
+      function searchNode(node, normalizedQuery, terms) {
+        const title = normalizeSearchText(node.title);
+        const id = normalizeSearchText(node.id);
+        const summary = normalizeSearchText(node.summary);
+        const evidence = normalizeSearchText(node.evidence_note);
+        const metadata = normalizeSearchText([
+          node.kind,
+          node.level,
+          node.status,
+          ...node.topics.flatMap(topic => [topic, topicLabel(topic)])
+        ].join(" "));
+        const completeText = `${title} ${id} ${summary} ${evidence} ${metadata}`;
+        if (!terms.every(term => completeText.includes(term))) return null;
+
+        let score = 0;
+        if (title === normalizedQuery) score += 500;
+        else if (title.startsWith(normalizedQuery)) score += 250;
+        else if (title.includes(normalizedQuery)) score += 160;
+        if (id === normalizedQuery) score += 220;
+        else if (id.startsWith(normalizedQuery)) score += 120;
+        else if (id.includes(normalizedQuery)) score += 70;
+        if (summary.includes(normalizedQuery)) score += 90;
+        if (evidence.includes(normalizedQuery)) score += 70;
+        if (metadata.includes(normalizedQuery)) score += 30;
+
+        const titleWords = new Set(title.split(" "));
+        for (const term of terms) {
+          if (titleWords.has(term)) score += 50;
+          else if (title.includes(term)) score += 25;
+          if (id.includes(term)) score += 15;
+          if (summary.includes(term)) score += 8;
+          if (evidence.includes(term)) score += 6;
+          if (metadata.includes(term)) score += 4;
+        }
+        return { node, score };
+      }
+
+      function contentSnippet(node, terms) {
+        const candidates = [node.summary, node.evidence_note].filter(Boolean);
+        const content = candidates.find(value => {
+          const normalized = normalizeSearchText(value);
+          return terms.some(term => normalized.includes(term));
+        }) || node.summary;
+        const compact = content.replace(/\s+/g, " ").trim();
+        if (compact.length <= 170) return compact;
+
+        const normalized = normalizeSearchText(compact);
+        const firstMatch = terms
+          .map(term => normalized.indexOf(term))
+          .filter(index => index >= 0)
+          .sort((a, b) => a - b)[0] || 0;
+        const start = Math.max(0, firstMatch - 55);
+        const end = Math.min(compact.length, start + 170);
+        return `${start > 0 ? "…" : ""}${compact.slice(start, end).trim()}${end < compact.length ? "…" : ""}`;
+      }
+
+      function setSearchSelection(index) {
+        const options = [...searchResults.querySelectorAll(".search-result")];
+        if (!options.length) {
+          state.searchSelection = -1;
+          searchInput.removeAttribute("aria-activedescendant");
+          return;
+        }
+        state.searchSelection = (index + options.length) % options.length;
+        for (const [optionIndex, option] of options.entries()) {
+          const selected = optionIndex === state.searchSelection;
+          option.setAttribute("aria-selected", String(selected));
+          if (selected) {
+            searchInput.setAttribute("aria-activedescendant", option.id);
+            option.scrollIntoView({ block: "nearest" });
+          }
+        }
+      }
+
+      function closeSearchResults() {
+        searchResults.hidden = true;
+        searchInput.setAttribute("aria-expanded", "false");
+        searchInput.removeAttribute("aria-activedescendant");
+        state.searchSelection = -1;
+      }
+
+      function selectSearchResult(nodeId) {
+        closeSearchResults();
+        openNode(nodeId);
+      }
+
+      function renderSearchResults() {
+        const normalizedQuery = normalizeSearchText(searchInput.value);
+        if (!normalizedQuery || !state.graph) {
+          state.searchMatches = [];
+          searchResults.replaceChildren();
+          searchStatus.textContent = "";
+          closeSearchResults();
+          return;
+        }
+
+        const terms = [...new Set(normalizedQuery.split(" ").filter(Boolean))];
+        state.searchMatches = state.graph.nodes
+          .map(node => searchNode(node, normalizedQuery, terms))
+          .filter(Boolean)
+          .sort((left, right) => right.score - left.score || left.node.title.localeCompare(right.node.title))
+          .slice(0, 8);
+        searchResults.replaceChildren();
+
+        if (!state.searchMatches.length) {
+          const empty = document.createElement("div");
+          empty.className = "search-empty";
+          empty.textContent = "No matching nodes";
+          searchResults.append(empty);
+        } else {
+          for (const [index, match] of state.searchMatches.entries()) {
+            const result = document.createElement("button");
+            result.type = "button";
+            result.className = "search-result";
+            result.id = `search-result-${index}`;
+            result.setAttribute("role", "option");
+            result.setAttribute("aria-selected", "false");
+
+            const title = document.createElement("strong");
+            title.textContent = match.node.title;
+            const metadata = document.createElement("span");
+            metadata.className = "search-result-meta";
+            metadata.textContent = `${topicLabel(match.node.topics[0])} · ${humanizeLabel(match.node.level)}`;
+            const snippet = document.createElement("span");
+            snippet.className = "search-result-snippet";
+            snippet.textContent = contentSnippet(match.node, terms);
+            result.append(title, metadata, snippet);
+            result.addEventListener("mouseenter", () => setSearchSelection(index));
+            result.addEventListener("click", () => selectSearchResult(match.node.id));
+            searchResults.append(result);
+          }
+        }
+
+        state.searchSelection = -1;
+        searchInput.removeAttribute("aria-activedescendant");
+        searchResults.hidden = false;
+        searchInput.setAttribute("aria-expanded", "true");
+        const count = state.searchMatches.length;
+        searchStatus.textContent = count ? `${count} matching ${count === 1 ? "node" : "nodes"}` : "No matching nodes";
       }
 
       function statusLegendItem(label, color) {
@@ -421,6 +576,28 @@
       }
 
       document.getElementById("close-details").addEventListener("click", closeDetails);
+      searchInput.addEventListener("input", renderSearchResults);
+      searchInput.addEventListener("focus", () => {
+        if (normalizeSearchText(searchInput.value)) renderSearchResults();
+      });
+      searchInput.addEventListener("keydown", event => {
+        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+          event.preventDefault();
+          if (searchResults.hidden) renderSearchResults();
+          const direction = event.key === "ArrowDown" ? 1 : -1;
+          setSearchSelection(state.searchSelection + direction);
+        } else if (event.key === "Enter" && state.searchSelection >= 0) {
+          event.preventDefault();
+          selectSearchResult(state.searchMatches[state.searchSelection].node.id);
+        } else if (event.key === "Escape" && !searchResults.hidden) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeSearchResults();
+        }
+      });
+      document.addEventListener("pointerdown", event => {
+        if (!searchShell.contains(event.target)) closeSearchResults();
+      });
       legendToggle.addEventListener("click", () => setLegend(legendPanel.hidden));
       document.getElementById("close-legend").addEventListener("click", () => setLegend(false));
       document.getElementById("fit").addEventListener("click", fitGraph);
