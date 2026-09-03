@@ -20,8 +20,8 @@ from config.settings import INDEX_PATH, STATIC_DIR
 class ApplicationTests(unittest.TestCase):
     def test_full_graph_is_available(self) -> None:
         response = build_graph_response(GraphQuery())
-        self.assertEqual(len(response.nodes), 106)
-        self.assertEqual(len(response.edges), 280)
+        self.assertEqual(len(response.nodes), 108)
+        self.assertEqual(len(response.edges), 291)
 
     def test_only_research_targets_are_terminal_learning_nodes(self) -> None:
         learning_types = {"prerequisite", "recommended_before"}
@@ -47,6 +47,9 @@ class ApplicationTests(unittest.TestCase):
             ("animal_models_aging", "drug_discovery_development"),
             ("bioimage_analysis", "assay_development_screening"),
             ("epigenome_editing", "epigenetic_rejuvenation"),
+            ("transformers_llms", "agentic_ai_systems"),
+            ("agentic_ai_systems", "biomedical_research_agents"),
+            ("biomedical_research_agents", "ai_longevity_discovery"),
         }
         self.assertLessEqual(expected_pairs, learning_pairs)
 
@@ -134,6 +137,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertIn("status-color-swatch", css)
         self.assertIn("openNode(node.id)", javascript)
         self.assertIn("fitGraph()", javascript)
+        self.assertNotIn("${graph.layout_version}", javascript)
         self.assertIn("node-title-box", css)
         self.assertNotIn("text-overflow: ellipsis", css)
         self.assertNotIn("-webkit-line-clamp", css)

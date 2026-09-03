@@ -337,7 +337,7 @@
           nodesGroup.append(group);
           nodeElements.set(node.id, group);
         }
-        meta.textContent = `${graph.nodes.length} nodes · ${graph.edges.length} edges · ${graph.layout_version}`;
+        meta.textContent = `${graph.nodes.length} nodes · ${graph.edges.length} edges`;
         renderStatusLegend(graph.options);
         fitGraph();
       }

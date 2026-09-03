@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "generated_at": "2026-08-29",
+  "generated_at": "2026-09-02",
   "language": "en",
   "edge_direction": "prerequisite_to_dependent",
   "status_values": [
@@ -229,7 +229,8 @@
       "level": "graduate",
       "status": "established_biology",
       "resources": [
-        {"title": "The Nature of Epigenetic Aging from a Single-Cell Perspective", "url": "https://www.nature.com/articles/s43587-024-00616-0", "type": "review", "provider": "Nature Aging", "level": "graduate"}
+        {"title": "The Nature of Epigenetic Aging from a Single-Cell Perspective", "url": "https://www.nature.com/articles/s43587-024-00616-0", "type": "review", "provider": "Nature Aging", "level": "graduate"},
+        {"title": "Introduction to Epigenetics", "url": "https://www.ncbi.nlm.nih.gov/books/NBK585706/", "type": "online_textbook", "provider": "NCBI Bookshelf / Springer", "level": "graduate"}
       ]
     },
     {
@@ -341,7 +342,8 @@
       "level": "graduate",
       "status": "established_biology",
       "resources": [
-        {"title": "Mechanisms of Autophagy–Lysosome Dysfunction in Neurodegenerative Diseases", "url": "https://www.nature.com/articles/s41580-024-00757-5", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "graduate"}
+        {"title": "Mechanisms of Autophagy–Lysosome Dysfunction in Neurodegenerative Diseases", "url": "https://www.nature.com/articles/s41580-024-00757-5", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "graduate"},
+        {"title": "The Cell: A Molecular Approach — Protein Degradation", "url": "https://www.ncbi.nlm.nih.gov/books/NBK9957/", "type": "online_textbook_chapter", "provider": "NCBI Bookshelf", "level": "undergraduate"}
       ]
     },
     {
@@ -353,7 +355,8 @@
       "level": "graduate",
       "status": "established_biology",
       "resources": [
-        {"title": "Suppressed Basal Mitophagy Drives Cellular Aging Phenotypes", "url": "https://pubmed.ncbi.nlm.nih.gov/38897197/", "type": "research_article", "provider": "Cell Reports", "level": "graduate"}
+        {"title": "Suppressed Basal Mitophagy Drives Cellular Aging Phenotypes", "url": "https://pubmed.ncbi.nlm.nih.gov/38897197/", "type": "research_article", "provider": "Cell Reports", "level": "graduate"},
+        {"title": "Molecular Biology of the Cell — The Mitochondrion", "url": "https://www.ncbi.nlm.nih.gov/books/NBK26894/", "type": "online_textbook_chapter", "provider": "NCBI Bookshelf", "level": "undergraduate"}
       ]
     },
     {
@@ -365,7 +368,8 @@
       "level": "graduate",
       "status": "established_biology",
       "resources": [
-        {"title": "Roles of Chromatin and Genome Instability in Cellular Senescence", "url": "https://www.nature.com/articles/s41580-024-00775-3", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "graduate"}
+        {"title": "Roles of Chromatin and Genome Instability in Cellular Senescence", "url": "https://www.nature.com/articles/s41580-024-00775-3", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "graduate"},
+        {"title": "Introduction to the Biology of Aging", "url": "https://onlinelearning.buckinstitute.org/courses/introduction-to-the-biology-of-aging/", "type": "course", "provider": "Buck Institute for Research on Aging", "level": "introductory"}
       ]
     },
     {
@@ -377,7 +381,8 @@
       "level": "graduate",
       "status": "established_biology",
       "resources": [
-        {"title": "Strategic Outline of Interventions Targeting Extracellular Matrix", "url": "https://journals.physiology.org/doi/10.1152/ajpcell.00060.2023", "type": "review_and_roadmap", "provider": "American Journal of Physiology", "level": "graduate"}
+        {"title": "Strategic Outline of Interventions Targeting Extracellular Matrix", "url": "https://journals.physiology.org/doi/10.1152/ajpcell.00060.2023", "type": "review_and_roadmap", "provider": "American Journal of Physiology", "level": "graduate"},
+        {"title": "MIT 2.785J Cell-Matrix Mechanics", "url": "https://ocw.mit.edu/courses/2-785j-cell-matrix-mechanics-fall-2016/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"}
       ]
     },
     {
@@ -646,7 +651,8 @@
       "level": "frontier",
       "status": "active_preclinical",
       "resources": [
-        {"title": "Nonlinear Dynamics of Multi-Omics Profiles during Human Aging", "url": "https://www.nature.com/articles/s43587-024-00692-2", "type": "research_article", "provider": "Nature Aging", "level": "frontier"}
+        {"title": "Nonlinear Dynamics of Multi-Omics Profiles during Human Aging", "url": "https://www.nature.com/articles/s43587-024-00692-2", "type": "research_article", "provider": "Nature Aging", "level": "frontier"},
+        {"title": "Introduction to Multi-Omics Data Integration and Visualisation", "url": "https://www.ebi.ac.uk/training/materials/introduction-to-multiomics-data-integration-and-visualisation-materials/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
       ]
     },
     {
@@ -723,6 +729,34 @@
       ]
     },
     {
+      "id": "agentic_ai_systems",
+      "title": "AI Agents and Agentic Workflows",
+      "summary": "Tool calling, reason-and-act loops, planning, memory, structured state, agentic RAG, multi-agent coordination, human approval, observability, evaluation and security. The goal is to build controllable workflows rather than equate autonomy with correctness.",
+      "kind": "skill",
+      "topics": ["ml_ai", "computing_data"],
+      "level": "graduate",
+      "status": "foundational",
+      "resources": [
+        {"title": "Hugging Face AI Agents Course", "url": "https://huggingface.co/learn/agents-course/en/unit0/introduction", "type": "course", "provider": "Hugging Face", "level": "graduate"},
+        {"title": "Advanced Large Language Model Agents MOOC", "url": "https://github.com/rdi-berkeley/llm-agents-mooc/blob/main/f24.md", "type": "course", "provider": "UC Berkeley RDI", "level": "graduate"}
+      ]
+    },
+    {
+      "id": "biomedical_research_agents",
+      "title": "AI Agents for Biomedical and Longevity Research",
+      "summary": "Agents that orchestrate literature search, biomedical databases, code, omics workflows, models and experimental tools to generate and test research hypotheses. Scientific use requires provenance, reproducibility, domain validation and human oversight; an agent-generated conclusion is not evidence by itself.",
+      "kind": "skill",
+      "topics": ["ml_ai", "bioinformatics_omics", "geroscience", "research_clinical"],
+      "level": "frontier",
+      "status": "active_preclinical",
+      "resources": [
+        {"title": "AI Agents for Science", "url": "https://agents4science.github.io/Class/", "type": "course", "provider": "University of Chicago / U.S. DOE", "level": "graduate"},
+        {"title": "BRAD Bioinformatics Agent Tutorials", "url": "https://github.com/Jpickard1/BRAD", "type": "tutorial_collection", "provider": "University of Michigan", "level": "graduate"},
+        {"title": "Empowering Biomedical Discovery with AI Agents", "url": "https://arxiv.org/abs/2404.02831", "type": "review", "provider": "Cell", "level": "frontier"},
+        {"title": "ClockBase Agent: Autonomous Discovery of Aging Interventions (preprint)", "url": "https://pubmed.ncbi.nlm.nih.gov/41332661/", "type": "preprint", "provider": "bioRxiv / PubMed", "level": "frontier"}
+      ]
+    },
+    {
       "id": "biomedical_nlp_knowledge_graphs",
       "title": "Biomedical NLP and knowledge graphs",
       "summary": "Entity normalization, relation extraction, ontologies, RAG, provenance and expert validation. Applied to literature mining and building a verifiable knowledge map.",
@@ -732,7 +766,9 @@
       "status": "active_preclinical",
       "resources": [
         {"title": "Large Language Models for Biomedicine: Best Practices", "url": "https://pubmed.ncbi.nlm.nih.gov/38657567/", "type": "review", "provider": "Journal of the American Medical Informatics Association", "level": "graduate"},
-        {"title": "iKraph Biomedical Knowledge Graph", "url": "https://www.nature.com/articles/s42256-025-01014-w", "type": "research_article", "provider": "Nature Machine Intelligence", "level": "frontier"}
+        {"title": "iKraph Biomedical Knowledge Graph", "url": "https://www.nature.com/articles/s42256-025-01014-w", "type": "research_article", "provider": "Nature Machine Intelligence", "level": "frontier"},
+        {"title": "Stanford CS224N: NLP with Deep Learning", "url": "https://web.stanford.edu/class/cs224n/", "type": "course", "provider": "Stanford University", "level": "graduate"},
+        {"title": "Knowledge Graphs", "url": "https://opencourse.inf.ed.ac.uk/kg", "type": "course", "provider": "University of Edinburgh", "level": "graduate"}
       ]
     },
     {
@@ -745,7 +781,8 @@
       "status": "active_preclinical",
       "resources": [
         {"title": "Large-Scale Foundation Model on Single-Cell Transcriptomics", "url": "https://www.nature.com/articles/s41592-024-02305-7", "type": "research_article", "provider": "Nature Methods", "level": "frontier"},
-        {"title": "Gene Perturbation Prediction Does Not Yet Outperform Linear Baselines", "url": "https://www.nature.com/articles/s41592-025-02772-6", "type": "research_article", "provider": "Nature Methods", "level": "frontier"}
+        {"title": "Gene Perturbation Prediction Does Not Yet Outperform Linear Baselines", "url": "https://www.nature.com/articles/s41592-025-02772-6", "type": "research_article", "provider": "Nature Methods", "level": "frontier"},
+        {"title": "Protein and Artificial Intelligence", "url": "https://sungsoo-ahn.github.io/protein-ai-s26/", "type": "course", "provider": "KAIST", "level": "graduate"}
       ]
     },
     {
@@ -758,7 +795,8 @@
       "status": "clinical_platform",
       "resources": [
         {"title": "Epigenetic Ageing Clocks: Statistical Methods and Challenges", "url": "https://www.nature.com/articles/s41576-024-00807-w", "type": "review", "provider": "Nature Reviews Genetics", "level": "frontier"},
-        {"title": "Validation of Biomarkers of Aging", "url": "https://doi.org/10.1038/S41591-023-02784-9", "type": "review", "provider": "Nature Medicine", "level": "frontier"}
+        {"title": "Validation of Biomarkers of Aging", "url": "https://doi.org/10.1038/S41591-023-02784-9", "type": "review", "provider": "Nature Medicine", "level": "frontier"},
+        {"title": "Introduction to the Biology of Aging", "url": "https://onlinelearning.buckinstitute.org/courses/introduction-to-the-biology-of-aging/", "type": "course", "provider": "Buck Institute for Research on Aging", "level": "introductory"}
       ]
     },
     {
@@ -770,7 +808,8 @@
       "level": "frontier",
       "status": "clinical_platform",
       "resources": [
-        {"title": "Creating an AI-First Drug Discovery Engine", "url": "https://pubmed.ncbi.nlm.nih.gov/39271792/", "type": "review", "provider": "Nature Reviews Drug Discovery", "level": "frontier"}
+        {"title": "Creating an AI-First Drug Discovery Engine", "url": "https://pubmed.ncbi.nlm.nih.gov/39271792/", "type": "review", "provider": "Nature Reviews Drug Discovery", "level": "frontier"},
+        {"title": "Machine Learning in Drug Discovery: A Practical Introduction", "url": "https://www.ebi.ac.uk/training/online/courses/machine-learning-drug-discovery/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
       ]
     },
     {
@@ -795,7 +834,8 @@
       "level": "frontier",
       "status": "clinical_platform",
       "resources": [
-        {"title": "Self-Driving Laboratories for Protein Fitness Landscapes", "url": "https://www.nature.com/articles/s44286-023-00002-4", "type": "research_article", "provider": "Nature Chemical Engineering", "level": "frontier"}
+        {"title": "Self-Driving Laboratories for Protein Fitness Landscapes", "url": "https://www.nature.com/articles/s44286-023-00002-4", "type": "research_article", "provider": "Nature Chemical Engineering", "level": "frontier"},
+        {"title": "Introduction to AI for Discovery Using Self-Driving Labs", "url": "https://ac-microcourses.readthedocs.io/en/latest/courses/hello-world/index.html", "type": "course", "provider": "Acceleration Consortium / University of Toronto", "level": "graduate"}
       ]
     },
     {
@@ -808,7 +848,8 @@
       "status": "clinical_platform",
       "resources": [
         {"title": "QUEST Framework for Human Evaluation of Healthcare LLMs", "url": "https://www.nature.com/articles/s41746-024-01258-7", "type": "research_article", "provider": "npj Digital Medicine", "level": "professional"},
-        {"title": "Poisoning Medical Knowledge Using Large Language Models", "url": "https://www.nature.com/articles/s42256-024-00899-3", "type": "research_article", "provider": "Nature Machine Intelligence", "level": "frontier"}
+        {"title": "Poisoning Medical Knowledge Using Large Language Models", "url": "https://www.nature.com/articles/s42256-024-00899-3", "type": "research_article", "provider": "Nature Machine Intelligence", "level": "frontier"},
+        {"title": "MIT HST.953 Clinical Data Learning, Visualization, and Deployments", "url": "https://ocw.mit.edu/courses/hst-953-clinical-data-learning-visualization-and-deployments-fall-2024/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"}
       ]
     },
     {
@@ -857,7 +898,8 @@
       "level": "frontier",
       "status": "active_preclinical",
       "resources": [
-        {"title": "Epigenome Editing Technologies for Discovery and Medicine", "url": "https://pubmed.ncbi.nlm.nih.gov/39075148/", "type": "review", "provider": "Nature Reviews Methods Primers", "level": "frontier"}
+        {"title": "Epigenome Editing Technologies for Discovery and Medicine", "url": "https://pubmed.ncbi.nlm.nih.gov/39075148/", "type": "review", "provider": "Nature Reviews Methods Primers", "level": "frontier"},
+        {"title": "Addgene's CRISPR 101 eBook", "url": "https://info.addgene.org/hubfs/CRISPR_101_ebook/3rd%20edition/CRISPR-eBook-3rd-edition.pdf", "type": "online_textbook", "provider": "Addgene", "level": "graduate"}
       ]
     },
     {
@@ -908,7 +950,8 @@
       "level": "graduate",
       "status": "clinical_platform",
       "resources": [
-        {"title": "A Framework for Neural Organoids, Assembloids and Transplantation Studies", "url": "https://www.nature.com/articles/s41586-024-08487-6", "type": "framework", "provider": "Nature", "level": "frontier"}
+        {"title": "A Framework for Neural Organoids, Assembloids and Transplantation Studies", "url": "https://www.nature.com/articles/s41586-024-08487-6", "type": "framework", "provider": "Nature", "level": "frontier"},
+        {"title": "Stem Cell Medicine: From Scientific Research to Patient Care", "url": "https://learn.hms.harvard.edu/programs/stem-cell-medicine", "type": "course", "provider": "Harvard Medical School / ISSCR", "level": "graduate"}
       ]
     },
     {
@@ -932,7 +975,8 @@
       "level": "frontier",
       "status": "active_preclinical",
       "resources": [
-        {"title": "Organoid Bioprinting: From Cells to Functional Tissues", "url": "https://www.nature.com/articles/s44222-024-00268-0", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"}
+        {"title": "Organoid Bioprinting: From Cells to Functional Tissues", "url": "https://www.nature.com/articles/s44222-024-00268-0", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"},
+        {"title": "Bioprinting: 3D Printing Body Parts", "url": "https://www.futurelearn.com/courses/bioprinting", "type": "course", "provider": "University of Wollongong / FutureLearn", "level": "undergraduate"}
       ]
     },
     {
@@ -945,7 +989,8 @@
       "status": "early_clinical",
       "resources": [
         {"title": "Design and Testing of a Humanized Porcine Donor", "url": "https://www.nature.com/articles/s41586-023-06594-4", "type": "research_article", "provider": "Nature", "level": "frontier"},
-        {"title": "First Gene-Edited Pig Kidney Transplant", "url": "https://www.nature.com/articles/s41587-024-02223-1", "type": "research_highlight", "provider": "Nature Biotechnology", "level": "frontier"}
+        {"title": "First Gene-Edited Pig Kidney Transplant", "url": "https://www.nature.com/articles/s41587-024-02223-1", "type": "research_highlight", "provider": "Nature Biotechnology", "level": "frontier"},
+        {"title": "Immunology Flipped Course", "url": "https://www.ibiology.org/online-biology-courses/immunology-flipped-course/", "type": "course", "provider": "iBiology", "level": "graduate"}
       ]
     },
     {
@@ -970,7 +1015,8 @@
       "level": "frontier",
       "status": "clinical_platform",
       "resources": [
-        {"title": "Synthetic Macromolecular Switches for Precision Control of Therapeutic Cells", "url": "https://www.nature.com/articles/s44222-024-00235-9", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"}
+        {"title": "Synthetic Macromolecular Switches for Precision Control of Therapeutic Cells", "url": "https://www.nature.com/articles/s44222-024-00235-9", "type": "review", "provider": "Nature Reviews Bioengineering", "level": "frontier"},
+        {"title": "Making a Cell Therapy: Principles and Practice of Manufacturing", "url": "https://openlearning.mit.edu/courses-programs/mitx-courses/making-cell-therapy-principles-and-practice-manufacturing", "type": "course", "provider": "MITx", "level": "graduate"}
       ]
     },
     {
@@ -983,7 +1029,8 @@
       "status": "clinical_platform",
       "resources": [
         {"title": "Validation of Biomarkers of Aging", "url": "https://doi.org/10.1038/S41591-023-02784-9", "type": "review", "provider": "Nature Medicine", "level": "professional"},
-        {"title": "Endpoints for Geroscience Clinical Trials", "url": "https://pubmed.ncbi.nlm.nih.gov/36260264/", "type": "consensus_article", "provider": "GeroScience", "level": "professional"}
+        {"title": "Endpoints for Geroscience Clinical Trials", "url": "https://pubmed.ncbi.nlm.nih.gov/36260264/", "type": "consensus_article", "provider": "GeroScience", "level": "professional"},
+        {"title": "Evaluation of Biomarkers and Surrogate Endpoints in Chronic Disease", "url": "https://www.ncbi.nlm.nih.gov/books/NBK220297/", "type": "online_textbook", "provider": "National Academies Press / NCBI Bookshelf", "level": "graduate"}
       ]
     },
     {
@@ -1010,7 +1057,8 @@
       "evidence_note": "The pathways are causally related to lifespan in model organisms; individual interventions have been investigated in humans, but human life extension and general rejuvenation have not been proven.",
       "resources": [
         {"title": "Hallmarks of Aging: Deregulated Nutrient Sensing", "url": "https://pubmed.ncbi.nlm.nih.gov/36599349/", "type": "review", "provider": "Cell", "level": "frontier"},
-        {"title": "Aging in Heart Failure: Biology over Chronology", "url": "https://www.jacc.org/doi/10.1016/j.jchf.2024.02.021", "type": "review", "provider": "JACC: Heart Failure", "level": "frontier"}
+        {"title": "Aging in Heart Failure: Biology over Chronology", "url": "https://www.jacc.org/doi/10.1016/j.jchf.2024.02.021", "type": "review", "provider": "JACC: Heart Failure", "level": "frontier"},
+        {"title": "MIT 7.05 General Biochemistry", "url": "https://ocw.mit.edu/courses/7-05-general-biochemistry-spring-2020/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
       ]
     },
     {
@@ -1024,7 +1072,8 @@
       "evidence_note": "Precursors increase NAD in humans, but the clinical effects of healthy aging are generally limited and ambiguous.",
       "resources": [
         {"title": "NAD+ Precursor Supplementation in Human Ageing", "url": "https://pubmed.ncbi.nlm.nih.gov/41083806/", "type": "review", "provider": "Nature Metabolism", "level": "frontier"},
-        {"title": "NAD in Aging Biology: Potential Applications and Many Unknowns", "url": "https://academic.oup.com/edrv/article/44/6/1047/7207987", "type": "review", "provider": "Endocrine Reviews", "level": "frontier"}
+        {"title": "NAD in Aging Biology: Potential Applications and Many Unknowns", "url": "https://academic.oup.com/edrv/article/44/6/1047/7207987", "type": "review", "provider": "Endocrine Reviews", "level": "frontier"},
+        {"title": "MIT 7.05 General Biochemistry", "url": "https://ocw.mit.edu/courses/7-05-general-biochemistry-spring-2020/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
       ]
     },
     {
@@ -1037,7 +1086,8 @@
       "status": "early_clinical",
       "evidence_note": "The preclinical causal base is strong, but human studies are early; specificity, toxicity, and biomarkers selection remain challenges.",
       "resources": [
-        {"title": "How to Kill the Zombie Cells That Make You Age", "url": "https://www.nature.com/articles/d41586-024-01370-4", "type": "research_overview", "provider": "Nature", "level": "frontier"}
+        {"title": "How to Kill the Zombie Cells That Make You Age", "url": "https://www.nature.com/articles/d41586-024-01370-4", "type": "research_overview", "provider": "Nature", "level": "frontier"},
+        {"title": "Introduction to the Biology of Aging", "url": "https://onlinelearning.buckinstitute.org/courses/introduction-to-the-biology-of-aging/", "type": "course", "provider": "Buck Institute for Research on Aging", "level": "introductory"}
       ]
     },
     {
@@ -1050,7 +1100,8 @@
       "status": "active_preclinical",
       "evidence_note": "Loss of proteostasis and disabled macroautophagy are established hallmarks; safe systemic enhancement and clearance of different aggregates require disease- and tissue-specific solutions.",
       "resources": [
-        {"title": "Mechanisms of Autophagy–Lysosome Dysfunction", "url": "https://www.nature.com/articles/s41580-024-00757-5", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "frontier"}
+        {"title": "Mechanisms of Autophagy–Lysosome Dysfunction", "url": "https://www.nature.com/articles/s41580-024-00757-5", "type": "review", "provider": "Nature Reviews Molecular Cell Biology", "level": "frontier"},
+        {"title": "The Cell: A Molecular Approach — Protein Degradation", "url": "https://www.ncbi.nlm.nih.gov/books/NBK9957/", "type": "online_textbook_chapter", "provider": "NCBI Bookshelf", "level": "undergraduate"}
       ]
     },
     {
@@ -1063,7 +1114,8 @@
       "status": "active_preclinical",
       "evidence_note": "Mitochondrial dysfunction is causally associated with aging, but there is no universal therapy for different tissues; most intervention evidence is preclinical.",
       "resources": [
-        {"title": "Suppressed Basal Mitophagy Drives Cellular Aging Phenotypes", "url": "https://pubmed.ncbi.nlm.nih.gov/38897197/", "type": "research_article", "provider": "Cell Reports", "level": "frontier"}
+        {"title": "Suppressed Basal Mitophagy Drives Cellular Aging Phenotypes", "url": "https://pubmed.ncbi.nlm.nih.gov/38897197/", "type": "research_article", "provider": "Cell Reports", "level": "frontier"},
+        {"title": "Molecular Biology of the Cell — The Mitochondrion", "url": "https://www.ncbi.nlm.nih.gov/books/NBK26894/", "type": "online_textbook_chapter", "provider": "NCBI Bookshelf", "level": "undergraduate"}
       ]
     },
     {
@@ -1077,7 +1129,8 @@
       "evidence_note": "The accumulation of mutations and clonal expansion are established, but the safe control of all tissues and the causal contribution of different clones remain open challenges.",
       "resources": [
         {"title": "Somatic Mutations and Drivers of Clonal Hematopoiesis", "url": "https://www.nature.com/articles/s41588-024-01755-1", "type": "research_article", "provider": "Nature Genetics", "level": "frontier"},
-        {"title": "Longitudinal Analysis of Clonal Hematopoiesis", "url": "https://www.nature.com/articles/s41467-024-52302-9", "type": "research_article", "provider": "Nature Communications", "level": "frontier"}
+        {"title": "Longitudinal Analysis of Clonal Hematopoiesis", "url": "https://www.nature.com/articles/s41467-024-52302-9", "type": "research_article", "provider": "Nature Communications", "level": "frontier"},
+        {"title": "Genomes — Mutation, Repair and Recombination", "url": "https://www.ncbi.nlm.nih.gov/books/NBK21114/", "type": "online_textbook_chapter", "provider": "NCBI Bookshelf", "level": "undergraduate"}
       ]
     },
     {
@@ -1090,7 +1143,8 @@
       "status": "active_preclinical",
       "evidence_note": "Telomere attrition is a hallmark, but telomerase supports replicative immortality of tumors; systemic activation requires strict cancer control.",
       "resources": [
-        {"title": "Targeting Telomeres: Telomere Maintenance and Cancer", "url": "https://www.nature.com/articles/s41568-022-00490-1", "type": "review", "provider": "Nature Reviews Cancer", "level": "frontier"}
+        {"title": "Targeting Telomeres: Telomere Maintenance and Cancer", "url": "https://www.nature.com/articles/s41568-022-00490-1", "type": "review", "provider": "Nature Reviews Cancer", "level": "frontier"},
+        {"title": "Genomes — Genome Replication, Telomeres and Telomerase", "url": "https://www.ncbi.nlm.nih.gov/books/NBK21113/", "type": "online_textbook_chapter", "provider": "NCBI Bookshelf", "level": "undergraduate"}
       ]
     },
     {
@@ -1104,7 +1158,8 @@
       "evidence_note": "There are rejuvenation phenotypes in cells and mice; delivery, dedifferentiation, tissue-specific lethality and oncogenic risk are not solved, human rejuvenation is not proven.",
       "resources": [
         {"title": "Mechanisms and Strategies for Rejuvenation through Epigenetic Reprogramming", "url": "https://pubmed.ncbi.nlm.nih.gov/38102454/", "type": "review", "provider": "Nature Aging", "level": "frontier"},
-        {"title": "Partial Cellular Reprogramming: A Deep Dive", "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/acel.14039", "type": "review", "provider": "Aging Cell", "level": "frontier"}
+        {"title": "Partial Cellular Reprogramming: A Deep Dive", "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/acel.14039", "type": "review", "provider": "Aging Cell", "level": "frontier"},
+        {"title": "Introduction to Epigenetics", "url": "https://www.ncbi.nlm.nih.gov/books/NBK585706/", "type": "online_textbook", "provider": "NCBI Bookshelf / Springer", "level": "graduate"}
       ]
     },
     {
@@ -1118,7 +1173,8 @@
       "evidence_note": "Immune aging is established; depleting myeloid-biased HSC and thymus regeneration are promising in models, but systemic human rejuvenation is not shown.",
       "resources": [
         {"title": "Restoring a Youthful Immune System", "url": "https://www.nature.com/articles/d41573-024-00061-z", "type": "research_highlight", "provider": "Nature Reviews Drug Discovery", "level": "frontier"},
-        {"title": "Age-Related Epithelial Defects Limit Thymic Regeneration", "url": "https://www.nature.com/articles/s41590-024-01915-9", "type": "research_article", "provider": "Nature Immunology", "level": "frontier"}
+        {"title": "Age-Related Epithelial Defects Limit Thymic Regeneration", "url": "https://www.nature.com/articles/s41590-024-01915-9", "type": "research_article", "provider": "Nature Immunology", "level": "frontier"},
+        {"title": "Immunology Flipped Course", "url": "https://www.ibiology.org/online-biology-courses/immunology-flipped-course/", "type": "course", "provider": "iBiology", "level": "graduate"}
       ]
     },
     {
@@ -1132,7 +1188,8 @@
       "evidence_note": "Dysbiosis is a hallmark, but associations depend on environment and health; transferability between cohorts is limited and causality remains difficult to establish.",
       "resources": [
         {"title": "The Human Gut Microbiome and Aging", "url": "https://pubmed.ncbi.nlm.nih.gov/38831607/", "type": "review", "provider": "Gut Microbes", "level": "frontier"},
-        {"title": "Diet-Derived Microbiota Metabolites in Ageing", "url": "https://www.sciencedirect.com/science/article/pii/S1568163724002691", "type": "review", "provider": "Ageing Research Reviews", "level": "frontier"}
+        {"title": "Diet-Derived Microbiota Metabolites in Ageing", "url": "https://www.sciencedirect.com/science/article/pii/S1568163724002691", "type": "review", "provider": "Ageing Research Reviews", "level": "frontier"},
+        {"title": "Metagenomics Bioinformatics: A Practical Introduction", "url": "https://www.ebi.ac.uk/training/online/courses/metagenomics-bioinformatics", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
       ]
     },
     {
@@ -1158,7 +1215,8 @@
       "status": "active_preclinical",
       "evidence_note": "Tissue-specific stem-cell defects are established; general activation of regeneration carries risks of aberrant differentiation, fibrosis, and cancer.",
       "resources": [
-        {"title": "Cellular Rejuvenation: Mechanisms and Therapeutic Interventions", "url": "https://www.nature.com/articles/s41392-023-01343-5", "type": "review", "provider": "Signal Transduction and Targeted Therapy", "level": "frontier"}
+        {"title": "Cellular Rejuvenation: Mechanisms and Therapeutic Interventions", "url": "https://www.nature.com/articles/s41392-023-01343-5", "type": "review", "provider": "Signal Transduction and Targeted Therapy", "level": "frontier"},
+        {"title": "Stem Cell Medicine: From Scientific Research to Patient Care", "url": "https://learn.hms.harvard.edu/programs/stem-cell-medicine", "type": "course", "provider": "Harvard Medical School / ISSCR", "level": "graduate"}
       ]
     },
     {
@@ -1171,7 +1229,8 @@
       "status": "speculative",
       "evidence_note": "The fundamental biology is active, but therapeutic manipulation may select tumor-like cheaters; safe tissue replacement has not been demonstrated.",
       "resources": [
-        {"title": "Cell Competition and the Regulation of Protein Homeostasis", "url": "https://www.sciencedirect.com/science/article/pii/S0955067424000024", "type": "review", "provider": "Current Opinion in Cell Biology", "level": "frontier"}
+        {"title": "Cell Competition and the Regulation of Protein Homeostasis", "url": "https://www.sciencedirect.com/science/article/pii/S0955067424000024", "type": "review", "provider": "Current Opinion in Cell Biology", "level": "frontier"},
+        {"title": "Developmental Biology", "url": "https://www.ncbi.nlm.nih.gov/books/NBK9983/", "type": "online_textbook", "provider": "NCBI Bookshelf", "level": "undergraduate"}
       ]
     },
     {
@@ -1184,7 +1243,8 @@
       "status": "active_preclinical",
       "evidence_note": "ECM aging is recognized as important, but there is no universal cross-link breaker or method for systemic matrix renewal; the field remains underexplored.",
       "resources": [
-        {"title": "Strategic Outline of ECM Interventions for Healthy Longevity", "url": "https://journals.physiology.org/doi/10.1152/ajpcell.00060.2023", "type": "review_and_roadmap", "provider": "American Journal of Physiology", "level": "frontier"}
+        {"title": "Strategic Outline of ECM Interventions for Healthy Longevity", "url": "https://journals.physiology.org/doi/10.1152/ajpcell.00060.2023", "type": "review_and_roadmap", "provider": "American Journal of Physiology", "level": "frontier"},
+        {"title": "MIT 2.785J Cell-Matrix Mechanics", "url": "https://ocw.mit.edu/courses/2-785j-cell-matrix-mechanics-fall-2016/", "type": "course", "provider": "MIT OpenCourseWare", "level": "graduate"}
       ]
     },
     {
@@ -1198,7 +1258,8 @@
       "evidence_note": "The management of cardiovascular risk and individual forms of plaque regression are clinically feasible; the complete elimination of accumulated vascular damage remains an immature goal.",
       "resources": [
         {"title": "Atherosclerotic Cardiovascular Disease in Aging", "url": "https://www.nature.com/articles/s44325-024-00012-y", "type": "review", "provider": "npj Cardiovascular Health", "level": "frontier"},
-        {"title": "Efferocytosis in Atherosclerosis", "url": "https://www.nature.com/articles/s41569-024-01037-7", "type": "review", "provider": "Nature Reviews Cardiology", "level": "frontier"}
+        {"title": "Efferocytosis in Atherosclerosis", "url": "https://www.nature.com/articles/s41569-024-01037-7", "type": "review", "provider": "Nature Reviews Cardiology", "level": "frontier"},
+        {"title": "Mechanisms of Vascular Disease", "url": "https://www.ncbi.nlm.nih.gov/books/NBK534260/", "type": "online_textbook", "provider": "NCBI Bookshelf / University of Adelaide Press", "level": "graduate"}
       ]
     },
     {
@@ -1211,7 +1272,8 @@
       "status": "established_biology",
       "evidence_note": "Cancer control is mandatory for radical longevity, but there is no single cancer-proofing technology; the mechanisms depend on tissue and tumor evolution.",
       "resources": [
-        {"title": "Peto's Paradox and Natural Cancer Resistance", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10973980/", "type": "systematic_review", "provider": "Biomedical Journal", "level": "frontier"}
+        {"title": "Peto's Paradox and Natural Cancer Resistance", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10973980/", "type": "systematic_review", "provider": "Biomedical Journal", "level": "frontier"},
+        {"title": "MIT 7.012 Introduction to Biology", "url": "https://ocw.mit.edu/courses/7-012-introduction-to-biology-fall-2004/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
       ]
     },
     {
@@ -1224,7 +1286,8 @@
       "status": "established_biology",
       "evidence_note": "Active discovery; transfer of candidate mechanisms to humans requires causal functional validation.",
       "resources": [
-        {"title": "Peto's Paradox: Natural Strategies for Long Lifespans", "url": "https://www.sciencedirect.com/science/article/pii/S2319417023000914", "type": "systematic_review", "provider": "Biomedical Journal", "level": "frontier"}
+        {"title": "Peto's Paradox: Natural Strategies for Long Lifespans", "url": "https://www.sciencedirect.com/science/article/pii/S2319417023000914", "type": "systematic_review", "provider": "Biomedical Journal", "level": "frontier"},
+        {"title": "Principles of Evolution, Ecology and Behavior", "url": "https://oyc.yale.edu/ecology-and-evolutionary-biology/eeb-122", "type": "course", "provider": "Open Yale Courses", "level": "undergraduate"}
       ]
     },
     {
@@ -1252,7 +1315,8 @@
       "evidence_note": "Separate cellular targets and replacement strategies are active, but restoring complex circuits and preserving functions requires tissue- and network-level validation.",
       "resources": [
         {"title": "A Framework for Neural Organoids and Transplantation Studies", "url": "https://www.nature.com/articles/s41586-024-08487-6", "type": "framework", "provider": "Nature", "level": "frontier"},
-        {"title": "CRISPR Screens Reveal Regulators of Ageing in Neural Stem Cells", "url": "https://www.nature.com/articles/s41586-024-07972-2", "type": "research_article", "provider": "Nature", "level": "frontier"}
+        {"title": "CRISPR Screens Reveal Regulators of Ageing in Neural Stem Cells", "url": "https://www.nature.com/articles/s41586-024-07972-2", "type": "research_article", "provider": "Nature", "level": "frontier"},
+        {"title": "MIT 9.01 Introduction to Neuroscience", "url": "https://ocw.mit.edu/courses/9-01-introduction-to-neuroscience-fall-2007/", "type": "course", "provider": "MIT OpenCourseWare", "level": "undergraduate"}
       ]
     },
     {
@@ -1279,7 +1343,8 @@
       "status": "early_clinical",
       "evidence_note": "The first transplants of gene-edited pig organs were carried out in humans; durability, rejection, infection and trial-scale safety are still being investigated.",
       "resources": [
-        {"title": "First Gene-Edited Pig Kidney Transplant", "url": "https://www.nature.com/articles/s41587-024-02223-1", "type": "research_highlight", "provider": "Nature Biotechnology", "level": "frontier"}
+        {"title": "First Gene-Edited Pig Kidney Transplant", "url": "https://www.nature.com/articles/s41587-024-02223-1", "type": "research_highlight", "provider": "Nature Biotechnology", "level": "frontier"},
+        {"title": "Immunology Flipped Course", "url": "https://www.ibiology.org/online-biology-courses/immunology-flipped-course/", "type": "course", "provider": "iBiology", "level": "graduate"}
       ]
     },
     {
@@ -1293,7 +1358,8 @@
       "evidence_note": "Many clocks predict age/outcomes, but responsiveness and surrogate validity for rejuvenation therapies still need system validation.",
       "resources": [
         {"title": "Validation of Biomarkers of Aging", "url": "https://doi.org/10.1038/S41591-023-02784-9", "type": "review", "provider": "Nature Medicine", "level": "frontier"},
-        {"title": "Nonlinear Dynamics of Human Aging Multi-Omics", "url": "https://www.nature.com/articles/s43587-024-00692-2", "type": "research_article", "provider": "Nature Aging", "level": "frontier"}
+        {"title": "Nonlinear Dynamics of Human Aging Multi-Omics", "url": "https://www.nature.com/articles/s43587-024-00692-2", "type": "research_article", "provider": "Nature Aging", "level": "frontier"},
+        {"title": "Introduction to Multi-Omics Data Integration and Visualisation", "url": "https://www.ebi.ac.uk/training/materials/introduction-to-multiomics-data-integration-and-visualisation-materials/", "type": "course", "provider": "EMBL-EBI", "level": "graduate"}
       ]
     },
     {
@@ -1334,7 +1400,8 @@
       "status": "active_preclinical",
       "evidence_note": "Valuable for understanding rejuvenation mechanisms and reproductive aging; germline interventions carry special intergenerational and ethical risks.",
       "resources": [
-        {"title": "Mechanisms and Strategies for Rejuvenation through Epigenetic Reprogramming", "url": "https://pubmed.ncbi.nlm.nih.gov/38102454/", "type": "review", "provider": "Nature Aging", "level": "frontier"}
+        {"title": "Mechanisms and Strategies for Rejuvenation through Epigenetic Reprogramming", "url": "https://pubmed.ncbi.nlm.nih.gov/38102454/", "type": "review", "provider": "Nature Aging", "level": "frontier"},
+        {"title": "Introduction to Epigenetics", "url": "https://www.ncbi.nlm.nih.gov/books/NBK585706/", "type": "online_textbook", "provider": "NCBI Bookshelf / Springer", "level": "graduate"}
       ]
     },
     {
@@ -1466,6 +1533,15 @@
     {"from":"machine_learning_foundations","to":"deep_learning","type":"prerequisite","strength":"required","rationale":"Deep learning extends the general principles of ML."},
     {"from":"school_calculus","to":"deep_learning","type":"prerequisite","strength":"required","rationale":"Backpropagation and optimization use derivatives."},
     {"from":"deep_learning","to":"transformers_llms","type":"prerequisite","strength":"required","rationale":"Transformers are deep neural architectures."},
+    {"from":"python_data_analysis","to":"agentic_ai_systems","type":"prerequisite","strength":"required","rationale":"Implementing tools, state and orchestration requires Python programming."},
+    {"from":"transformers_llms","to":"agentic_ai_systems","type":"prerequisite","strength":"required","rationale":"Modern agent loops use language models for planning, tool selection and synthesis."},
+    {"from":"reproducible_computing","to":"agentic_ai_systems","type":"recommended_before","strength":"recommended","rationale":"Agent runs need versioned environments, traces and reproducible tool execution."},
+    {"from":"agentic_ai_systems","to":"biomedical_research_agents","type":"prerequisite","strength":"required","rationale":"Biomedical agents extend general tool-use, planning, memory and evaluation patterns."},
+    {"from":"bioinformatics_foundations","to":"biomedical_research_agents","type":"prerequisite","strength":"required","rationale":"Agents must operate biological databases and workflows with domain-aware constraints."},
+    {"from":"evidence_synthesis","to":"biomedical_research_agents","type":"prerequisite","strength":"required","rationale":"Literature agents must distinguish evidence quality, study design and unsupported claims."},
+    {"from":"biomedical_nlp_knowledge_graphs","to":"biomedical_research_agents","type":"recommended_before","strength":"recommended","rationale":"Biomedical agents frequently use entity normalization, retrieval and knowledge graphs."},
+    {"from":"biological_foundation_models","to":"biomedical_research_agents","type":"recommended_before","strength":"recommended","rationale":"Domain models can serve as tools for sequence, cell and perturbation reasoning."},
+    {"from":"biomedical_ai_validation","to":"biomedical_research_agents","type":"prerequisite","strength":"required","rationale":"Agentic biomedical workflows require external validation, audit trails and safety checks."},
     {"from":"transformers_llms","to":"biomedical_nlp_knowledge_graphs","type":"prerequisite","strength":"required","rationale":"Modern biomedical NLP uses transformer/LLM models."},
     {"from":"bioinformatics_foundations","to":"biomedical_nlp_knowledge_graphs","type":"prerequisite","strength":"required","rationale":"Biomedical entities and databases require domain knowledge."},
     {"from":"discrete_math_graphs","to":"biomedical_nlp_knowledge_graphs","type":"prerequisite","strength":"recommended","rationale":"Knowledge graph structure requires graph concepts."},
@@ -1614,6 +1690,7 @@
     {"from":"ai_protein_design","to":"ai_longevity_discovery","type":"recommended_before","strength":"recommended","rationale":"Designed proteins can be repair/measurement tools."},
     {"from":"laboratory_automation_active_learning","to":"ai_longevity_discovery","type":"recommended_before","strength":"recommended","rationale":"Closed-loop experiments associate predictions with validation."},
     {"from":"biomedical_ai_validation","to":"ai_longevity_discovery","type":"prerequisite","strength":"required","rationale":"Biomedical AI must be externally and prospectively validated."},
+    {"from":"biomedical_research_agents","to":"ai_longevity_discovery","type":"recommended_before","strength":"recommended","rationale":"Agents can orchestrate evidence search, omics analysis and hypothesis testing across longevity workflows."},
     {"from":"cryobiology_organ_preservation","to":"biostasis_bridge","type":"prerequisite","strength":"required","rationale":"Biostasis relies on vitrification and rewarming."},
     {"from":"tissue_engineering_biomaterials","to":"biostasis_bridge","type":"recommended_before","strength":"recommended","rationale":"Preservation damage is measured at tissue/material level."},
     {"from":"transplantation_xenobiology","to":"biostasis_bridge","type":"recommended_before","strength":"recommended","rationale":"The functionality of the preserved organ is proven by transplantation."},
@@ -1630,6 +1707,7 @@
     {"from":"bioimage_analysis","to":"senescence_therapeutics","type":"applied_in","strength":"contextual","rationale":"High-content imaging phenotypes senescent states."},
     {"from":"aging_clocks_ml","to":"epigenetic_rejuvenation","type":"applied_in","strength":"contextual","rationale":"Clocks are used as research readouts with caveats."},
     {"from":"biomedical_nlp_knowledge_graphs","to":"comparative_longevity_biology","type":"applied_in","strength":"contextual","rationale":"Literature graphs combine cross-species evidence."},
+    {"from":"biomedical_research_agents","to":"laboratory_automation_active_learning","type":"applied_in","strength":"contextual","rationale":"Research agents can orchestrate analysis and decision-making around closed-loop experiments."},
 
     {"from":"combination_therapy_design","to":"whole_body_combination_goal","type":"prerequisite","strength":"required","rationale":"Integration requires formal design combinations."},
     {"from":"biomarkers_multiomics_direction","to":"whole_body_combination_goal","type":"prerequisite","strength":"required","rationale":"The system effect should be measured by multi-level biomarkers and outcomes."},

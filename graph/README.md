@@ -6,8 +6,8 @@ Direction review: [`../research/longevity-directions.md`](../research/longevity-
 
 The current version contains:
 
-- 106 nodes;
-- 280 edges;
+- 108 nodes;
+- 291 edges;
 - 26 research or integration targets;
 - 6 school-level root nodes;
 - 12 consolidated visual topic categories;
