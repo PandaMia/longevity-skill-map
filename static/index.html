@@ -30,6 +30,9 @@
         <span id="search-status" class="visually-hidden" aria-live="polite"></span>
       </div>
       <div class="toolbar">
+        <label class="depth-control" for="mastery-depth"><span>Depth</span>
+          <select id="mastery-depth"><option value="understand">Understand the topic</option><option value="apply">Work on tasks</option></select>
+        </label>
         <button id="fit" type="button">Fit graph</button>
         <button id="legend-toggle" type="button" aria-controls="legend-panel" aria-expanded="false">Legend</button>
         <button id="zoom-in" type="button" aria-label="Zoom in">＋</button>
@@ -45,10 +48,17 @@
         </defs>
         <g id="viewport">
           <g id="lanes"></g>
+          <g id="containers"></g>
           <g id="edges"></g>
           <g id="nodes"></g>
         </g>
       </svg>
+      <section id="path-panel" class="path-panel" hidden aria-label="Locked learning path">
+        <div class="path-heading"><span class="path-eyebrow">LOCKED LEARNING PATH</span><button id="reset-path" type="button">Reset path</button></div>
+        <strong id="path-target"></strong><p id="path-summary" aria-live="polite"></p>
+        <details id="path-steps-disclosure"><summary>Explore required steps</summary><div id="path-steps"></div></details>
+      </section>
+      <div id="notice" class="notice" role="status" hidden></div>
       <div id="loading">Loading the static layout…</div>
       <div id="error" hidden></div>
       <aside id="details" hidden aria-live="polite">
@@ -87,6 +97,8 @@
       </aside>
     </main>
   </div>
+  <script src="/static/graph-view.js" defer></script>
+  <script src="/static/graph-interactions.js" defer></script>
   <script src="/static/app.js" defer></script>
 </body>
 </html>

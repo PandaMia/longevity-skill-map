@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 GRAPH_PATH = ROOT / "graph" / "longevity-skills.json"
 
-NODE_FIELDS = {"id", "title", "summary", "kind", "topics", "level", "status", "resources"}
+NODE_FIELDS = {"id", "title", "summary", "kind", "topics", "level", "status", "resources", "outcomes", "practice"}
 NODE_KINDS = {"foundation", "discipline", "skill", "technology", "research_direction", "integration_goal"}
 NODE_LEVELS = {"school", "introductory", "undergraduate", "graduate", "professional", "frontier"}
 EDGE_TYPES = {"prerequisite", "recommended_before", "applied_in", "enables", "part_of", "complements"}
@@ -38,6 +38,8 @@ def main() -> int:
 
     ids = [node.get("id") for node in nodes]
     id_set = set(ids)
+    node_by_id = {node.get("id"): node for node in nodes}
+    containers = {node.get("parent_id") for node in nodes if node.get("parent_id")}
     status_values = set(data.get("status_values", []))
     if len(ids) != len(id_set):
         duplicates = sorted({node_id for node_id in ids if ids.count(node_id) > 1})
@@ -53,6 +55,17 @@ def main() -> int:
             fail(errors, f"{node_id}: topics must not be empty")
         if not node.get("summary"):
             fail(errors, f"{node_id}: summary must not be empty")
+        parent = node.get("parent_id")
+        if parent:
+            if parent not in id_set or parent == node_id:
+                fail(errors, f"{node_id}: invalid parent {parent}")
+            elif node_by_id[parent].get("parent_id"):
+                fail(errors, f"{node_id}: only one level of containment is supported")
+        for depth in ("understand", "apply"):
+            if not node.get("outcomes", {}).get(depth):
+                fail(errors, f"{node_id}: missing {depth} outcome")
+        if not node.get("practice"):
+            fail(errors, f"{node_id}: missing practice task")
         if node.get("kind") not in NODE_KINDS:
             fail(errors, f"{node_id}: invalid kind {node.get('kind')!r}")
         if node.get("level") not in NODE_LEVELS:
@@ -94,6 +107,14 @@ def main() -> int:
             fail(errors, f"{prefix}: invalid type {edge_type!r}")
         if strength not in EDGE_STRENGTHS:
             fail(errors, f"{prefix}: invalid strength {strength!r}")
+        if edge.get("min_depth") not in {"understand", "apply"}:
+            fail(errors, f"{prefix}: invalid minimum mastery depth")
+        if edge.get("source_depth") not in {None, "understand", "apply"}:
+            fail(errors, f"{prefix}: invalid source mastery depth")
+        if edge_type == "prerequisite" and strength != "required":
+            fail(errors, f"{prefix}: prerequisites must be required; use recommended_before")
+        if edge.get("min_depth") == "understand" and edge.get("source_depth") == "apply":
+            fail(errors, f"{prefix}: understanding cannot require practical mastery")
         if not edge.get("rationale"):
             fail(errors, f"{prefix}: rationale is required")
         if source == target:
@@ -141,7 +162,7 @@ def main() -> int:
             fail(errors, f"{node_id}: target is not reachable from a school-level node")
         if node.get("level") != "school" and inbound_learning[node_id] == 0:
             fail(errors, f"{node_id}: non-school node has no learning prerequisite")
-        if node.get("kind") not in TARGET_KINDS and not learning_graph[node_id]:
+        if node.get("kind") not in TARGET_KINDS and node_id not in containers and not learning_graph[node_id]:
             fail(errors, f"{node_id}: non-target node has no learning dependent")
 
     if errors:

@@ -8,6 +8,7 @@ from config.graph import (
     build_graph_response,
     build_node_details,
     health_response,
+    build_learning_path,
 )
 from config.models import (
     GraphQuery,
@@ -15,6 +16,8 @@ from config.models import (
     HealthResponse,
     NodeDetailsRequest,
     NodeDetailsResponse,
+    LearningPathRequest,
+    LearningPathResponse,
 )
 from config.settings import INDEX_PATH, STATIC_DIR
 
@@ -56,6 +59,14 @@ def query_graph(query: GraphQuery) -> GraphResponse:
 def node_details(request: NodeDetailsRequest) -> NodeDetailsResponse:
     try:
         return build_node_details(request.node_id)
+    except UnknownNodeError as error:
+        raise HTTPException(status_code=404, detail=str(error)) from error
+
+
+@app.post("/api/learning-path", response_model=LearningPathResponse)
+def learning_path(request: LearningPathRequest) -> LearningPathResponse:
+    try:
+        return build_learning_path(request)
     except UnknownNodeError as error:
         raise HTTPException(status_code=404, detail=str(error)) from error
 

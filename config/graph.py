@@ -5,6 +5,11 @@ from collections import defaultdict
 
 from .models import (
     EdgeType,
+    EdgeStrength,
+    MasteryDepth,
+    LearningPathRequest,
+    LearningPathResponse,
+    PathStep,
     FilterOptions,
     GraphBounds,
     GraphEdge,
@@ -46,6 +51,13 @@ def validate_graph_references(graph: GraphFile) -> None:
     node_ids = {node.id for node in graph.nodes}
     if len(node_ids) != len(graph.nodes):
         raise RuntimeError("Graph contains duplicate node ids")
+    by_id = {node.id: node for node in graph.nodes}
+    for node in graph.nodes:
+        if node.parent_id is not None:
+            if node.parent_id not in node_ids or node.parent_id == node.id:
+                raise RuntimeError(f"Invalid parent for {node.id}")
+            if by_id[node.parent_id].parent_id is not None:
+                raise RuntimeError("Containers currently support one level of components")
     for edge in graph.edges:
         if edge.from_ not in node_ids or edge.to not in node_ids:
             raise RuntimeError(f"Edge references an unknown node: {edge.from_} -> {edge.to}")
@@ -82,7 +94,9 @@ def deterministic_layout(
                 heapq.heappush(queue, target)
 
     if len(topo_order) != len(graph.nodes):
-        return deterministic_layout_with_strict_edges(graph)
+        if any(e.type == EdgeType.RECOMMENDED_BEFORE for e in graph.edges):
+            return deterministic_layout_with_strict_edges(graph)
+        raise RuntimeError("Cycle in prerequisite graph")
 
     return assign_topic_lane_coordinates(graph, rank)
 
@@ -194,6 +208,10 @@ def assign_topic_lane_coordinates(
 GRAPH = load_graph()
 validate_graph_references(GRAPH)
 NODE_BY_ID = {node.id: node for node in GRAPH.nodes}
+CHILDREN: dict[str, list[str]] = defaultdict(list)
+for _node in GRAPH.nodes:
+    if _node.parent_id:
+        CHILDREN[_node.parent_id].append(_node.id)
 KNOWN_TOPICS = {topic for node in GRAPH.nodes for topic in node.topics}
 UNKNOWN_CONFIG_TOPICS = KNOWN_TOPICS - TOPIC_CATEGORIES.keys()
 if UNKNOWN_CONFIG_TOPICS:
@@ -256,6 +274,8 @@ def build_graph_response(query: GraphQuery) -> GraphResponse:
                 evidence_note=node.evidence_note,
                 x=POSITIONS[node.id][0],
                 y=POSITIONS[node.id][1],
+                parent_id=node.parent_id,
+                children=CHILDREN[node.id],
             )
             for node in selected_nodes
         ],
@@ -266,6 +286,8 @@ def build_graph_response(query: GraphQuery) -> GraphResponse:
                     "to": edge.to,
                     "type": edge.type,
                     "strength": edge.strength,
+                    "min_depth": edge.min_depth,
+                    "source_depth": edge.source_depth,
                 }
             )
             for edge in selected_edges
@@ -285,6 +307,8 @@ def related_edge(edge: GraphEdge, counterpart_id: str, relation: str) -> Related
         type=edge.type,
         strength=edge.strength,
         rationale=edge.rationale,
+        min_depth=edge.min_depth,
+        source_depth=edge.source_depth,
     )
 
 
@@ -317,6 +341,64 @@ def build_node_details(node_id: str) -> NodeDetailsResponse:
         prerequisites=prerequisites,
         dependents=dependents,
         other_relations=other_relations,
+        children=[NODE_BY_ID[child_id] for child_id in CHILDREN[node.id]],
+        parent=NODE_BY_ID.get(node.parent_id),
+    )
+
+
+def build_learning_path(request: LearningPathRequest) -> LearningPathResponse:
+    """Resolve required AND dependencies, propagating the depth needed at each step.
+
+    Membership never implies learning every sibling. A container is only a visual
+    shell unless it is itself requested by a prerequisite. Recommended edges do
+    not enter a required path. Incoming application-only edges activate only for
+    tasks, and source_depth can request conceptual knowledge of a prerequisite.
+    """
+    if request.node_id not in NODE_BY_ID:
+        raise UnknownNodeError(request.node_id)
+    incoming: dict[str, list[tuple[int, GraphEdge]]] = defaultdict(list)
+    for index, edge in enumerate(GRAPH.edges):
+        if edge.type == EdgeType.PREREQUISITE and edge.strength == EdgeStrength.REQUIRED:
+            incoming[edge.to].append((index, edge))
+    required: dict[str, MasteryDepth] = {}
+    active: set[tuple[str, MasteryDepth]] = set()
+    selected_edges: set[int] = set()
+
+    def visit(node_id: str, depth: MasteryDepth) -> None:
+        key = (node_id, depth)
+        if key in active:
+            raise RuntimeError(f"Cycle in learning path at {node_id}")
+        previous = required.get(node_id)
+        if previous == MasteryDepth.APPLY or previous == depth:
+            return
+        active.add(key)
+        required[node_id] = depth
+        for index, edge in incoming[node_id]:
+            if depth == MasteryDepth.UNDERSTAND and edge.min_depth == MasteryDepth.APPLY:
+                continue
+            selected_edges.add(index)
+            visit(edge.from_, edge.source_depth or depth)
+        active.remove(key)
+
+    visit(request.node_id, request.depth)
+    # Stable topological stages include every branch and count shared skills once.
+    stage: dict[str, int] = {}
+    def stage_for(node_id: str) -> int:
+        if node_id not in stage:
+            parents = [GRAPH.edges[i].from_ for i in selected_edges if GRAPH.edges[i].to == node_id]
+            stage[node_id] = 1 + max((stage_for(parent) for parent in parents), default=-1)
+        return stage[node_id]
+    for node_id in required:
+        stage_for(node_id)
+    ordered = sorted(required, key=lambda node_id: (stage[node_id], NODE_BY_ID[node_id].title, node_id))
+    containers = sorted({NODE_BY_ID[node_id].parent_id for node_id in required if NODE_BY_ID[node_id].parent_id})
+    return LearningPathResponse(
+        target_id=request.node_id,
+        depth=request.depth,
+        node_ids=ordered,
+        container_ids=containers,
+        edge_indices=sorted(selected_edges),
+        steps=[PathStep(node_id=node_id, depth=required[node_id], stage=stage[node_id]) for node_id in ordered],
     )
 
 

@@ -52,6 +52,16 @@ class EdgeStrength(str, Enum):
     CONTEXTUAL = "contextual"
 
 
+class MasteryDepth(str, Enum):
+    UNDERSTAND = "understand"
+    APPLY = "apply"
+
+
+class LearningOutcomes(StrictModel):
+    understand: str = Field(min_length=1, max_length=1200)
+    apply: str = Field(min_length=1, max_length=1200)
+
+
 NodeId = Annotated[str, Field(min_length=1, max_length=96, pattern=r"^[a-z0-9_]+$")]
 TopicName = Annotated[str, Field(min_length=1, max_length=64, pattern=r"^[a-z0-9_]+$")]
 
@@ -62,6 +72,8 @@ class LearningResource(StrictModel):
     type: str = Field(min_length=1, max_length=64)
     provider: str = Field(min_length=1, max_length=160)
     level: NodeLevel
+    section: str | None = None
+    depth: MasteryDepth = MasteryDepth.UNDERSTAND
 
 
 class GraphNode(StrictModel):
@@ -74,6 +86,9 @@ class GraphNode(StrictModel):
     status: NodeStatus
     resources: list[LearningResource] = Field(min_length=1, max_length=16)
     evidence_note: str | None = Field(default=None, max_length=1600)
+    parent_id: NodeId | None = None
+    outcomes: LearningOutcomes
+    practice: str = Field(min_length=1, max_length=1200)
 
 
 class GraphEdge(StrictModel):
@@ -82,6 +97,8 @@ class GraphEdge(StrictModel):
     type: EdgeType
     strength: EdgeStrength
     rationale: str = Field(min_length=1, max_length=600)
+    min_depth: MasteryDepth = MasteryDepth.UNDERSTAND
+    source_depth: MasteryDepth | None = None
 
     model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
@@ -120,6 +137,26 @@ class NodeDetailsRequest(StrictModel):
     node_id: NodeId
 
 
+class LearningPathRequest(StrictModel):
+    node_id: NodeId
+    depth: MasteryDepth = MasteryDepth.UNDERSTAND
+
+
+class PathStep(StrictModel):
+    node_id: NodeId
+    depth: MasteryDepth
+    stage: int
+
+
+class LearningPathResponse(StrictModel):
+    target_id: NodeId
+    depth: MasteryDepth
+    node_ids: list[NodeId]
+    container_ids: list[NodeId]
+    edge_indices: list[int]
+    steps: list[PathStep]
+
+
 class PositionedNode(StrictModel):
     id: NodeId
     title: str
@@ -131,6 +168,8 @@ class PositionedNode(StrictModel):
     evidence_note: str | None
     x: float
     y: float
+    parent_id: NodeId | None
+    children: list[NodeId]
 
 
 class RenderEdge(StrictModel):
@@ -138,6 +177,8 @@ class RenderEdge(StrictModel):
     to: NodeId
     type: EdgeType
     strength: EdgeStrength
+    min_depth: MasteryDepth
+    source_depth: MasteryDepth | None
 
     model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
@@ -188,6 +229,8 @@ class RelatedEdge(StrictModel):
     type: EdgeType
     strength: EdgeStrength
     rationale: str
+    min_depth: MasteryDepth
+    source_depth: MasteryDepth | None
 
 
 class NodeDetailsResponse(StrictModel):
@@ -195,6 +238,8 @@ class NodeDetailsResponse(StrictModel):
     prerequisites: list[RelatedEdge]
     dependents: list[RelatedEdge]
     other_relations: list[RelatedEdge]
+    children: list[GraphNode]
+    parent: GraphNode | None
 
 
 class HealthResponse(StrictModel):

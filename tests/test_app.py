@@ -12,18 +12,20 @@ from config.graph import (
     build_graph_response,
     build_node_details,
     deterministic_layout,
+    build_learning_path,
+    CHILDREN,
 )
-from config.models import GraphQuery, NodeDetailsRequest
+from config.models import GraphQuery, NodeDetailsRequest, LearningPathRequest, MasteryDepth
 from config.settings import INDEX_PATH, STATIC_DIR
 
 
 class ApplicationTests(unittest.TestCase):
     def test_full_graph_is_available(self) -> None:
         response = build_graph_response(GraphQuery())
-        self.assertEqual(len(response.nodes), 108)
-        self.assertEqual(len(response.edges), 291)
+        self.assertEqual({node.id for node in response.nodes}, {node.id for node in GRAPH.nodes})
+        self.assertEqual(len(response.edges), len(GRAPH.edges))
 
-    def test_only_research_targets_are_terminal_learning_nodes(self) -> None:
+    def test_terminal_nodes_are_targets_or_content_containers(self) -> None:
         learning_types = {"prerequisite", "recommended_before"}
         nodes_with_dependents = {
             edge.from_
@@ -33,7 +35,7 @@ class ApplicationTests(unittest.TestCase):
         terminal_nodes = [node for node in GRAPH.nodes if node.id not in nodes_with_dependents]
         self.assertTrue(terminal_nodes)
         self.assertTrue(
-            all(node.kind.value in {"research_direction", "integration_goal"} for node in terminal_nodes)
+            all(node.kind.value in {"research_direction", "integration_goal"} or CHILDREN[node.id] for node in terminal_nodes)
         )
 
     def test_intermediate_nodes_have_intended_learning_continuations(self) -> None:
@@ -44,7 +46,8 @@ class ApplicationTests(unittest.TestCase):
         }
         expected_pairs = {
             ("algorithms_data_structures", "bioinformatics_foundations"),
-            ("animal_models_aging", "drug_discovery_development"),
+            ("mammalian_aging_models", "preclinical_safety"),
+            ("preclinical_safety", "drug_discovery_development"),
             ("bioimage_analysis", "assay_development_screening"),
             ("epigenome_editing", "epigenetic_rejuvenation"),
             ("transformers_llms", "agentic_ai_systems"),
@@ -129,7 +132,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertIn("function searchNode", javascript)
         self.assertIn("function renderSearchResults", javascript)
         self.assertIn("selectSearchResult(match.node.id)", javascript)
-        self.assertIn("openNode(nodeId)", javascript)
+        self.assertIn("function openNode(nodeId", javascript)
         self.assertIn("topic-lane", css)
         self.assertIn("search-result", css)
         self.assertIn("edge-legend-item", css)
@@ -163,6 +166,85 @@ class ApplicationTests(unittest.TestCase):
                 self.assertIsNone(cyrillic.search(node.evidence_note))
         for edge in GRAPH.edges:
             self.assertIsNone(cyrillic.search(edge.rationale))
+
+
+    def path(self, target, depth="apply"):
+        return build_learning_path(LearningPathRequest(node_id=target, depth=depth))
+
+    def test_depth_specific_closures_for_every_node(self):
+        for node in GRAPH.nodes:
+            with self.subTest(node=node.id):
+                conceptual = self.path(node.id, "understand")
+                practical = self.path(node.id, "apply")
+                self.assertLessEqual(set(conceptual.node_ids), set(practical.node_ids))
+                self.assertEqual(len(practical.node_ids), len(set(practical.node_ids)))
+                stages = {step.node_id: step.stage for step in practical.steps}
+                for index in practical.edge_indices:
+                    edge = GRAPH.edges[index]
+                    self.assertEqual(edge.type.value, "prerequisite")
+                    self.assertEqual(edge.strength.value, "required")
+                    self.assertLess(stages[edge.from_], stages[edge.to])
+                for step in conceptual.steps:
+                    self.assertEqual(step.depth, MasteryDepth.UNDERSTAND)
+
+    def test_a_component_does_not_require_its_siblings_or_container(self):
+        route = self.path("flow_gating")
+        self.assertIn("flow_panel_design", route.node_ids)
+        self.assertIn("microscopy_flow_cytometry", route.container_ids)
+        for unrelated in ["microscopy_flow_cytometry", "cell_sorting", "bioimage_analysis", "fluorescence_microscopy"]:
+            self.assertNotIn(unrelated, route.node_ids)
+
+    def test_practical_paths_include_methods_and_biology(self):
+        route = self.path("biostasis_bridge")
+        for required in ["cell_biology", "physiology_homeostasis", "transport_thermal_biophysics", "experimental_design_biostatistics", "graft_function_assessment"]:
+            self.assertIn(required, route.node_ids)
+        self.assertNotIn("graft_function_assessment", self.path("biostasis_bridge", "understand").node_ids)
+        brain = self.path("brain_microglial_rejuvenation")
+        for required in ["electrophysiology", "histology_pathology", "cognitive_behavioral_assessment", "immune_aging_phenotyping"]:
+            self.assertIn(required, brain.node_ids)
+
+    def test_all_research_tasks_require_experimental_design(self):
+        for node in GRAPH.nodes:
+            if node.kind.value in {"research_direction", "integration_goal"}:
+                self.assertIn("experimental_design_biostatistics", self.path(node.id).node_ids, node.id)
+
+    def test_prerequisite_depth_is_propagated_without_overtraining(self):
+        route = self.path("flow_gating")
+        depths = {step.node_id: step.depth for step in route.steps}
+        self.assertEqual(depths["flow_gating"], MasteryDepth.APPLY)
+        self.assertEqual(depths["immunology"], MasteryDepth.UNDERSTAND)
+        self.assertEqual(depths["experimental_design_biostatistics"], MasteryDepth.APPLY)
+
+    def test_modalities_do_not_require_irrelevant_omics(self):
+        clinical = self.path("clinical_clock_reproduction")
+        self.assertNotIn("dna_methylation_analysis", clinical.node_ids)
+        methylation = self.path("methylation_clock_reproduction")
+        self.assertIn("dna_methylation_analysis", methylation.node_ids)
+        self.assertNotIn("lipidomics_analysis", methylation.node_ids)
+        rnaseq = self.path("rna_differential_expression")
+        self.assertIn("r_bioconductor", rnaseq.node_ids)
+        self.assertIn("multiple_testing_batch", rnaseq.node_ids)
+
+    def test_containers_and_resources_have_complete_learning_metadata(self):
+        requested = ["drug_discovery_development", "gene_therapy_delivery", "microscopy_flow_cytometry", "proteomics_metabolomics", "ipsc_organoids", "transplantation_xenobiology", "immune_inflammaging_rejuvenation", "brain_microglial_rejuvenation"]
+        for node_id in requested:
+            details = build_node_details(node_id)
+            self.assertGreaterEqual(len(details.children), 3)
+            for child in details.children:
+                self.assertTrue(child.resources)
+                self.assertTrue(child.outcomes.understand)
+                self.assertTrue(child.outcomes.apply)
+                self.assertTrue(child.practice)
+
+    def test_learning_path_api_validation(self):
+        from fastapi.testclient import TestClient
+        with TestClient(app.app) as client:
+            response = client.post("/api/learning-path", json={"node_id": "flow_gating", "depth": "apply"})
+            self.assertEqual(response.status_code, 200)
+            self.assertIn("flow_panel_design", response.json()["node_ids"])
+            self.assertEqual(client.post("/api/learning-path", json={"node_id": "unknown"}).status_code, 404)
+            self.assertEqual(client.post("/api/learning-path", json={"node_id": "flow_gating", "depth": "expert"}).status_code, 422)
+            self.assertEqual(client.post("/api/learning-path", json={"node_id": "flow_gating", "unexpected": True}).status_code, 422)
 
 
 if __name__ == "__main__":

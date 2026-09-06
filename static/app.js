@@ -22,11 +22,44 @@
       const topicLegendList = document.getElementById("topic-legend-list");
 
       const NODE_W = 224;
-      const NODE_H = 72;
-      const state = { graph: null, scale: 1, tx: 0, ty: 0, panning: false, moved: false, startX: 0, startY: 0, startTx: 0, startTy: 0, activeNode: null, hoverNode: null, gestureScale: 1, searchMatches: [], searchSelection: -1 };
+      const state = { graph: null, view: null, expanded: new Set(), path: null, depth: "understand", detailPayload: null, detailVersion: 0, pathVersion: 0, pathPending: false, pendingTarget: null, scale: 1, tx: 0, ty: 0, panning: false, navigating: false, moved: false, startX: 0, startY: 0, startTx: 0, startTy: 0, activeNode: null, hoverNode: null, gestureScale: 1, searchMatches: [], searchSelection: -1 };
       const nodeElements = new Map();
       const edgeElements = [];
       const topicDefinitions = new Map();
+      const containersGroup = document.getElementById("containers");
+      const depthSelect = document.getElementById("mastery-depth");
+      const pathPanel = document.getElementById("path-panel");
+      const pathSteps = document.getElementById("path-steps");
+      const notice = document.getElementById("notice");
+      let noticeTimer;
+      function depthLabel(depth) { return depth === "apply" ? "Work on tasks" : "Understand the topic"; }
+      function canExplore(id) { return !state.path || state.path.node_ids.includes(id); }
+      function showNotice(message) {
+        notice.textContent = message; notice.hidden = false;
+        clearTimeout(noticeTimer); noticeTimer = setTimeout(() => { notice.hidden = true; }, 5000);
+      }
+      function effectiveDepth(id) {
+        return state.path?.steps.find(step => step.node_id === id)?.depth || state.depth;
+      }
+      const interactionRenderer = GraphInteractions.createRenderer({
+        onTransform: ({ tx, ty, scale }) => viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${scale})`)
+      });
+      let navigationTimer;
+      function pauseHoverForNavigation() {
+        if (!state.navigating) {
+          state.navigating = true;
+          svg.classList.add("is-navigating");
+          clearHighlight();
+        }
+        clearTimeout(navigationTimer);
+        navigationTimer = setTimeout(() => {
+          if (!state.panning) {
+            state.navigating = false;
+            svg.classList.remove("is-navigating");
+          }
+        }, 120);
+      }
+
 
       function svgElement(name, attributes = {}) {
         const element = document.createElementNS(NS, name);
@@ -150,7 +183,7 @@
 
       function selectSearchResult(nodeId) {
         closeSearchResults();
-        openNode(nodeId);
+        openNode(nodeId, true);
       }
 
       function renderSearchResults() {
@@ -165,6 +198,7 @@
 
         const terms = [...new Set(normalizedQuery.split(" ").filter(Boolean))];
         state.searchMatches = state.graph.nodes
+          .filter(node => canExplore(node.id))
           .map(node => searchNode(node, normalizedQuery, terms))
           .filter(Boolean)
           .sort((left, right) => right.score - left.score || left.node.title.localeCompare(right.node.title))
@@ -268,9 +302,9 @@
       }
 
       function edgePath(source, target) {
-        const sx = source.x + NODE_W / 2;
+        const sx = source.x + (source.width || NODE_W) / 2;
         const sy = source.y;
-        const tx = target.x - NODE_W / 2;
+        const tx = target.x - (target.width || NODE_W) / 2;
         const ty = target.y;
         const dx = tx - sx;
         if (dx >= 20) {
@@ -281,105 +315,154 @@
         return `M ${sx} ${sy} C ${sx + offset} ${sy}, ${tx + offset} ${ty}, ${tx} ${ty}`;
       }
 
-      function renderGraph(graph) {
+      function renderGraph(graph, fit = false) {
         state.graph = graph;
+        const view = GraphView.createView(graph, state.expanded, state.path);
+        state.view = view;
         topicDefinitions.clear();
         for (const topic of graph.options.topics) topicDefinitions.set(topic.id, topic);
-        renderTopicLanes(graph);
+        renderTopicLanes(view);
+        containersGroup.replaceChildren();
         edgesGroup.replaceChildren();
         nodesGroup.replaceChildren();
         nodeElements.clear();
         edgeElements.length = 0;
-        const positions = new Map(graph.nodes.map(node => [node.id, node]));
-
-        for (const edge of graph.edges) {
-          const source = positions.get(edge.from);
-          const target = positions.get(edge.to);
-          if (!source || !target) continue;
-          const path = svgElement("path", { d: edgePath(source, target), class: `edge ${edge.type}`, "marker-end": "url(#arrow)" });
-          path.dataset.from = edge.from;
-          path.dataset.to = edge.to;
-          path.dataset.type = edge.type;
-          edgesGroup.append(path);
-          edgeElements.push({ element: path, edge });
+        const positions = new Map(view.nodes.map(node => [node.id, node]));
+        for (const box of view.containers) {
+          const rect = svgElement("rect", { x: box.x, y: box.y, width: box.width, height: box.height, rx: 16, class: "container-boundary" });
+          rect.style.setProperty("--container-color", topicColor(box.topic));
+          rect.dataset.container = box.id;
+          containersGroup.append(rect);
         }
-
-        for (const node of graph.nodes) {
-          const group = svgElement("g", { class: "node", transform: `translate(${node.x} ${node.y})`, tabindex: "0", role: "button", "aria-label": node.title });
+        for (const edge of view.edges) {
+          const source = positions.get(edge.from), target = positions.get(edge.to);
+          const path = svgElement("path", { d: edgePath(source, target), class: `edge ${edge.type} ${edge.strength}`, "marker-end": "url(#arrow)" });
+          path.dataset.from = edge.from; path.dataset.to = edge.to; path.dataset.type = edge.type;
+          edgesGroup.append(path); edgeElements.push({ element: path, edge });
+        }
+        for (const node of view.nodes) {
+          const expandable = node.children.length > 0;
+          const group = svgElement("g", { class: `node${expandable ? " container-node" : ""}${node.parent_id ? " component-node" : ""}`, transform: `translate(${node.x} ${node.y})`, tabindex: "0", role: "button", "aria-label": node.title });
           group.dataset.id = node.id;
           group.style.setProperty("--node-color", topicColor(node.topics[0]));
           group.style.setProperty("--status-color", statusColor(node.status));
-          group.append(svgElement("rect", { class: "node-card", x: -NODE_W / 2, y: -NODE_H / 2, width: NODE_W, height: NODE_H }));
-          group.append(svgElement("rect", { class: "kind-mark", x: -NODE_W / 2 + 10, y: -NODE_H / 2 + 10, width: 8, height: 52, rx: 4 }));
-          group.append(svgElement("circle", { class: "status-dot", cx: NODE_W / 2 - 14, cy: -NODE_H / 2 + 14, r: 5 }));
-
-          const titleObject = svgElement("foreignObject", { x: -NODE_W / 2 + 28, y: -27, width: NODE_W - 50, height: 40 });
-          const title = document.createElement("div");
-          title.className = "node-title-box";
-          title.textContent = node.title;
-          title.title = node.title;
-          titleObject.append(title);
-          group.append(titleObject);
-          const metaObject = svgElement("foreignObject", { x: -NODE_W / 2 + 28, y: 20, width: NODE_W - 50, height: 13 });
-          const topic = document.createElement("div");
-          topic.className = "node-meta-box";
-          topic.textContent = `${topicLabel(node.topics[0])} · ${humanizeLabel(node.level)}`;
-          topic.title = topic.textContent;
-          metaObject.append(topic);
-          group.append(metaObject);
-
+          group.append(svgElement("rect", { class: "node-card", x: -node.width / 2, y: -44, width: node.width, height: 88 }));
+          group.append(svgElement("rect", { class: "kind-mark", x: -node.width / 2 + 10, y: -32, width: 6, height: 62, rx: 3 }));
+          group.append(svgElement("circle", { class: "status-dot", cx: node.width / 2 - 14, cy: -30, r: 5 }));
+          const titleObject = svgElement("foreignObject", { x: -node.width / 2 + 28, y: -33, width: node.width - (expandable ? 78 : 50), height: 49 });
+          const title = document.createElement("div"); title.className = "node-title-box"; title.textContent = node.title; title.title = node.title;
+          titleObject.append(title); group.append(titleObject);
+          const metaObject = svgElement("foreignObject", { x: -node.width / 2 + 28, y: 23, width: node.width - 44, height: 15 });
+          const metaText = document.createElement("div"); metaText.className = "node-meta-box";
+          const componentCount = state.path ? node.children.filter(id => state.path.node_ids.includes(id)).length : node.children.length;
+          metaText.textContent = expandable ? `${componentCount}${state.path ? " required" : ""} components · ${humanizeLabel(node.level)}` : `${topicLabel(node.topics[0])} · ${humanizeLabel(node.level)}`;
+          metaObject.append(metaText); group.append(metaObject);
+          if (expandable) {
+            const toggle = svgElement("g", { class: "container-toggle", transform: `translate(${node.width / 2 - 28} 0)`, role: "button", tabindex: "0", "aria-label": `${state.expanded.has(node.id) ? "Collapse" : "Expand"} ${node.title}`, "aria-expanded": state.expanded.has(node.id) });
+            toggle.append(svgElement("rect", { x: -13, y: -13, width: 26, height: 26, rx: 6 }));
+            const symbol = svgElement("text", { x: 0, y: 6, "text-anchor": "middle" }); symbol.textContent = state.expanded.has(node.id) ? "−" : "+";
+            toggle.append(symbol);
+            toggle.addEventListener("click", event => { event.stopPropagation(); toggleContainer(node.id); });
+            toggle.addEventListener("keydown", event => { if (["Enter", " "].includes(event.key)) { event.preventDefault(); event.stopPropagation(); toggleContainer(node.id); } });
+            group.append(toggle);
+          }
           group.addEventListener("mouseenter", () => highlightNode(node.id));
           group.addEventListener("mouseleave", clearHighlight);
           group.addEventListener("focus", () => highlightNode(node.id));
           group.addEventListener("blur", clearHighlight);
           group.addEventListener("click", () => { if (!state.moved) openNode(node.id); });
           group.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openNode(node.id); } });
-          nodesGroup.append(group);
-          nodeElements.set(node.id, group);
+          nodesGroup.append(group); nodeElements.set(node.id, group);
         }
-        meta.textContent = `${graph.nodes.length} nodes · ${graph.edges.length} edges`;
-        renderStatusLegend(graph.options);
-        fitGraph();
+        meta.textContent = `${graph.nodes.length} skills & topics · ${graph.nodes.filter(node => node.children.length).length} containers`;
+        interactionRenderer.setGraph(nodeElements, edgeElements);
+        state.hoverNode = null;
+        renderStatusLegend(graph.options); applyHighlight();
+        if (fit) fitGraph();
+      }
+
+      function toggleContainer(id) {
+        if (state.pathPending) return;
+        if (state.path && !state.path.container_ids.includes(id) && !state.path.node_ids.includes(id)) return;
+        const position = state.view.nodes.find(node => node.id === id);
+        if (state.expanded.has(id)) state.expanded.delete(id); else state.expanded.add(id);
+        renderGraph(state.graph);
+        // Keep the header anchored while the rest of its lane reflows.
+        const next = state.view.nodes.find(node => node.id === id);
+        if (position && next) { state.tx += (position.x - next.x) * state.scale; state.ty += (position.y - next.y) * state.scale; applyTransform(); }
+        if (state.expanded.has(id)) {
+          const box = state.view.containers.find(item => item.id === id);
+          if (box) {
+            const rect = svg.getBoundingClientRect();
+            const availableWidth = Math.max(260, rect.width - (details.hidden ? 0 : Math.min(462, rect.width * .4)));
+            state.scale = Math.min(1, (availableWidth - 48) / box.width, (rect.height - 64) / box.height);
+            state.tx = availableWidth / 2 - (box.x + box.width / 2) * state.scale;
+            state.ty = rect.height / 2 - (box.y + box.height / 2) * state.scale;
+            applyTransform();
+          }
+        }
+        if (state.detailPayload) renderDetails(state.detailPayload);
       }
 
       function applyHighlight() {
-        const highlightedNodes = [state.activeNode, state.hoverNode].filter(Boolean);
-        if (!highlightedNodes.length) {
-          for (const item of edgeElements) item.element.classList.remove("is-related", "is-dimmed");
-          for (const element of nodeElements.values()) element.classList.remove("is-dimmed");
-          return;
-        }
+        // Only an explicit selection dims the graph. Pointer hover stays local.
+        const highlightedNodes = [state.activeNode].filter(Boolean);
+        interactionRenderer.setHover(state.hoverNode);
         const highlightedSet = new Set(highlightedNodes);
         const connected = new Set(highlightedNodes);
+        const required = new Set(state.path?.node_ids || []);
+        const requiredEdges = new Set(state.path?.edge_indices || []);
         for (const item of edgeElements) {
           const related = highlightedSet.has(item.edge.from) || highlightedSet.has(item.edge.to);
-          item.element.classList.toggle("is-related", related);
-          item.element.classList.toggle("is-dimmed", !related);
+          const onPath = state.path && item.edge.indices.some(index => requiredEdges.has(index));
+          item.element.classList.toggle("is-related", state.path ? onPath : related);
+          item.element.classList.toggle("is-dimmed", state.path ? !onPath : highlightedNodes.length > 0 && !related);
           if (related) { connected.add(item.edge.from); connected.add(item.edge.to); }
         }
-        for (const [id, element] of nodeElements) element.classList.toggle("is-dimmed", !connected.has(id));
+        for (const [id, element] of nodeElements) {
+          const shell = state.path?.container_ids.includes(id);
+          const allowed = !state.path || required.has(id);
+          element.classList.toggle("is-active", state.activeNode === id);
+          element.classList.toggle("is-target", state.path?.target_id === id);
+          element.classList.toggle("is-path", Boolean(state.path && required.has(id)));
+          element.classList.toggle("is-dimmed", state.path ? !allowed && !shell : highlightedNodes.length > 0 && !connected.has(id));
+          element.classList.toggle("is-unavailable", !allowed);
+          element.setAttribute("aria-disabled", String(!allowed));
+          element.setAttribute("tabindex", allowed ? "0" : "-1");
+          const toggle = element.querySelector(".container-toggle");
+          if (toggle) { toggle.setAttribute("tabindex", allowed || shell ? "0" : "-1"); toggle.setAttribute("aria-disabled", String(!(allowed || shell))); }
+        }
       }
 
       function highlightNode(nodeId) {
+        if (state.panning || state.navigating || !canExplore(nodeId)) return;
         state.hoverNode = nodeId;
-        applyHighlight();
+        interactionRenderer.setHover(nodeId);
       }
 
       function clearHighlight() {
         state.hoverNode = null;
-        applyHighlight();
+        interactionRenderer.setHover(null);
       }
 
       function applyTransform() {
-        viewport.setAttribute("transform", `translate(${state.tx} ${state.ty}) scale(${state.scale})`);
+        interactionRenderer.setTransform(state.tx, state.ty, state.scale);
       }
 
       function fitGraph() {
         if (!state.graph) return;
         const rect = svg.getBoundingClientRect();
-        const bounds = state.graph.bounds;
+        let bounds = state.view.bounds;
+        if (state.path) {
+          const selected = state.view.nodes.filter(node => state.path.node_ids.includes(node.id));
+          if (selected.length) {
+            const left = Math.min(...selected.map(node => node.x - node.width / 2));
+            const top = Math.min(...selected.map(node => node.y - 44));
+            bounds = { min_x: left, min_y: top, width: Math.max(...selected.map(node => node.x + node.width / 2)) - left, height: Math.max(...selected.map(node => node.y + 44)) - top };
+          }
+        }
         const padding = 54;
-        state.scale = Math.max(.08, Math.min(1.2, (rect.width - padding * 2) / bounds.width, (rect.height - padding * 2) / bounds.height));
+        state.scale = Math.max(.025, Math.min(1.2, (rect.width - padding * 2) / bounds.width, (rect.height - padding * 2) / bounds.height));
         state.tx = (rect.width - bounds.width * state.scale) / 2 - bounds.min_x * state.scale;
         state.ty = (rect.height - bounds.height * state.scale) / 2 - bounds.min_y * state.scale;
         applyTransform();
@@ -390,7 +473,7 @@
         const px = clientX - rect.left;
         const py = clientY - rect.top;
         const previous = state.scale;
-        const next = Math.max(.07, Math.min(2.8, previous * factor));
+        const next = Math.max(.025, Math.min(2.8, previous * factor));
         state.tx = px - (px - state.tx) * (next / previous);
         state.ty = py - (py - state.ty) * (next / previous);
         state.scale = next;
@@ -399,6 +482,7 @@
 
       svg.addEventListener("wheel", event => {
         event.preventDefault();
+        pauseHoverForNavigation();
         if (event.ctrlKey) {
           // Chromium exposes a trackpad pinch as Ctrl + wheel. A normal
           // two-finger gesture has no Ctrl modifier and must only pan.
@@ -415,10 +499,12 @@
       // instead of the Ctrl + wheel convention used by Chromium.
       svg.addEventListener("gesturestart", event => {
         event.preventDefault();
+        pauseHoverForNavigation();
         state.gestureScale = Number(event.scale) || 1;
       }, { passive: false });
       svg.addEventListener("gesturechange", event => {
         event.preventDefault();
+        pauseHoverForNavigation();
         const nextGestureScale = Number(event.scale) || state.gestureScale;
         const factor = nextGestureScale / state.gestureScale;
         zoomAt(event.clientX, event.clientY, factor);
@@ -432,6 +518,7 @@
       svg.addEventListener("pointerdown", event => {
         if (event.target.closest(".node")) return;
         state.panning = true;
+        pauseHoverForNavigation();
         state.moved = false;
         state.startX = event.clientX;
         state.startY = event.clientY;
@@ -452,6 +539,9 @@
       function endPan(event) {
         if (!state.panning) return;
         state.panning = false;
+        state.navigating = false;
+        clearTimeout(navigationTimer);
+        svg.classList.remove("is-navigating");
         if (svg.hasPointerCapture(event.pointerId)) svg.releasePointerCapture(event.pointerId);
         svg.classList.remove("is-panning");
         setTimeout(() => { state.moved = false; }, 0);
@@ -489,14 +579,15 @@
           list.append(empty);
         }
         for (const relation of relations) {
-          const item = document.createElement("div");
+          const item = document.createElement("button");
+          item.type = "button"; item.disabled = !canExplore(relation.node_id);
           item.className = "relation";
           const name = document.createElement("strong");
           name.textContent = relation.node_title;
           const description = document.createElement("span");
-          description.textContent = `${relation.type} · ${relation.strength} — ${relation.rationale}`;
+          description.textContent = `${relation.strength === "required" ? "Required" : "Recommended"}${relation.min_depth === "apply" ? " for tasks" : ""} — ${relation.rationale}`;
           item.append(name, description);
-          item.addEventListener("click", () => openNode(relation.node_id));
+          item.addEventListener("click", () => openNode(relation.node_id, true));
           item.style.cursor = "pointer";
           list.append(item);
         }
@@ -504,65 +595,143 @@
         parent.append(section);
       }
 
-      async function openNode(nodeId) {
-        state.activeNode = nodeId;
-        for (const [id, element] of nodeElements) element.classList.toggle("is-active", id === nodeId);
-        applyHighlight();
-        details.hidden = false;
-        detailTitle.textContent = "Loading…";
-        detailId.textContent = nodeId;
-        detailBody.replaceChildren();
+      function focusNode(nodeId) {
+        const node = state.view.nodes.find(item => item.id === nodeId);
+        if (!node) return;
+        const rect = svg.getBoundingClientRect();
+        const available = rect.width - (details.hidden ? 0 : Math.min(462, rect.width * .4));
+        state.scale = 1;
+        state.tx = Math.max(140, available / 2) - node.x * state.scale;
+        state.ty = rect.height / 2 - node.y * state.scale;
+        applyTransform();
+      }
+
+      async function openNode(nodeId, focus = false) {
+        if (!canExplore(nodeId) || state.pathPending) return;
+        const version = ++state.detailVersion;
+        state.activeNode = nodeId; state.hoverNode = null; state.detailPayload = null;
+        const node = state.graph.nodes.find(item => item.id === nodeId);
+        if (node?.parent_id && !state.expanded.has(node.parent_id)) {
+          state.expanded.add(node.parent_id); renderGraph(state.graph);
+        }
+        applyHighlight(); details.hidden = false;
+        detailTitle.textContent = "Loading…"; detailId.textContent = nodeId; detailBody.replaceChildren();
+        if (focus) focusNode(nodeId);
         try {
-          const response = await fetch("/api/nodes/details", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ node_id: nodeId })
-          });
+          const response = await fetch("/api/nodes/details", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ node_id: nodeId }) });
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const payload = await response.json();
-          const node = payload.node;
-          detailTitle.textContent = node.title;
-          detailId.textContent = node.id;
-          appendText(detailBody, "summary", node.summary);
-          const chips = document.createElement("div");
-          chips.className = "chips";
-          for (const value of [humanizeLabel(node.kind), humanizeLabel(node.level), humanizeLabel(node.status), ...node.topics.map(topicLabel)]) {
-            const chip = document.createElement("span");
-            chip.className = "chip";
-            chip.textContent = value;
-            chips.append(chip);
-          }
-          detailBody.append(chips);
-          if (node.evidence_note) appendText(detailBody, "evidence", node.evidence_note);
-
-          const resources = makeSection(`Learning resources · ${node.resources.length}`);
-          const resourceList = document.createElement("div");
-          resourceList.className = "resource-list";
-          for (const resource of node.resources) {
-            const link = document.createElement("a");
-            link.className = "resource";
-            link.href = resource.url;
-            link.target = "_blank";
-            link.rel = "noreferrer noopener";
-            const name = document.createElement("strong");
-            name.textContent = resource.title;
-            const info = document.createElement("span");
-            info.textContent = `${resource.provider} · ${resource.type} · ${resource.level}`;
-            link.append(name, info);
-            resourceList.append(link);
-          }
-          resources.append(resourceList);
-          detailBody.append(resources);
-          renderRelations(detailBody, "Prerequisites", payload.prerequisites);
-          renderRelations(detailBody, "Unlocks", payload.dependents);
-          renderRelations(detailBody, "Other applications", payload.other_relations);
+          if (version !== state.detailVersion) return;
+          state.detailPayload = payload; renderDetails(payload);
         } catch (error) {
-          detailTitle.textContent = "Unable to load node";
-          appendText(detailBody, "evidence", String(error));
+          if (version !== state.detailVersion) return;
+          detailTitle.textContent = "Unable to load node"; appendText(detailBody, "evidence", String(error));
         }
       }
 
+      function renderDetails(payload) {
+        const node = payload.node, depth = effectiveDepth(node.id);
+        detailTitle.textContent = node.title; detailId.textContent = payload.parent ? `Component of ${payload.parent.title}` : humanizeLabel(node.kind);
+        detailBody.replaceChildren();
+        const actions = document.createElement("div"); actions.className = "detail-actions";
+        const lock = document.createElement("button"); lock.type = "button"; lock.className = "primary-button";
+        lock.id = "lock-path"; lock.disabled = state.pathPending;
+        lock.textContent = state.path ? (state.path.target_id === node.id ? "Path locked to this target" : "Set as path target") : "Lock learning path";
+        lock.disabled = state.pathPending || state.path?.target_id === node.id;
+        lock.addEventListener("click", () => lockPath(node.id)); actions.append(lock);
+        if (payload.children.length) {
+          const expand = document.createElement("button"); expand.type = "button"; expand.className = "secondary-button";
+          expand.textContent = state.expanded.has(node.id) ? "Collapse components" : "Expand components";
+          expand.addEventListener("click", () => toggleContainer(node.id)); actions.append(expand);
+        }
+        detailBody.append(actions);
+        appendText(detailBody, "summary", node.summary);
+        const outcome = makeSection(depthLabel(depth));
+        appendText(outcome, "learning-outcome", node.outcomes[depth]);
+        if (state.path && depth !== state.depth) appendText(outcome, "empty", "This path needs conceptual knowledge of this prerequisite.");
+        detailBody.append(outcome);
+        if (depth === "apply") { const practice = makeSection("Practice / evidence of readiness"); appendText(practice, "learning-outcome", node.practice); detailBody.append(practice); }
+        if (node.evidence_note) appendText(detailBody, "evidence", node.evidence_note);
+        if (payload.children.length) {
+          const section = makeSection("Component skills");
+          appendText(section, "empty", state.path ? "Only components required by the locked target are available." : "Choose a component to build a focused learning path.");
+          for (const child of payload.children) {
+            const button = document.createElement("button"); button.type = "button"; button.className = "component-link";
+            button.textContent = child.title; button.disabled = !canExplore(child.id);
+            button.addEventListener("click", () => openNode(child.id, true)); section.append(button);
+          }
+          detailBody.append(section);
+        }
+        const resources = makeSection("Learning materials");
+        for (const resource of node.resources) {
+          const link = document.createElement("a"); link.className = "resource"; link.href = resource.url; link.target = "_blank"; link.rel = "noreferrer noopener";
+          const name = document.createElement("strong"); name.textContent = resource.title;
+          const info = document.createElement("span"); info.textContent = `${resource.provider} · ${resource.depth === "apply" ? "Practice" : "Concepts"}`;
+          link.append(name, info);
+          if (resource.section) { const section = document.createElement("span"); section.className = "resource-section"; section.textContent = resource.section; link.append(section); }
+          resources.append(link);
+        }
+        detailBody.append(resources);
+        renderRelations(detailBody, "Prerequisites", payload.prerequisites);
+        renderRelations(detailBody, "Unlocks", payload.dependents);
+        renderRelations(detailBody, "Other applications", payload.other_relations);
+      }
+
+      async function lockPath(targetId) {
+        const version = ++state.pathVersion;
+        state.pathPending = true; state.pendingTarget = targetId;
+        if (state.detailPayload) renderDetails(state.detailPayload);
+        try {
+          const response = await fetch("/api/learning-path", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ node_id: targetId, depth: state.depth }) });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const path = await response.json();
+          if (version !== state.pathVersion) return;
+          if (!state.path) state.overviewExpanded = new Set(state.expanded);
+          state.path = path; state.depth = path.depth; depthSelect.value = path.depth; state.hoverNode = null;
+          for (const id of path.container_ids) state.expanded.add(id);
+          if (!path.node_ids.includes(state.activeNode)) { state.activeNode = targetId; state.detailPayload = null; }
+          renderGraph(state.graph); renderPathPanel(); renderSearchResults(); closeSearchResults(); fitGraph();
+          state.pathPending = false;
+          if (state.detailPayload) renderDetails(state.detailPayload); else if (!details.hidden) openNode(state.activeNode);
+        } catch (error) {
+          if (version !== state.pathVersion) return;
+          // Preserve the prior locked path and its actual depth on failure.
+          if (state.path) { state.depth = state.path.depth; depthSelect.value = state.depth; }
+          showNotice(`Unable to build path: ${String(error)}`);
+        } finally {
+          if (version === state.pathVersion) { state.pathPending = false; state.pendingTarget = null; if (state.detailPayload) renderDetails(state.detailPayload); }
+        }
+      }
+
+      function renderPathPanel() {
+        pathPanel.hidden = !state.path;
+        if (!state.path) return;
+        const target = state.graph.nodes.find(node => node.id === state.path.target_id);
+        document.getElementById("path-target").textContent = target.title;
+        document.getElementById("path-summary").textContent = `${depthLabel(state.path.depth)} · ${state.path.node_ids.length - 1} prerequisite skills & topics. Explore highlighted nodes; the target stays fixed.`;
+        pathSteps.replaceChildren();
+        let currentStage = -1;
+        for (const step of state.path.steps) {
+          if (step.stage !== currentStage) {
+            currentStage = step.stage; const label = document.createElement("p"); label.className = "stage-label";
+            label.textContent = `Stage ${currentStage + 1}`; pathSteps.append(label);
+          }
+          const node = state.graph.nodes.find(item => item.id === step.node_id);
+          const button = document.createElement("button"); button.className = "path-step"; button.type = "button"; button.dataset.nodeId = node.id;
+          button.textContent = `${node.title} · ${depthLabel(step.depth)}`;
+          button.addEventListener("click", () => openNode(node.id, true)); pathSteps.append(button);
+        }
+      }
+
+      function resetPath() {
+        ++state.pathVersion; state.pathPending = false; state.pendingTarget = null;
+        state.path = null; state.expanded = state.overviewExpanded || state.expanded;
+        state.overviewExpanded = null; closeDetails(); pathPanel.hidden = true;
+        searchInput.value = ""; closeSearchResults(); renderGraph(state.graph, true);
+      }
+
       function closeDetails() {
+        ++state.detailVersion; state.detailPayload = null;
         details.hidden = true;
         state.activeNode = null;
         state.hoverNode = null;
@@ -575,6 +744,12 @@
         legendToggle.setAttribute("aria-expanded", String(open));
       }
 
+      document.getElementById("reset-path").addEventListener("click", resetPath);
+      depthSelect.addEventListener("change", () => {
+        state.depth = depthSelect.value;
+        if (state.path || state.pendingTarget) lockPath(state.path?.target_id || state.pendingTarget);
+        else if (state.detailPayload) renderDetails(state.detailPayload);
+      });
       document.getElementById("close-details").addEventListener("click", closeDetails);
       searchInput.addEventListener("input", renderSearchResults);
       searchInput.addEventListener("focus", () => {
@@ -620,7 +795,7 @@
           });
           if (!response.ok) throw new Error(`Graph API returned HTTP ${response.status}`);
           const graph = await response.json();
-          renderGraph(graph);
+          renderGraph(graph, true);
           loading.hidden = true;
         } catch (error) {
           loading.hidden = true;

@@ -1,155 +1,102 @@
 # Longevity skill graph
 
-Machine-readable graph: [`longevity-skills.json`](./longevity-skills.json)  
-Construction rules: [`../research/map-rules.md`](../research/map-rules.md)  
-Direction review: [`../research/longevity-directions.md`](../research/longevity-directions.md)
+The source of truth is [`longevity-skills.json`](./longevity-skills.json), schema **0.2.0**. It contains 236 nodes, 868 edges, 24 expandable containers, 26 research/integration targets and 6 school-level foundations.
 
-The current version contains:
+## Containers and components
 
-- 108 nodes;
-- 291 edges;
-- 26 research or integration targets;
-- 6 school-level root nodes;
-- 12 consolidated visual topic categories;
-- 6 explicitly excluded or consolidated directions.
+A component has `parent_id`; the parent retains its existing stable ID, title and overview resources. Containment is a presentation relationship, not a prerequisite. A component's path includes only the components explicitly required by its dependency edges. Other children of its parent are not automatically required.
 
-## Reading the graph
+The current presentation supports one level of components. A shared skill belongs to one container and can be reused by any number of learning paths. For example, product quality and batch release are shared by gene therapy and other product-development paths; they are not copied into every container.
 
-A `prerequisite` edge points from an earlier skill to the skill that depends on it. Multiple incoming edges with `strength: required` form an AND dependency: all of them are expected to be learned.
+Containers are collapsed in the overview. Use the plus/minus control or the detail panel to expand them. Selecting a component through search expands its container and centers the component. Ordinary node selection continues to highlight immediate neighbors.
 
-`recommended_before` improves a learning route but is not a strict requirement. `applied_in` shows where an existing skill is used and does not define learning order.
+A whole-container target uses explicitly curated incoming edges. Many broad containers include several practical specialties at task depth. Users can select a component for a more focused target. Aging-clock modalities are recommended choices beside their common validation foundation; choosing methylation clocks does not require clinical clocks, and vice versa.
 
-The first topic places a node in one of 12 horizontal spatial lanes. Within each lane, prerequisite depth determines the horizontal position: foundational nodes stay on the left and advanced dependent nodes move to the right. Each topic also has a fixed accent color: node borders use the saturated color while the containing lane uses a pale tint. The small dot retains a separate status color.
+## Two mastery depths
 
-```mermaid
-flowchart LR
-    S[School mathematics, physics, chemistry, biology, and computer science]
-    U[University biology and quantitative foundations]
-    M[Experimental and computational methods]
-    A[AI, ML, LLMs, and laboratory automation]
-    T[Therapeutic and engineering platforms]
-    R[Longevity research directions]
-    G[Combination and whole-body integration]
+- **Understand the topic** (`understand`): explain concepts, assumptions and limitations.
+- **Work on tasks** (`apply`): perform or design a scoped task and evaluate its result. Laboratory and professional tasks can require supervised training.
 
-    S --> U
-    U --> M
-    S --> M
-    M --> A
-    U --> T
-    M --> T
-    U --> R
-    M --> R
-    A --> R
-    T --> R
-    R --> G
-```
-
-## Example routes
-
-### Metabolic interventions
-
-```text
-school chemistry + school biology
-  -> introductory biology + organic chemistry
-  -> biochemistry
-  -> metabolism/redox + physiology
-  -> pharmacology
-  -> metabolic interventions / nutrient sensing
-```
-
-### Aging clocks and multi-omics
-
-```text
-school mathematics + computer science + biology
-  -> probability/statistics + Python + molecular biology
-  -> bioinformatics + transcriptomics/genomics/proteomics
-  -> multi-omics integration + machine learning
-  -> biomarker validation + aging clocks
-  -> biomarkers / aging clocks / multi-omics
-```
-
-### Partial reprogramming
-
-```text
-school biology + chemistry
-  -> cell biology + molecular biology + genetics
-  -> epigenetics + developmental/stem cell biology
-  -> iPSC/organoids + gene-therapy delivery
-  -> cancer biology + biomarker validation
-  -> partial reprogramming / epigenetic rejuvenation
-```
-
-### Organ replacement
-
-```text
-school biology + chemistry + physics
-  -> developmental biology + physiology + immunology + ECM biology
-  -> cell culture + iPSC/organoids
-  -> biomaterials/tissue engineering + transplantation
-  -> bioprinting (recommended)
-  -> cell/tissue/organ replacement
-```
-
-### AI-driven discovery
-
-```text
-school mathematics + computer science
-  -> calculus + linear algebra + probability + Python
-  -> machine learning -> deep learning
-  -> biological foundation models / NLP / drug design / protein design
-  + bioinformatics and domain biology
-  + biomedical AI validation
-  -> AI-driven longevity discovery
-```
-
-## Node schema
+Every node includes `outcomes.understand`, `outcomes.apply` and a `practice` task. Depth is separate from the existing academic `level` and scientific maturity `status`.
 
 ```json
 {
-  "id": "stable_snake_case_id",
-  "title": "Node title",
-  "summary": "A concise description of the skill and its purpose.",
+  "id": "flow_gating",
+  "title": "Flow cytometry gating and quantification",
+  "parent_id": "microscopy_flow_cytometry",
+  "summary": "Singlet, viability and population gates and sources of analysis bias.",
   "kind": "skill",
-  "topics": ["primary_topic", "secondary_topic"],
+  "topics": ["molecular_cell_biology"],
   "level": "graduate",
   "status": "foundational",
-  "evidence_note": "Evidence limitations for a research direction.",
-  "resources": [
-    {
-      "title": "A specific course or learning resource",
-      "url": "https://example.org/resource",
-      "type": "course",
-      "provider": "Provider",
-      "level": "graduate"
-    }
-  ]
+  "outcomes": {
+    "understand": "Explain singlet, viability and population gates and sources of analysis bias.",
+    "apply": "Analyze a sample dataset with a documented gating hierarchy and sensitivity checks."
+  },
+  "practice": "Analyze a sample dataset with a documented gating hierarchy and sensitivity checks.",
+  "resources": [{
+    "title": "FlowJo: drawing and interpreting gates",
+    "url": "https://docs.flowjo.com/flowjo/graphs-and-gating/gw-gating/gw-gatedrawing/",
+    "provider": "FlowJo",
+    "type": "tutorial",
+    "level": "graduate",
+    "depth": "apply",
+    "section": "Gating tools and gate hierarchy"
+  }]
 }
 ```
 
-## Edge schema
+## Dependency semantics
+
+A prerequisite edge points from the earlier skill to its dependent. All applicable required edges form an AND dependency.
+
+- `min_depth: understand`: needed at both depths.
+- `min_depth: apply`: added only when the dependent must be used for tasks.
+- `source_depth: understand`: only conceptual mastery of the earlier skill is required.
+- `source_depth: null`: propagate the dependent's requested depth.
 
 ```json
 {
-  "from": "prerequisite_node",
-  "to": "dependent_node",
+  "from": "experimental_design_biostatistics",
+  "to": "flow_gating",
   "type": "prerequisite",
   "strength": "required",
-  "rationale": "Why the earlier node is needed."
+  "min_depth": "apply",
+  "source_depth": null,
+  "rationale": "Practical analysis requires explicit controls and uncertainty assessment."
 }
 ```
+
+`recommended_before` never enters a required path. The previous ambiguous `prerequisite/recommended` combination is rejected by validation. `applied_in` and containment do not set learning order. Alternative specialties are separate selectable targets rather than implicit OR choices selected on the user's behalf.
+
+## Locked learning paths
+
+`POST /api/learning-path` accepts `{"node_id":"flow_gating","depth":"apply"}` and returns:
+
+- `target_id` and `depth`;
+- `node_ids`: complete transitive prerequisite closure, including the target;
+- `container_ids`: presentation shells needed to expose components; these are not necessarily required skills;
+- `edge_indices`: indices into the full graph's edge array;
+- `steps`: node ID, effective depth and topological stage for every required step.
+
+The resolver upgrades shared prerequisites to the strongest requested depth, includes all required branches and counts each skill once. No path is selected by geometric proximity or shortest-path heuristics.
+
+The UI locks the target until the user explicitly retargets or resets. Clicking other required nodes inspects them without changing the path. Search, graph nodes, related-node buttons and component buttons obey the same lock. Containers expand automatically to expose required components; unrelated siblings are hidden. Changing mastery depth recalculates the path for the same target. Reset restores the overview expansion state and full navigation.
+
+## Materials
+
+A resource may specify `section` (an actual chapter, lesson or topic within a course) and `depth` (concepts or practice). Specific chapter/tutorial links are preferred. Broad courses can remain on containers. Resources are educational support; completing a page is not equivalent to demonstrating the node's practical outcome.
+
+See [`curriculum-expansion.md`](../research/curriculum-expansion.md) for coverage, source choices and limitations.
 
 ## Validation
 
 ```bash
 python3 scripts/validate_graph.py
+.venv/bin/python -m unittest discover -s tests -v
+node --test tests/*.test.js
 ```
 
-The validator checks unique IDs, required fields and resources, valid references, edge types, cycles among strict prerequisites, reachability of every research direction from school-level foundations, and English-only graph content.
+The standalone validator checks references, hierarchy, required metadata, resources, edge semantics, cycles and learning continuations. Application tests check both depths for every node, monotonicity, topological order, selective components, practical foundations and API input validation. Presentation tests check collapse/expand, path filtering, deterministic layout, containment and overlap. Interaction tests check local hover updates, stable shared edges, graph-size-independent mutation counts and batched camera updates.
 
-## Version 0.1 limitations
-
-- The graph covers the major directions but does not decompose every skill into individual laboratory protocols.
-- Nodes do not yet include formal assessments or estimated learning time.
-- Some courses provide an overview and do not replace a degree program or supervised laboratory training.
-- A direction's maturity status is not an individual medical recommendation.
-- AND/OR prerequisite groups are not represented separately; all strict incoming prerequisites are treated as AND dependencies.
+Topic lanes and positions remain deterministic for a given expansion state. The full-graph API retains all nodes and stable source coordinates; `static/graph-view.js` projects them into visible root cards and expanded containers.

@@ -27,6 +27,7 @@ config/settings.py Filesystem and layout settings
 static/index.html  Page structure
 static/styles.css  Visual styles
 static/app.js      Graph rendering and interactions
+static/graph-interactions.js  Frame-batched hover and camera updates
 ```
 
 ```bash
@@ -36,10 +37,12 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) after startup. Node positions are computed deterministically and remain unchanged across application restarts.
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) after startup. The overview contains expandable discipline containers. Choose a mastery depth, open a skill and select **Lock learning path** to explore only its required prerequisites. **Reset path** restores the full map. Positions are deterministic for a given expansion state. Hover highlights only the current card and its incident edges; graph-wide dimming is reserved for a selected node or locked path. Pan and zoom updates are coalesced per animation frame.
 
-Application tests:
+Application tests (Python environment plus Node.js for presentation tests):
 
 ```bash
+pip install -r requirements.txt
 python -m unittest discover -s tests -v
+node --test tests/*.test.js
 ```
