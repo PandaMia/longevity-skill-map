@@ -6,18 +6,18 @@ from config.graph import (
     UnknownNodeError,
     UnknownTopicsError,
     build_graph_response,
+    build_learning_path,
     build_node_details,
     health_response,
-    build_learning_path,
 )
 from config.models import (
     GraphQuery,
     GraphResponse,
     HealthResponse,
-    NodeDetailsRequest,
-    NodeDetailsResponse,
     LearningPathRequest,
     LearningPathResponse,
+    NodeDetailsRequest,
+    NodeDetailsResponse,
 )
 from config.settings import INDEX_PATH, STATIC_DIR
 

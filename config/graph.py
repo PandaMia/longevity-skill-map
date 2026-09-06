@@ -4,12 +4,8 @@ import heapq
 from collections import defaultdict
 
 from .models import (
-    EdgeType,
     EdgeStrength,
-    MasteryDepth,
-    LearningPathRequest,
-    LearningPathResponse,
-    PathStep,
+    EdgeType,
     FilterOptions,
     GraphBounds,
     GraphEdge,
@@ -17,8 +13,12 @@ from .models import (
     GraphQuery,
     GraphResponse,
     HealthResponse,
+    LearningPathRequest,
+    LearningPathResponse,
+    MasteryDepth,
     NodeDetailsResponse,
     NodeKind,
+    PathStep,
     PositionedNode,
     RelatedEdge,
     RenderEdge,

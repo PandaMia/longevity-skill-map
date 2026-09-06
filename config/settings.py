@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 BASE_DIR = Path(__file__).resolve().parents[1]
 GRAPH_PATH = BASE_DIR / "graph" / "longevity-skills.json"
 STATIC_DIR = BASE_DIR / "static"
