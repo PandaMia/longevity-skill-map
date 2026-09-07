@@ -1,5 +1,7 @@
 # Longevity Skill Map
 
+**[Open the interactive map](https://longevity-skill-map.pandamia.org/)**
+
 An interactive map of the knowledge and practical skills needed for research on healthy life extension. Choose a skill or research direction, explore its prerequisites, and build a learning path from foundational concepts to practical tasks.
 
 The current map contains **238 nodes, 880 relationships and 25 expandable containers**.
