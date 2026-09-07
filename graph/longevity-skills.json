@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2.0",
-  "generated_at": "2026-09-06",
+  "generated_at": "2026-09-07",
   "language": "en",
   "edge_direction": "prerequisite_to_dependent",
   "status_values": [
@@ -3528,7 +3528,7 @@
     {
       "id": "reproductive_germline_rejuvenation",
       "title": "Germline rejuvenation and intergenerational resetting",
-      "summary": "Research on epigenetic resetting, oocyte/sperm aging, embryonic reprogramming and mechanisms that allow new generation to start from a young state.",
+      "summary": "Research on epigenetic resetting, oocyte/sperm aging, embryonic reprogramming and germline protein quality control. Components examine oocyte aggregate clearance and the hypothesis of adapting germline proteostasis mechanisms to somatic cells.",
       "kind": "research_direction",
       "topics": [
         "molecular_cell_biology",
@@ -3536,7 +3536,7 @@
       ],
       "level": "frontier",
       "status": "active_preclinical",
-      "evidence_note": "Valuable for understanding rejuvenation mechanisms and reproductive aging; germline interventions carry special intergenerational and ethical risks.",
+      "evidence_note": "Evidence varies by species and developmental stage; germline proteostasis and epigenetic resetting are distinct processes. Mechanistic findings do not establish somatic rejuvenation. Germline interventions carry intergenerational and ethical risks.",
       "resources": [
         {
           "title": "Mechanisms and Strategies for Rejuvenation through Epigenetic Reprogramming",
@@ -3551,14 +3551,128 @@
           "type": "online_textbook",
           "provider": "NCBI Bookshelf / Springer",
           "level": "graduate"
+        },
+        {
+          "title": "The proteostatic landscape of healthy human oocytes",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12361380/",
+          "type": "research_article",
+          "provider": "The EMBO Journal (2025)",
+          "level": "frontier",
+          "depth": "understand",
+          "section": "Results and Table 1: human versus mouse oocyte proteostasis"
         }
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of germline rejuvenation and intergenerational resetting: Research on epigenetic resetting, oocyte/sperm aging, embryonic reprogramming and mechanisms that allow new generation to start from a young state.",
-        "apply": "Complete a scoped task in germline rejuvenation and intergenerational resetting, document the method and evaluate the result against an appropriate reference or control."
+        "understand": "Compare epigenetic resetting, reproductive aging and protein quality control in the germline, keeping species-specific evidence and proposed somatic applications separate.",
+        "apply": "Build an evidence map for a germline rejuvenation mechanism, linking perturbations and measurements to developmental outcomes and limits of extrapolation."
       },
-      "practice": "Produce an annotated worked example using the linked material for germline rejuvenation and intergenerational resetting; state the assumptions, checks and limitations."
+      "practice": "Compare one epigenetic-resetting study with one oocyte protein-clearance study; record the species, developmental stage, controls and demonstrated outcome. Select a component for a focused task."
+    },
+    {
+      "id": "oocyte_proteostasis_renewal",
+      "title": "Protein-aggregate clearance in oocytes: ELVAs and lysosomes",
+      "summary": "Germline protein quality control during oocyte maturation: the lysosomal V-ATPase switch in C. elegans and RUFY1-organized endolysosomal vesicular assemblies (ELVAs) in mice. Distinguish aggregate sequestration, degradation and species-specific adaptations.",
+      "kind": "skill",
+      "topics": [
+        "molecular_cell_biology",
+        "geroscience"
+      ],
+      "level": "graduate",
+      "status": "established_biology",
+      "evidence_note": "Mouse ELVAs store protein aggregates and degrade them during maturation. Mouse Psma7 deletion studies support a role for proteasomes in this process. In the 2025 healthy-human-oocyte study, aggregates occupied enlarged lysosomes and proteolytic activity decreased with maturation; the mouse mechanism cannot simply be assumed in humans.",
+      "resources": [
+        {
+          "title": "A lysosomal switch triggers proteostasis renewal in the immortal C. elegans germ lineage",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29168500/",
+          "type": "research_article",
+          "provider": "Nature (2017)",
+          "level": "frontier",
+          "depth": "understand",
+          "section": "Oocyte maturation signals, V-ATPase and lysosomal acidification"
+        },
+        {
+          "title": "Mouse oocytes sequester aggregated proteins in degradative super-organelles",
+          "url": "https://doi.org/10.1016/j.cell.2024.01.031",
+          "type": "research_article",
+          "provider": "Cell (2024)",
+          "level": "frontier",
+          "depth": "understand",
+          "section": "Results: ELVA organization, RUFY1 and aggregate degradation during maturation"
+        },
+        {
+          "title": "The proteostatic landscape of healthy human oocytes",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12361380/",
+          "type": "research_article",
+          "provider": "The EMBO Journal (2025)",
+          "level": "frontier",
+          "depth": "understand",
+          "section": "Results and Table 1: human versus mouse oocyte proteostasis"
+        },
+        {
+          "title": "20S proteasome-regulated proteostasis in ELVAs is critical for oocyte-to-embryo transition and female fertility",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13373198/",
+          "type": "research_article",
+          "provider": "The EMBO Journal (2026)",
+          "level": "frontier",
+          "depth": "apply",
+          "section": "Results: oocyte-specific Psma7 deletion, ELVA function and reproductive aging"
+        }
+      ],
+      "parent_id": "reproductive_germline_rejuvenation",
+      "outcomes": {
+        "understand": "Explain lysosomal acidification and ELVA-mediated protein quality control, and compare nematode, mouse and human findings without equating clearance with complete age resetting.",
+        "apply": "Interpret published imaging and perturbation data using aggregate burden, degradative flux and developmental outcomes; distinguish sequestration from degradation and identify confounders."
+      },
+      "practice": "Build a species-by-stage evidence table from the linked studies. Annotate one aggregate-localization figure and one functional perturbation result; specify a complementary measurement needed to establish degradation."
+    },
+    {
+      "id": "germline_proteostasis_somatic_transfer",
+      "title": "Translating germline proteostasis to somatic cells",
+      "summary": "Test whether oocyte-inspired aggregate handling and lysosomal regulation can improve protein quality control in differentiated somatic cells. Evaluate organelle assembly, cargo degradation and sustained cell function as separate outcomes.",
+      "kind": "research_direction",
+      "topics": [
+        "molecular_cell_biology",
+        "geroscience"
+      ],
+      "level": "frontier",
+      "status": "speculative",
+      "evidence_note": "RUFY1 overexpression formed ELVA-like compartments in HeLa cells, but these lacked 20S proteasome recruitment (Cell, 2024). A C. elegans screen linked germline regulators to somatic lysosomal acidification and aggregation (eLife, 2021). These are partial mechanistic results, not proof of transferring a complete rejuvenation program or extending human lifespan. Human oocyte biology also differs from mouse findings.",
+      "resources": [
+        {
+          "title": "Mouse oocytes sequester aggregated proteins in degradative super-organelles",
+          "url": "https://doi.org/10.1016/j.cell.2024.01.031",
+          "type": "research_article",
+          "provider": "Cell (2024)",
+          "level": "frontier",
+          "depth": "apply",
+          "section": "Figure 3I-J and Figure S3: RUFY1 compartments in HeLa cells and missing proteasome recruitment"
+        },
+        {
+          "title": "A genetic screen identifies new steps in oocyte maturation that enhance proteostasis in the immortal germ lineage",
+          "url": "https://elifesciences.org/articles/62653",
+          "type": "research_article",
+          "provider": "eLife (2021)",
+          "level": "frontier",
+          "depth": "apply",
+          "section": "Figure 6: protein aggregation and lysosome acidification in somatic tissues"
+        },
+        {
+          "title": "The proteostatic landscape of healthy human oocytes",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12361380/",
+          "type": "research_article",
+          "provider": "The EMBO Journal (2025)",
+          "level": "frontier",
+          "depth": "understand",
+          "section": "Results and Table 1: human versus mouse oocyte proteostasis"
+        }
+      ],
+      "parent_id": "reproductive_germline_rejuvenation",
+      "outcomes": {
+        "understand": "Assess which germline mechanisms have evidence in somatic cells and what remains untested, distinguishing structural reconstitution from functional clearance and rejuvenation.",
+        "apply": "Design a bounded study in a defined somatic cell model with controls for cargo degradation, lysosomal flux, toxicity, cell identity and sustained function."
+      },
+      "practice": "Write a study proposal comparing one germline-inspired perturbation with a matched control and an established clearance benchmark. Include independent readouts that distinguish degradation from secretion, dilution by division or selective cell death, and state criteria for rejecting the hypothesis."
     },
     {
       "id": "whole_body_combination_goal",
@@ -15759,6 +15873,114 @@
       "min_depth": "apply",
       "source_depth": null,
       "rationale": "This task requires the corresponding measurement and interpretation skills, including their quality checks."
+    },
+    {
+      "from": "proteostasis_autophagy",
+      "to": "oocyte_proteostasis_renewal",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "understand",
+      "source_depth": "understand",
+      "rationale": "Protein folding, proteasomal degradation and lysosomal pathways are needed to interpret oocyte aggregate handling."
+    },
+    {
+      "from": "developmental_stem_cell_biology",
+      "to": "oocyte_proteostasis_renewal",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "understand",
+      "source_depth": "understand",
+      "rationale": "Oocyte maturation and the oocyte-to-embryo transition define when clearance mechanisms operate."
+    },
+    {
+      "from": "autophagy_flux_measurement",
+      "to": "oocyte_proteostasis_renewal",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "apply",
+      "source_depth": null,
+      "rationale": "Testing clearance requires distinguishing increased degradation from accumulated compartments."
+    },
+    {
+      "from": "bioimage_analysis",
+      "to": "oocyte_proteostasis_renewal",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "apply",
+      "source_depth": null,
+      "rationale": "Aggregate and organelle measurements require quantitative image analysis and control of segmentation bias."
+    },
+    {
+      "from": "experimental_design_biostatistics",
+      "to": "oocyte_proteostasis_renewal",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "apply",
+      "source_depth": null,
+      "rationale": "Perturbation studies require controls, independent biological replicates and uncertainty assessment."
+    },
+    {
+      "from": "oocyte_proteostasis_renewal",
+      "to": "reproductive_germline_rejuvenation",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "understand",
+      "source_depth": null,
+      "rationale": "Germline rejuvenation research includes cytoplasmic protein quality control alongside epigenetic resetting."
+    },
+    {
+      "from": "oocyte_proteostasis_renewal",
+      "to": "germline_proteostasis_somatic_transfer",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "understand",
+      "source_depth": null,
+      "rationale": "A proposed somatic adaptation must start from the demonstrated germline mechanism and its species-specific limits."
+    },
+    {
+      "from": "geroscience_hallmarks",
+      "to": "germline_proteostasis_somatic_transfer",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "understand",
+      "source_depth": "understand",
+      "rationale": "Evaluating a somatic rejuvenation claim requires distinguishing proteostasis changes from broader aging outcomes."
+    },
+    {
+      "from": "cell_culture_functional_assays",
+      "to": "germline_proteostasis_somatic_transfer",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "apply",
+      "source_depth": null,
+      "rationale": "Somatic-cell studies need an appropriate culture model and validated functional assays."
+    },
+    {
+      "from": "cell_identity_function",
+      "to": "germline_proteostasis_somatic_transfer",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "apply",
+      "source_depth": null,
+      "rationale": "An apparent clearance benefit must preserve cell identity, viability and relevant function."
+    },
+    {
+      "from": "experimental_design_biostatistics",
+      "to": "germline_proteostasis_somatic_transfer",
+      "type": "prerequisite",
+      "strength": "required",
+      "min_depth": "apply",
+      "source_depth": null,
+      "rationale": "Testing transferability requires prespecified outcomes, matched controls and biological replication."
+    },
+    {
+      "from": "germline_proteostasis_somatic_transfer",
+      "to": "proteostasis_damage_clearance",
+      "type": "complements",
+      "strength": "contextual",
+      "min_depth": "understand",
+      "source_depth": null,
+      "rationale": "Germline mechanisms supply candidate strategies for somatic debris clearance whose functional benefit still needs validation."
     }
   ],
   "excluded_directions": [

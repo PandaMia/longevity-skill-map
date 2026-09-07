@@ -1,6 +1,6 @@
 # Longevity skill graph
 
-The source of truth is [`longevity-skills.json`](./longevity-skills.json), schema **0.2.0**. It contains 236 nodes, 868 edges, 24 expandable containers, 26 research/integration targets and 6 school-level foundations.
+The source of truth is [`longevity-skills.json`](./longevity-skills.json), schema **0.2.0**. It contains 238 nodes, 880 edges, 25 expandable containers, 27 research/integration targets and 6 school-level foundations.
 
 ## Containers and components
 

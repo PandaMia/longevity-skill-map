@@ -36,6 +36,21 @@ Research targets now require experimental design for practical work. Brain route
 
 ## Resource choices
 
+### ECM and germline coverage check (2026-09-07)
+
+ECM was already represented by `extracellular_matrix_biology`, `ecm_crosslinks_fibrosis` and `matrix_mechanics_measurement`; no duplicate nodes were needed. The existing `reproductive_germline_rejuvenation` target now contains two focused components:
+
+- `oocyte_proteostasis_renewal`: interpreting protein-aggregate clearance in oocytes, with shared prerequisites in proteostasis, developmental biology, flux measurement and image analysis.
+- `germline_proteostasis_somatic_transfer`: testing transferability to somatic cells, with additional requirements for cell culture, experimental design and functional validation. Its `speculative` status refers to rejuvenation through this strategy.
+
+The sources separate the [C. elegans lysosomal switch (2017)](https://pubmed.ncbi.nlm.nih.gov/29168500/) from [mouse ELVAs (2024)](https://doi.org/10.1016/j.cell.2024.01.031). The latter study produced RUFY1 compartments in HeLa cells without 20S proteasome recruitment. A [worm genetic screen (2021)](https://elifesciences.org/articles/62653) connects germline regulators with somatic proteostasis; neither result establishes functional rejuvenation by transferring the full mechanism.
+
+A [human-oocyte study (2025)](https://pmc.ncbi.nlm.nih.gov/articles/PMC12361380/) found aggregates in enlarged lysosomes and reduced proteolytic activity with maturation. A [mouse Psma7 study (2026)](https://pmc.ncbi.nlm.nih.gov/articles/PMC13373198/) adds genetic evidence for proteasome involvement in oocyte clearance. The nodes retain the species distinctions and require separate evidence for aggregate degradation and functional improvement.
+
+The broad germline target requires the clearance component. Somatic transfer remains independently selectable and connects to general intracellular damage clearance through a non-prerequisite relationship.
+
+### Existing curriculum resources
+
 The new materials combine conceptual courses, focused chapters and reproducible exercises:
 
 - [Longevity Zero to One syllabus](https://www.longevitycourse.org/) and [recordings](https://www.longevitycourse.org/zuzalu): orientation and choosing a research contribution. The syllabus and recorded Zuzalu edition are complementary; lecture numbering can differ. The course also discusses speculative futures outside this biological-longevity graph.

@@ -2,7 +2,7 @@
 
 An interactive map of the knowledge and practical skills needed for research on healthy life extension. Choose a skill or research direction, explore its prerequisites, and build a learning path from foundational concepts to practical tasks.
 
-The current map contains **236 nodes, 868 relationships and 24 expandable containers**.
+The current map contains **238 nodes, 880 relationships and 25 expandable containers**.
 
 ![Current Longevity Skill Map with the Introduction to longevity container expanded and its learning details open](docs/images/skill-map.jpg)
 
@@ -53,6 +53,8 @@ A path includes all applicable required prerequisites, not just one shortest cha
 The map connects school-level foundations to molecular and cellular aging, biomarkers, senescence, epigenetic rejuvenation, immune and brain aging, tissue and organ replacement, gene delivery, drug discovery and combination strategies.
 
 It also covers organismal function and healthspan, organ-specific aging, human population studies, adult reproductive aging, extracellular aggregates, sleep, exercise and nutrition research. Reusable methods include applied statistics, epigenomics, cellular-aging measurements, tissue and brain analysis, omics processing and biological-product development.
+
+Extracellular matrix coverage includes mechanobiology, cross-links/AGE, fibrosis and mechanical measurements. The germline rejuvenation container includes oocyte protein-aggregate clearance and the research hypothesis of translating germline proteostasis to somatic cells.
 
 For the dependency model and mastery-depth semantics, see the [graph documentation](graph/README.md).
 
