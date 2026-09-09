@@ -1,6 +1,6 @@
-# Curriculum expansion, version 0.2
+# Curriculum expansion
 
-Updated 2026-09-06. This release adds 128 nodes and 24 containers while preserving all existing node IDs. The two mastery depths are educational outcomes: understanding a topic and working on a scoped task. They are not job titles or clinical credentials.
+Updated 2026-09-08. The map contains 278 nodes, 1,053 relationships and 32 containers. Existing node IDs and specializations are preserved. The two mastery depths are educational outcomes: understanding a topic and working on a scoped task. They are not job titles or clinical credentials.
 
 ## Requested decompositions
 
@@ -34,6 +34,23 @@ Additional containers cover the longevity introduction, applied statistics, epig
 
 Research targets now require experimental design for practical work. Brain routes include relevant measurement skills. Cryobiology includes cell/tissue physiology, experimental design, transport/thermal modeling and organ-function assessment. These changes add substantive competencies rather than padding routes to a numeric length.
 
+### Additional methods and database skills
+
+The latest additions comprise 40 nodes, including seven containers. Bayesian and time-series skills extend the existing applied-statistics container.
+
+| Area | Components |
+|---|---|
+| Virology | Viral structure and replication; host interactions; persistence and aging; assay interpretation. |
+| Transposable elements | Mobile genetic elements → epigenetic silencing → repetitive-sequence analysis → senescence and inflammatory responses. |
+| Gene networks | Coexpression; regulatory-network inference; modules and topology; validation and uncertainty; comparisons across aging states. |
+| Longevity databases | Gene evidence; identifiers and pathways; public omics; human cohorts; genetic combinations; trial registries. |
+| SQL and research data | Relational schemas; queries and joins; reproducible ingestion and provenance. |
+| Applied statistics | Bayesian inference; model checking; time-series analysis; physiological time series. |
+| Physical aging models | Thermodynamics and information; stochastic dynamics; critical transitions and resilience; mortality laws. |
+| Aging theories | Evolutionary explanations; mechanistic hypotheses; discrimination through testable predictions. |
+
+Virology components connect to viral delivery and infection surveillance in xenotransplantation. Practical transposon research requires repeat analysis, senescence measurements, experimental design and causal inference. Recommended links connect other new methods to existing specializations without making every neighboring discipline a mandatory prerequisite.
+
 ## Resource choices
 
 ### ECM and germline coverage check (2026-09-07)
@@ -62,11 +79,41 @@ The new materials combine conceptual courses, focused chapters and reproducible 
 - [LIPID MAPS tutorials](https://www.lipidmaps.org/resources/education/tutorials): lipid-specific mass spectrometry and interpretation.
 - [Flow cytometry and sorting guidelines](https://pmc.ncbi.nlm.nih.gov/articles/PMC11115438/) and [FlowJo exercises](https://www.flowjo.com/docs/flowjo10/getting-acquainted/learn-flowjo-now): complement the introductory iBiology lecture.
 - [OpenStax Anatomy and Physiology 2e](https://openstax.org/details/books/anatomy-and-physiology-2e): direct organ-system chapters, supplemented by geroscience and outcome-focused resources.
+- [Computational Biology of Aging](https://computationalaginglab.github.io/computational_aging_course/intro.html): specific chapters and practicals for aging biology, differential expression, methylation, survival analysis, aging clocks, WGCNA, complex systems and resilience. Advanced survival ML and deep-learning exercises are optional extensions with preparation requirements stated.
+- [AGCT data-analysis school syllabus](https://openlongevity.org/agctschool) and [video lectures](https://www.youtube.com/playlist?list=PLGmnY2BPH1JJzDnA2c7dy7jkncp4iqquK): expression, methylation, gene networks, graph algorithms, pathway enrichment, clustering and population genetics. Resources identify relevant lectures and use verified individual video links where available.
+
+Russian-language materials retain their original titles and display RU labels:
+
+- [Биология старения — Тимофей Глинин](https://stepik.org/course/127124/promo), after introductory molecular biology and genetics.
+- [Молекулярная биология и генетика](https://stepik.org/course/70/promo), supporting biological foundations.
+- [Школа долголетия Open Longevity, 2019](https://www.youtube.com/playlist?list=PLNq0DHP78fouEh9PqZQCH0PGx6t4FbAmj), dated explicitly and accompanied by guidance to check research claims against current evidence.
+- The AGCT data-analysis school.
 
 New URL checks identified and corrected stale/incorrect paths for the causal-inference book, lipidomics tutorials and ChIP-seq tutorial. A blocked WormBook homepage was replaced by its specific NCBI chapter. Some publishers use bot challenges; HTTP success alone is not treated as evidence that a chapter teaches a complete practical competency. Existing legacy resources outside the changed areas have not all been re-audited.
+
+Of 51 additional URLs checked for the methods and database expansion, 48 returned HTTP 200. Two ClinicalTrials.gov pages returned HTTP 403 to the automated client, and the AGCT syllabus returned a DNS error in a separate check; its program was accessible through web search. These results do not constitute complete verification of material availability or every video. Chapter links and syllabus content were checked separately.
+
+## Practical assignments
+
+There are 24 assignment blocks, each with an objective, steps, expected deliverable, success criteria and supporting materials. A shared project may support several related skills. At **Work on tasks** depth, assignments appear after **Learning materials**. Completion is not automatically assessed or stored.
+
+The initial database assignments are:
+
+- GenAge / Open Genes: compare FOXO3, MTOR, TERT, SIRT1 and TP53, distinguishing organisms, associations, interventions and primary sources.
+- UniProt / GO / Reactome: reconcile identifiers and perform enrichment with an appropriate background and multiple-testing correction.
+- GEO: prepare a manifest and sample table, distinguishing raw and processed data, replicates and contrasts.
+- HMD / UK Biobank / GTEx: justify dataset selection, variables, access and limitations using public catalogues; restricted data require separate authorization.
+- SynergyAge: examine three genetic combinations, single interventions, controls and an interaction model. This is not presented as a database of clinical drug combinations.
+- ClinicalTrials.gov: compare two studies by protocol, outcomes, record history and published results.
+
+Other assignments cover progressive SQL tasks, networks, Bayesian inference, temporal validation, stochastic models, recovery after perturbation, mortality, discrimination between theories, repeat analysis, viral-assay interpretation, RNA-seq and external clock validation. Introductory assignments do not assume methods taught only in later nodes.
+
+Graph checks cover cycles, references, both mastery depths, selective components, assignment definitions and Russian-language resources. Browser checks cover search, depth switching, assignment expansion, path locking/reset and RU labels.
 
 ## Limits and maintenance
 
 Each practical outcome is a bounded research or analysis task. Hands-on laboratory, animal and surgical work requires the appropriate supervised training and access; this graph does not certify professional competence. Academic level and evidence maturity remain distinct from mastery depth.
 
 The containers are curated decompositions, not an exhaustive protocol encyclopedia. Maintain shared skills once. When a downstream task needs only one part of a discipline, connect that component directly, not the whole container. Add broad optional specializations as recommended links, or expose a focused selectable component.
+
+Transposon expression is not equated with new insertions, and coexpression is not equated with causal regulation. Physical models and competing theories are not presented as established rejuvenation methods. Mortality-law conclusions remain bounded by the observed age range.

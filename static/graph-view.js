@@ -1,5 +1,9 @@
 /* Pure presentation projection. Containment is visual, never a prerequisite. */
 (function (root) {
+  function edgeMatchesDepth(graph, edge, depth) {
+    // A projected edge can combine several original component relationships.
+    return edge.indices.some(index => depth === "apply" || graph.edges[index].min_depth !== "apply");
+  }
   function createView(graph, expanded, path) {
     const byId = new Map(graph.nodes.map(node => [node.id, node]));
     const required = path ? new Set(path.node_ids) : null;
@@ -63,6 +67,6 @@
     return { ...graph, nodes, edges: [...edges.values()], containers, lanes,
       bounds: { min_x: 0, min_y: 0, width: cursorX + 60, height: cursorY + 20 } };
   }
-  if (typeof module !== 'undefined' && module.exports) module.exports = { createView };
-  else root.GraphView = { createView };
+  if (typeof module !== 'undefined' && module.exports) module.exports = { createView, edgeMatchesDepth };
+  else root.GraphView = { createView, edgeMatchesDepth };
 })(typeof window !== 'undefined' ? window : globalThis);

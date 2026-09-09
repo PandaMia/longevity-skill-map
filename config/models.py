@@ -57,6 +57,11 @@ class MasteryDepth(str, Enum):
     APPLY = "apply"
 
 
+class ResourceLanguage(str, Enum):
+    ENGLISH = "en"
+    RUSSIAN = "ru"
+
+
 class LearningOutcomes(StrictModel):
     understand: str = Field(min_length=1, max_length=1200)
     apply: str = Field(min_length=1, max_length=1200)
@@ -74,6 +79,17 @@ class LearningResource(StrictModel):
     level: NodeLevel
     section: str | None = None
     depth: MasteryDepth = MasteryDepth.UNDERSTAND
+    language: ResourceLanguage = ResourceLanguage.ENGLISH
+
+
+class PracticeExercise(StrictModel):
+    id: NodeId
+    title: str = Field(min_length=1, max_length=240)
+    objective: str = Field(min_length=1, max_length=1200)
+    steps: list[Annotated[str, Field(min_length=1, max_length=1200)]] = Field(min_length=2, max_length=12)
+    deliverable: str = Field(min_length=1, max_length=1200)
+    success_criteria: list[Annotated[str, Field(min_length=1, max_length=1200)]] = Field(min_length=2, max_length=12)
+    resources: list[LearningResource] = Field(min_length=1, max_length=8)
 
 
 class GraphNode(StrictModel):
@@ -89,6 +105,14 @@ class GraphNode(StrictModel):
     parent_id: NodeId | None = None
     outcomes: LearningOutcomes
     practice: str = Field(min_length=1, max_length=1200)
+    exercises: list[PracticeExercise] = Field(default_factory=list, max_length=12)
+
+    @field_validator("exercises")
+    @classmethod
+    def unique_exercise_ids(cls, exercises: list[PracticeExercise]) -> list[PracticeExercise]:
+        if len({exercise.id for exercise in exercises}) != len(exercises):
+            raise ValueError("Exercise IDs must be unique within a node")
+        return exercises
 
 
 class GraphEdge(StrictModel):

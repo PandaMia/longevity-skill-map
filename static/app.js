@@ -375,7 +375,7 @@
           nodesGroup.append(group); nodeElements.set(node.id, group);
         }
         meta.textContent = `${graph.nodes.length} skills & topics · ${graph.nodes.filter(node => node.children.length).length} containers`;
-        interactionRenderer.setGraph(nodeElements, edgeElements);
+        refreshHoverGraph();
         state.hoverNode = null;
         renderStatusLegend(graph.options); applyHighlight();
         if (fit) fitGraph();
@@ -404,6 +404,11 @@
         if (state.detailPayload) renderDetails(state.detailPayload);
       }
 
+      function refreshHoverGraph() {
+        interactionRenderer.setGraph(nodeElements, edgeElements.filter(item =>
+          GraphView.edgeMatchesDepth(state.graph, item.edge, state.depth)));
+      }
+
       function applyHighlight() {
         // Only an explicit selection dims the graph. Pointer hover stays local.
         const highlightedNodes = [state.activeNode].filter(Boolean);
@@ -413,7 +418,8 @@
         const required = new Set(state.path?.node_ids || []);
         const requiredEdges = new Set(state.path?.edge_indices || []);
         for (const item of edgeElements) {
-          const related = highlightedSet.has(item.edge.from) || highlightedSet.has(item.edge.to);
+          const related = (highlightedSet.has(item.edge.from) || highlightedSet.has(item.edge.to))
+            && GraphView.edgeMatchesDepth(state.graph, item.edge, state.depth);
           const onPath = state.path && item.edge.indices.some(index => requiredEdges.has(index));
           item.element.classList.toggle("is-related", state.path ? onPath : related);
           item.element.classList.toggle("is-dimmed", state.path ? !onPath : highlightedNodes.length > 0 && !related);
@@ -629,6 +635,53 @@
         }
       }
 
+      function learningResourceLink(resource) {
+        const link = document.createElement("a");
+        link.className = "resource"; link.href = resource.url;
+        link.target = "_blank"; link.rel = "noreferrer noopener";
+        const name = document.createElement("strong");
+        name.textContent = resource.title; name.lang = resource.language || "en";
+        const info = document.createElement("span");
+        info.textContent = `${resource.provider} · ${resource.depth === "apply" ? "Practice" : "Concepts"} · `;
+        const language = document.createElement("span");
+        language.className = "resource-language";
+        language.textContent = resource.language === "ru" ? "RU" : "EN";
+        language.title = resource.language === "ru" ? "Russian" : "English";
+        info.append(language); link.append(name, info);
+        if (resource.section) {
+          const section = document.createElement("span"); section.className = "resource-section";
+          section.textContent = resource.section; section.lang = resource.language || "en";
+          link.append(section);
+        }
+        return link;
+      }
+
+      function renderExercises(parent, exercises) {
+        if (!exercises.length) return;
+        const section = makeSection(`Practical assignments · ${exercises.length}`);
+        section.classList.add("practice-assignments");
+        for (const exercise of exercises) {
+          const card = document.createElement("details");
+          card.className = "practice-assignment"; card.dataset.exerciseId = exercise.id;
+          const title = document.createElement("summary"); title.textContent = exercise.title;
+          const body = document.createElement("div"); body.className = "assignment-body";
+          appendText(body, "learning-outcome", exercise.objective);
+          for (const [heading, entries, tag] of [["Steps", exercise.steps, "ol"], ["Success criteria", exercise.success_criteria, "ul"]]) {
+            const label = document.createElement("h4"); label.textContent = heading;
+            const list = document.createElement(tag);
+            for (const entry of entries) { const item = document.createElement("li"); item.textContent = entry; list.append(item); }
+            body.append(label, list);
+          }
+          const deliverable = document.createElement("h4"); deliverable.textContent = "Deliverable";
+          body.append(deliverable); appendText(body, "learning-outcome", exercise.deliverable);
+          const materials = document.createElement("h4"); materials.textContent = "Assignment materials";
+          body.append(materials);
+          for (const resource of exercise.resources) body.append(learningResourceLink(resource));
+          card.append(title, body); section.append(card);
+        }
+        parent.append(section);
+      }
+
       function renderDetails(payload) {
         const node = payload.node, depth = effectiveDepth(node.id);
         detailTitle.textContent = node.title; detailId.textContent = payload.parent ? `Component of ${payload.parent.title}` : humanizeLabel(node.kind);
@@ -650,7 +703,9 @@
         appendText(outcome, "learning-outcome", node.outcomes[depth]);
         if (state.path && depth !== state.depth) appendText(outcome, "empty", "This path needs conceptual knowledge of this prerequisite.");
         detailBody.append(outcome);
-        if (depth === "apply") { const practice = makeSection("Practice / evidence of readiness"); appendText(practice, "learning-outcome", node.practice); detailBody.append(practice); }
+        if (depth !== "apply" && node.exercises?.length) {
+          appendText(outcome, "practice-hint", `Switch Depth to Work on tasks to explore ${node.exercises.length} practical ${node.exercises.length === 1 ? "assignment" : "assignments"} and include their task-level prerequisites.`);
+        }
         if (node.evidence_note) appendText(detailBody, "evidence", node.evidence_note);
         if (payload.children.length) {
           const section = makeSection("Component skills");
@@ -664,20 +719,16 @@
         }
         const resources = makeSection("Learning materials");
         for (const resource of node.resources) {
-          const link = document.createElement("a"); link.className = "resource"; link.href = resource.url; link.target = "_blank"; link.rel = "noreferrer noopener";
-          const name = document.createElement("strong"); name.textContent = resource.title;
-          const info = document.createElement("span"); info.textContent = `${resource.provider} · ${resource.depth === "apply" ? "Practice" : "Concepts"}`;
-          link.append(name, info);
-          if (resource.section) { const section = document.createElement("span"); section.className = "resource-section"; section.textContent = resource.section; link.append(section); }
-          resources.append(link);
+          resources.append(learningResourceLink(resource));
         }
         detailBody.append(resources);
+        if (depth === "apply") renderExercises(detailBody, node.exercises || []);
         renderRelations(detailBody, "Prerequisites", payload.prerequisites);
         renderRelations(detailBody, "Unlocks", payload.dependents);
         renderRelations(detailBody, "Other applications", payload.other_relations);
       }
 
-      async function lockPath(targetId) {
+      async function lockPath(targetId, { preserveView = false } = {}) {
         const version = ++state.pathVersion;
         state.pathPending = true; state.pendingTarget = targetId;
         if (state.detailPayload) renderDetails(state.detailPayload);
@@ -686,11 +737,23 @@
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const path = await response.json();
           if (version !== state.pathVersion) return;
+          const anchorId = path.node_ids.includes(state.activeNode) ? state.activeNode : targetId;
+          const position = preserveView ? state.view.nodes.find(node => node.id === anchorId) : null;
           if (!state.path) state.overviewExpanded = new Set(state.expanded);
           state.path = path; state.depth = path.depth; depthSelect.value = path.depth; state.hoverNode = null;
           for (const id of path.container_ids) state.expanded.add(id);
           if (!path.node_ids.includes(state.activeNode)) { state.activeNode = targetId; state.detailPayload = null; }
-          renderGraph(state.graph); renderPathPanel(); renderSearchResults(); closeSearchResults(); fitGraph();
+          renderGraph(state.graph); renderPathPanel(); renderSearchResults(); closeSearchResults();
+          if (preserveView) {
+            // Keep the inspected skill in place as depth-specific components
+            // change the layout, retaining any zoom/pan made during the request.
+            const next = state.view.nodes.find(node => node.id === anchorId);
+            if (position && next) {
+              state.tx += (position.x - next.x) * state.scale;
+              state.ty += (position.y - next.y) * state.scale;
+              applyTransform();
+            }
+          } else fitGraph();
           state.pathPending = false;
           if (state.detailPayload) renderDetails(state.detailPayload); else if (!details.hidden) openNode(state.activeNode);
         } catch (error) {
@@ -724,10 +787,23 @@
       }
 
       function resetPath() {
+        const position = state.view.nodes.find(node => node.id === state.activeNode);
         ++state.pathVersion; state.pathPending = false; state.pendingTarget = null;
         state.path = null; state.expanded = state.overviewExpanded || state.expanded;
-        state.overviewExpanded = null; closeDetails(); pathPanel.hidden = true;
-        searchInput.value = ""; closeSearchResults(); renderGraph(state.graph, true);
+        state.overviewExpanded = null; pathPanel.hidden = true;
+        const selected = state.graph.nodes.find(node => node.id === state.activeNode);
+        if (selected?.parent_id) state.expanded.add(selected.parent_id);
+        renderGraph(state.graph);
+        // Restoring siblings can reflow the layout; keep the selection at its
+        // current screen position without changing the user's zoom.
+        const next = state.view.nodes.find(node => node.id === state.activeNode);
+        if (position && next) {
+          state.tx += (position.x - next.x) * state.scale;
+          state.ty += (position.y - next.y) * state.scale;
+          applyTransform();
+        }
+        if (state.detailPayload) renderDetails(state.detailPayload);
+        renderSearchResults(); closeSearchResults();
       }
 
       function closeDetails() {
@@ -747,8 +823,11 @@
       document.getElementById("reset-path").addEventListener("click", resetPath);
       depthSelect.addEventListener("change", () => {
         state.depth = depthSelect.value;
-        if (state.path || state.pendingTarget) lockPath(state.path?.target_id || state.pendingTarget);
-        else if (state.detailPayload) renderDetails(state.detailPayload);
+        if (state.path || state.pendingTarget) lockPath(state.path?.target_id || state.pendingTarget, { preserveView: true });
+        else {
+          refreshHoverGraph(); applyHighlight();
+          if (state.detailPayload) renderDetails(state.detailPayload);
+        }
       });
       document.getElementById("close-details").addEventListener("click", closeDetails);
       searchInput.addEventListener("input", renderSearchResults);

@@ -33,8 +33,10 @@ def main() -> int:
     edges = data.get("edges", [])
     errors: list[str] = []
 
-    if CYRILLIC.search(graph_text):
-        fail(errors, "Graph content must be English-only; Cyrillic text was found")
+    # The skill map remains English; resource titles/sections may use their
+    # original Russian names when language is explicitly marked as ru.
+    if data.get("language") != "en":
+        fail(errors, "The graph navigation language must be en")
 
     ids = [node.get("id") for node in nodes]
     id_set = set(ids)
@@ -74,10 +76,42 @@ def main() -> int:
             fail(errors, f"{node_id}: invalid status {node.get('status')!r}")
         if node.get("kind") in TARGET_KINDS and not node.get("evidence_note"):
             fail(errors, f"{node_id}: research targets require evidence_note")
+        for field in ("id", "title", "summary", "practice", "evidence_note", "outcomes"):
+            if CYRILLIC.search(json.dumps(node.get(field, ""), ensure_ascii=False)):
+                fail(errors, f"{node_id}: {field} must be English-only")
+        exercises = node.get("exercises", [])
+        if not isinstance(exercises, list):
+            fail(errors, f"{node_id}: exercises must be a list")
+            exercises = []
+        exercise_ids = set()
+        for exercise in exercises:
+            exercise_id = exercise.get("id", "")
+            prefix = f"{node_id}: exercise {exercise_id}"
+            if not re.fullmatch(r"[a-z0-9_]+", exercise_id) or exercise_id in exercise_ids:
+                fail(errors, f"{prefix}: invalid or duplicate ID")
+            exercise_ids.add(exercise_id)
+            for field in ("title", "objective", "deliverable"):
+                if not isinstance(exercise.get(field), str) or not exercise[field].strip():
+                    fail(errors, f"{prefix}: {field} is required")
+            for field in ("steps", "success_criteria"):
+                entries = exercise.get(field)
+                if not isinstance(entries, list) or len(entries) < 2 or any(not isinstance(entry, str) or not entry.strip() for entry in entries):
+                    fail(errors, f"{prefix}: {field} needs at least two nonempty entries")
+            if not exercise.get("resources"):
+                fail(errors, f"{prefix}: supporting resources are required")
+            for field in ("title", "objective", "deliverable", "steps", "success_criteria"):
+                if CYRILLIC.search(json.dumps(exercise.get(field, ""), ensure_ascii=False)):
+                    fail(errors, f"{prefix}: {field} must be English-only")
         resources = node.get("resources", [])
         if not resources:
             fail(errors, f"{node_id}: at least one learning resource is required")
-        for index, resource in enumerate(resources):
+        all_resources = resources + [resource for exercise in exercises for resource in exercise.get("resources", [])]
+        for index, resource in enumerate(all_resources):
+            language = resource.get("language", "en")
+            if language not in {"en", "ru"}:
+                fail(errors, f"{node_id}: resource #{index + 1} has unsupported language")
+            if language != "ru" and CYRILLIC.search(json.dumps(resource, ensure_ascii=False)):
+                fail(errors, f"{node_id}: Russian resources must declare language ru")
             if not resource.get("title") or not resource.get("url"):
                 fail(errors, f"{node_id}: resource #{index + 1} needs title and url")
             elif not resource["url"].startswith(("https://", "http://")):
@@ -115,6 +149,8 @@ def main() -> int:
             fail(errors, f"{prefix}: prerequisites must be required; use recommended_before")
         if edge.get("min_depth") == "understand" and edge.get("source_depth") == "apply":
             fail(errors, f"{prefix}: understanding cannot require practical mastery")
+        if CYRILLIC.search(edge.get("rationale", "")):
+            fail(errors, f"{prefix}: rationale must be English-only")
         if not edge.get("rationale"):
             fail(errors, f"{prefix}: rationale is required")
         if source == target:

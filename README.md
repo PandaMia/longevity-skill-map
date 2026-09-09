@@ -4,7 +4,7 @@
 
 An interactive map of the knowledge and practical skills needed for research on healthy life extension. Choose a skill or research direction, explore its prerequisites, and build a learning path from foundational concepts to practical tasks.
 
-The current map contains **238 nodes, 880 relationships and 25 expandable containers**.
+The current map contains **278 nodes, 1,053 relationships and 32 expandable containers**.
 
 ![Current Longevity Skill Map with the Introduction to longevity container expanded and its learning details open](docs/images/skill-map.jpg)
 
@@ -16,8 +16,9 @@ The current map contains **238 nodes, 880 relationships and 25 expandable contai
 - **Search for a skill.** Search titles, descriptions and research context, including components inside collapsed containers. Selecting a result brings the skill into view.
 - **Expand broad disciplines.** Open containers such as gene therapy, drug discovery, brain rejuvenation or microscopy to explore their component skills.
 - **Choose a mastery depth.** Switch between understanding a topic and working on practical tasks. Each skill includes learning outcomes for both depths and a practical task for assessing readiness.
-- **Find learning materials.** Open courses, textbooks, tutorials and research resources from a skill's detail panel. Materials include chapter or lesson guidance where available.
-- **Inspect dependencies.** Click a node to highlight its immediate neighbors and see prerequisites, skills it unlocks, and other applications. Hover provides a local preview without dimming the entire graph.
+- **Find learning materials.** Open courses, textbooks, tutorials and research resources from a skill's detail panel. Materials include chapter or lesson guidance and EN/RU language labels, including Computational Biology of Aging and the AGCT data-analysis school.
+- **Practice with concrete assignments.** At **Work on tasks** depth, expand an assignment to see its objective, steps, expected deliverable, success criteria and supporting materials. The first 24 assignment blocks cover database evidence, SQL, gene networks, statistics, aging models and omics analysis.
+- **Inspect dependencies.** Click a node to highlight its immediate neighbors at the selected depth and see prerequisites, skills it unlocks, and other applications. Task-only relationships are highlighted only at **Work on tasks** depth. Hover follows the same depth filter and provides a local preview without dimming the entire graph.
 - **Lock a learning path.** Highlight the complete set of required prerequisites for a target at the chosen depth, then explore only those skills. Required components are revealed automatically; unrelated components stay outside the path.
 - **Review research maturity.** Status markers and evidence notes distinguish foundational knowledge, established mechanisms, preclinical research, clinical platforms and speculative goals.
 
@@ -33,7 +34,7 @@ The current map contains **238 nodes, 880 relationships and 25 expandable contai
 
 3. Select a node and click **Lock learning path** in its detail panel.
 4. Explore the highlighted skills. The target remains fixed while you inspect prerequisites. **Explore required steps** lists the path in learning stages and shows the depth needed for each step.
-5. Change the depth to recalculate the path for the same target, or click **Reset path** to return to unrestricted navigation.
+5. Change the depth to recalculate the path for the same target while keeping the current zoom and the inspected node's position on screen. Click **Reset path** to return to unrestricted navigation. Reset keeps the selected node, its detail panel, the current zoom and the node's position on screen.
 
 A path includes all applicable required prerequisites, not just one shortest chain. Shared skills appear once. Selecting a component requires only the relevant parts of its parent discipline.
 
@@ -57,6 +58,8 @@ The map connects school-level foundations to molecular and cellular aging, bioma
 It also covers organismal function and healthspan, organ-specific aging, human population studies, adult reproductive aging, extracellular aggregates, sleep, exercise and nutrition research. Reusable methods include applied statistics, epigenomics, cellular-aging measurements, tissue and brain analysis, omics processing and biological-product development.
 
 Extracellular matrix coverage includes mechanobiology, cross-links/AGE, fibrosis and mechanical measurements. The germline rejuvenation container includes oocyte protein-aggregate clearance and the research hypothesis of translating germline proteostasis to somatic cells.
+
+Additional paths cover virology, transposable elements and senescence, gene networks, longevity databases, research data organization and SQL, Bayesian inference, time series, physical models and theories of aging.
 
 For the dependency model and mastery-depth semantics, see the [graph documentation](graph/README.md).
 

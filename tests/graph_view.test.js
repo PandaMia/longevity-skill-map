@@ -1,6 +1,6 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
-const { createView } = require('../static/graph-view.js');
+const { createView, edgeMatchesDepth } = require('../static/graph-view.js');
 const { execFileSync } = require('node:child_process');
 const { join } = require('node:path');
 const root = join(__dirname, '..');
@@ -21,6 +21,21 @@ test('expanding a container exposes its actual children', () => {
   const view = createView(graph, new Set(['microscopy_flow_cytometry']), null);
   const parent = graph.nodes.find(n => n.id === 'microscopy_flow_cytometry');
   assert.deepEqual(new Set(view.nodes.filter(n => n.parent_id).map(n => n.id)), new Set(parent.children));
+});
+test('conceptual selection excludes task-only prerequisites while practice includes them', () => {
+  const view = createView(graph, new Set(['longevity_data_resources']), null);
+  const edge = view.edges.find(e => e.to === 'aging_gene_evidence' &&
+    graph.nodes.find(n => n.id === e.from)?.title === 'Scientific Data Management and FAIR');
+  assert(edge, 'the FAIR prerequisite must be present in the full graph');
+  assert.equal(edgeMatchesDepth(graph, edge, 'understand'), false);
+  assert.equal(edgeMatchesDepth(graph, edge, 'apply'), true);
+  const genetics = view.edges.find(e => e.to === 'aging_gene_evidence' && e.from === 'genetics_genomics');
+  assert.equal(edgeMatchesDepth(graph, genetics, 'understand'), true);
+});
+test('collapsed relationships use all original depths, not just the first aggregated edge', () => {
+  const source = { edges: [{ min_depth: 'apply' }, { min_depth: 'understand' }] };
+  assert.equal(edgeMatchesDepth(source, { indices: [0, 1] }, 'understand'), true);
+  assert.equal(edgeMatchesDepth(source, { indices: [0] }, 'understand'), false);
 });
 test('locked path exposes only required siblings and cannot project unrelated edges', () => {
   const view = createView(graph, new Set(path.container_ids), path);

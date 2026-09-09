@@ -164,3 +164,13 @@
       #details { bottom: 8px; }
       #stage:has(.path-panel:not([hidden])) #details { bottom: 36%; }
     }
+    .practice-hint { margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .practice-assignment { margin-top: 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); overflow: hidden; }
+    .practice-assignment > summary { padding: 12px; color: var(--text); font-size: 13px; font-weight: 650; line-height: 1.4; cursor: pointer; }
+    .practice-assignment > summary:focus-visible { outline: 2px solid var(--accent-2); outline-offset: -3px; }
+    .practice-assignment[open] > summary { border-bottom: 1px solid var(--border); }
+    .assignment-body { padding: 12px; }
+    .assignment-body h4 { margin: 16px 0 8px; color: var(--muted); font-size: 12px; }
+    .assignment-body ol, .assignment-body ul { margin: 0; padding-left: 20px; font-size: 12px; line-height: 1.5; }
+    .assignment-body li + li { margin-top: 8px; }
+    .resource span.resource-language { display: inline-block; margin: 0; padding: 1px 5px; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 10px; font-weight: 650; }

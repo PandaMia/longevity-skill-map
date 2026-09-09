@@ -1,6 +1,6 @@
 # Longevity skill graph
 
-The source of truth is [`longevity-skills.json`](./longevity-skills.json), schema **0.2.0**. It contains 238 nodes, 880 edges, 25 expandable containers, 27 research/integration targets and 6 school-level foundations.
+The source of truth is [`longevity-skills.json`](./longevity-skills.json). It contains 278 nodes, 1,053 edges, 32 expandable containers, 28 research/integration targets and 6 school-level foundations.
 
 ## Containers and components
 
@@ -81,13 +81,19 @@ A prerequisite edge points from the earlier skill to its dependent. All applicab
 
 The resolver upgrades shared prerequisites to the strongest requested depth, includes all required branches and counts each skill once. No path is selected by geometric proximity or shortest-path heuristics.
 
-The UI locks the target until the user explicitly retargets or resets. Clicking other required nodes inspects them without changing the path. Search, graph nodes, related-node buttons and component buttons obey the same lock. Containers expand automatically to expose required components; unrelated siblings are hidden. Changing mastery depth recalculates the path for the same target. Reset restores the overview expansion state and full navigation.
+The UI locks the target until the user explicitly retargets or resets. Clicking other required nodes inspects them without changing the path. Search, graph nodes, related-node buttons and component buttons obey the same lock. Containers expand automatically to expose required components; unrelated siblings are hidden. Changing mastery depth recalculates the path for the same target. Reset restores full navigation and the overview expansion state, keeping the selected component's parent expanded. The selection and detail panel stay open, zoom is unchanged, and camera translation compensates for layout reflow to keep the selected node at the same screen position.
 
 ## Materials
 
-A resource may specify `section` (an actual chapter, lesson or topic within a course) and `depth` (concepts or practice). Specific chapter/tutorial links are preferred. Broad courses can remain on containers. Resources are educational support; completing a page is not equivalent to demonstrating the node's practical outcome.
+A resource may specify `section` (an actual chapter, lesson or topic within a course), `depth` (concepts or practice) and `language` (`en` by default, or `ru`). Russian resources retain their original titles and display an RU badge; navigation and skill descriptions remain English. Specific chapter/tutorial links are preferred. Broad courses can remain on containers. Resources are educational support; completing a page is not equivalent to demonstrating the node's practical outcome.
 
-See [`curriculum-expansion.md`](../research/curriculum-expansion.md) for coverage, source choices and limitations.
+## Structured assignments
+
+Nodes may include an `exercises` array alongside their concise `practice` outcome. Each exercise has an `id` unique within that node, `title`, `objective`, `steps`, `deliverable`, `success_criteria` and supporting `resources` using the same resource schema. Steps and success criteria each require at least two entries. There are currently 24 assignment blocks.
+
+At task depth the detail panel renders these as expandable **Practical assignments** after **Learning materials**. The practical outcome appears once under **Work on tasks**. At conceptual depth it shows a hint explaining how to access assignments. The effective depth of a prerequisite in a locked path also controls assignment visibility. Assignments use the node's existing depth-specific prerequisites; they do not create an independent dependency graph or track completion.
+
+See [Curriculum expansion](../research/curriculum-expansion.md) for coverage, source choices, database exercises, Russian-language materials and limitations.
 
 ## Validation
 
