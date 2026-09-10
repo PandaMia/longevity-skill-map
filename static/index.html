@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Longevity Skill Map</title>
-  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/styles.css?v=20260910-visible-content">
 </head>
 <body>
   <div id="app">
@@ -40,19 +40,11 @@
       </div>
     </header>
     <main id="stage">
-      <svg id="graph" role="img" aria-label="Longevity skill graph">
-        <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke"></path>
-          </marker>
-        </defs>
-        <g id="viewport">
-          <g id="lanes"></g>
-          <g id="containers"></g>
-          <g id="edges"></g>
-          <g id="nodes"></g>
-        </g>
-      </svg>
+      <div id="graph" tabindex="0" role="listbox" aria-label="Longevity skill graph"
+        aria-describedby="graph-keyboard-help" aria-activedescendant="graph-keyboard-node">
+        <span id="graph-keyboard-node" class="visually-hidden" role="option" aria-selected="false"></span>
+      </div>
+      <p id="graph-keyboard-help" class="visually-hidden">Use arrow keys to browse skills, Enter or Space to open a skill, and plus or minus to expand or collapse a container. You can also search for any skill above.</p>
       <section id="path-panel" class="path-panel" hidden aria-label="Locked learning path">
         <div class="path-heading"><span class="path-eyebrow">LOCKED LEARNING PATH</span><button id="reset-path" type="button">Reset path</button></div>
         <strong id="path-target"></strong><p id="path-summary" aria-live="polite"></p>
@@ -97,8 +89,9 @@
       </aside>
     </main>
   </div>
-  <script src="/static/graph-view.js?v=20260908-depth" defer></script>
-  <script src="/static/graph-interactions.js" defer></script>
-  <script src="/static/app.js?v=20260908-depth-camera" defer></script>
+  <script src="/static/graph-view.js?v=20260910-visible-content" defer></script>
+  <script src="/static/graph-interactions.js?v=20260910-visible-content" defer></script>
+  <script src="/static/graph-renderer.js?v=20260910-visible-content" defer></script>
+  <script src="/static/app.js?v=20260910-visible-content" defer></script>
 </body>
 </html>

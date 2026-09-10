@@ -1,10 +1,5 @@
     (() => {
-      const NS = "http://www.w3.org/2000/svg";
-      const svg = document.getElementById("graph");
-      const viewport = document.getElementById("viewport");
-      const lanesGroup = document.getElementById("lanes");
-      const edgesGroup = document.getElementById("edges");
-      const nodesGroup = document.getElementById("nodes");
+      const surface = document.getElementById("graph");
       const loading = document.getElementById("loading");
       const errorBox = document.getElementById("error");
       const details = document.getElementById("details");
@@ -21,19 +16,20 @@
       const statusLegendList = document.getElementById("status-legend-list");
       const topicLegendList = document.getElementById("topic-legend-list");
 
-      const NODE_W = 224;
       const state = { graph: null, view: null, expanded: new Set(), path: null, depth: "understand", detailPayload: null, detailVersion: 0, pathVersion: 0, pathPending: false, pendingTarget: null, scale: 1, tx: 0, ty: 0, panning: false, navigating: false, moved: false, startX: 0, startY: 0, startTx: 0, startTy: 0, activeNode: null, hoverNode: null, gestureScale: 1, searchMatches: [], searchSelection: -1 };
-      const nodeElements = new Map();
-      const edgeElements = [];
       const topicDefinitions = new Map();
-      const containersGroup = document.getElementById("containers");
+      let sourceNodes = new Map();
       const depthSelect = document.getElementById("mastery-depth");
       const pathPanel = document.getElementById("path-panel");
       const pathSteps = document.getElementById("path-steps");
       const notice = document.getElementById("notice");
       let noticeTimer;
       function depthLabel(depth) { return depth === "apply" ? "Work on tasks" : "Understand the topic"; }
-      function canExplore(id) { return !state.path || state.path.node_ids.includes(id); }
+      let indexedPath = null, requiredNodeIds = new Set();
+      function canExplore(id) {
+        if (indexedPath !== state.path) { indexedPath = state.path; requiredNodeIds = new Set(state.path?.node_ids); }
+        return !state.path || requiredNodeIds.has(id);
+      }
       function showNotice(message) {
         notice.textContent = message; notice.hidden = false;
         clearTimeout(noticeTimer); noticeTimer = setTimeout(() => { notice.hidden = true; }, 5000);
@@ -41,38 +37,26 @@
       function effectiveDepth(id) {
         return state.path?.steps.find(step => step.node_id === id)?.depth || state.depth;
       }
-      const interactionRenderer = GraphInteractions.createRenderer({
-        onTransform: ({ tx, ty, scale }) => viewport.setAttribute("transform", `translate(${tx} ${ty}) scale(${scale})`)
-      });
+      let graphRenderer;
       let navigationTimer;
       function pauseHoverForNavigation() {
         if (!state.navigating) {
           state.navigating = true;
-          svg.classList.add("is-navigating");
+          surface.classList.add("is-navigating");
           clearHighlight();
         }
         clearTimeout(navigationTimer);
         navigationTimer = setTimeout(() => {
           if (!state.panning) {
             state.navigating = false;
-            svg.classList.remove("is-navigating");
+            surface.classList.remove("is-navigating");
           }
         }, 120);
       }
 
 
-      function svgElement(name, attributes = {}) {
-        const element = document.createElementNS(NS, name);
-        for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, String(value));
-        return element;
-      }
-
       function topicLabel(topic) {
         return topicDefinitions.get(topic)?.label || humanizeLabel(topic);
-      }
-
-      function topicColor(topic) {
-        return topicDefinitions.get(topic)?.color || "#64748b";
       }
 
       function statusColor(status) {
@@ -100,18 +84,25 @@
           .trim();
       }
 
+      const searchIndex = new WeakMap();
       function searchNode(node, normalizedQuery, terms) {
-        const title = normalizeSearchText(node.title);
-        const id = normalizeSearchText(node.id);
-        const summary = normalizeSearchText(node.summary);
-        const evidence = normalizeSearchText(node.evidence_note);
-        const metadata = normalizeSearchText([
-          node.kind,
-          node.level,
-          node.status,
-          ...node.topics.flatMap(topic => [topic, topicLabel(topic)])
-        ].join(" "));
-        const completeText = `${title} ${id} ${summary} ${evidence} ${metadata}`;
+        let indexed = searchIndex.get(node);
+        if (!indexed) {
+          const title = normalizeSearchText(node.title);
+          const id = normalizeSearchText(node.id);
+          const summary = normalizeSearchText(node.summary);
+          const evidence = normalizeSearchText(node.evidence_note);
+          const metadata = normalizeSearchText([
+            node.kind,
+            node.level,
+            node.status,
+            ...node.topics.flatMap(topic => [topic, topicLabel(topic)])
+          ].join(" "));
+          const completeText = `${title} ${id} ${summary} ${evidence} ${metadata}`;
+          indexed = { title, id, summary, evidence, metadata, completeText, titleWords: new Set(title.split(" ")) };
+          searchIndex.set(node, indexed);
+        }
+        const { title, id, summary, evidence, metadata, completeText, titleWords } = indexed;
         if (!terms.every(term => completeText.includes(term))) return null;
 
         let score = 0;
@@ -125,7 +116,6 @@
         if (evidence.includes(normalizedQuery)) score += 70;
         if (metadata.includes(normalizedQuery)) score += 30;
 
-        const titleWords = new Set(title.split(" "));
         for (const term of terms) {
           if (titleWords.has(term)) score += 50;
           else if (title.includes(term)) score += 25;
@@ -274,110 +264,18 @@
         }));
       }
 
-      function renderTopicLanes(graph) {
-        lanesGroup.replaceChildren();
-        for (const lane of graph.lanes) {
-          const group = svgElement("g", { class: "topic-lane", "data-topic": lane.id });
-          group.style.setProperty("--lane-color", lane.color);
-          group.append(svgElement("rect", {
-            class: "topic-lane-background",
-            x: 20,
-            y: lane.y,
-            width: graph.bounds.width - 40,
-            height: lane.height,
-            rx: 18
-          }));
-          const label = svgElement("text", { class: "topic-lane-label", x: 36, y: lane.y + 29 });
-          label.textContent = lane.label;
-          group.append(label);
-          group.append(svgElement("line", {
-            class: "topic-lane-rule",
-            x1: 24,
-            y1: lane.y + 44,
-            x2: graph.bounds.width - 24,
-            y2: lane.y + 44
-          }));
-          lanesGroup.append(group);
-        }
-      }
-
-      function edgePath(source, target) {
-        const sx = source.x + (source.width || NODE_W) / 2;
-        const sy = source.y;
-        const tx = target.x - (target.width || NODE_W) / 2;
-        const ty = target.y;
-        const dx = tx - sx;
-        if (dx >= 20) {
-          const bend = Math.max(45, dx * .45);
-          return `M ${sx} ${sy} C ${sx + bend} ${sy}, ${tx - bend} ${ty}, ${tx} ${ty}`;
-        }
-        const offset = 90 + Math.abs(ty - sy) * .18;
-        return `M ${sx} ${sy} C ${sx + offset} ${sy}, ${tx + offset} ${ty}, ${tx} ${ty}`;
-      }
-
       function renderGraph(graph, fit = false) {
+        if (state.graph !== graph) sourceNodes = new Map(graph.nodes.map(node => [node.id, node]));
         state.graph = graph;
-        const view = GraphView.createView(graph, state.expanded, state.path);
-        state.view = view;
+        state.view = GraphView.createView(graph, state.expanded, state.path);
         topicDefinitions.clear();
         for (const topic of graph.options.topics) topicDefinitions.set(topic.id, topic);
-        renderTopicLanes(view);
-        containersGroup.replaceChildren();
-        edgesGroup.replaceChildren();
-        nodesGroup.replaceChildren();
-        nodeElements.clear();
-        edgeElements.length = 0;
-        const positions = new Map(view.nodes.map(node => [node.id, node]));
-        for (const box of view.containers) {
-          const rect = svgElement("rect", { x: box.x, y: box.y, width: box.width, height: box.height, rx: 16, class: "container-boundary" });
-          rect.style.setProperty("--container-color", topicColor(box.topic));
-          rect.dataset.container = box.id;
-          containersGroup.append(rect);
-        }
-        for (const edge of view.edges) {
-          const source = positions.get(edge.from), target = positions.get(edge.to);
-          const path = svgElement("path", { d: edgePath(source, target), class: `edge ${edge.type} ${edge.strength}`, "marker-end": "url(#arrow)" });
-          path.dataset.from = edge.from; path.dataset.to = edge.to; path.dataset.type = edge.type;
-          edgesGroup.append(path); edgeElements.push({ element: path, edge });
-        }
-        for (const node of view.nodes) {
-          const expandable = node.children.length > 0;
-          const group = svgElement("g", { class: `node${expandable ? " container-node" : ""}${node.parent_id ? " component-node" : ""}`, transform: `translate(${node.x} ${node.y})`, tabindex: "0", role: "button", "aria-label": node.title });
-          group.dataset.id = node.id;
-          group.style.setProperty("--node-color", topicColor(node.topics[0]));
-          group.style.setProperty("--status-color", statusColor(node.status));
-          group.append(svgElement("rect", { class: "node-card", x: -node.width / 2, y: -44, width: node.width, height: 88 }));
-          group.append(svgElement("rect", { class: "kind-mark", x: -node.width / 2 + 10, y: -32, width: 6, height: 62, rx: 3 }));
-          group.append(svgElement("circle", { class: "status-dot", cx: node.width / 2 - 14, cy: -30, r: 5 }));
-          const titleObject = svgElement("foreignObject", { x: -node.width / 2 + 28, y: -33, width: node.width - (expandable ? 78 : 50), height: 49 });
-          const title = document.createElement("div"); title.className = "node-title-box"; title.textContent = node.title; title.title = node.title;
-          titleObject.append(title); group.append(titleObject);
-          const metaObject = svgElement("foreignObject", { x: -node.width / 2 + 28, y: 23, width: node.width - 44, height: 15 });
-          const metaText = document.createElement("div"); metaText.className = "node-meta-box";
-          const componentCount = state.path ? node.children.filter(id => state.path.node_ids.includes(id)).length : node.children.length;
-          metaText.textContent = expandable ? `${componentCount}${state.path ? " required" : ""} components · ${humanizeLabel(node.level)}` : `${topicLabel(node.topics[0])} · ${humanizeLabel(node.level)}`;
-          metaObject.append(metaText); group.append(metaObject);
-          if (expandable) {
-            const toggle = svgElement("g", { class: "container-toggle", transform: `translate(${node.width / 2 - 28} 0)`, role: "button", tabindex: "0", "aria-label": `${state.expanded.has(node.id) ? "Collapse" : "Expand"} ${node.title}`, "aria-expanded": state.expanded.has(node.id) });
-            toggle.append(svgElement("rect", { x: -13, y: -13, width: 26, height: 26, rx: 6 }));
-            const symbol = svgElement("text", { x: 0, y: 6, "text-anchor": "middle" }); symbol.textContent = state.expanded.has(node.id) ? "−" : "+";
-            toggle.append(symbol);
-            toggle.addEventListener("click", event => { event.stopPropagation(); toggleContainer(node.id); });
-            toggle.addEventListener("keydown", event => { if (["Enter", " "].includes(event.key)) { event.preventDefault(); event.stopPropagation(); toggleContainer(node.id); } });
-            group.append(toggle);
-          }
-          group.addEventListener("mouseenter", () => highlightNode(node.id));
-          group.addEventListener("mouseleave", clearHighlight);
-          group.addEventListener("focus", () => highlightNode(node.id));
-          group.addEventListener("blur", clearHighlight);
-          group.addEventListener("click", () => { if (!state.moved) openNode(node.id); });
-          group.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openNode(node.id); } });
-          nodesGroup.append(group); nodeElements.set(node.id, group);
-        }
+        graphRenderer.setGraph(graph, state.view, { expanded: state.expanded, path: state.path,
+          activeId: state.activeNode, depth: state.depth });
         meta.textContent = `${graph.nodes.length} skills & topics · ${graph.nodes.filter(node => node.children.length).length} containers`;
-        refreshHoverGraph();
         state.hoverNode = null;
-        renderStatusLegend(graph.options); applyHighlight();
+        renderStatusLegend(graph.options);
+        updateKeyboardNode();
         if (fit) fitGraph();
       }
 
@@ -393,7 +291,7 @@
         if (state.expanded.has(id)) {
           const box = state.view.containers.find(item => item.id === id);
           if (box) {
-            const rect = svg.getBoundingClientRect();
+            const rect = surface.getBoundingClientRect();
             const availableWidth = Math.max(260, rect.width - (details.hidden ? 0 : Math.min(462, rect.width * .4)));
             state.scale = Math.min(1, (availableWidth - 48) / box.width, (rect.height - 64) / box.height);
             state.tx = availableWidth / 2 - (box.x + box.width / 2) * state.scale;
@@ -404,63 +302,34 @@
         if (state.detailPayload) renderDetails(state.detailPayload);
       }
 
-      function refreshHoverGraph() {
-        interactionRenderer.setGraph(nodeElements, edgeElements.filter(item =>
-          GraphView.edgeMatchesDepth(state.graph, item.edge, state.depth)));
-      }
-
       function applyHighlight() {
-        // Only an explicit selection dims the graph. Pointer hover stays local.
-        const highlightedNodes = [state.activeNode].filter(Boolean);
-        interactionRenderer.setHover(state.hoverNode);
-        const highlightedSet = new Set(highlightedNodes);
-        const connected = new Set(highlightedNodes);
-        const required = new Set(state.path?.node_ids || []);
-        const requiredEdges = new Set(state.path?.edge_indices || []);
-        for (const item of edgeElements) {
-          const related = (highlightedSet.has(item.edge.from) || highlightedSet.has(item.edge.to))
-            && GraphView.edgeMatchesDepth(state.graph, item.edge, state.depth);
-          const onPath = state.path && item.edge.indices.some(index => requiredEdges.has(index));
-          item.element.classList.toggle("is-related", state.path ? onPath : related);
-          item.element.classList.toggle("is-dimmed", state.path ? !onPath : highlightedNodes.length > 0 && !related);
-          if (related) { connected.add(item.edge.from); connected.add(item.edge.to); }
-        }
-        for (const [id, element] of nodeElements) {
-          const shell = state.path?.container_ids.includes(id);
-          const allowed = !state.path || required.has(id);
-          element.classList.toggle("is-active", state.activeNode === id);
-          element.classList.toggle("is-target", state.path?.target_id === id);
-          element.classList.toggle("is-path", Boolean(state.path && required.has(id)));
-          element.classList.toggle("is-dimmed", state.path ? !allowed && !shell : highlightedNodes.length > 0 && !connected.has(id));
-          element.classList.toggle("is-unavailable", !allowed);
-          element.setAttribute("aria-disabled", String(!allowed));
-          element.setAttribute("tabindex", allowed ? "0" : "-1");
-          const toggle = element.querySelector(".container-toggle");
-          if (toggle) { toggle.setAttribute("tabindex", allowed || shell ? "0" : "-1"); toggle.setAttribute("aria-disabled", String(!(allowed || shell))); }
-        }
+        if (!graphRenderer || !state.view) return;
+        graphRenderer.setHighlight(state.activeNode, state.path, state.depth);
+        graphRenderer.setHover(state.hoverNode);
+        updateKeyboardNode();
       }
 
       function highlightNode(nodeId) {
         if (state.panning || state.navigating || !canExplore(nodeId)) return;
         state.hoverNode = nodeId;
-        interactionRenderer.setHover(nodeId);
+        graphRenderer?.setHover(nodeId);
       }
 
       function clearHighlight() {
         state.hoverNode = null;
-        interactionRenderer.setHover(null);
+        graphRenderer?.setHover(null);
       }
 
       function applyTransform() {
-        interactionRenderer.setTransform(state.tx, state.ty, state.scale);
+        graphRenderer?.setTransform(state.tx, state.ty, state.scale);
       }
 
       function fitGraph() {
         if (!state.graph) return;
-        const rect = svg.getBoundingClientRect();
+        const rect = surface.getBoundingClientRect();
         let bounds = state.view.bounds;
         if (state.path) {
-          const selected = state.view.nodes.filter(node => state.path.node_ids.includes(node.id));
+          const selected = state.view.nodes.filter(node => canExplore(node.id));
           if (selected.length) {
             const left = Math.min(...selected.map(node => node.x - node.width / 2));
             const top = Math.min(...selected.map(node => node.y - 44));
@@ -475,7 +344,7 @@
       }
 
       function zoomAt(clientX, clientY, factor) {
-        const rect = svg.getBoundingClientRect();
+        const rect = surface.getBoundingClientRect();
         const px = clientX - rect.left;
         const py = clientY - rect.top;
         const previous = state.scale;
@@ -486,7 +355,7 @@
         applyTransform();
       }
 
-      svg.addEventListener("wheel", event => {
+      surface.addEventListener("wheel", event => {
         event.preventDefault();
         pauseHoverForNavigation();
         if (event.ctrlKey) {
@@ -495,7 +364,7 @@
           zoomAt(event.clientX, event.clientY, Math.exp(-event.deltaY * .01));
           return;
         }
-        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? svg.clientHeight : 1;
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? surface.clientHeight : 1;
         state.tx -= event.deltaX * unit;
         state.ty -= event.deltaY * unit;
         applyTransform();
@@ -503,12 +372,12 @@
 
       // Safari/WebKit exposes a native trackpad pinch through gesture events
       // instead of the Ctrl + wheel convention used by Chromium.
-      svg.addEventListener("gesturestart", event => {
+      surface.addEventListener("gesturestart", event => {
         event.preventDefault();
         pauseHoverForNavigation();
         state.gestureScale = Number(event.scale) || 1;
       }, { passive: false });
-      svg.addEventListener("gesturechange", event => {
+      surface.addEventListener("gesturechange", event => {
         event.preventDefault();
         pauseHoverForNavigation();
         const nextGestureScale = Number(event.scale) || state.gestureScale;
@@ -516,13 +385,15 @@
         zoomAt(event.clientX, event.clientY, factor);
         state.gestureScale = nextGestureScale;
       }, { passive: false });
-      svg.addEventListener("gestureend", event => {
+      surface.addEventListener("gestureend", event => {
         event.preventDefault();
         state.gestureScale = 1;
       }, { passive: false });
 
-      svg.addEventListener("pointerdown", event => {
-        if (event.target.closest(".node")) return;
+      surface.addEventListener("pointerdown", event => {
+        if (event.button !== 0) return;
+        event.preventDefault();
+        if (graphRenderer?.hitTest(event.clientX, event.clientY)) return;
         state.panning = true;
         pauseHoverForNavigation();
         state.moved = false;
@@ -530,11 +401,16 @@
         state.startY = event.clientY;
         state.startTx = state.tx;
         state.startTy = state.ty;
-        svg.setPointerCapture(event.pointerId);
-        svg.classList.add("is-panning");
+        surface.setPointerCapture(event.pointerId);
+        surface.classList.add("is-panning");
       });
-      svg.addEventListener("pointermove", event => {
-        if (!state.panning) return;
+      surface.addEventListener("pointermove", event => {
+        if (!state.panning) {
+          const hit = graphRenderer?.hitTest(event.clientX, event.clientY);
+          surface.classList.toggle("is-over-node", Boolean(hit));
+          if (hit) highlightNode(hit.id); else clearHighlight();
+          return;
+        }
         const dx = event.clientX - state.startX;
         const dy = event.clientY - state.startY;
         if (Math.abs(dx) + Math.abs(dy) > 4) state.moved = true;
@@ -547,15 +423,61 @@
         state.panning = false;
         state.navigating = false;
         clearTimeout(navigationTimer);
-        svg.classList.remove("is-navigating");
-        if (svg.hasPointerCapture(event.pointerId)) svg.releasePointerCapture(event.pointerId);
-        svg.classList.remove("is-panning");
+        surface.classList.remove("is-navigating");
+        if (surface.hasPointerCapture(event.pointerId)) surface.releasePointerCapture(event.pointerId);
+        surface.classList.remove("is-panning");
         setTimeout(() => { state.moved = false; }, 0);
       }
-      svg.addEventListener("pointerup", endPan);
-      svg.addEventListener("pointercancel", endPan);
-      svg.addEventListener("click", event => {
-        if (!event.target.closest(".node") && !state.moved) closeDetails();
+      surface.addEventListener("pointerup", endPan);
+      surface.addEventListener("pointercancel", endPan);
+      surface.addEventListener("click", event => {
+        if (state.moved) return;
+        const hit = graphRenderer?.hitTest(event.clientX, event.clientY);
+        if (hit?.toggle) toggleContainer(hit.id);
+        else if (hit) openNode(hit.id);
+        else closeDetails();
+      });
+
+      let keyboardNodeId = null;
+      const keyboardOption = document.getElementById("graph-keyboard-node");
+      function updateKeyboardNode() {
+        if (!state.view) return;
+        const allowed = state.view.nodes.filter(node => canExplore(node.id) || state.path?.container_ids.includes(node.id));
+        let index = allowed.findIndex(node => node.id === keyboardNodeId);
+        if (index < 0) { index = 0; keyboardNodeId = allowed[0]?.id || null; }
+        const node = allowed[index];
+        keyboardOption.textContent = node ? `${node.title}${node.children.length ? `, ${state.expanded.has(node.id) ? "expanded" : "collapsed"} container` : ""}` : "No nodes";
+        keyboardOption.setAttribute("aria-selected", String(node?.id === state.activeNode));
+        keyboardOption.setAttribute("aria-posinset", String(index + 1));
+        keyboardOption.setAttribute("aria-setsize", String(allowed.length));
+      }
+      surface.addEventListener("pointerleave", clearHighlight);
+      surface.addEventListener("focus", () => {
+        if (!surface.matches(":focus-visible")) return;
+        keyboardNodeId = state.activeNode || keyboardNodeId;
+        updateKeyboardNode();
+        if (keyboardNodeId) { focusNode(keyboardNodeId); highlightNode(keyboardNodeId); }
+      });
+      surface.addEventListener("blur", clearHighlight);
+      surface.addEventListener("keydown", event => {
+        if (!state.view) return;
+        const nodes = state.view.nodes.filter(node => canExplore(node.id) || state.path?.container_ids.includes(node.id));
+        if (!nodes.length) return;
+        let index = Math.max(0, nodes.findIndex(node => node.id === keyboardNodeId));
+        if (["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "Home", "End"].includes(event.key)) {
+          event.preventDefault();
+          if (event.key === "Home") index = 0;
+          else if (event.key === "End") index = nodes.length - 1;
+          else index = (index + (["ArrowLeft", "ArrowUp"].includes(event.key) ? -1 : 1) + nodes.length) % nodes.length;
+          keyboardNodeId = nodes[index].id;
+          updateKeyboardNode(); focusNode(keyboardNodeId); highlightNode(keyboardNodeId);
+        } else if (["Enter", " "].includes(event.key)) {
+          event.preventDefault(); openNode(keyboardNodeId);
+        } else if (["+", "=", "-"].includes(event.key) && nodes[index].children.length) {
+          event.preventDefault();
+          const shouldExpand = event.key !== "-";
+          if (state.expanded.has(keyboardNodeId) !== shouldExpand) toggleContainer(keyboardNodeId);
+        }
       });
 
       function appendText(parent, className, text) {
@@ -604,7 +526,7 @@
       function focusNode(nodeId) {
         const node = state.view.nodes.find(item => item.id === nodeId);
         if (!node) return;
-        const rect = svg.getBoundingClientRect();
+        const rect = surface.getBoundingClientRect();
         const available = rect.width - (details.hidden ? 0 : Math.min(462, rect.width * .4));
         state.scale = 1;
         state.tx = Math.max(140, available / 2) - node.x * state.scale;
@@ -616,7 +538,7 @@
         if (!canExplore(nodeId) || state.pathPending) return;
         const version = ++state.detailVersion;
         state.activeNode = nodeId; state.hoverNode = null; state.detailPayload = null;
-        const node = state.graph.nodes.find(item => item.id === nodeId);
+        const node = sourceNodes.get(nodeId);
         if (node?.parent_id && !state.expanded.has(node.parent_id)) {
           state.expanded.add(node.parent_id); renderGraph(state.graph);
         }
@@ -728,7 +650,7 @@
         renderRelations(detailBody, "Other applications", payload.other_relations);
       }
 
-      async function lockPath(targetId, { preserveView = false } = {}) {
+      async function lockPath(targetId) {
         const version = ++state.pathVersion;
         state.pathPending = true; state.pendingTarget = targetId;
         if (state.detailPayload) renderDetails(state.detailPayload);
@@ -738,22 +660,20 @@
           const path = await response.json();
           if (version !== state.pathVersion) return;
           const anchorId = path.node_ids.includes(state.activeNode) ? state.activeNode : targetId;
-          const position = preserveView ? state.view.nodes.find(node => node.id === anchorId) : null;
+          const position = state.view.nodes.find(node => node.id === anchorId);
           if (!state.path) state.overviewExpanded = new Set(state.expanded);
           state.path = path; state.depth = path.depth; depthSelect.value = path.depth; state.hoverNode = null;
           for (const id of path.container_ids) state.expanded.add(id);
           if (!path.node_ids.includes(state.activeNode)) { state.activeNode = targetId; state.detailPayload = null; }
           renderGraph(state.graph); renderPathPanel(); renderSearchResults(); closeSearchResults();
-          if (preserveView) {
-            // Keep the inspected skill in place as depth-specific components
-            // change the layout, retaining any zoom/pan made during the request.
-            const next = state.view.nodes.find(node => node.id === anchorId);
-            if (position && next) {
-              state.tx += (position.x - next.x) * state.scale;
-              state.ty += (position.y - next.y) * state.scale;
-              applyTransform();
-            }
-          } else fitGraph();
+          // Preserve zoom and the inspected skill's screen position when locking
+          // or updating a path, including navigation made while awaiting the API.
+          const next = state.view.nodes.find(node => node.id === anchorId);
+          if (position && next) {
+            state.tx += (position.x - next.x) * state.scale;
+            state.ty += (position.y - next.y) * state.scale;
+            applyTransform();
+          }
           state.pathPending = false;
           if (state.detailPayload) renderDetails(state.detailPayload); else if (!details.hidden) openNode(state.activeNode);
         } catch (error) {
@@ -769,7 +689,7 @@
       function renderPathPanel() {
         pathPanel.hidden = !state.path;
         if (!state.path) return;
-        const target = state.graph.nodes.find(node => node.id === state.path.target_id);
+        const target = sourceNodes.get(state.path.target_id);
         document.getElementById("path-target").textContent = target.title;
         document.getElementById("path-summary").textContent = `${depthLabel(state.path.depth)} · ${state.path.node_ids.length - 1} prerequisite skills & topics. Explore highlighted nodes; the target stays fixed.`;
         pathSteps.replaceChildren();
@@ -779,7 +699,7 @@
             currentStage = step.stage; const label = document.createElement("p"); label.className = "stage-label";
             label.textContent = `Stage ${currentStage + 1}`; pathSteps.append(label);
           }
-          const node = state.graph.nodes.find(item => item.id === step.node_id);
+          const node = sourceNodes.get(step.node_id);
           const button = document.createElement("button"); button.className = "path-step"; button.type = "button"; button.dataset.nodeId = node.id;
           button.textContent = `${node.title} · ${depthLabel(step.depth)}`;
           button.addEventListener("click", () => openNode(node.id, true)); pathSteps.append(button);
@@ -791,7 +711,7 @@
         ++state.pathVersion; state.pathPending = false; state.pendingTarget = null;
         state.path = null; state.expanded = state.overviewExpanded || state.expanded;
         state.overviewExpanded = null; pathPanel.hidden = true;
-        const selected = state.graph.nodes.find(node => node.id === state.activeNode);
+        const selected = sourceNodes.get(state.activeNode);
         if (selected?.parent_id) state.expanded.add(selected.parent_id);
         renderGraph(state.graph);
         // Restoring siblings can reflow the layout; keep the selection at its
@@ -811,7 +731,6 @@
         details.hidden = true;
         state.activeNode = null;
         state.hoverNode = null;
-        for (const element of nodeElements.values()) element.classList.remove("is-active");
         applyHighlight();
       }
 
@@ -823,9 +742,9 @@
       document.getElementById("reset-path").addEventListener("click", resetPath);
       depthSelect.addEventListener("change", () => {
         state.depth = depthSelect.value;
-        if (state.path || state.pendingTarget) lockPath(state.path?.target_id || state.pendingTarget, { preserveView: true });
+        if (state.path || state.pendingTarget) lockPath(state.path?.target_id || state.pendingTarget);
         else {
-          refreshHoverGraph(); applyHighlight();
+          applyHighlight();
           if (state.detailPayload) renderDetails(state.detailPayload);
         }
       });
@@ -855,9 +774,10 @@
       legendToggle.addEventListener("click", () => setLegend(legendPanel.hidden));
       document.getElementById("close-legend").addEventListener("click", () => setLegend(false));
       document.getElementById("fit").addEventListener("click", fitGraph);
-      document.getElementById("zoom-in").addEventListener("click", () => { const rect = svg.getBoundingClientRect(); zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 1.25); });
-      document.getElementById("zoom-out").addEventListener("click", () => { const rect = svg.getBoundingClientRect(); zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, .8); });
-      window.addEventListener("resize", fitGraph);
+      document.getElementById("zoom-in").addEventListener("click", () => { const rect = surface.getBoundingClientRect(); zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 1.25); });
+      document.getElementById("zoom-out").addEventListener("click", () => { const rect = surface.getBoundingClientRect(); zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, .8); });
+      // The renderer resizes its drawing buffer without discarding the camera.
+
       window.addEventListener("keydown", event => {
         if (event.key === "Escape") {
           closeDetails();
@@ -874,6 +794,8 @@
           });
           if (!response.ok) throw new Error(`Graph API returned HTTP ${response.status}`);
           const graph = await response.json();
+          graphRenderer = await GraphRenderer.create({ element: surface,
+            onContextChange: restored => showNotice(restored ? "Graphics restored." : "Graphics interrupted. Waiting for the GPU to recover…") });
           renderGraph(graph, true);
           loading.hidden = true;
         } catch (error) {

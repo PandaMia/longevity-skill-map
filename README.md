@@ -32,7 +32,7 @@ The current map contains **278 nodes, 1,053 relationships and 32 expandable cont
    | **Understand the topic** | Explain the concepts, assumptions and limitations. |
    | **Work on tasks** | Apply relevant methods, analyze results and complete a scoped practical task. |
 
-3. Select a node and click **Lock learning path** in its detail panel.
+3. Select a node and click **Lock learning path** in its detail panel. Locking keeps the current zoom and the selected node's position on screen.
 4. Explore the highlighted skills. The target remains fixed while you inspect prerequisites. **Explore required steps** lists the path in learning stages and shows the depth needed for each step.
 5. Change the depth to recalculate the path for the same target while keeping the current zoom and the inspected node's position on screen. Click **Reset path** to return to unrestricted navigation. Reset keeps the selected node, its detail panel, the current zoom and the node's position on screen.
 
@@ -48,7 +48,9 @@ A path includes all applicable required prerequisites, not just one shortest cha
 | **+ / −** on a container | Expand or collapse its components |
 | **Legend** | Explain topic colors, status dots and edge styles |
 | Arrow keys and Enter in search | Select a search result |
-| Tab, then Enter or Space | Open a focused node |
+| Tab to the graph, then arrow keys | Browse skills, including offscreen nodes |
+| Enter or Space on the graph | Open the focused skill |
+| + / − on the focused container | Expand or collapse its components |
 | Escape | Dismiss search suggestions, details or the legend |
 
 ## Research coverage
@@ -77,6 +79,19 @@ python app.py
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 The service exposes the graph, node details and depth-specific learning paths through a FastAPI API. Interactive API documentation is available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs), and the health endpoint is [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
+
+## Rendering and UI development
+
+The map renders with PixiJS/WebGL, using spatial culling, GPU batches and shared text atlases. Titles, metadata and relationships remain visible at every zoom level. Browsers without WebGL use a Canvas2D fallback.
+
+The compiled UI is included in the repository, so the Python and Docker startup commands above still work without Node.js. After editing renderer sources, install the pinned dependencies and rebuild:
+
+```bash
+npm ci
+npm run build
+```
+
+See [rendering design, alternatives and reproducible benchmarks](docs/graph-rendering.md) for performance details and browser checks.
 
 ## Validate and test
 

@@ -15,17 +15,24 @@
       return { node, children, column, width: children.length ? 520 : 224,
         height: children.length ? 114 + Math.ceil(children.length / 2) * 112 : 88 };
     });
-    const columns = [...new Set(units.map(unit => unit.column))].sort((a, b) => a - b);
+    const columnWidths = new Map(), topicUnits = new Map();
+    for (const unit of units) {
+      columnWidths.set(unit.column, Math.max(columnWidths.get(unit.column) || 0, unit.width));
+      const topic = unit.node.topics[0];
+      if (!topicUnits.has(topic)) topicUnits.set(topic, []);
+      topicUnits.get(topic).push(unit);
+    }
+    const columns = [...columnWidths.keys()].sort((a, b) => a - b);
     const xs = new Map();
     let cursorX = 320;
     for (const column of columns) {
       xs.set(column, cursorX);
-      cursorX += Math.max(...units.filter(unit => unit.column === column).map(unit => unit.width)) + 100;
+      cursorX += columnWidths.get(column) + 100;
     }
     const nodes = [], containers = [], lanes = [];
     let cursorY = 40;
     for (const topic of graph.options.topics) {
-      const members = units.filter(unit => unit.node.topics[0] === topic.id);
+      const members = topicUnits.get(topic.id) || [];
       if (!members.length) continue;
       const stacks = new Map();
       for (const unit of members.sort((a, b) => a.node.y - b.node.y || a.node.id.localeCompare(b.node.id))) {

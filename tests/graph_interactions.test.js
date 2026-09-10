@@ -95,3 +95,13 @@ test('disposing cancels outstanding animation work', () => {
   f.renderer.setTransform(1, 2, 3); f.renderer.dispose(); f.paint();
   assert.equal(f.transforms.length, 0);
 });
+
+test('resize and camera bursts share one paint and do not start an idle loop', () => {
+  const frames = new Map(); let id = 0, paints = 0;
+  const renderer = createRenderer({ onTransform() {}, onPaint() { paints++; },
+    requestFrame(callback) { frames.set(++id, callback); return id; }, cancelFrame(id) { frames.delete(id); } });
+  for (let i = 0; i < 100; i++) { renderer.invalidate(); renderer.setTransform(i, i, 1); }
+  assert.equal(frames.size, 1);
+  const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback());
+  assert.equal(paints, 1); assert.equal(frames.size, 0);
+});

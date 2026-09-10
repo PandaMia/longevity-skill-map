@@ -1,0 +1,215 @@
+{
+  "measured_at": "2026-09-10",
+  "platform": "macOS arm64",
+  "baseline_commit": "092fd8035c09f94fe5951b02c8b3596714ef1fa5",
+  "viewport": "1440x960",
+  "deviceScaleFactor": 2,
+  "samples": 180,
+  "method": "Original SVG comparison; current WebGL extended run with titles, metadata and background edges visible at every scale, coarse edge batches and an independent cached text layer. Same browser, fixture and wheel input. See graph-rendering.md.",
+  "results": [
+    {
+      "label": "Current collapsed map",
+      "renderer": "SVG (HEAD)",
+      "nodes": 278,
+      "edges": 1053,
+      "loadMs": 177.38487499999997,
+      "domElements": 2019,
+      "frameMedianMs": 26,
+      "frameP95Ms": 30.90000009536743,
+      "frameMaxMs": 34.59999990463257,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36"
+    },
+    {
+      "label": "Current collapsed map",
+      "renderer": "PixiJS WebGL",
+      "nodes": 278,
+      "edges": 1053,
+      "loadMs": 314.59024999999997,
+      "zoom": {
+        "medianMs": 16.600000381469727,
+        "p95Ms": 18.199999809265137,
+        "maxMs": 95.5,
+        "metrics": {
+          "frames": 364,
+          "lastRenderMs": 0.39999961853027344,
+          "visibleNodes": 21,
+          "visibleEdgeTiles": 4,
+          "cachedNodes": 135,
+          "backend": "webgl",
+          "visibleLabelNodes": 21,
+          "visibleBaseEdgeTiles": 4,
+          "cachedEdgeTiles": 18
+        }
+      },
+      "overview": {
+        "medianMs": 16.699999809265137,
+        "p95Ms": 17.40000009536743,
+        "maxMs": 17.59999990463257,
+        "metrics": {
+          "frames": 545,
+          "lastRenderMs": 0.19999980926513672,
+          "visibleNodes": 135,
+          "visibleEdgeTiles": 1,
+          "cachedNodes": 135,
+          "backend": "webgl",
+          "visibleLabelNodes": 135,
+          "visibleBaseEdgeTiles": 1,
+          "cachedEdgeTiles": 18
+        }
+      },
+      "domElements": 133,
+      "frameMedianMs": 16.699999809265137,
+      "frameP95Ms": 17.59999990463257,
+      "frameMaxMs": 18.200000286102295,
+      "renderCpuP95Ms": 0.5999999046325684,
+      "metrics": {
+        "frames": 545,
+        "lastRenderMs": 0.19999980926513672,
+        "visibleNodes": 135,
+        "visibleEdgeTiles": 1,
+        "cachedNodes": 135,
+        "backend": "webgl",
+        "visibleLabelNodes": 135,
+        "visibleBaseEdgeTiles": 1,
+        "cachedEdgeTiles": 18
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36"
+    },
+    {
+      "label": "10 copies of expanded map",
+      "renderer": "SVG (HEAD)",
+      "nodes": 2780,
+      "edges": 10530,
+      "loadMs": 477.31987500000105,
+      "domElements": 33051,
+      "frameMedianMs": 41.799999713897705,
+      "frameP95Ms": 50.30000019073486,
+      "frameMaxMs": 57.700000286102295,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36"
+    },
+    {
+      "label": "10 copies of expanded map",
+      "renderer": "PixiJS WebGL",
+      "nodes": 2780,
+      "edges": 10530,
+      "loadMs": 831.0665410000001,
+      "zoom": {
+        "medianMs": 16.699999809265137,
+        "p95Ms": 24.40000009536743,
+        "maxMs": 48.700000286102295,
+        "metrics": {
+          "frames": 364,
+          "lastRenderMs": 0.09999990463256836,
+          "visibleNodes": 10,
+          "visibleEdgeTiles": 4,
+          "cachedNodes": 512,
+          "backend": "webgl",
+          "visibleLabelNodes": 10,
+          "visibleBaseEdgeTiles": 4,
+          "cachedEdgeTiles": 31
+        }
+      },
+      "overview": {
+        "medianMs": 16.699999809265137,
+        "p95Ms": 17.199999809265137,
+        "maxMs": 17.90000009536743,
+        "metrics": {
+          "frames": 545,
+          "lastRenderMs": 1,
+          "visibleNodes": 2780,
+          "visibleEdgeTiles": 10,
+          "cachedNodes": 2780,
+          "backend": "webgl",
+          "visibleLabelNodes": 2780,
+          "visibleBaseEdgeTiles": 10,
+          "cachedEdgeTiles": 31
+        }
+      },
+      "domElements": 133,
+      "frameMedianMs": 16.699999809265137,
+      "frameP95Ms": 17.5,
+      "frameMaxMs": 18,
+      "renderCpuP95Ms": 0.5,
+      "metrics": {
+        "frames": 545,
+        "lastRenderMs": 1,
+        "visibleNodes": 2780,
+        "visibleEdgeTiles": 10,
+        "cachedNodes": 2780,
+        "backend": "webgl",
+        "visibleLabelNodes": 2780,
+        "visibleBaseEdgeTiles": 10,
+        "cachedEdgeTiles": 31
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36"
+    },
+    {
+      "label": "50 copies of expanded map",
+      "renderer": "SVG (HEAD)",
+      "nodes": 13900,
+      "edges": 52650,
+      "loadMs": 1863.2846660000032,
+      "domElements": 164323,
+      "frameMedianMs": 97.7999997138977,
+      "frameP95Ms": 142,
+      "frameMaxMs": 148.09999990463257,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36"
+    },
+    {
+      "label": "50 copies of expanded map",
+      "renderer": "PixiJS WebGL",
+      "nodes": 13900,
+      "edges": 52650,
+      "loadMs": 3848.433792,
+      "zoom": {
+        "medianMs": 16.699999809265137,
+        "p95Ms": 24.699999809265137,
+        "maxMs": 43.09999990463257,
+        "metrics": {
+          "frames": 364,
+          "lastRenderMs": 0.40000009536743164,
+          "visibleNodes": 10,
+          "visibleEdgeTiles": 4,
+          "cachedNodes": 512,
+          "backend": "webgl",
+          "visibleLabelNodes": 10,
+          "visibleBaseEdgeTiles": 4,
+          "cachedEdgeTiles": 69
+        }
+      },
+      "overview": {
+        "medianMs": 16.59999990463257,
+        "p95Ms": 17.799999713897705,
+        "maxMs": 177.7000002861023,
+        "metrics": {
+          "frames": 545,
+          "lastRenderMs": 158.80000019073486,
+          "visibleNodes": 11064,
+          "visibleEdgeTiles": 47,
+          "cachedNodes": 11710,
+          "backend": "webgl",
+          "visibleLabelNodes": 11064,
+          "visibleBaseEdgeTiles": 47,
+          "cachedEdgeTiles": 69
+        }
+      },
+      "domElements": 133,
+      "frameMedianMs": 16.699999809265137,
+      "frameP95Ms": 17.59999990463257,
+      "frameMaxMs": 18.700000286102295,
+      "renderCpuP95Ms": 0.5999999046325684,
+      "metrics": {
+        "frames": 545,
+        "lastRenderMs": 158.80000019073486,
+        "visibleNodes": 11064,
+        "visibleEdgeTiles": 47,
+        "cachedNodes": 11710,
+        "backend": "webgl",
+        "visibleLabelNodes": 11064,
+        "visibleBaseEdgeTiles": 47,
+        "cachedEdgeTiles": 69
+      },
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36"
+    }
+  ]
+}

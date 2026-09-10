@@ -1,6 +1,9 @@
 /* Paint high-frequency interactions once per frame, touching only changed items. */
 (function (root) {
-  function createRenderer({ onTransform, requestFrame = requestAnimationFrame, cancelFrame = cancelAnimationFrame }) {
+  function createRenderer({ onTransform, onPaint = () => {},
+    onNodeHover = (node, value) => node.classList[value ? "add" : "remove"]("is-hovered"),
+    onEdgeHover = (edge, value) => edge.classList[value ? "add" : "remove"]("is-hovered"),
+    requestFrame = requestAnimationFrame, cancelFrame = cancelAnimationFrame }) {
     let nodes = new Map(), incident = new Map();
     let hovered = null, paintedNode = null, paintedEdges = new Set();
     let transform = null, hoverDirty = false, transformDirty = false, frame = null;
@@ -15,30 +18,31 @@
         transformDirty = false;
         onTransform(transform);
       }
-      if (!hoverDirty) return;
+      if (!hoverDirty) { onPaint(); return; }
       hoverDirty = false;
       const node = nodes.get(hovered) || null;
       const nextEdges = incident.get(hovered) || new Set();
       if (node !== paintedNode) {
-        paintedNode?.classList.remove("is-hovered");
-        node?.classList.add("is-hovered");
+        if (paintedNode) onNodeHover(paintedNode, false);
+        if (node) onNodeHover(node, true);
       }
       // An edge shared by the previous and next node stays highlighted.
       for (const element of paintedEdges) {
-        if (!nextEdges.has(element)) element.classList.remove("is-hovered");
+        if (!nextEdges.has(element)) onEdgeHover(element, false);
       }
       for (const element of nextEdges) {
-        if (!paintedEdges.has(element)) element.classList.add("is-hovered");
+        if (!paintedEdges.has(element)) onEdgeHover(element, true);
       }
       paintedNode = node;
       paintedEdges = nextEdges;
+      onPaint();
     }
 
     return {
       setGraph(nodeElements, edgeElements) {
         // Graph replacement is rare; build the adjacency index once here.
-        paintedNode?.classList.remove("is-hovered");
-        for (const element of paintedEdges) element.classList.remove("is-hovered");
+        if (paintedNode) onNodeHover(paintedNode, false);
+        for (const element of paintedEdges) onEdgeHover(element, false);
         nodes = nodeElements;
         incident = new Map();
         for (const { element, edge } of edgeElements) {
@@ -62,6 +66,7 @@
         transformDirty = true;
         schedule();
       },
+      invalidate: schedule,
       dispose() {
         if (frame !== null) cancelFrame(frame);
         frame = null;

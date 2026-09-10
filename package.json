@@ -1,0 +1,19 @@
+{
+  "name": "longevity-skill-map-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build_ui.cjs",
+    "test": "node --test tests/*.test.js",
+    "test:browser": "node scripts/test_graph_browser.cjs",
+    "benchmark": "node scripts/benchmark_graph.cjs"
+  },
+  "dependencies": {
+    "pixi.js": "8.20.1",
+    "rbush": "4.0.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "playwright": "1.58.2"
+  }
+}

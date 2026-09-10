@@ -45,28 +45,11 @@
     #stage { position: relative; min-height: 0; overflow: hidden; background-image: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--border) 72%, transparent) 1px, transparent 0); background-size: 24px 24px; }
     #graph { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
     #graph.is-panning { cursor: grabbing; }
-    .topic-lane-background { fill: color-mix(in srgb, var(--lane-color) 9%, var(--surface-2)); stroke: color-mix(in srgb, var(--lane-color) 32%, var(--border)); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
-    .topic-lane-label { fill: var(--lane-color); font-size: 18px; font-weight: 720; letter-spacing: .01em; }
-    .topic-lane-rule { stroke: color-mix(in srgb, var(--lane-color) 24%, var(--border)); stroke-width: 1; vector-effect: non-scaling-stroke; }
-    .edge { fill: none; stroke: var(--edge); stroke-width: 1.25; opacity: .28; vector-effect: non-scaling-stroke; }
-    .edge.recommended_before { stroke-dasharray: 7 5; }
-    .edge.applied_in { stroke-dasharray: 2 6; }
-    .edge.is-related { opacity: 1; stroke: var(--accent); stroke-width: 3; }
-    .edge.is-dimmed { opacity: .035; }
-    .edge.is-hovered:not(.is-dimmed):not(.is-related) { opacity: .8; stroke: var(--accent); stroke-width: 2; }
-    #edges, #lanes, #containers { pointer-events: none; }
+    #graph { position: relative; outline: none; }
+    #graph canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+    #graph.is-over-node:not(.is-navigating):not(.is-panning) { cursor: pointer; }
+    #graph:focus-visible { outline: 2px solid var(--accent-2); outline-offset: -3px; }
     #stage { background-color: var(--bg); }
-    #graph.is-navigating .node { cursor: inherit; }
-    .node { cursor: pointer; outline: none; }
-    .node rect.node-card { fill: var(--surface-2); stroke: var(--node-color, var(--node-border)); stroke-width: 2; rx: 10; vector-effect: non-scaling-stroke; }
-    .node.is-hovered rect.node-card, .node:focus-visible rect.node-card, .node.is-active rect.node-card { stroke-width: 4; }
-    .node.is-dimmed { opacity: .25; }
-    .node text { pointer-events: none; fill: var(--text); }
-    .node foreignObject { pointer-events: none; overflow: hidden; }
-    .node .node-title-box { width: 100%; height: 30px; display: block; overflow: hidden; color: var(--text); font-size: 12.5px; font-weight: 680; line-height: 15px; overflow-wrap: anywhere; word-break: break-word; }
-    .node .node-meta-box { width: 100%; overflow: hidden; color: var(--muted); font-size: 9.5px; line-height: 13px; text-overflow: clip; white-space: nowrap; }
-    .node .status-dot { fill: var(--status-color); stroke: var(--surface-2); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-    .node .kind-mark { fill: color-mix(in srgb, var(--node-color, var(--node-border)) 18%, transparent); stroke: var(--node-color, var(--node-border)); stroke-width: 1; vector-effect: non-scaling-stroke; }
     #loading, #error { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); background: color-mix(in srgb, var(--bg) 82%, transparent); z-index: 4; }
     #error { color: var(--danger); padding: 24px; text-align: center; }
     [hidden] { display: none !important; }
@@ -120,20 +103,6 @@
     .toolbar { align-items: center; }
     .depth-control { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; }
     .depth-control select { min-height: 38px; padding: 7px 9px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-2); color: var(--text); font: inherit; }
-    .node .node-title-box { height: 48px; line-height: 16px; }
-    .container-boundary { fill: color-mix(in srgb, var(--container-color) 6%, var(--surface-2)); stroke: color-mix(in srgb, var(--container-color) 55%, var(--border)); stroke-width: 1.5; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
-    .container-node .node-card { fill: color-mix(in srgb, var(--node-color) 10%, var(--surface-2)); }
-    .container-toggle { cursor: pointer; outline: none; }
-    .container-toggle rect { fill: var(--surface-2); stroke: var(--node-color); stroke-width: 1; }
-    .container-toggle text { fill: var(--text); font-size: 21px; font-weight: 500; }
-    .container-toggle:focus rect, .container-toggle:hover rect { stroke-width: 3; }
-    .node.is-path .node-card { stroke: var(--accent); stroke-width: 3; }
-    .node.is-target .node-card { stroke: var(--accent-2); stroke-width: 4; }
-    .node.is-active .node-card { stroke-width: 5; }
-    .node.is-unavailable { cursor: default; }
-    .node.is-unavailable.is-hovered .node-card { stroke-width: 2; }
-    .node.is-unavailable .container-toggle { cursor: pointer; }
-    .edge.recommended { stroke-dasharray: 7 5; }
     .detail-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
     .primary-button, .secondary-button { border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; background: var(--surface-2); color: var(--text); cursor: pointer; font-size: 12px; }
     .primary-button { color: #052e16; border-color: var(--accent); background: var(--accent); font-weight: 650; }
