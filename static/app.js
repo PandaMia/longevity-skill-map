@@ -288,17 +288,6 @@
         // Keep the header anchored while the rest of its lane reflows.
         const next = state.view.nodes.find(node => node.id === id);
         if (position && next) { state.tx += (position.x - next.x) * state.scale; state.ty += (position.y - next.y) * state.scale; applyTransform(); }
-        if (state.expanded.has(id)) {
-          const box = state.view.containers.find(item => item.id === id);
-          if (box) {
-            const rect = surface.getBoundingClientRect();
-            const availableWidth = Math.max(260, rect.width - (details.hidden ? 0 : Math.min(462, rect.width * .4)));
-            state.scale = Math.min(1, (availableWidth - 48) / box.width, (rect.height - 64) / box.height);
-            state.tx = availableWidth / 2 - (box.x + box.width / 2) * state.scale;
-            state.ty = rect.height / 2 - (box.y + box.height / 2) * state.scale;
-            applyTransform();
-          }
-        }
         if (state.detailPayload) renderDetails(state.detailPayload);
       }
 
@@ -523,12 +512,12 @@
         parent.append(section);
       }
 
+      // Reveal a navigation target by panning only; zoom belongs to the user.
       function focusNode(nodeId) {
         const node = state.view.nodes.find(item => item.id === nodeId);
         if (!node) return;
         const rect = surface.getBoundingClientRect();
         const available = rect.width - (details.hidden ? 0 : Math.min(462, rect.width * .4));
-        state.scale = 1;
         state.tx = Math.max(140, available / 2) - node.x * state.scale;
         state.ty = rect.height / 2 - node.y * state.scale;
         applyTransform();

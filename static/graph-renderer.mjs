@@ -2,6 +2,8 @@ import { WebGLRenderer, Container, Graphics, BitmapText, BitmapFont, Buffer, Buf
 import { overviewMesh } from './graph-overview.mjs';
 import { buildEdgeTiles, coarsenEdgeTiles, createNodeWindow, nodeIndex, hitTest, viewportBounds, highlightState, CARD_DETAIL_SCALE } from './graph-geometry.mjs';
 
+const BASE_EDGE_ALPHA = .12;
+
 const vertex = `
 precision highp float;
 in vec2 aPosition;
@@ -139,7 +141,7 @@ export async function create({ element, onContextChange = () => {} }) {
     if (renderer) {
       tileCaches.forEach((_, i) => resetTiles(i));
       shaders.forEach(shader => shader.destroy());
-      shaders = [edgeShader(1.25, palette.edge, .28), edgeShader(3, '#22c55e', 1), edgeShader(2, '#22c55e', .8)];
+      shaders = [edgeShader(1.25, palette.edge, BASE_EDGE_ALPHA), edgeShader(3, '#22c55e', 1), edgeShader(2, '#22c55e', .8)];
       resetNodes(); resetOverview(); buildBackground();
     }
     interactions.invalidate();
@@ -283,7 +285,7 @@ export async function create({ element, onContextChange = () => {} }) {
       world.position.set(camera.tx, camera.ty); world.scale.set(camera.scale);
       for (const layer of layers.slice(0, 2)) for (const child of layer.children) child.visible = intersects(child.graphBounds, bounds);
       shaders.forEach(shader => { shader.resources.styleUniforms.uniforms.uScale = camera.scale; });
-      shaders[0].resources.styleUniforms.uniforms.uEdgeColor = [...rgb(palette.edge), selection.dimmed ? .035 : .28];
+      shaders[0].resources.styleUniforms.uniforms.uEdgeColor = [...rgb(palette.edge), selection.dimmed ? .035 : BASE_EDGE_ALPHA];
       paintTiles(0, detailed ? edges : coarseEdges, bounds);
       paintTiles(1, selectedEdges, bounds);
       paintTiles(2, hoverEdges, bounds);
@@ -337,7 +339,7 @@ export async function create({ element, onContextChange = () => {} }) {
       }
       c.setLineDash([]); c.globalAlpha = 1;
     }
-    lines(edges, palette.edge, selection.dimmed ? .035 : .28, 1.25);
+    lines(edges, palette.edge, selection.dimmed ? .035 : BASE_EDGE_ALPHA, 1.25);
     lines(selectedEdges, '#22c55e', 1, 3); lines(hoverEdges, '#22c55e', .8, 2);
     for (const { node } of visible) {
       const flags = selection.nodes.get(node.id) || {}, color = topics.get(node.topics[0]) || '#64748b', x = node.x - node.width / 2;

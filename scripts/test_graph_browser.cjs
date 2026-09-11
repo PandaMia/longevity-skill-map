@@ -17,6 +17,44 @@ async function checkContentAtEveryScale(page) {
     assert(metrics.visibleBaseEdgeTiles > 0, `background edges must be drawn at scale ${scale}`);
   }
 }
+async function preserveScale(page, label, action) {
+  const before = await page.evaluate(() => testRenderer.getCamera().scale);
+  await action(); await frames(page);
+  assert.equal(await page.evaluate(() => testRenderer.getCamera().scale), before, label);
+}
+async function setScale(page, scale) {
+  const camera = await page.evaluate(() => testRenderer.getCamera());
+  const rect = await page.locator('#graph').boundingBox();
+  await page.locator('#graph').dispatchEvent('wheel', { ctrlKey: true,
+    deltaY: -Math.log(scale / camera.scale) / .01,
+    clientX: rect.x + rect.width / 2, clientY: rect.y + rect.height / 2 });
+  await frames(page);
+}
+async function detailsReady(page) {
+  await page.waitForFunction(() => document.getElementById('detail-title').textContent !== 'Loading…');
+}
+async function checkActionZoom(page) {
+  for (const scale of [.55, 1.7]) {
+    await setScale(page, scale);
+    await preserveScale(page, 'search keeps zoom', () => search(page, 'Introduction to longevity'));
+    // A previous test may have left the container open.
+    const collapse = page.getByRole('button', { name: 'Collapse components', exact: true });
+    if (await collapse.count()) await preserveScale(page, 'panel collapse keeps zoom', () => collapse.click());
+    const id = await page.evaluate(() => testView.nodes.find(n => n.title === 'Introduction to longevity').id);
+    const before = await nodePoint(page, id);
+    const toggle = await nodePoint(page, id, true);
+    await preserveScale(page, 'canvas expand keeps zoom', () => page.mouse.click(toggle.x, toggle.y));
+    const after = await nodePoint(page, id);
+    assert(Math.abs(before.x - after.x) < .01 && Math.abs(before.y - after.y) < .01, 'container header stays anchored');
+    await preserveScale(page, 'panel collapse keeps zoom', () => page.getByRole('button', { name: 'Collapse components', exact: true }).click());
+    await preserveScale(page, 'panel expand keeps zoom', () => page.getByRole('button', { name: 'Expand components', exact: true }).click());
+    await preserveScale(page, 'component navigation keeps zoom', async () => { await page.locator('.component-link').first().click(); await detailsReady(page); });
+    await preserveScale(page, 'related skill navigation keeps zoom', async () => { await page.locator('.relation:not([disabled])').first().click(); await detailsReady(page); });
+    await preserveScale(page, 'keyboard focus and navigation keep zoom', async () => {
+      await page.locator('#graph').focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); await page.keyboard.press('Enter'); await detailsReady(page);
+    });
+  }
+}
 (async () => {
   const browser = await launch();
   try {
@@ -31,6 +69,12 @@ async function checkContentAtEveryScale(page) {
     console.log('PASS WebGL startup; no SVG nodes; no idle render loop');
     await checkContentAtEveryScale(page);
     console.log('PASS titles, metadata and background edges at every scale');
+    await checkActionZoom(page);
+    console.log('PASS containers, search, components, relations and keyboard preserve zoom at 55% and 170%');
+    await setScale(page, 1);
+    await search(page, 'Introduction to longevity');
+    const collapseIntro = page.getByRole('button', { name: 'Collapse components', exact: true });
+    if (await collapseIntro.count()) await collapseIntro.click();
 
     await search(page, 'Introduction to longevity');
     const intro = await page.locator('#detail-id').textContent();
@@ -59,7 +103,12 @@ async function checkContentAtEveryScale(page) {
     let next = await nodePoint(page, 'flow_gating');
     assert(Math.abs(point.x - next.x) < .01 && Math.abs(point.y - next.y) < .01 && point.scale === next.scale, 'changing depth must preserve camera anchor');
     assert(!await page.evaluate(() => testView.nodes.some(node => node.id === 'cell_sorting')));
-    point = next;
+    await page.locator('#path-steps-disclosure').evaluate(element => { element.open = true; });
+    await preserveScale(page, 'path step navigation keeps zoom', async () => {
+      await page.locator('.path-step').first().click(); await detailsReady(page);
+    });
+    await preserveScale(page, 'search in a locked path keeps zoom', () => search(page, 'flow_gating'));
+    point = await nodePoint(page, 'flow_gating');
     await page.locator('#reset-path').click(); await frames(page);
     next = await nodePoint(page, 'flow_gating');
     assert(Math.abs(point.x - next.x) < .01 && Math.abs(point.y - next.y) < .01 && point.scale === next.scale, 'reset must preserve camera anchor');
@@ -122,7 +171,10 @@ async function checkContentAtEveryScale(page) {
     await instrument(page); await ready(page);
     assert.equal(await page.locator('#graph').getAttribute('data-renderer'), 'canvas2d');
     await checkContentAtEveryScale(page);
+    await checkActionZoom(page);
     await search(page, 'Introduction to longevity');
+    const collapseIntro = page.getByRole('button', { name: 'Collapse components', exact: true });
+    if (await collapseIntro.count()) await collapseIntro.click();
     await page.getByRole('button', { name: 'Expand components', exact: true }).click(); await frames(page);
     assert(await page.evaluate(() => testView.containers.length > 0));
     await page.screenshot({ path: join(screenshots, 'graph-fallback.png') });

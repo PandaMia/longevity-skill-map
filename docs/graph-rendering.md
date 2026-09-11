@@ -18,7 +18,7 @@ A GPU backend alone is insufficient: geometry, labels, hit testing and the overv
 - **Indexed layout and search.** Column widths and topic membership are computed in one pass. Search normalization and path membership are cached.
 - **Keyboard and fallback support.** The graph has one accessible tab stop: arrows browse nodes, Enter/Space opens details, and +/- expands/collapses a container. Search can reach offscreen and collapsed nodes. A Canvas2D backend keeps the map usable without WebGL.
 
-Text scales with its card and remains present in the overview. Use **Fit graph** explicitly to fit the graph or path; **Lock learning path** does not fit or zoom the camera.
+Text scales with its card and remains present in the overview. Opening/collapsing containers, searching, following related skills or path steps, and keyboard navigation preserve the current zoom; navigation pans to reveal the target. Only explicit zoom controls/gestures and **Fit graph** change the scale after startup. Use **Fit graph** explicitly to fit the graph or path; **Lock learning path** does not fit or zoom the camera.
 
 ## Alternatives considered
 

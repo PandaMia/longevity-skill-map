@@ -40,6 +40,8 @@ A path includes all applicable required prerequisites, not just one shortest cha
 
 ## Navigate the map
 
+Opening or closing containers, selecting skills, search results, related skills, path steps and keyboard navigation preserve your chosen zoom. Navigation may pan to reveal its target. After the initial fit, only zoom gestures, the toolbar **+ / −**, and **Fit graph** change the scale.
+
 | Control | Action |
 |---|---|
 | Drag the background or scroll | Pan the map |
