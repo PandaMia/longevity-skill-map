@@ -11,6 +11,16 @@
       const searchInput = document.getElementById("node-search");
       const searchResults = document.getElementById("search-results");
       const searchStatus = document.getElementById("search-status");
+      const infoPanel = document.getElementById("info-panel");
+      const infoToggle = document.getElementById("info-toggle");
+      const closeInfo = document.getElementById("close-info");
+      const infoSeenKey = "longevity-map-info-seen-v1";
+      try {
+        if (localStorage.getItem(infoSeenKey) === "1") {
+          infoToggle.classList.remove("is-new");
+          infoToggle.title = "About this map";
+        }
+      } catch { /* The panel also works when browser storage is unavailable. */ }
       const legendPanel = document.getElementById("legend-panel");
       const legendToggle = document.getElementById("legend-toggle");
       const statusLegendList = document.getElementById("status-legend-list");
@@ -43,6 +53,7 @@
         if (!state.navigating) {
           state.navigating = true;
           surface.classList.add("is-navigating");
+          surface.classList.remove("is-over-node");
           clearHighlight();
         }
         clearTimeout(navigationTimer);
@@ -346,17 +357,22 @@
 
       surface.addEventListener("wheel", event => {
         event.preventDefault();
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? surface.clientHeight : 1;
+        if ((!event.deltaX && !event.deltaY) || ((!event.shiftKey || event.ctrlKey) && !event.deltaY)) return;
         pauseHoverForNavigation();
         if (event.ctrlKey) {
-          // Chromium exposes a trackpad pinch as Ctrl + wheel. A normal
-          // two-finger gesture has no Ctrl modifier and must only pan.
-          zoomAt(event.clientX, event.clientY, Math.exp(-event.deltaY * .01));
-          return;
+          // Keep the existing trackpad-pinch sensitivity.
+          zoomAt(event.clientX, event.clientY, Math.exp(-event.deltaY * unit * .01));
+        } else if (event.shiftKey) {
+          // Explicit modifier for trackpad/wheel panning; ordinary wheel zooms.
+          state.tx -= event.deltaX * unit;
+          state.ty -= event.deltaY * unit;
+          applyTransform();
+        } else {
+          // Normalize Windows/Firefox line deltas and cap unusually large ticks.
+          const delta = Math.max(-300, Math.min(300, event.deltaY * unit));
+          zoomAt(event.clientX, event.clientY, Math.exp(-delta * .002));
         }
-        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? surface.clientHeight : 1;
-        state.tx -= event.deltaX * unit;
-        state.ty -= event.deltaY * unit;
-        applyTransform();
       }, { passive: false });
 
       // Safari/WebKit exposes a native trackpad pinch through gesture events
@@ -440,7 +456,10 @@
         keyboardOption.setAttribute("aria-posinset", String(index + 1));
         keyboardOption.setAttribute("aria-setsize", String(allowed.length));
       }
-      surface.addEventListener("pointerleave", clearHighlight);
+      surface.addEventListener("pointerleave", () => {
+        surface.classList.remove("is-over-node");
+        clearHighlight();
+      });
       surface.addEventListener("focus", () => {
         if (!surface.matches(":focus-visible")) return;
         keyboardNodeId = state.activeNode || keyboardNodeId;
@@ -723,7 +742,21 @@
         applyHighlight();
       }
 
+      function setInfo(open) {
+        const restoreFocus = !open && infoPanel.contains(document.activeElement);
+        infoPanel.hidden = !open;
+        infoToggle.setAttribute("aria-expanded", String(open));
+        if (open) {
+          setLegend(false);
+          infoToggle.classList.remove("is-new");
+          infoToggle.title = "About this map";
+          try { localStorage.setItem(infoSeenKey, "1"); } catch { /* Optional preference. */ }
+          closeInfo.focus({ preventScroll: true });
+        } else if (restoreFocus) infoToggle.focus({ preventScroll: true });
+      }
+
       function setLegend(open) {
+        if (open) setInfo(false);
         legendPanel.hidden = !open;
         legendToggle.setAttribute("aria-expanded", String(open));
       }
@@ -760,6 +793,8 @@
       document.addEventListener("pointerdown", event => {
         if (!searchShell.contains(event.target)) closeSearchResults();
       });
+      infoToggle.addEventListener("click", () => setInfo(infoPanel.hidden));
+      closeInfo.addEventListener("click", () => setInfo(false));
       legendToggle.addEventListener("click", () => setLegend(legendPanel.hidden));
       document.getElementById("close-legend").addEventListener("click", () => setLegend(false));
       document.getElementById("fit").addEventListener("click", fitGraph);
@@ -769,6 +804,7 @@
 
       window.addEventListener("keydown", event => {
         if (event.key === "Escape") {
+          if (!infoPanel.hidden) { setInfo(false); return; }
           closeDetails();
           setLegend(false);
         }

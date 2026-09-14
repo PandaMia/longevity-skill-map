@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Longevity Skill Map</title>
-  <link rel="stylesheet" href="/static/styles.css?v=20260910-visible-content">
+  <link rel="stylesheet" href="/static/styles.css?v=20260913-info">
 </head>
 <body>
   <div id="app">
@@ -34,6 +34,7 @@
           <select id="mastery-depth"><option value="understand">Understand the topic</option><option value="apply">Work on tasks</option></select>
         </label>
         <button id="fit" type="button">Fit graph</button>
+        <button id="info-toggle" class="info-toggle is-new" type="button" aria-controls="info-panel" aria-expanded="false" title="Start here: about this map"><span class="info-icon" aria-hidden="true">i</span>Info</button>
         <button id="legend-toggle" type="button" aria-controls="legend-panel" aria-expanded="false">Legend</button>
         <button id="zoom-in" type="button" aria-label="Zoom in">＋</button>
         <button id="zoom-out" type="button" aria-label="Zoom out">−</button>
@@ -62,6 +63,22 @@
           <button id="close-details" class="panel-close" type="button" aria-label="Close">×</button>
         </div>
         <div id="detail-body" class="panel-body"></div>
+      </aside>
+      <aside id="info-panel" class="legend-panel info-panel" hidden aria-labelledby="info-title">
+        <div class="legend-panel-head">
+          <h2 id="info-title">Explore the map</h2>
+          <button id="close-info" class="panel-close" type="button" aria-label="Close info">×</button>
+        </div>
+        <div class="legend-panel-body info-panel-body">
+          <p class="info-intro">Explore the knowledge and practical skills for research on healthy life extension.</p>
+          <ul class="info-features">
+            <li><strong>Find a skill.</strong> Search or select a node to see its prerequisites, learning materials and practical tasks.</li>
+            <li><strong>Open containers.</strong> Use + to reveal component skills and − to collapse them.</li>
+            <li><strong>Build a learning path.</strong> Choose your depth, select a target and click <b>Lock learning path</b> to highlight its prerequisites.</li>
+          </ul>
+          <p class="info-topics">Colors show subject areas. A skill inside a container can belong to a different subject area.</p>
+          <p class="info-navigation">Scroll to zoom · Drag to move</p>
+        </div>
       </aside>
       <aside id="legend-panel" class="legend-panel" hidden aria-label="Legend">
         <div class="legend-panel-head">
@@ -92,6 +109,6 @@
   <script src="/static/graph-view.js?v=20260910-visible-content" defer></script>
   <script src="/static/graph-interactions.js?v=20260910-visible-content" defer></script>
   <script src="/static/graph-renderer.js?v=20260910-soft-edges" defer></script>
-  <script src="/static/app.js?v=20260910-preserve-zoom" defer></script>
+  <script src="/static/app.js?v=20260913-info" defer></script>
 </body>
 </html>

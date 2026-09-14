@@ -8,7 +8,7 @@ SVG is a reasonable choice for small graphs. In this application, the collapsed 
 
 A GPU backend alone is insufficient: geometry, labels, hit testing and the overview must also scale. The replacement implements:
 
-- **One scheduled frame for camera and hover updates.** An idle map performs no rendering. Wheel bursts use the latest camera state. Resizing preserves the camera. Locking a path preserves zoom and the inspected node's screen position, including any navigation while the path request is pending.
+- **One scheduled frame for camera and hover updates.** An idle map performs no rendering. Wheel bursts use the latest camera state. Ordinary wheel input zooms around the pointer; Shift + wheel pans. Pixel, line and page deltas are normalized, with a cap on unusually large ordinary-wheel steps. Resizing preserves the camera. Locking a path preserves zoom and the inspected node's screen position, including any navigation while the path request is pending.
 - **Spatial indexing.** RBush finds visible cards and the card under the pointer. A 128-pixel overscan band keeps text batches stable during small pans; zooming in shrinks the retained window. No per-card DOM event listeners or Pixi scene traversal for picking.
 - **Tiled GPU edge meshes.** Cubic curves are flattened once per layout, divided into bounded spatial fragments and uploaded on demand. Offscreen fragments are skipped, including the offscreen portions of long edges that cross the viewport. Stroke widths, arrowheads and dashes use screen coordinates, without rebuilding geometry during zoom. At distant scales, groups of tiles share larger GPU buffers to reduce draw calls while retaining every segment and arrow.
 - **Separate selection and hover layers.** Camera movement does not scan graph relationships. Hover uses an adjacency index and only changes the local neighborhood. The existing depth and locked-path semantics are preserved.
@@ -19,6 +19,12 @@ A GPU backend alone is insufficient: geometry, labels, hit testing and the overv
 - **Keyboard and fallback support.** The graph has one accessible tab stop: arrows browse nodes, Enter/Space opens details, and +/- expands/collapses a container. Search can reach offscreen and collapsed nodes. A Canvas2D backend keeps the map usable without WebGL.
 
 Text scales with its card and remains present in the overview. Opening/collapsing containers, searching, following related skills or path steps, and keyboard navigation preserve the current zoom; navigation pans to reveal the target. Only explicit zoom controls/gestures and **Fit graph** change the scale after startup. Use **Fit graph** explicitly to fit the graph or path; **Lock learning path** does not fit or zoom the camera.
+
+## Cursor rendering
+
+The graph uses the same native `pointer` hand cursor as the toolbar, including during dragging, node hover and wheel navigation. Its size follows the browser/OS cursor settings. The canvas inherits the graph cursor; no custom cursor images are loaded.
+
+Browser checks compare the graph and canvas cursor with the toolbar after reload, during interaction states and in both themes.
 
 ## Alternatives considered
 

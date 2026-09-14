@@ -33,6 +33,65 @@ async function setScale(page, scale) {
 async function detailsReady(page) {
   await page.waitForFunction(() => document.getElementById('detail-title').textContent !== 'Loading…');
 }
+async function checkInfoPanel(page) {
+  const button = page.locator('#info-toggle'), panel = page.locator('#info-panel');
+  assert(await button.isVisible()); assert(await panel.isHidden());
+  assert(await button.evaluate(element => element.classList.contains('is-new')), 'first visit draws attention to Info');
+  const before = await page.evaluate(() => testRenderer.getCamera());
+  await button.click();
+  assert(await panel.isVisible()); assert.equal(await button.getAttribute('aria-expanded'), 'true');
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'close-info');
+  assert(!(await button.evaluate(element => element.classList.contains('is-new'))));
+  assert.equal(await page.evaluate(() => localStorage.getItem('longevity-map-info-seen-v1')), '1');
+  const text = await panel.innerText();
+  for (const phrase of ['Find a skill', 'Open containers', 'Lock learning path', 'different subject area']) assert(text.includes(phrase));
+  assert(text.trim().split(/\s+/).length < 130, 'Info should remain a compact introduction');
+  await page.screenshot({ path: join(screenshots, 'info-light.png') });
+  await page.locator('#legend-toggle').click();
+  assert(await panel.isHidden()); assert(await page.locator('#legend-panel').isVisible());
+  await button.click();
+  assert(await page.locator('#legend-panel').isHidden());
+  await page.keyboard.press('Escape');
+  assert(await panel.isHidden()); assert.equal(await button.getAttribute('aria-expanded'), 'false');
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'info-toggle');
+  assert.deepEqual(await page.evaluate(() => testRenderer.getCamera()), before, 'help panels must not change the camera');
+  await page.emulateMedia({ colorScheme: 'dark' }); await button.click(); await frames(page);
+  await page.screenshot({ path: join(screenshots, 'info-dark.png') });
+  await page.locator('#close-info').click();
+  for (const width of [1100, 900, 760, 390, 320]) {
+    await page.setViewportSize({ width, height: 700 });
+    const bounds = await button.boundingBox();
+    assert(bounds && bounds.x >= 0 && bounds.x + bounds.width <= width, `Info stays in the toolbar at width ${width}`);
+    for (const selector of ['#node-search', '#mastery-depth', '#legend-toggle', '#zoom-out']) {
+      const box = await page.locator(selector).boundingBox();
+      assert(box && box.x >= 0 && box.x + box.width <= width, `${selector} fits at width ${width}`);
+    }
+    await button.click();
+    const box = await panel.boundingBox();
+    assert(box.x >= 0 && box.x + box.width <= width && box.y + box.height <= 700, 'compact Info stays within the screen');
+    if (width === 390) await page.screenshot({ path: join(screenshots, 'info-mobile.png') });
+    await page.locator('#close-info').click();
+  }
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.emulateMedia({ colorScheme: 'light' }); await frames(page);
+  console.log('PASS compact Info, first-visit marker, Legend switching, Escape, focus and responsive toolbar');
+}
+async function checkCursors(page) {
+  const toolbarCursor = await page.locator('#fit').evaluate(element => getComputedStyle(element).cursor);
+  assert.equal(toolbarCursor, 'pointer');
+  const cursors = await page.locator('#graph').evaluate(element => {
+    const previous = element.className, canvas = element.querySelector('canvas'), result = {};
+    for (const [name, classes] of [['background', ''], ['dragging', 'is-panning'], ['node', 'is-over-node'], ['zooming', 'is-over-node is-navigating']]) {
+      element.className = classes;
+      result[name] = [getComputedStyle(element).cursor, getComputedStyle(canvas).cursor];
+    }
+    element.className = previous; return result;
+  });
+  for (const [name, [outer, canvas]] of Object.entries(cursors)) {
+    assert.equal(outer, toolbarCursor, `${name} cursor must match the toolbar's native hand`);
+    assert.equal(canvas, toolbarCursor, 'Pixi canvas must inherit the same native hand');
+  }
+}
 async function checkActionZoom(page) {
   for (const scale of [.55, 1.7]) {
     await setScale(page, scale);
@@ -63,6 +122,11 @@ async function checkActionZoom(page) {
     await instrument(page); await ready(page);
     assert.equal(await page.locator('#graph').getAttribute('data-renderer'), 'webgl');
     assert.equal(await page.locator('#graph svg, #graph foreignObject').count(), 0);
+    await checkInfoPanel(page);
+    await checkCursors(page);
+    await page.reload(); await page.waitForFunction(() => window.testRenderer && document.getElementById('loading').hidden); await frames(page);
+    assert(!(await page.locator('#info-toggle').evaluate(element => element.classList.contains('is-new'))), 'Info remembers that its introduction was opened');
+    await checkCursors(page);
     const idle = await page.evaluate(() => testRenderer.getMetrics().frames);
     await page.waitForTimeout(250);
     assert.equal(await page.evaluate(() => testRenderer.getMetrics().frames), idle, 'idle map must not render');
@@ -78,6 +142,10 @@ async function checkActionZoom(page) {
 
     await search(page, 'Introduction to longevity');
     const intro = await page.locator('#detail-id').textContent();
+    const introCamera = await page.evaluate(() => testRenderer.getCamera());
+    await page.locator('#info-toggle').click(); await page.keyboard.press('Escape');
+    assert(await page.locator('#details').isVisible()); assert.equal(await page.locator('#detail-id').textContent(), intro);
+    assert.deepEqual(await page.evaluate(() => testRenderer.getCamera()), introCamera, 'closing Info must preserve the selected skill and camera');
     const nodeId = await page.evaluate(() => testView.nodes.find(node => node.title === 'Introduction to longevity').id);
     const toggle = await nodePoint(page, nodeId, true);
     await page.mouse.click(toggle.x, toggle.y); await frames(page);
@@ -88,7 +156,7 @@ async function checkActionZoom(page) {
 
     await search(page, 'flow_gating');
     await page.locator('#zoom-out').click();
-    await page.locator('#graph').dispatchEvent('wheel', { deltaX: 37, deltaY: 53, deltaMode: 0 }); await frames(page);
+    await page.locator('#graph').dispatchEvent('wheel', { shiftKey: true, deltaX: 37, deltaY: 53, deltaMode: 0 }); await frames(page);
     const beforeLock = await nodePoint(page, 'flow_gating');
     await page.getByRole('button', { name: 'Lock learning path', exact: true }).click();
     await page.waitForFunction(() => !document.getElementById('path-panel').hidden);
@@ -116,10 +184,29 @@ async function checkActionZoom(page) {
     console.log('PASS locked path, depth filtering, reset and camera preservation');
 
     const camera = await page.evaluate(() => testRenderer.getCamera());
-    await page.locator('#graph').dispatchEvent('wheel', { deltaX: 37, deltaY: 53, deltaMode: 0 }); await frames(page);
+    await page.locator('#graph').dispatchEvent('wheel', { shiftKey: true, deltaX: 37, deltaY: 53, deltaMode: 0 }); await frames(page);
     let after = await page.evaluate(() => testRenderer.getCamera());
     assert.equal(after.tx, camera.tx - 37); assert.equal(after.ty, camera.ty - 53); assert.equal(after.scale, camera.scale);
     const rect = await page.locator('#graph').boundingBox(), px = 600, py = 350;
+    await page.mouse.move(rect.x + px, rect.y + py);
+    const beforeWheel = after;
+    const wheelAnchor = { x: (px - beforeWheel.tx) / beforeWheel.scale, y: (py - beforeWheel.ty) / beforeWheel.scale };
+    await page.mouse.wheel(0, -100); await frames(page, 3);
+    let wheelCamera = await page.evaluate(() => testRenderer.getCamera());
+    assert(wheelCamera.scale > beforeWheel.scale, 'ordinary wheel up must zoom in');
+    assert(Math.abs((px - wheelCamera.tx) / wheelCamera.scale - wheelAnchor.x) < .001);
+    assert(Math.abs((py - wheelCamera.ty) / wheelCamera.scale - wheelAnchor.y) < .001);
+    await page.mouse.wheel(0, 100); await frames(page, 3);
+    after = await page.evaluate(() => testRenderer.getCamera());
+    assert(Math.abs(after.scale - beforeWheel.scale) < 1e-10, 'wheel down must reverse the zoom');
+    for (const [deltaMode, deltaY] of [[0, 48], [1, 3], [2, 48 / rect.height]]) {
+      const previous = after;
+      await page.locator('#graph').dispatchEvent('wheel', { deltaMode, deltaY, clientX: rect.x + px, clientY: rect.y + py }); await frames(page);
+      after = await page.evaluate(() => testRenderer.getCamera());
+      assert(Math.abs(after.scale / previous.scale - Math.exp(-48 * .002)) < 1e-10, 'pixel, line and page wheel units must agree');
+    }
+    await page.locator('#graph').dispatchEvent('wheel', { deltaX: 100, deltaY: 0, clientX: rect.x + px, clientY: rect.y + py }); await frames(page);
+    assert.deepEqual(await page.evaluate(() => testRenderer.getCamera()), after, 'horizontal-only scrolling must not pan the map');
     const wx = (px - after.tx) / after.scale, wy = (py - after.ty) / after.scale;
     await page.locator('#graph').dispatchEvent('wheel', { clientX: rect.x + px, clientY: rect.y + py, ctrlKey: true, deltaY: -20 }); await frames(page);
     after = await page.evaluate(() => testRenderer.getCamera());
@@ -138,12 +225,14 @@ async function checkActionZoom(page) {
     const afterDrag = await page.evaluate(() => testRenderer.getCamera());
     assert(Math.abs(afterDrag.tx - beforeDrag.tx - 70) < .01 && Math.abs(afterDrag.ty - beforeDrag.ty - 90) < .01);
     assert(await page.locator('#details').isVisible(), 'drag must not behave like a background click');
-    console.log('PASS wheel pan, drag, anchored pinch zoom, resize');
+    console.log('PASS mouse-wheel zoom, delta modes, Shift-wheel pan, drag, anchored pinch zoom and resize');
 
     await page.locator('#graph').focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); await page.keyboard.press('Enter');
     await page.waitForFunction(() => document.getElementById('detail-title').textContent !== 'Loading…');
     assert(await page.locator('#graph-keyboard-node').getAttribute('aria-posinset') === '2');
     await page.emulateMedia({ colorScheme: 'dark' }); await frames(page);
+    await checkCursors(page);
+    console.log('PASS native toolbar cursor on the graph after reload, pan/hover/zoom state changes and dark theme');
     await page.screenshot({ path: join(screenshots, 'graph-dark.png') });
     console.log('PASS keyboard navigation and theme change');
     const contextRestored = await page.evaluate(async () => {
@@ -170,6 +259,7 @@ async function checkActionZoom(page) {
     const errors = []; page.on('pageerror', error => errors.push(error.message));
     await instrument(page); await ready(page);
     assert.equal(await page.locator('#graph').getAttribute('data-renderer'), 'canvas2d');
+    await checkCursors(page);
     await checkContentAtEveryScale(page);
     await checkActionZoom(page);
     await search(page, 'Introduction to longevity');

@@ -54,12 +54,12 @@ async function run(browser, graph, label, baseline) {
     surface.dispatchEvent(new WheelEvent('wheel', { ctrlKey: true, deltaY: -Math.log(1 / camera.scale) / .01, clientX: 600, clientY: 400 }));
     await new Promise(requestAnimationFrame); await new Promise(requestAnimationFrame);
     camera = readCamera();
-    surface.dispatchEvent(new WheelEvent('wheel', { deltaX: camera.tx + 1400, deltaY: camera.ty + 3400 }));
+    surface.dispatchEvent(new WheelEvent('wheel', { shiftKey: true, deltaX: camera.tx + 1400, deltaY: camera.ty + 3400 }));
     for (let i = 0; i < 30; i++) await new Promise(requestAnimationFrame);
     const timings = [], cpu = [];
     let previous = performance.now();
     for (let i = 0; i < samples; i++) {
-      surface.dispatchEvent(new WheelEvent('wheel', { deltaY: i < samples / 2 ? 12 : -12, deltaX: i < samples / 2 ? 5 : -5, clientX: rect.width / 2, clientY: rect.height / 2 }));
+      surface.dispatchEvent(new WheelEvent('wheel', { shiftKey: true, deltaY: i < samples / 2 ? 12 : -12, deltaX: i < samples / 2 ? 5 : -5, clientX: rect.width / 2, clientY: rect.height / 2 }));
       await new Promise(requestAnimationFrame);
       const now = performance.now(); timings.push(now - previous); previous = now;
       if (!baseline) cpu.push(testRenderer.getMetrics().lastRenderMs);
@@ -72,7 +72,7 @@ async function run(browser, graph, label, baseline) {
         for (let i = 0; i < samples; i++) {
           surface.dispatchEvent(new WheelEvent('wheel', phase === 'zoom'
             ? { ctrlKey: true, deltaY: i < samples / 2 ? 3 : -3, clientX: 600, clientY: 400 }
-            : { deltaY: i < samples / 2 ? 2 : -2 }));
+            : { shiftKey: true, deltaY: i < samples / 2 ? 2 : -2 }));
           await new Promise(requestAnimationFrame); const now = performance.now(); durations.push(now - last); last = now;
         }
         durations.sort((a, b) => a - b);

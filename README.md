@@ -12,6 +12,8 @@ The current map contains **278 nodes, 1,053 relationships and 32 expandable cont
 
 ## What you can do
 
+Open **Info** in the top toolbar for a short guide to the map. Its first-visit marker stays visible until you open it.
+
 - **Explore longevity research.** Navigate biology, quantitative sciences, omics, AI, clinical research, genetic engineering and regenerative medicine in color-coded topic lanes.
 - **Search for a skill.** Search titles, descriptions and research context, including components inside collapsed containers. Selecting a result brings the skill into view.
 - **Expand broad disciplines.** Open containers such as gene therapy, drug discovery, brain rejuvenation or microscopy to explore their component skills.
@@ -44,8 +46,8 @@ Opening or closing containers, selecting skills, search results, related skills,
 
 | Control | Action |
 |---|---|
-| Drag the background or scroll | Pan the map |
-| Pinch, Ctrl + scroll, or **+ / −** | Zoom |
+| Drag the background or Shift + scroll | Pan the map |
+| Scroll, pinch, Ctrl + scroll, or toolbar **+ / −** | Zoom around the pointer (toolbar buttons use the viewport center) |
 | **Fit graph** | Fit the full map or the locked path in view |
 | **+ / −** on a container | Expand or collapse its components |
 | **Legend** | Explain topic colors, status dots and edge styles |
