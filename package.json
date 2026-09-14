@@ -6,7 +6,8 @@
     "build": "node scripts/build_ui.cjs",
     "test": "node --test tests/*.test.js",
     "test:browser": "node scripts/test_graph_browser.cjs",
-    "benchmark": "node scripts/benchmark_graph.cjs"
+    "benchmark": "node scripts/benchmark_graph.cjs",
+    "test:touch": "node scripts/test_graph_touch.cjs"
   },
   "dependencies": {
     "pixi.js": "8.20.1",

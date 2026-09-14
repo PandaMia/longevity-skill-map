@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const { mkdirSync } = require('node:fs');
 const { join } = require('node:path');
-const { launch, instrument, ready, frames, nodePoint, search, root } = require('./browser_helpers.cjs');
+const { launch, instrument, ready, frames, nodePoint, search, root, gesture } = require('./browser_helpers.cjs');
 const screenshots = join(root, 'artifacts'); mkdirSync(screenshots, { recursive: true });
 async function checkContentAtEveryScale(page) {
   for (const scale of [.025, .1, .3, .55, 1]) {
@@ -225,6 +225,13 @@ async function checkActionZoom(page) {
     const afterDrag = await page.evaluate(() => testRenderer.getCamera());
     assert(Math.abs(afterDrag.tx - beforeDrag.tx - 70) < .01 && Math.abs(afterDrag.ty - beforeDrag.ty - 90) < .01);
     assert(await page.locator('#details').isVisible(), 'drag must not behave like a background click');
+    const beforeGesture = await page.evaluate(() => testRenderer.getCamera());
+    const gestureRect = await page.locator('#graph').boundingBox();
+    await gesture(page, 'gesturestart', { scale: 1, clientX: gestureRect.x + 400, clientY: gestureRect.y + 300 });
+    await gesture(page, 'gesturechange', { scale: 1.1, clientX: gestureRect.x + 400, clientY: gestureRect.y + 300 });
+    await gesture(page, 'gestureend', { scale: 1.1 }); await frames(page);
+    const afterGesture = await page.evaluate(() => testRenderer.getCamera());
+    assert(Math.abs(afterGesture.scale / beforeGesture.scale - 1.1) < 1e-10, 'desktop Safari trackpad pinch remains enabled');
     console.log('PASS mouse-wheel zoom, delta modes, Shift-wheel pan, drag, anchored pinch zoom and resize');
 
     await page.locator('#graph').focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); await page.keyboard.press('Enter');

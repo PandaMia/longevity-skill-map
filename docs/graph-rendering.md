@@ -20,6 +20,14 @@ A GPU backend alone is insufficient: geometry, labels, hit testing and the overv
 
 Text scales with its card and remains present in the overview. Opening/collapsing containers, searching, following related skills or path steps, and keyboard navigation preserve the current zoom; navigation pans to reveal the target. Only explicit zoom controls/gestures and **Fit graph** change the scale after startup. Use **Fit graph** explicitly to fit the graph or path; **Lock learning path** does not fit or zoom the camera.
 
+## Phone navigation
+
+At widths up to 960 CSS pixels, a grid gives search its own full-width row above the toolbar. The search field and depth selector use 16px text, and the app follows the dynamic viewport height. Desktop layout above that breakpoint keeps the existing header.
+
+`graph-touch.js` handles touch pointers separately from mouse dragging and desktop trackpad gestures. It measures both axes and maps the world point at the initial finger midpoint to the current midpoint. A new camera reference is taken whenever a finger is added or removed. Pointer capture keeps the gesture active outside the original target; cancellation clears it. Pinching can start on a card. A tap selects a node, while a drag or pinch suppresses delayed compatibility clicks. Legacy Safari gesture events and synthesized wheel events cannot apply a second zoom to the same touch sequence. The approach uses [Pointer Events](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events/Pinch_zoom_gestures).
+
+Run `npm run test:touch` against the local test server for mobile Chrome emulation with actual DevTools multi-touch input, diagonal/moving midpoint checks, partial finger release, cancellation, card touches and responsive layout. Desktop regression tests also exercise wheel zoom, mouse dragging and the Safari trackpad adapter. Device emulation does not replace testing a physical iPhone's keyboard/browser chrome.
+
 ## Cursor rendering
 
 The graph uses the same native `pointer` hand cursor as the toolbar, including during dragging, node hover and wheel navigation. Its size follows the browser/OS cursor settings. The canvas inherits the graph cursor; no custom cursor images are loaded.
@@ -58,6 +66,7 @@ For browser checks, start the local server in another terminal:
 ```bash
 python -m uvicorn app:app --host 127.0.0.1 --port 8001
 npm run test:browser
+npm run test:touch
 npm run benchmark
 npm run benchmark -- --extended
 ```

@@ -157,13 +157,16 @@
     .resource span.resource-language { display: inline-block; margin: 0; padding: 1px 5px; border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 10px; font-weight: 650; }
 
     @media (max-width: 960px) {
-      #app { grid-template-rows: 104px minmax(0, 1fr); }
-      header { flex-wrap: wrap; align-content: center; gap: 6px 8px; padding: 8px 12px; }
-      .search-shell { flex: 1 1 100%; }
-      .toolbar { flex: 1 1 100%; margin-left: 0; justify-content: flex-end; }
+      #app { height: 100dvh; grid-template-rows: auto minmax(0, 1fr); }
+      header { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "search" "tools"; gap: 6px; padding: 8px 12px; }
+      .search-shell { grid-area: search; min-width: 0; max-width: none; width: 100%; }
+      #node-search { height: 44px; font-size: 16px; }
+      .toolbar { grid-area: tools; min-width: 0; width: 100%; margin-left: 0; justify-content: flex-end; }
       .depth-control { margin-right: auto; min-width: 0; }
+      .depth-control select { font-size: 16px; }
     }
     @media (max-width: 760px) {
+      .search-results { width: 100%; max-height: min(620px, calc(100dvh - 70px)); }
       .depth-control select { max-width: clamp(92px, calc(100vw - 245px), 145px); }
       #info-toggle { padding: 7px 8px; gap: 4px; font-size: 12px; }
       .info-panel { width: min(360px, calc(100% - 16px)); max-height: calc(100% - 16px); }

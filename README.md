@@ -47,6 +47,8 @@ Opening or closing containers, selecting skills, search results, related skills,
 | Control | Action |
 |---|---|
 | Drag the background or Shift + scroll | Pan the map |
+| One finger on a phone | Pan; tap a node to open it |
+| Two fingers on a phone | Pinch and move around the midpoint between the fingers |
 | Scroll, pinch, Ctrl + scroll, or toolbar **+ / −** | Zoom around the pointer (toolbar buttons use the viewport center) |
 | **Fit graph** | Fit the full map or the locked path in view |
 | **+ / −** on a container | Expand or collapse its components |
@@ -85,6 +87,8 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 The service exposes the graph, node details and depth-specific learning paths through a FastAPI API. Interactive API documentation is available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs), and the health endpoint is [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
 
 ## Rendering and UI development
+
+On phones, search occupies its own full-width row above the controls. Touch gestures preserve the point between the fingers while zooming, and releasing one finger continues panning without changing scale.
 
 The map renders with PixiJS/WebGL, using spatial culling, GPU batches and shared text atlases. Titles, metadata and relationships remain visible at every zoom level. Browsers without WebGL use a Canvas2D fallback.
 

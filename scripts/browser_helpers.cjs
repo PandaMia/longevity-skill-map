@@ -41,5 +41,13 @@ async function search(page, value) {
   await page.locator('#node-search').fill(value); await page.locator('.search-result').first().click();
   await page.waitForFunction(() => document.getElementById('detail-title').textContent !== 'Loading…'); await frames(page);
 }
+async function gesture(page, type, properties) {
+  // Chromium does not expose Safari's GestureEvent constructor. Preserve its
+  // scale/client coordinates explicitly when exercising the Safari adapter.
+  await page.locator('#graph').evaluate((element, { type, properties }) => {
+    const event = new Event(type, { bubbles: true, cancelable: true });
+    Object.assign(event, properties); element.dispatchEvent(event);
+  }, { type, properties });
+}
 function baselineAsset(ref, path) { return execFileSync('git', ['show', `${ref}:${path}`], { cwd: root, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }); }
-module.exports = { launch, instrument, ready, frames, nodePoint, search, url, root, baselineAsset };
+module.exports = { launch, instrument, ready, frames, nodePoint, search, url, root, baselineAsset, gesture };

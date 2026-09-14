@@ -48,6 +48,21 @@
         return state.path?.steps.find(step => step.node_id === id)?.depth || state.depth;
       }
       let graphRenderer;
+      let mousePointerId = null, lastTouchTime = -Infinity, ignoreNativeGesture = false;
+      const touchController = GraphTouch.createController({
+        getCamera: () => ({ tx: state.tx, ty: state.ty, scale: state.scale }),
+        onTransform: camera => { Object.assign(state, camera); applyTransform(); }
+      });
+      function recentTouch() { return touchController.active || performance.now() - lastTouchTime < 500; }
+      function touchPoint(event) {
+        const rect = surface.getBoundingClientRect();
+        return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+      }
+      function finishNavigation() {
+        state.panning = false; state.navigating = false;
+        clearTimeout(navigationTimer);
+        surface.classList.remove("is-panning", "is-navigating", "is-over-node");
+      }
       let navigationTimer;
       function pauseHoverForNavigation() {
         if (!state.navigating) {
@@ -344,6 +359,7 @@
       }
 
       function zoomAt(clientX, clientY, factor) {
+        if (!Number.isFinite(factor) || factor <= 0) return;
         const rect = surface.getBoundingClientRect();
         const px = clientX - rect.left;
         const py = clientY - rect.top;
@@ -357,6 +373,7 @@
 
       surface.addEventListener("wheel", event => {
         event.preventDefault();
+        if (recentTouch() || ignoreNativeGesture) return;
         const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? surface.clientHeight : 1;
         if ((!event.deltaX && !event.deltaY) || ((!event.shiftKey || event.ctrlKey) && !event.deltaY)) return;
         pauseHoverForNavigation();
@@ -379,26 +396,50 @@
       // instead of the Ctrl + wheel convention used by Chromium.
       surface.addEventListener("gesturestart", event => {
         event.preventDefault();
+        ignoreNativeGesture = recentTouch();
+        if (ignoreNativeGesture) return;
         pauseHoverForNavigation();
         state.gestureScale = Number(event.scale) || 1;
       }, { passive: false });
       surface.addEventListener("gesturechange", event => {
         event.preventDefault();
+        if (ignoreNativeGesture || recentTouch()) return;
         pauseHoverForNavigation();
         const nextGestureScale = Number(event.scale) || state.gestureScale;
+        if (!Number.isFinite(nextGestureScale) || nextGestureScale <= 0) return;
         const factor = nextGestureScale / state.gestureScale;
         zoomAt(event.clientX, event.clientY, factor);
         state.gestureScale = nextGestureScale;
       }, { passive: false });
       surface.addEventListener("gestureend", event => {
         event.preventDefault();
+        ignoreNativeGesture = false;
         state.gestureScale = 1;
       }, { passive: false });
 
+      function activateHit(hit) {
+        if (hit?.toggle) toggleContainer(hit.id);
+        else if (hit) openNode(hit.id);
+        else closeDetails();
+      }
       surface.addEventListener("pointerdown", event => {
-        if (event.button !== 0) return;
+        if (event.pointerType === "touch") {
+          event.preventDefault();
+          if (!graphRenderer) return;
+          lastTouchTime = performance.now();
+          if (document.activeElement === searchInput) searchInput.blur();
+          touchController.down(event.pointerId, touchPoint(event));
+          state.panning = true; state.moved = touchController.moved;
+          pauseHoverForNavigation();
+          surface.setPointerCapture(event.pointerId);
+          surface.classList.add("is-panning");
+          return;
+        }
+        if (event.button !== 0 || touchController.active || mousePointerId !== null) return;
+        if (event.pointerType === "mouse") lastTouchTime = -Infinity;
         event.preventDefault();
         if (graphRenderer?.hitTest(event.clientX, event.clientY)) return;
+        mousePointerId = event.pointerId;
         state.panning = true;
         pauseHoverForNavigation();
         state.moved = false;
@@ -410,12 +451,21 @@
         surface.classList.add("is-panning");
       });
       surface.addEventListener("pointermove", event => {
-        if (!state.panning) {
+        if (event.pointerType === "touch") {
+          if (!touchController.has(event.pointerId)) return;
+          event.preventDefault(); lastTouchTime = performance.now();
+          touchController.move(event.pointerId, touchPoint(event));
+          state.moved = touchController.moved;
+          return;
+        }
+        if (touchController.active || recentTouch()) return;
+        if (mousePointerId === null) {
           const hit = graphRenderer?.hitTest(event.clientX, event.clientY);
           surface.classList.toggle("is-over-node", Boolean(hit));
           if (hit) highlightNode(hit.id); else clearHighlight();
           return;
         }
+        if (event.pointerId !== mousePointerId) return;
         const dx = event.clientX - state.startX;
         const dy = event.clientY - state.startY;
         if (Math.abs(dx) + Math.abs(dy) > 4) state.moved = true;
@@ -424,24 +474,45 @@
         applyTransform();
       });
       function endPan(event) {
-        if (!state.panning) return;
-        state.panning = false;
-        state.navigating = false;
-        clearTimeout(navigationTimer);
-        surface.classList.remove("is-navigating");
+        if (event.pointerType === "touch") {
+          if (!touchController.has(event.pointerId)) return;
+          lastTouchTime = performance.now();
+          const tap = touchController.up(event.pointerId, touchPoint(event), event.type !== "pointerup");
+          if (surface.hasPointerCapture(event.pointerId)) surface.releasePointerCapture(event.pointerId);
+          if (!touchController.active) {
+            finishNavigation(); state.moved = false;
+            if (tap) {
+              const rect = surface.getBoundingClientRect();
+              const start = graphRenderer.hitTest(rect.left + tap.start.x, rect.top + tap.start.y);
+              const end = graphRenderer.hitTest(rect.left + tap.end.x, rect.top + tap.end.y);
+              if (start?.id === end?.id && start?.toggle === end?.toggle) activateHit(end);
+            }
+          }
+          return;
+        }
+        if (event.pointerId !== mousePointerId) return;
+        mousePointerId = null;
+        finishNavigation();
         if (surface.hasPointerCapture(event.pointerId)) surface.releasePointerCapture(event.pointerId);
-        surface.classList.remove("is-panning");
         setTimeout(() => { state.moved = false; }, 0);
       }
       surface.addEventListener("pointerup", endPan);
       surface.addEventListener("pointercancel", endPan);
+      surface.addEventListener("lostpointercapture", endPan);
       surface.addEventListener("click", event => {
+        // Touch taps are handled on pointerup; suppress delayed compatibility
+        // clicks, especially after a pinch or after one finger was lifted.
+        if (event.pointerType === "touch" || event.sourceCapabilities?.firesTouchEvents || (recentTouch() && event.detail > 0)) return;
         if (state.moved) return;
-        const hit = graphRenderer?.hitTest(event.clientX, event.clientY);
-        if (hit?.toggle) toggleContainer(hit.id);
-        else if (hit) openNode(hit.id);
-        else closeDetails();
+        activateHit(graphRenderer?.hitTest(event.clientX, event.clientY));
       });
+      function cancelNavigation() {
+        if (touchController.active) lastTouchTime = performance.now();
+        touchController.cancel(); mousePointerId = null; ignoreNativeGesture = false;
+        finishNavigation(); state.moved = false;
+      }
+      window.addEventListener("blur", cancelNavigation);
+      document.addEventListener("visibilitychange", () => { if (document.hidden) cancelNavigation(); });
 
       let keyboardNodeId = null;
       const keyboardOption = document.getElementById("graph-keyboard-node");
