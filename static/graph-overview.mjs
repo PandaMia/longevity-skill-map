@@ -1,3 +1,4 @@
+import { nodeColor } from './graph-geometry.mjs';
 import { Buffer, BufferUsage, Geometry, Mesh, Shader } from 'pixi.js';
 
 // At overview scale thousands of cards are only a few pixels wide. A single
@@ -9,7 +10,7 @@ export function overviewMesh(nodes, flags, palette, topics) {
   const surface = rgb(palette.surface);
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i], state = flags.get(node.id) || {}, color = topics.get(node.topics[0]) || '#64748b';
-    const border = rgb(state.target ? '#38bdf8' : state.path ? '#22c55e' : color);
+    const border = rgb(nodeColor(node, topics, state));
     const tint = rgb(color), fill = node.children.length ? surface.map((c, i) => c * .9 + tint[i] * .1) : surface;
     const alpha = state.dimmed ? .25 : 1, stroke = state.active ? 5 : state.path || state.target ? 3 : 2;
     for (const [corner, [x, y]] of [[-1, -1], [1, -1], [1, 1], [-1, 1]].entries()) {

@@ -85,7 +85,7 @@ export function buildEdgeTiles(edges, positions, tileSize = TILE_SIZE) {
       for (let j = 0; j < steps; j++) {
         add({ x1: a.x + (b.x - a.x) * j / steps, y1: a.y + (b.y - a.y) * j / steps,
           x2: a.x + (b.x - a.x) * (j + 1) / steps, y2: a.y + (b.y - a.y) * (j + 1) / steps,
-          distance: distance + length * j / steps, pattern, arrow: i === points.length - 1 && j === steps - 1 });
+          distance: distance + length * j / steps, pattern, edge, arrow: i === points.length - 1 && j === steps - 1 });
       }
       distance += length;
     }
@@ -119,6 +119,35 @@ export function hitTest(index, camera, px, py) {
   const node = index.search({ minX: x, minY: y, maxX: x, maxY: y })[0]?.node;
   if (!node) return null;
   return { id: node.id, toggle: node.children.length > 0 && Math.abs(x - (node.x + node.width / 2 - 28)) <= 15 && Math.abs(y - node.y) <= 15 };
+}
+
+export function nodeColor(node, topics, flags = {}) {
+  return flags.target ? '#38bdf8' : flags.path ? '#22c55e' : topics.get(node?.topics?.[0]) || '#64748b';
+}
+
+export function hitTestEdge(tree, camera, px, py, { tolerance = 7, accepts = () => true } = {}) {
+  if (!tree) return null;
+  const x = (px - camera.tx) / camera.scale, y = (py - camera.ty) / camera.scale;
+  const radius = tolerance / camera.scale;
+  let closest = null, best = radius * radius, bestKey = '';
+  // Query fine tiles even when drawing coarser overview batches. Segment
+  // distance rejects false hits inside the bounding box of a long curve.
+  for (const tile of tree.search({ minX: x - radius, minY: y - radius, maxX: x + radius, maxY: y + radius })) {
+    for (const segment of tile.segments) {
+      const edge = segment.edge;
+      if (!edge || !accepts(edge)) continue;
+      const dx = segment.x2 - segment.x1, dy = segment.y2 - segment.y1;
+      const length2 = dx * dx + dy * dy;
+      const t = length2 ? Math.max(0, Math.min(1, ((x - segment.x1) * dx + (y - segment.y1) * dy) / length2)) : 0;
+      const distance2 = (x - segment.x1 - t * dx) ** 2 + (y - segment.y1 - t * dy) ** 2;
+      if (distance2 > radius * radius) continue;
+      const key = `${edge.from}:${edge.to}:${edge.type}:${edge.strength}`;
+      if (!closest || distance2 < best - 1e-9 || (Math.abs(distance2 - best) <= 1e-9 && key < bestKey)) {
+        closest = edge; best = distance2; bestKey = key;
+      }
+    }
+  }
+  return closest;
 }
 
 export function highlightState(graph, view, activeId, path, depth) {

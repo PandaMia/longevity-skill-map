@@ -15,7 +15,7 @@
     {
       "id": "school_algebra_functions",
       "title": "Algebra, functions and graphs",
-      "summary": "School algebra: equations, powers, logarithms, functions, graphs, and proportions. It is needed for chemical kinetics, statistics, physiological models, and machine learning.",
+      "summary": "School algebra:\n\n- Equations\n- Powers\n- Logarithms\n- Functions\n- Graphs\n- Proportions.\n\nIt is needed for chemical kinetics, statistics, physiological models, and machine learning.",
       "kind": "foundation",
       "topics": [
         "quantitative_sciences"
@@ -41,7 +41,7 @@
     {
       "id": "school_calculus",
       "title": "Mathematical analysis",
-      "summary": "Limits, derivatives, integrals, and continuous change. Forms a language for reaction kinetics, population dynamics, optimization and differential models.",
+      "summary": "- Limits\n- Derivatives\n- Integrals\n- Continuous change.\n\nForms a language for reaction kinetics, population dynamics, optimization and differential models.",
       "kind": "foundation",
       "topics": [
         "quantitative_sciences"
@@ -67,7 +67,7 @@
     {
       "id": "linear_algebra",
       "title": "Linear algebra",
-      "summary": "Vectors, matrices, linear transformations, eigenvalues, and matrix decompositions. A shared prerequisite for multi-omics, ML, network models, and image analysis.",
+      "summary": "- Vectors\n- Matrices\n- Linear transformations\n- Eigenvalues\n- Matrix decompositions.\n\nA shared prerequisite for multi-omics, ML, network models, and image analysis.",
       "kind": "foundation",
       "topics": [
         "quantitative_sciences",
@@ -94,7 +94,7 @@
     {
       "id": "probability_statistics",
       "title": "Probability and statistics",
-      "summary": "Random values, distributions, estimation, confidence intervals and hypothesis testing. Reused in all experimental, clinical and computational branches.",
+      "summary": "- Random values\n- Distributions\n- Estimation\n- Confidence intervals\n- Hypothesis testing.\n\nReused in all experimental, clinical and computational branches.",
       "kind": "foundation",
       "topics": [
         "quantitative_sciences"
@@ -127,7 +127,7 @@
     {
       "id": "differential_equations_dynamics",
       "title": "Differential equations and dynamical systems",
-      "summary": "Models of change over time, stability, feedback and nonlinear dynamics. Necessary for signaling networks, cell populations, pharmacokinetics and systemic physiology.",
+      "summary": "- Models of change over time\n- Stability\n- Feedback\n- Nonlinear dynamics.\n\nNecessary for signaling networks, cell populations, pharmacokinetics and systemic physiology.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences",
@@ -154,7 +154,7 @@
     {
       "id": "discrete_math_graphs",
       "title": "Discrete mathematics and graph theory",
-      "summary": "Combinatorics, graphs, recurrence relations, and proofs. Required for biological networks, knowledge graphs, lineage trees, and graph ML models.",
+      "summary": "- Combinatorics\n- Graphs\n- Recurrence relations\n- Proofs.\n\nRequired for biological networks, knowledge graphs, lineage trees, and graph ML models.",
       "kind": "foundation",
       "topics": [
         "quantitative_sciences",
@@ -193,7 +193,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of discrete mathematics and graph theory: Combinatorics, graphs, recurrence relations, and proofs.",
+        "understand": "Explain the main concepts, assumptions and limitations of discrete mathematics and graph theory:\n\n- Combinatorics\n- Graphs\n- Recurrence relations\n- Proofs.",
         "apply": "Complete a scoped task in discrete mathematics and graph theory, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for discrete mathematics and graph theory; state the assumptions, checks and limitations."
@@ -201,7 +201,7 @@
     {
       "id": "school_physics",
       "title": "School physics and energy",
-      "summary": "Mechanics, energy, electricity, diffusion, waves and basic thermodynamics. Supports biophysics, imaging, electrophysiology and transport phenomena.",
+      "summary": "- Mechanics\n- Energy\n- Electricity\n- Diffusion\n- Waves\n- Basic thermodynamics.\n\nSupports biophysics, imaging, electrophysiology and transport phenomena.",
       "kind": "foundation",
       "topics": [
         "quantitative_sciences"
@@ -234,7 +234,7 @@
     {
       "id": "school_chemistry",
       "title": "General chemistry",
-      "summary": "Atomic structure, chemical bonds, stoichiometry, equilibrium, acids and bases, thermodynamics and kinetics. Basis for biochemistry, pharmacology and materials science.",
+      "summary": "- Atomic structure\n- Chemical bonds\n- Stoichiometry\n- Equilibrium\n- Acids and bases\n- Thermodynamics and kinetics.\n\nBasis for biochemistry, pharmacology and materials science.",
       "kind": "foundation",
       "topics": [
         "chemistry_pharmacology"
@@ -267,7 +267,7 @@
     {
       "id": "organic_chemistry",
       "title": "Organic chemistry",
-      "summary": "Structure and reactivity of organic molecules, functional groups, stereochemistry and reaction mechanisms. It is necessary for biochemistry and medicinal chemistry.",
+      "summary": "- Structure and reactivity of organic molecules\n- Functional groups\n- Stereochemistry\n- Reaction mechanisms.\n\nIt is necessary for biochemistry and medicinal chemistry.",
       "kind": "discipline",
       "topics": [
         "chemistry_pharmacology"
@@ -293,7 +293,7 @@
     {
       "id": "school_biology",
       "title": "School biology",
-      "summary": "Cell, heredity, evolution, metabolism, physiology and ecology. The starting point for all longevity biological routes.",
+      "summary": "- Cell\n- Heredity\n- Evolution\n- Metabolism\n- Physiology\n- Ecology.\n\nThe starting point for all longevity biological routes.",
       "kind": "foundation",
       "topics": [
         "molecular_cell_biology"
@@ -326,7 +326,7 @@
     {
       "id": "school_computer_science",
       "title": "Fundamentals of programming",
-      "summary": "Variables, conditionals, loops, functions, data structures, and debugging. A foundation for data analysis, bioinformatics, ML, and experiment automation.",
+      "summary": "- Variables\n- Conditionals\n- Loops\n- Functions\n- Data structures\n- Debugging.\n\nA foundation for data analysis, bioinformatics, ML, and experiment automation.",
       "kind": "foundation",
       "topics": [
         "computing_data"
@@ -352,7 +352,7 @@
     {
       "id": "scientific_reasoning",
       "title": "Scientific thinking and working with evidence",
-      "summary": "Hypotheses, causality, controls, reproducibility, sources of error, and levels of evidence. Protects the map from conflating correlations, preclinical results, and clinical efficacy.",
+      "summary": "- Hypotheses\n- Causality\n- Controls\n- Reproducibility\n- Sources of error\n- Levels of evidence.\n\nProtects the map from conflating correlations, preclinical results, and clinical efficacy.",
       "kind": "foundation",
       "topics": [
         "research_clinical"
@@ -413,7 +413,7 @@
     {
       "id": "biochemistry",
       "title": "Biochemistry",
-      "summary": "Protein structure and function, enzymes, membranes, metabolism, bioenergetics, and molecular recognition. The shared language of most molecular longevity research.",
+      "summary": "- Protein structure and function\n- Enzymes\n- Membranes\n- Metabolism\n- Bioenergetics\n- Molecular recognition.\n\nThe shared language of most molecular longevity research.",
       "kind": "discipline",
       "topics": [
         "chemistry_pharmacology"
@@ -439,7 +439,7 @@
     {
       "id": "molecular_biology",
       "title": "Molecular biology",
-      "summary": "DNA replication and repair, transcription, RNA processing, gene translation and regulation. Needed for genome maintenance, editing, omics and reprogramming.",
+      "summary": "- DNA replication and repair\n- Transcription\n- RNA processing\n- Gene translation and regulation.\n\nNeeded for genome maintenance, editing, omics and reprogramming.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology"
@@ -484,7 +484,7 @@
     {
       "id": "cell_biology",
       "title": "Cell biology",
-      "summary": "Organelles, membrane transport, cytoskeleton, cell cycle, signaling, apoptosis, and tissue cellular organization. The basis of senescence, autophagy and regenerative medicine.",
+      "summary": "- Organelles\n- Membrane transport\n- Cytoskeleton\n- Cell cycle\n- Signaling\n- Apoptosis\n- Tissue cellular organization.\n\nThe basis of senescence, autophagy and regenerative medicine.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology"
@@ -510,7 +510,7 @@
     {
       "id": "genetics_genomics",
       "title": "Genetics and genomics",
-      "summary": "Inheritance, recombination, linkage, population variation, genome structure, and genotype-phenotype connections. Comparative biology, cancer evolution and genome editing.",
+      "summary": "- Inheritance\n- Recombination\n- Linkage\n- Population variation\n- Genome structure\n- Genotype-phenotype connections.\n\nComparative biology, cancer evolution and genome editing.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology"
@@ -555,7 +555,7 @@
     {
       "id": "epigenetics_chromatin",
       "title": "Epigenetics and chromatin",
-      "summary": "DNA methylation, histone modifications, chromatin remodeling, 3D genome and cellular inheritance. Central base for aging clocks, epigenome editing and reprogramming.",
+      "summary": "- DNA methylation\n- Histone modifications\n- Chromatin remodeling\n- 3D genome\n- Cellular inheritance.\n\nCentral base for aging clocks, epigenome editing and reprogramming.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology"
@@ -598,7 +598,7 @@
     {
       "id": "physiology_homeostasis",
       "title": "Physiology and homeostasis",
-      "summary": "Organ functions, endocrine and neural control, blood circulation, respiration, kidneys, exchange and inter-organ coordination. It is necessary for the transition from cellular effects to whole-body outcomes.",
+      "summary": "- Organ functions\n- Endocrine and neural control\n- Blood circulation\n- Respiration\n- Kidneys\n- Exchange\n- Inter-organ coordination.\n\nIt is necessary for the transition from cellular effects to whole-body outcomes.",
       "kind": "discipline",
       "topics": [
         "physiology_neuroscience"
@@ -624,7 +624,7 @@
     {
       "id": "immunology",
       "title": "Immunology",
-      "summary": "Innate and adaptive immunity, antigen presentation, tolerance, inflammation, immune memory and tumor surveillance. Base for inflammaging, thymus/HSC and cancer proofing.",
+      "summary": "- Innate and adaptive immunity\n- Antigen presentation\n- Tolerance\n- Inflammation\n- Immune memory\n- Tumor surveillance.\n\nBase for inflammaging, thymus/HSC and cancer proofing.",
       "kind": "discipline",
       "topics": [
         "immunology_cancer"
@@ -650,7 +650,7 @@
     {
       "id": "microbiology_microbial_ecology",
       "title": "Microbiology and Microbial Ecology",
-      "summary": "Bacterial physiology, communities, host-microbe interactions, ecology, and microbial metabolism. The basis for the causal study of microbiome and dysbiosis.",
+      "summary": "- Bacterial physiology\n- Communities\n- Host-microbe interactions\n- Ecology\n- Microbial metabolism.\n\nThe basis for the causal study of microbiome and dysbiosis.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology"
@@ -668,7 +668,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of microbiology and microbial ecology: Bacterial physiology, communities, host-microbe interactions, ecology, and microbial metabolism.",
+        "understand": "Explain the main concepts, assumptions and limitations of microbiology and microbial ecology:\n\n- Bacterial physiology\n- Communities\n- Host-microbe interactions\n- Ecology\n- Microbial metabolism.",
         "apply": "Complete a scoped task in microbiology and microbial ecology, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for microbiology and microbial ecology; state the assumptions, checks and limitations."
@@ -676,7 +676,7 @@
     {
       "id": "developmental_stem_cell_biology",
       "title": "Developmental and stem cell biology",
-      "summary": "Cell fate, differentiation, morphogens, stem-cell niches, regeneration and iPSC. Common base for tissue repair, organoids, HSC and partial reprogramming.",
+      "summary": "- Cell fate\n- Differentiation\n- Morphogens\n- Stem-cell niches\n- Regeneration\n- iPSC.\n\nCommon base for tissue repair, organoids, HSC and partial reprogramming.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology",
@@ -703,7 +703,7 @@
     {
       "id": "neuroscience",
       "title": "Neuroscience",
-      "summary": "Neurons and glia, synapses, circuits, myelin, neurovascular unit and plasticity. Brain aging, microglia and neural replacement.",
+      "summary": "- Neurons and glia\n- Synapses\n- Circuits\n- Myelin\n- Neurovascular unit\n- Plasticity.\n\nBrain aging, microglia and neural replacement.",
       "kind": "discipline",
       "topics": [
         "physiology_neuroscience"
@@ -729,7 +729,7 @@
     {
       "id": "cancer_biology",
       "title": "Cancer Biology and Tumor Evolution",
-      "summary": "Oncogenes, tumor suppressors, genome instability, clonal evolution, microenvironment, immune escape and metastasis. Mandatory safety pre-requisite for telomerase, reprogramming and regeneration.",
+      "summary": "- Oncogenes\n- Tumor suppressors\n- Genome instability\n- Clonal evolution\n- Microenvironment\n- Immune escape\n- Metastasis.\n\nMandatory safety pre-requisite for telomerase, reprogramming and regeneration.",
       "kind": "discipline",
       "topics": [
         "immunology_cancer",
@@ -765,7 +765,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of cancer biology and tumor evolution: Oncogenes, tumor suppressors, genome instability, clonal evolution, microenvironment, immune escape and metastasis.",
+        "understand": "Explain the main concepts, assumptions and limitations of cancer biology and tumor evolution:\n\n- Oncogenes\n- Tumor suppressors\n- Genome instability\n- Clonal evolution\n- Microenvironment\n- Immune escape\n- Metastasis.",
         "apply": "Complete a scoped task in cancer biology and tumor evolution, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for cancer biology and tumor evolution; state the assumptions, checks and limitations."
@@ -842,7 +842,7 @@
     {
       "id": "metabolism_redox",
       "title": "Metabolism, Bioenergetics and Redox",
-      "summary": "Glycolysis, TCA, oxidative phosphorylation, NAD/NADH, ROS, nutrient sensing and metabolic flux. Common base for mTOR/AMPK, NAD+, mitochondria and cancer metabolism.",
+      "summary": "- Glycolysis\n- TCA\n- Oxidative phosphorylation\n- NAD/NADH\n- ROS\n- Nutrient sensing\n- Metabolic flux.\n\nCommon base for mTOR/AMPK, NAD+, mitochondria and cancer metabolism.",
       "kind": "discipline",
       "topics": [
         "chemistry_pharmacology",
@@ -878,7 +878,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of metabolism, bioenergetics and redox: Glycolysis, TCA, oxidative phosphorylation, NAD/NADH, ROS, nutrient sensing and metabolic flux.",
+        "understand": "Explain the main concepts, assumptions and limitations of metabolism, bioenergetics and redox:\n\n- Glycolysis\n- TCA\n- Oxidative phosphorylation\n- NAD/NADH\n- ROS\n- Nutrient sensing\n- Metabolic flux.",
         "apply": "Complete a scoped task in metabolism, bioenergetics and redox, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for metabolism, bioenergetics and redox; state the assumptions, checks and limitations."
@@ -886,7 +886,7 @@
     {
       "id": "proteostasis_autophagy",
       "title": "Proteostasis, autophagy and lysosomes",
-      "summary": "Protein folding, chaperones, ubiquitin-proteasome system, macroautophagy, CMA and lysosomal degradation. Required for protein aggregates, lipofuscin and mitophagy.",
+      "summary": "- Protein folding\n- Chaperones\n- Ubiquitin-proteasome system\n- Macroautophagy\n- CMA\n- Lysosomal degradation.\n\nRequired for protein aggregates, lipofuscin and mitophagy.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology",
@@ -912,7 +912,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of proteostasis, autophagy and lysosomes: Protein folding, chaperones, ubiquitin-proteasome system, macroautophagy, CMA and lysosomal degradation.",
+        "understand": "Explain the main concepts, assumptions and limitations of proteostasis, autophagy and lysosomes:\n\n- Protein folding\n- Chaperones\n- Ubiquitin-proteasome system\n- Macroautophagy\n- CMA\n- Lysosomal degradation.",
         "apply": "Complete a scoped task in proteostasis, autophagy and lysosomes, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for proteostasis, autophagy and lysosomes; state the assumptions, checks and limitations."
@@ -920,7 +920,7 @@
     {
       "id": "mitochondrial_biology",
       "title": "Mitochondrial biology and quality control",
-      "summary": "Electron transport, mtDNA, dynamics, biogenesis, unfolded-protein response and mitophagy. Allows you to distinguish energy defects, signaling and removal of damaged organelles.",
+      "summary": "- Electron transport\n- mtDNA\n- Dynamics\n- Biogenesis\n- Unfolded-protein response\n- Mitophagy.\n\nAllows you to distinguish energy defects, signaling and removal of damaged organelles.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology",
@@ -946,7 +946,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of mitochondrial biology and quality control: Electron transport, mtDNA, dynamics, biogenesis, unfolded-protein response and mitophagy.",
+        "understand": "Explain the main concepts, assumptions and limitations of mitochondrial biology and quality control:\n\n- Electron transport\n- mtDNA\n- Dynamics\n- Biogenesis\n- Unfolded-protein response\n- Mitophagy.",
         "apply": "Complete a scoped task in mitochondrial biology and quality control, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for mitochondrial biology and quality control; state the assumptions, checks and limitations."
@@ -954,7 +954,7 @@
     {
       "id": "cellular_senescence",
       "title": "Cellular senescence",
-      "summary": "Stable cell-cycle arrest, SASP, biomarkers, beneficial and pathological roles, heterogeneity and immune clearance. Common base for senolytics, senomorphics and senescence-aware safety.",
+      "summary": "- Stable cell-cycle arrest\n- SASP\n- Biomarkers\n- Beneficial and pathological roles\n- Heterogeneity\n- Immune clearance.\n\nCommon base for senolytics, senomorphics and senescence-aware safety.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology",
@@ -980,7 +980,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of cellular senescence: Stable cell-cycle arrest, SASP, biomarkers, beneficial and pathological roles, heterogeneity and immune clearance.",
+        "understand": "Explain the main concepts, assumptions and limitations of cellular senescence:\n\n- Stable cell-cycle arrest\n- SASP\n- Biomarkers\n- Beneficial and pathological roles\n- Heterogeneity\n- Immune clearance.",
         "apply": "Complete a scoped task in cellular senescence, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for cellular senescence; state the assumptions, checks and limitations."
@@ -988,7 +988,7 @@
     {
       "id": "extracellular_matrix_biology",
       "title": "Extracellular matrix and mechanobiology",
-      "summary": "Collagen, elastin, proteoglycans, cross-links, matrix turnover, stiffness, mechanotransduction and fibrosis. ECM rejuvenation, AGE and tissue engineering.",
+      "summary": "- Collagen\n- Elastin\n- Proteoglycans\n- Cross-links\n- Matrix turnover\n- Stiffness\n- Mechanotransduction\n- Fibrosis.\n\nECM rejuvenation, AGE and tissue engineering.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology",
@@ -1014,7 +1014,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of extracellular matrix and mechanobiology: Collagen, elastin, proteoglycans, cross-links, matrix turnover, stiffness, mechanotransduction and fibrosis.",
+        "understand": "Explain the main concepts, assumptions and limitations of extracellular matrix and mechanobiology:\n\n- Collagen\n- Elastin\n- Proteoglycans\n- Cross-links\n- Matrix turnover\n- Stiffness\n- Mechanotransduction\n- Fibrosis.",
         "apply": "Complete a scoped task in extracellular matrix and mechanobiology, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for extracellular matrix and mechanobiology; state the assumptions, checks and limitations."
@@ -1022,7 +1022,7 @@
     {
       "id": "pharmacology_toxicology",
       "title": "Pharmacology and toxicology",
-      "summary": "Dose-response, receptors, ADME, pharmacokinetics, pharmacodynamics, therapeutic window and safety. Mandatory before developing or interpreting gerotherapeutics.",
+      "summary": "- Dose-response\n- Receptors\n- ADME\n- Pharmacokinetics\n- Pharmacodynamics\n- Therapeutic window\n- Safety.\n\nMandatory before developing or interpreting gerotherapeutics.",
       "kind": "discipline",
       "topics": [
         "chemistry_pharmacology",
@@ -1041,7 +1041,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of pharmacology and toxicology: Dose-response, receptors, ADME, pharmacokinetics, pharmacodynamics, therapeutic window and safety.",
+        "understand": "Explain the main concepts, assumptions and limitations of pharmacology and toxicology:\n\n- Dose-response\n- Receptors\n- ADME\n- Pharmacokinetics\n- Pharmacodynamics\n- Therapeutic window\n- Safety.",
         "apply": "Complete a scoped task in pharmacology and toxicology, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for pharmacology and toxicology; state the assumptions, checks and limitations."
@@ -1049,7 +1049,7 @@
     {
       "id": "systems_biology",
       "title": "Systems biology and biological networks",
-      "summary": "Pathways, feedback loops, network motifs, multi-scale models and emergent behavior. It connects individual hallmarks and is needed for combination therapies.",
+      "summary": "- Pathways\n- Feedback loops\n- Network motifs\n- Multi-scale models\n- Emergent behavior.\n\nIt connects individual hallmarks and is needed for combination therapies.",
       "kind": "discipline",
       "topics": [
         "bioinformatics_omics",
@@ -1104,7 +1104,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of systems biology and biological networks: Pathways, feedback loops, network motifs, multi-scale models and emergent behavior.",
+        "understand": "Explain the main concepts, assumptions and limitations of systems biology and biological networks:\n\n- Pathways\n- Feedback loops\n- Network motifs\n- Multi-scale models\n- Emergent behavior.",
         "apply": "Complete a scoped task in systems biology and biological networks, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for systems biology and biological networks; state the assumptions, checks and limitations."
@@ -1112,7 +1112,7 @@
     {
       "id": "python_data_analysis",
       "title": "Python and data analysis",
-      "summary": "Python, NumPy, pandas, notebooks, testing and tabular data processing. A common practical node for bioinformatics, ML, statistics and automation.",
+      "summary": "- Python\n- NumPy\n- Pandas\n- Notebooks\n- Testing\n- Tabular data processing.\n\nA common practical node for bioinformatics, ML, statistics and automation.",
       "kind": "skill",
       "topics": [
         "computing_data"
@@ -1145,7 +1145,7 @@
     {
       "id": "algorithms_data_structures",
       "title": "Algorithms and data structures",
-      "summary": "Complexity, arrays, hash tables, trees, graphs, and algorithmic design. It is necessary for scalable processing of omics and knowledge graphs.",
+      "summary": "- Complexity\n- Arrays\n- Hash tables\n- Trees\n- Graphs\n- Algorithmic design.\n\nIt is necessary for scalable processing of omics and knowledge graphs.",
       "kind": "skill",
       "topics": [
         "computing_data"
@@ -1163,7 +1163,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of algorithms and data structures: Complexity, arrays, hash tables, trees, graphs, and algorithmic design.",
+        "understand": "Explain the main concepts, assumptions and limitations of algorithms and data structures:\n\n- Complexity\n- Arrays\n- Hash tables\n- Trees\n- Graphs\n- Algorithmic design.",
         "apply": "Complete a scoped task in algorithms and data structures, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for algorithms and data structures; state the assumptions, checks and limitations."
@@ -1171,7 +1171,7 @@
     {
       "id": "reproducible_computing",
       "title": "Linux, Git and Reproducible Computing",
-      "summary": "Command Prompt, version control, environments, containers, tests, and provenance computing. Makes analysis testable and repeatable.",
+      "summary": "- Command Prompt\n- Version control\n- Environments\n- Containers\n- Tests\n- Provenance computing.\n\nMakes analysis testable and repeatable.",
       "kind": "skill",
       "topics": [
         "computing_data",
@@ -1197,7 +1197,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of linux, git and reproducible computing: Command Prompt, version control, environments, containers, tests, and provenance computing.",
+        "understand": "Explain the main concepts, assumptions and limitations of linux, git and reproducible computing:\n\n- Command Prompt\n- Version control\n- Environments\n- Containers\n- Tests\n- Provenance computing.",
         "apply": "Complete a scoped task in linux, git and reproducible computing, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for linux, git and reproducible computing; state the assumptions, checks and limitations."
@@ -1205,7 +1205,7 @@
     {
       "id": "data_management_fair",
       "title": "Scientific Data Management and FAIR",
-      "summary": "Metadata, identifiers, formats, ontologies, repositories, privacy and FAIR principles. Needed for large cohorts, multi-omics and results sharing.",
+      "summary": "- Metadata\n- Identifiers\n- Formats\n- Ontologies\n- Repositories\n- Privacy\n- FAIR principles.\n\nNeeded for large cohorts, multi-omics and results sharing.",
       "kind": "skill",
       "topics": [
         "computing_data",
@@ -1224,7 +1224,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of scientific data management and fair: Metadata, identifiers, formats, ontologies, repositories, privacy and FAIR principles.",
+        "understand": "Explain the main concepts, assumptions and limitations of scientific data management and fair:\n\n- Metadata\n- Identifiers\n- Formats\n- Ontologies\n- Repositories\n- Privacy\n- FAIR principles.",
         "apply": "Complete a scoped task in scientific data management and fair, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for scientific data management and fair; state the assumptions, checks and limitations."
@@ -1232,7 +1232,7 @@
     {
       "id": "experimental_design_biostatistics",
       "title": "Experimental design and biostatistics",
-      "summary": "Controls, randomization, blinding, power, sample size, repeated measures, multiple testing and effect sizes. It is mandatory to evaluate any intervention of longevity.",
+      "summary": "- Controls\n- Randomization\n- Blinding\n- Power\n- Sample size\n- Repeated measures\n- Multiple testing\n- Effect sizes.\n\nIt is mandatory to evaluate any intervention of longevity.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences",
@@ -1266,7 +1266,7 @@
     {
       "id": "causal_inference",
       "title": "Causal inference",
-      "summary": "Confounding, DAGs, counterfactuals, target trial emulation and causal estimands. It helps distinguish the biomarker association from the causal mechanism or effect of the intervention.",
+      "summary": "- Confounding\n- DAGs\n- Counterfactuals\n- Target trial emulation\n- Causal estimands.\n\nIt helps distinguish the biomarker association from the causal mechanism or effect of the intervention.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences",
@@ -1285,7 +1285,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of causal inference: Confounding, DAGs, counterfactuals, target trial emulation and causal estimands.",
+        "understand": "Explain the main concepts, assumptions and limitations of causal inference:\n\n- Confounding\n- DAGs\n- Counterfactuals\n- Target trial emulation\n- Causal estimands.",
         "apply": "Complete a scoped task in causal inference, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for causal inference; state the assumptions, checks and limitations."
@@ -1293,7 +1293,7 @@
     {
       "id": "evidence_synthesis",
       "title": "Systematic reviews and meta-analysis",
-      "summary": "Question formulation, research search, risk of bias, synthesis, GRADE and interpretation of uncertainty. You need to check claims in fast-changing longevity.",
+      "summary": "- Question formulation\n- Research search\n- Risk of bias\n- Synthesis\n- GRADE\n- Interpretation of uncertainty.\n\nYou need to check claims in fast-changing longevity.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -1311,7 +1311,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of systematic reviews and meta-analysis: Question formulation, research search, risk of bias, synthesis, GRADE and interpretation of uncertainty.",
+        "understand": "Explain the main concepts, assumptions and limitations of systematic reviews and meta-analysis:\n\n- Question formulation\n- Research search\n- Risk of bias\n- Synthesis\n- GRADE\n- Interpretation of uncertainty.",
         "apply": "Complete a scoped task in systematic reviews and meta-analysis, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for systematic reviews and meta-analysis; state the assumptions, checks and limitations."
@@ -1319,7 +1319,7 @@
     {
       "id": "clinical_research_trials",
       "title": "Clinical research and trials",
-      "summary": "Protocol design, endpoints, randomization, monitoring, adverse events, ethics and regulatory context. It is necessary to translate geroscience from models to humans.",
+      "summary": "- Protocol design\n- Endpoints\n- Randomization\n- Monitoring\n- Adverse events\n- Ethics\n- Regulatory context.\n\nIt is necessary to translate geroscience from models to humans.",
       "kind": "skill",
       "topics": [
         "research_clinical",
@@ -1338,7 +1338,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of clinical research and trials: Protocol design, endpoints, randomization, monitoring, adverse events, ethics and regulatory context.",
+        "understand": "Explain the main concepts, assumptions and limitations of clinical research and trials:\n\n- Protocol design\n- Endpoints\n- Randomization\n- Monitoring\n- Adverse events\n- Ethics\n- Regulatory context.",
         "apply": "Complete a scoped task in clinical research and trials, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for clinical research and trials; state the assumptions, checks and limitations."
@@ -1346,7 +1346,7 @@
     {
       "id": "regulatory_ethics",
       "title": "Bioethics and regulation",
-      "summary": "Human subjects, informed consent, germline issues, gene therapy oversight, animal welfare, data privacy and dual-use risk. Necessary for secure broadcasting of frontier technologies.",
+      "summary": "- Human subjects\n- Informed consent\n- Germline issues\n- Gene therapy oversight\n- Animal welfare\n- Data privacy\n- Dual-use risk.\n\nNecessary for secure broadcasting of frontier technologies.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -1364,7 +1364,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of bioethics and regulation: Human subjects, informed consent, germline issues, gene therapy oversight, animal welfare, data privacy and dual-use risk.",
+        "understand": "Explain the main concepts, assumptions and limitations of bioethics and regulation:\n\n- Human subjects\n- Informed consent\n- Germline issues\n- Gene therapy oversight\n- Animal welfare\n- Data privacy\n- Dual-use risk.",
         "apply": "Complete a scoped task in bioethics and regulation, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for bioethics and regulation; state the assumptions, checks and limitations."
@@ -1372,7 +1372,7 @@
     {
       "id": "molecular_biology_lab",
       "title": "Practical molecular biology",
-      "summary": "Pipetting, nucleic-acid purification, PCR, cloning, electrophoresis, quantitative assays and lab records. Basic wet-lab competence for genome and gene-expression research.",
+      "summary": "- Pipetting\n- Nucleic-acid purification\n- PCR\n- Cloning\n- Electrophoresis\n- Quantitative assays\n- Lab records.\n\nBasic wet-lab competence for genome and gene-expression research.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology",
@@ -1399,7 +1399,7 @@
     {
       "id": "cell_culture_functional_assays",
       "title": "Cell Culture and Functional Assays",
-      "summary": "Aseptic technique, primary/immortalized cells, organotypic models, viability, proliferation, senescence and perturbation assays. It is necessary for preclinical testing of interventions.",
+      "summary": "- Aseptic technique\n- Primary/immortalized cells\n- Organotypic models\n- Viability\n- Proliferation\n- Senescence\n- Perturbation assays.\n\nIt is necessary for preclinical testing of interventions.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology",
@@ -1426,7 +1426,7 @@
     {
       "id": "microscopy_flow_cytometry",
       "title": "Microscopy, imaging and flow cytometry",
-      "summary": "Optical microscopy, fluorescence, image quantification, flow cytometry and sorting. Allows measurement of cell states, immune populations and tissue phenotypes.",
+      "summary": "- Optical microscopy\n- Fluorescence\n- Image quantification\n- Flow cytometry and sorting.\n\nAllows measurement of cell states, immune populations and tissue phenotypes.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology",
@@ -1445,7 +1445,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of microscopy, imaging and flow cytometry: Optical microscopy, fluorescence, image quantification, flow cytometry and sorting.",
+        "understand": "Explain the main concepts, assumptions and limitations of microscopy, imaging and flow cytometry:\n\n- Optical microscopy\n- Fluorescence\n- Image quantification\n- Flow cytometry and sorting.",
         "apply": "Integrate the required component skills in a documented project: Microscopy, imaging and flow cytometry. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for microscopy, imaging and flow cytometry; state the assumptions, checks and limitations."
@@ -1500,7 +1500,7 @@
     {
       "id": "assay_development_screening",
       "title": "Assay development and high-throughput screening",
-      "summary": "Assay quality, controls, Z-prime, dose-response, automation and hit validation. CRISPR/drug screens and search for senolytics or pathway modulators.",
+      "summary": "- Assay quality\n- Controls\n- Z-prime\n- Dose-response\n- Automation\n- Hit validation.\n\nCRISPR/drug screens and search for senolytics or pathway modulators.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology",
@@ -1519,7 +1519,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of assay development and high-throughput screening: Assay quality, controls, Z-prime, dose-response, automation and hit validation.",
+        "understand": "Explain the main concepts, assumptions and limitations of assay development and high-throughput screening:\n\n- Assay quality\n- Controls\n- Z-prime\n- Dose-response\n- Automation\n- Hit validation.",
         "apply": "Complete a scoped task in assay development and high-throughput screening, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for assay development and high-throughput screening; state the assumptions, checks and limitations."
@@ -1527,7 +1527,7 @@
     {
       "id": "bioinformatics_foundations",
       "title": "Basics of bioinformatics",
-      "summary": "Biological databases, sequence analysis, annotation, workflows and reproducibility. It combines molecular biology with computational analysis.",
+      "summary": "- Biological databases\n- Sequence analysis\n- Annotation\n- Workflows\n- Reproducibility.\n\nIt combines molecular biology with computational analysis.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -1562,7 +1562,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of basics of bioinformatics: Biological databases, sequence analysis, annotation, workflows and reproducibility.",
+        "understand": "Explain the main concepts, assumptions and limitations of basics of bioinformatics:\n\n- Biological databases\n- Sequence analysis\n- Annotation\n- Workflows\n- Reproducibility.",
         "apply": "Complete a scoped task in basics of bioinformatics, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for basics of bioinformatics; state the assumptions, checks and limitations."
@@ -1570,7 +1570,7 @@
     {
       "id": "ngs_genomic_analysis",
       "title": "NGS and analysis of genomic variants",
-      "summary": "Sequencing technologies, QC, alignment, variant calling, annotation and interpretation. Somatic mutations, CRISPR screens and comparative genomics.",
+      "summary": "- Sequencing technologies\n- QC\n- Alignment\n- Variant calling\n- Annotation\n- Interpretation.\n\nSomatic mutations, CRISPR screens and comparative genomics.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics",
@@ -1599,7 +1599,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of ngs and analysis of genomic variants: Sequencing technologies, QC, alignment, variant calling, annotation and interpretation.",
+        "understand": "Explain the main concepts, assumptions and limitations of ngs and analysis of genomic variants:\n\n- Sequencing technologies\n- QC\n- Alignment\n- Variant calling\n- Annotation\n- Interpretation.",
         "apply": "Complete a scoped task in ngs and analysis of genomic variants, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for ngs and analysis of genomic variants; state the assumptions, checks and limitations."
@@ -1607,7 +1607,7 @@
     {
       "id": "transcriptomics",
       "title": "Transcriptomics and gene expression analysis",
-      "summary": "RNA-seq design, normalization, differential expression, pathway enrichment and confounders. Required for aging signatures, perturbations and reprogramming.",
+      "summary": "- RNA-seq design\n- Normalization\n- Differential expression\n- Pathway enrichment\n- Confounders.\n\nRequired for aging signatures, perturbations and reprogramming.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -1665,7 +1665,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of transcriptomics and gene expression analysis: RNA-seq design, normalization, differential expression, pathway enrichment and confounders.",
+        "understand": "Explain the main concepts, assumptions and limitations of transcriptomics and gene expression analysis:\n\n- RNA-seq design\n- Normalization\n- Differential expression\n- Pathway enrichment\n- Confounders.",
         "apply": "Integrate the required component skills in a documented project: Transcriptomics and gene expression analysis. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for transcriptomics and gene expression analysis; state the assumptions, checks and limitations."
@@ -1673,7 +1673,7 @@
     {
       "id": "single_cell_spatial_omics",
       "title": "Single-cell and spatial omics",
-      "summary": "Experimental design, QC, dimensionality reduction, cell annotation, batch correction, trajectories and spatial context. Tissue-specific aging and rejuvenation atlases.",
+      "summary": "- Experimental design\n- QC\n- Dimensionality reduction\n- Cell annotation\n- Batch correction\n- Trajectories\n- Spatial context.\n\nTissue-specific aging and rejuvenation atlases.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -1691,7 +1691,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of single-cell and spatial omics: Experimental design, QC, dimensionality reduction, cell annotation, batch correction, trajectories and spatial context.",
+        "understand": "Explain the main concepts, assumptions and limitations of single-cell and spatial omics:\n\n- Experimental design\n- QC\n- Dimensionality reduction\n- Cell annotation\n- Batch correction\n- Trajectories\n- Spatial context.",
         "apply": "Integrate the required component skills in a documented project: Single-cell and spatial omics. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for single-cell and spatial omics; state the assumptions, checks and limitations."
@@ -1699,7 +1699,7 @@
     {
       "id": "proteomics_metabolomics",
       "title": "Proteomics, metabolomics and lipidomics",
-      "summary": "Mass spectrometry, feature identification, normalization, pathway analysis and measurement uncertainty. It is necessary for proteostasis, metabolism, biomarkers and multi-omics.",
+      "summary": "- Mass spectrometry\n- Feature identification\n- Normalization\n- Pathway analysis\n- Measurement uncertainty.\n\nIt is necessary for proteostasis, metabolism, biomarkers and multi-omics.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics",
@@ -1718,7 +1718,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of proteomics, metabolomics and lipidomics: Mass spectrometry, feature identification, normalization, pathway analysis and measurement uncertainty.",
+        "understand": "Explain the main concepts, assumptions and limitations of proteomics, metabolomics and lipidomics:\n\n- Mass spectrometry\n- Feature identification\n- Normalization\n- Pathway analysis\n- Measurement uncertainty.",
         "apply": "Integrate the required component skills in a documented project: Proteomics, metabolomics and lipidomics. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for proteomics, metabolomics and lipidomics; state the assumptions, checks and limitations."
@@ -1760,7 +1760,7 @@
     {
       "id": "comparative_phylogenetics",
       "title": "Comparative biology and phylogenetic methods",
-      "summary": "Phylogenetic trees, comparative models, orthology, convergent evolution and cross-species omics. It is necessary to search for natural mechanisms of longevity without pseudoreplication of species.",
+      "summary": "- Phylogenetic trees\n- Comparative models\n- Orthology\n- Convergent evolution\n- Cross-species omics.\n\nIt is necessary to search for natural mechanisms of longevity without pseudoreplication of species.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics",
@@ -1789,7 +1789,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of comparative biology and phylogenetic methods: Phylogenetic trees, comparative models, orthology, convergent evolution and cross-species omics.",
+        "understand": "Explain the main concepts, assumptions and limitations of comparative biology and phylogenetic methods:\n\n- Phylogenetic trees\n- Comparative models\n- Orthology\n- Convergent evolution\n- Cross-species omics.",
         "apply": "Complete a scoped task in comparative biology and phylogenetic methods, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for comparative biology and phylogenetic methods; state the assumptions, checks and limitations."
@@ -1797,7 +1797,7 @@
     {
       "id": "structural_biology_computational_chemistry",
       "title": "Structural biology and computational chemistry",
-      "summary": "Protein structure, binding, molecular dynamics, docking and free-energy reasoning. AI protein design and structure-based drug discovery.",
+      "summary": "- Protein structure\n- Binding\n- Molecular dynamics\n- Docking\n- Free-energy reasoning.\n\nAI protein design and structure-based drug discovery.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology",
@@ -1844,7 +1844,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of structural biology and computational chemistry: Protein structure, binding, molecular dynamics, docking and free-energy reasoning.",
+        "understand": "Explain the main concepts, assumptions and limitations of structural biology and computational chemistry:\n\n- Protein structure\n- Binding\n- Molecular dynamics\n- Docking\n- Free-energy reasoning.",
         "apply": "Integrate the required component skills in a documented project: Structural biology and computational chemistry. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for structural biology and computational chemistry; state the assumptions, checks and limitations."
@@ -1852,7 +1852,7 @@
     {
       "id": "bioimage_analysis",
       "title": "Computational analysis of bioimages",
-      "summary": "Segmentation, tracking, feature extraction, quality control and deep-learning microscopy. Required for senescence, histology, organoids and high-content screening.",
+      "summary": "- Segmentation\n- Tracking\n- Feature extraction\n- Quality control\n- Deep-learning microscopy.\n\nRequired for senescence, histology, organoids and high-content screening.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics",
@@ -1872,7 +1872,7 @@
       ],
       "parent_id": "microscopy_flow_cytometry",
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of computational analysis of bioimages: Segmentation, tracking, feature extraction, quality control and deep-learning microscopy.",
+        "understand": "Explain the main concepts, assumptions and limitations of computational analysis of bioimages:\n\n- Segmentation\n- Tracking\n- Feature extraction\n- Quality control\n- Deep-learning microscopy.",
         "apply": "Complete a scoped task in computational analysis of bioimages, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for computational analysis of bioimages; state the assumptions, checks and limitations."
@@ -1880,7 +1880,7 @@
     {
       "id": "machine_learning_foundations",
       "title": "Basics of machine learning",
-      "summary": "Supervised/unsupervised learning, train/validation/test, regularization, leakage, metrics and error analysis. Common base for clocks, omics, imaging and drug discovery.",
+      "summary": "- Supervised/unsupervised learning\n- Train/validation/test\n- Regularization\n- Leakage\n- Metrics\n- Error analysis.\n\nCommon base for clocks, omics, imaging and drug discovery.",
       "kind": "skill",
       "topics": [
         "ml_ai",
@@ -1924,7 +1924,7 @@
     {
       "id": "deep_learning",
       "title": "Deep learning",
-      "summary": "Neural networks, backpropagation, optimization, convolution, representation learning and uncertainty. Imaging, foundation models and generative design.",
+      "summary": "- Neural networks\n- Backpropagation\n- Optimization\n- Convolution\n- Representation learning\n- Uncertainty.\n\nImaging, foundation models and generative design.",
       "kind": "skill",
       "topics": [
         "ml_ai"
@@ -1942,7 +1942,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of deep learning: Neural networks, backpropagation, optimization, convolution, representation learning and uncertainty.",
+        "understand": "Explain the main concepts, assumptions and limitations of deep learning:\n\n- Neural networks\n- Backpropagation\n- Optimization\n- Convolution\n- Representation learning\n- Uncertainty.",
         "apply": "Complete a scoped task in deep learning, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for deep learning; state the assumptions, checks and limitations."
@@ -1950,7 +1950,7 @@
     {
       "id": "transformers_llms",
       "title": "Transformers and large language models",
-      "summary": "Attention, pretraining, tokenization, fine-tuning, retrieval, evaluation and failure modes. It is used for biomedical NLP but does not replace primary source testing.",
+      "summary": "- Attention\n- Pretraining\n- Tokenization\n- Fine-tuning\n- Retrieval\n- Evaluation\n- Failure modes.\n\nIt is used for biomedical NLP but does not replace primary source testing.",
       "kind": "skill",
       "topics": [
         "ml_ai"
@@ -1968,7 +1968,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of transformers and large language models: Attention, pretraining, tokenization, fine-tuning, retrieval, evaluation and failure modes.",
+        "understand": "Explain the main concepts, assumptions and limitations of transformers and large language models:\n\n- Attention\n- Pretraining\n- Tokenization\n- Fine-tuning\n- Retrieval\n- Evaluation\n- Failure modes.",
         "apply": "Complete a scoped task in transformers and large language models, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for transformers and large language models; state the assumptions, checks and limitations."
@@ -1976,7 +1976,7 @@
     {
       "id": "agentic_ai_systems",
       "title": "AI Agents and Agentic Workflows",
-      "summary": "Tool calling, reason-and-act loops, planning, memory, structured state, agentic RAG, multi-agent coordination, human approval, observability, evaluation and security. The goal is to build controllable workflows rather than equate autonomy with correctness.",
+      "summary": "- Tool calling\n- Reason-and-act loops\n- Planning\n- Memory\n- Structured state\n- Agentic RAG\n- Multi-agent coordination\n- Human approval\n- Observability\n- Evaluation\n- Security.\n\nThe goal is to build controllable workflows rather than equate autonomy with correctness.",
       "kind": "skill",
       "topics": [
         "ml_ai",
@@ -2002,7 +2002,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of ai agents and agentic workflows: Tool calling, reason-and-act loops, planning, memory, structured state, agentic RAG, multi-agent coordination, human approval, observability, evaluation and security.",
+        "understand": "Explain the main concepts, assumptions and limitations of ai agents and agentic workflows:\n\n- Tool calling\n- Reason-and-act loops\n- Planning\n- Memory\n- Structured state\n- Agentic RAG\n- Multi-agent coordination\n- Human approval\n- Observability\n- Evaluation\n- Security.",
         "apply": "Complete a scoped task in ai agents and agentic workflows, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for ai agents and agentic workflows; state the assumptions, checks and limitations."
@@ -2060,7 +2060,7 @@
     {
       "id": "biomedical_nlp_knowledge_graphs",
       "title": "Biomedical NLP and knowledge graphs",
-      "summary": "Entity normalization, relation extraction, ontologies, RAG, provenance and expert validation. Applied to literature mining and building a verifiable knowledge map.",
+      "summary": "- Entity normalization\n- Relation extraction\n- Ontologies\n- RAG\n- Provenance\n- Expert validation.\n\nApplied to literature mining and building a verifiable knowledge map.",
       "kind": "skill",
       "topics": [
         "ml_ai",
@@ -2101,7 +2101,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of biomedical nlp and knowledge graphs: Entity normalization, relation extraction, ontologies, RAG, provenance and expert validation.",
+        "understand": "Explain the main concepts, assumptions and limitations of biomedical nlp and knowledge graphs:\n\n- Entity normalization\n- Relation extraction\n- Ontologies\n- RAG\n- Provenance\n- Expert validation.",
         "apply": "Complete a scoped task in biomedical nlp and knowledge graphs, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for biomedical nlp and knowledge graphs; state the assumptions, checks and limitations."
@@ -2221,7 +2221,7 @@
     {
       "id": "ai_drug_discovery",
       "title": "AI for Target Identification and Drug Discovery",
-      "summary": "Representation learning, virtual screening, generative chemistry, ADMET prediction and prospective validation. A model score is not a substitute for experimental and clinical validation.",
+      "summary": "- Representation learning\n- Virtual screening\n- Generative chemistry\n- ADMET prediction\n- Prospective validation.\n\nA model score is not a substitute for experimental and clinical validation.",
       "kind": "skill",
       "topics": [
         "ml_ai",
@@ -2247,7 +2247,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of ai for target identification and drug discovery: Representation learning, virtual screening, generative chemistry, ADMET prediction and prospective validation.",
+        "understand": "Explain the main concepts, assumptions and limitations of ai for target identification and drug discovery:\n\n- Representation learning\n- Virtual screening\n- Generative chemistry\n- ADMET prediction\n- Prospective validation.",
         "apply": "Complete a scoped task in ai for target identification and drug discovery, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for ai for target identification and drug discovery; state the assumptions, checks and limitations."
@@ -2255,7 +2255,7 @@
     {
       "id": "ai_protein_design",
       "title": "AI protein structure and design",
-      "summary": "Structure prediction, sequence generation, binder design, protein language models and wet-lab validation. Applies to enzymes, biologics, sensors and repair tools.",
+      "summary": "- Structure prediction\n- Sequence generation\n- Binder design\n- Protein language models\n- Wet-lab validation.\n\nApplies to enzymes, biologics, sensors and repair tools.",
       "kind": "skill",
       "topics": [
         "ml_ai",
@@ -2281,7 +2281,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of ai protein structure and design: Structure prediction, sequence generation, binder design, protein language models and wet-lab validation.",
+        "understand": "Explain the main concepts, assumptions and limitations of ai protein structure and design:\n\n- Structure prediction\n- Sequence generation\n- Binder design\n- Protein language models\n- Wet-lab validation.",
         "apply": "Complete a scoped task in ai protein structure and design, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for ai protein structure and design; state the assumptions, checks and limitations."
@@ -2289,7 +2289,7 @@
     {
       "id": "laboratory_automation_active_learning",
       "title": "Laboratory automation and active learning",
-      "summary": "Robotics, liquid handling, experiment scheduling, Bayesian optimization, closed-loop design-test-learn and provenance-complete execution.",
+      "summary": "- Robotics\n- Liquid handling\n- Experiment scheduling\n- Bayesian optimization\n- Closed-loop design-test-learn\n- Provenance-complete execution.",
       "kind": "skill",
       "topics": [
         "ml_ai",
@@ -2315,7 +2315,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of laboratory automation and active learning: Robotics, liquid handling, experiment scheduling, Bayesian optimization, closed-loop design-test-learn and provenance-complete execution.",
+        "understand": "Explain the main concepts, assumptions and limitations of laboratory automation and active learning:\n\n- Robotics\n- Liquid handling\n- Experiment scheduling\n- Bayesian optimization\n- Closed-loop design-test-learn\n- Provenance-complete execution.",
         "apply": "Complete a scoped task in laboratory automation and active learning, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for laboratory automation and active learning; state the assumptions, checks and limitations."
@@ -2323,7 +2323,7 @@
     {
       "id": "biomedical_ai_validation",
       "title": "Validation and Security of Biomedical AI",
-      "summary": "Dataset shift, leakage, bias, calibration, uncertainty, human evaluation, audit trails and adversarial/poisoning risks. A mandatory node before using AI in clinical and evidence workflows.",
+      "summary": "- Dataset shift\n- Leakage\n- Bias\n- Calibration\n- Uncertainty\n- Human evaluation\n- Audit trails\n- Adversarial/poisoning risks.\n\nA mandatory node before using AI in clinical and evidence workflows.",
       "kind": "skill",
       "topics": [
         "ml_ai",
@@ -2356,7 +2356,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of validation and security of biomedical ai: Dataset shift, leakage, bias, calibration, uncertainty, human evaluation, audit trails and adversarial/poisoning risks.",
+        "understand": "Explain the main concepts, assumptions and limitations of validation and security of biomedical ai:\n\n- Dataset shift\n- Leakage\n- Bias\n- Calibration\n- Uncertainty\n- Human evaluation\n- Audit trails\n- Adversarial/poisoning risks.",
         "apply": "Complete a scoped task in validation and security of biomedical ai, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for validation and security of biomedical ai; state the assumptions, checks and limitations."
@@ -2364,7 +2364,7 @@
     {
       "id": "simulation_systems_pharmacology",
       "title": "Modeling and systems pharmacology",
-      "summary": "Mechanistic models, PK/PD, network simulations, parameter fitting, sensitivity and uncertainty. Combination therapy and multi-target intervention planning.",
+      "summary": "- Mechanistic models\n- PK/PD\n- Network simulations\n- Parameter fitting\n- Sensitivity\n- Uncertainty.\n\nCombination therapy and multi-target intervention planning.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics",
@@ -2384,7 +2384,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of modeling and systems pharmacology: Mechanistic models, PK/PD, network simulations, parameter fitting, sensitivity and uncertainty.",
+        "understand": "Explain the main concepts, assumptions and limitations of modeling and systems pharmacology:\n\n- Mechanistic models\n- PK/PD\n- Network simulations\n- Parameter fitting\n- Sensitivity\n- Uncertainty.",
         "apply": "Complete a scoped task in modeling and systems pharmacology, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for modeling and systems pharmacology; state the assumptions, checks and limitations."
@@ -2392,7 +2392,7 @@
     {
       "id": "crispr_genome_editing",
       "title": "CRISPR and genome editing",
-      "summary": "CRISPR-Cas nucleases, base/prime editing, guide design, delivery, off-target analysis and functional screens. A platform for gene testing and targeted therapeutic interventions.",
+      "summary": "- CRISPR-Cas nucleases\n- Base/prime editing\n- Guide design\n- Delivery\n- Off-target analysis\n- Functional screens.\n\nA platform for gene testing and targeted therapeutic interventions.",
       "kind": "technology",
       "topics": [
         "genetic_synthetic_engineering",
@@ -2418,7 +2418,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of crispr and genome editing: CRISPR-Cas nucleases, base/prime editing, guide design, delivery, off-target analysis and functional screens.",
+        "understand": "Explain the main concepts, assumptions and limitations of crispr and genome editing:\n\n- CRISPR-Cas nucleases\n- Base/prime editing\n- Guide design\n- Delivery\n- Off-target analysis\n- Functional screens.",
         "apply": "Complete a scoped task in crispr and genome editing, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for crispr and genome editing; state the assumptions, checks and limitations."
@@ -2426,7 +2426,7 @@
     {
       "id": "gene_therapy_delivery",
       "title": "Gene therapy and delivery",
-      "summary": "AAV/lentiviral vectors, non-viral nanoparticles, tissue tropism, expression control, immunogenicity, manufacturing and biodistribution. The main bottleneck of system genetic interventions.",
+      "summary": "- AAV/lentiviral vectors\n- Non-viral nanoparticles\n- Tissue tropism\n- Expression control\n- Immunogenicity\n- Manufacturing\n- Biodistribution.\n\nThe main bottleneck of system genetic interventions.",
       "kind": "technology",
       "topics": [
         "genetic_synthetic_engineering",
@@ -2445,7 +2445,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of gene therapy and delivery: AAV/lentiviral vectors, non-viral nanoparticles, tissue tropism, expression control, immunogenicity, manufacturing and biodistribution.",
+        "understand": "Explain the main concepts, assumptions and limitations of gene therapy and delivery:\n\n- AAV/lentiviral vectors\n- Non-viral nanoparticles\n- Tissue tropism\n- Expression control\n- Immunogenicity\n- Manufacturing\n- Biodistribution.",
         "apply": "Integrate the required component skills in a documented project: Gene therapy and delivery. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for gene therapy and delivery; state the assumptions, checks and limitations."
@@ -2487,7 +2487,7 @@
     {
       "id": "synthetic_biology_circuits",
       "title": "Synthetic biology and gene circuits",
-      "summary": "Design-build-test-learn, promoters, sensors, logic gates, feedback, kill switches and engineered cells/microbes. A platform for monitoring and conditional response to damage states.",
+      "summary": "- Design-build-test-learn\n- Promoters\n- Sensors\n- Logic gates\n- Feedback\n- Kill switches\n- Engineered cells/microbes.\n\nA platform for monitoring and conditional response to damage states.",
       "kind": "technology",
       "topics": [
         "genetic_synthetic_engineering",
@@ -2513,7 +2513,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of synthetic biology and gene circuits: Design-build-test-learn, promoters, sensors, logic gates, feedback, kill switches and engineered cells/microbes.",
+        "understand": "Explain the main concepts, assumptions and limitations of synthetic biology and gene circuits:\n\n- Design-build-test-learn\n- Promoters\n- Sensors\n- Logic gates\n- Feedback\n- Kill switches\n- Engineered cells/microbes.",
         "apply": "Complete a scoped task in synthetic biology and gene circuits, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for synthetic biology and gene circuits; state the assumptions, checks and limitations."
@@ -2521,7 +2521,7 @@
     {
       "id": "protein_engineering",
       "title": "Protein engineering",
-      "summary": "Directed evolution, rational design, library screening, affinity/specificity, stability and developmentability. Enzymes, binders, biologics and synthetic repair systems.",
+      "summary": "- Directed evolution\n- Rational design\n- Library screening\n- Affinity/specificity\n- Stability\n- Developmentability.\n\nEnzymes, binders, biologics and synthetic repair systems.",
       "kind": "technology",
       "topics": [
         "genetic_synthetic_engineering",
@@ -2547,7 +2547,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of protein engineering: Directed evolution, rational design, library screening, affinity/specificity, stability and developmentability.",
+        "understand": "Explain the main concepts, assumptions and limitations of protein engineering:\n\n- Directed evolution\n- Rational design\n- Library screening\n- Affinity/specificity\n- Stability\n- Developmentability.",
         "apply": "Complete a scoped task in protein engineering, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for protein engineering; state the assumptions, checks and limitations."
@@ -2555,7 +2555,7 @@
     {
       "id": "drug_discovery_development",
       "title": "Drug discovery and development",
-      "summary": "Target validation, hit discovery, lead optimization, ADME/Tox, preclinical models, CMC and clinical development. Turns the mechanism into a testable drug intervention.",
+      "summary": "- Target validation\n- Hit discovery\n- Lead optimization\n- ADME/Tox\n- Preclinical models\n- CMC\n- Clinical development.\n\nTurns the mechanism into a testable drug intervention.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology",
@@ -2581,7 +2581,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of drug discovery and development: Target validation, hit discovery, lead optimization, ADME/Tox, preclinical models, CMC and clinical development.",
+        "understand": "Explain the main concepts, assumptions and limitations of drug discovery and development:\n\n- Target validation\n- Hit discovery\n- Lead optimization\n- ADME/Tox\n- Preclinical models\n- CMC\n- Clinical development.",
         "apply": "Integrate the required component skills in a documented project: Drug discovery and development. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for drug discovery and development; state the assumptions, checks and limitations."
@@ -2589,7 +2589,7 @@
     {
       "id": "ipsc_organoids",
       "title": "iPSC, differentiation and organoids",
-      "summary": "Reprogramming to pluripotency, directed differentiation, organoid self-organization, maturation and disease modeling. Tissue replacement and humanized aging models.",
+      "summary": "- Reprogramming to pluripotency\n- Directed differentiation\n- Organoid self-organization\n- Maturation\n- Disease modeling.\n\nTissue replacement and humanized aging models.",
       "kind": "technology",
       "topics": [
         "regenerative_medicine",
@@ -2615,7 +2615,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of ipsc, differentiation and organoids: Reprogramming to pluripotency, directed differentiation, organoid self-organization, maturation and disease modeling.",
+        "understand": "Explain the main concepts, assumptions and limitations of ipsc, differentiation and organoids:\n\n- Reprogramming to pluripotency\n- Directed differentiation\n- Organoid self-organization\n- Maturation\n- Disease modeling.",
         "apply": "Integrate the required component skills in a documented project: iPSC, differentiation and organoids. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for ipsc, differentiation and organoids; state the assumptions, checks and limitations."
@@ -2623,7 +2623,7 @@
     {
       "id": "tissue_engineering_biomaterials",
       "title": "Tissue engineering and biomaterials",
-      "summary": "Scaffolds, hydrogels, mechanics, cell-material interactions, vascularization and bioreactors. It is necessary for the growth and integration of functional tissues.",
+      "summary": "- Scaffolds\n- Hydrogels\n- Mechanics\n- Cell-material interactions\n- Vascularization\n- Bioreactors.\n\nIt is necessary for the growth and integration of functional tissues.",
       "kind": "technology",
       "topics": [
         "regenerative_medicine"
@@ -2641,7 +2641,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of tissue engineering and biomaterials: Scaffolds, hydrogels, mechanics, cell-material interactions, vascularization and bioreactors.",
+        "understand": "Explain the main concepts, assumptions and limitations of tissue engineering and biomaterials:\n\n- Scaffolds\n- Hydrogels\n- Mechanics\n- Cell-material interactions\n- Vascularization\n- Bioreactors.",
         "apply": "Complete a scoped task in tissue engineering and biomaterials, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for tissue engineering and biomaterials; state the assumptions, checks and limitations."
@@ -2649,7 +2649,7 @@
     {
       "id": "bioprinting_biofabrication",
       "title": "3D bioprinting and biofabrication",
-      "summary": "Bioinks, printing modalities, spatial patterning, organoid building blocks, perfusion and quality control. Active platform, but whole-organ manufacturing remains immature.",
+      "summary": "- Bioinks\n- Printing modalities\n- Spatial patterning\n- Organoid building blocks\n- Perfusion\n- Quality control.\n\nActive platform, but whole-organ manufacturing remains immature.",
       "kind": "technology",
       "topics": [
         "regenerative_medicine"
@@ -2674,7 +2674,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of 3d bioprinting and biofabrication: Bioinks, printing modalities, spatial patterning, organoid building blocks, perfusion and quality control.",
+        "understand": "Explain the main concepts, assumptions and limitations of 3d bioprinting and biofabrication:\n\n- Bioinks\n- Printing modalities\n- Spatial patterning\n- Organoid building blocks\n- Perfusion\n- Quality control.",
         "apply": "Complete a scoped task in 3d bioprinting and biofabrication, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for 3d bioprinting and biofabrication; state the assumptions, checks and limitations."
@@ -2682,7 +2682,7 @@
     {
       "id": "transplantation_xenobiology",
       "title": "Transplantation immunology and xenobiology",
-      "summary": "Rejection, tolerance, immunosuppression, donor engineering, zoonotic risk, surgery and graft monitoring. Organ replacement and xenotransplantation.",
+      "summary": "- Rejection\n- Tolerance\n- Immunosuppression\n- Donor engineering\n- Zoonotic risk\n- Surgery\n- Graft monitoring.\n\nOrgan replacement and xenotransplantation.",
       "kind": "technology",
       "topics": [
         "regenerative_medicine",
@@ -2716,7 +2716,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of transplantation immunology and xenobiology: Rejection, tolerance, immunosuppression, donor engineering, zoonotic risk, surgery and graft monitoring.",
+        "understand": "Explain the main concepts, assumptions and limitations of transplantation immunology and xenobiology:\n\n- Rejection\n- Tolerance\n- Immunosuppression\n- Donor engineering\n- Zoonotic risk\n- Surgery\n- Graft monitoring.",
         "apply": "Integrate the required component skills in a documented project: Transplantation immunology and xenobiology. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for transplantation immunology and xenobiology; state the assumptions, checks and limitations."
@@ -2724,7 +2724,7 @@
     {
       "id": "cryobiology_organ_preservation",
       "title": "Cryobiology and organ preservation",
-      "summary": "Ice formation, vitrification, cryoprotectant toxicity, perfusion, thermal stress and nanowarming. Real transplant-enabling area; whole-body revival not shown",
+      "summary": "- Ice formation\n- Vitrification\n- Cryoprotectant toxicity\n- Perfusion\n- Thermal stress\n- Nanowarming.\n\nReal transplant-enabling area; whole-body revival not shown",
       "kind": "technology",
       "topics": [
         "regenerative_medicine"
@@ -2749,7 +2749,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of cryobiology and organ preservation: Ice formation, vitrification, cryoprotectant toxicity, perfusion, thermal stress and nanowarming.",
+        "understand": "Explain the main concepts, assumptions and limitations of cryobiology and organ preservation:\n\n- Ice formation\n- Vitrification\n- Cryoprotectant toxicity\n- Perfusion\n- Thermal stress\n- Nanowarming.",
         "apply": "Complete a scoped task in cryobiology and organ preservation, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for cryobiology and organ preservation; state the assumptions, checks and limitations."
@@ -2757,7 +2757,7 @@
     {
       "id": "immune_cell_engineering",
       "title": "Immune-cell engineering",
-      "summary": "Engineered T/NK/macrophage cells, receptors, logic gates, persistence, exhaustion and safety switches. Potentially applied to cancer surveillance and senescent-cell clearance.",
+      "summary": "- Engineered T/NK/macrophage cells\n- Receptors\n- Logic gates\n- Persistence\n- Exhaustion\n- Safety switches.\n\nPotentially applied to cancer surveillance and senescent-cell clearance.",
       "kind": "technology",
       "topics": [
         "immunology_cancer",
@@ -2783,7 +2783,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of immune-cell engineering: Engineered T/NK/macrophage cells, receptors, logic gates, persistence, exhaustion and safety switches.",
+        "understand": "Explain the main concepts, assumptions and limitations of immune-cell engineering:\n\n- Engineered T/NK/macrophage cells\n- Receptors\n- Logic gates\n- Persistence\n- Exhaustion\n- Safety switches.",
         "apply": "Complete a scoped task in immune-cell engineering, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for immune-cell engineering; state the assumptions, checks and limitations."
@@ -2791,7 +2791,7 @@
     {
       "id": "biomarker_validation",
       "title": "Development and Validation of Biomarkers",
-      "summary": "Analytical validity, biological validity, prognostic value, responsiveness, external replication and clinical utility. It is mandatory before using clocks as endpoints.",
+      "summary": "- Analytical validity\n- Biological validity\n- Prognostic value\n- Responsiveness\n- External replication\n- Clinical utility.\n\nIt is mandatory before using clocks as endpoints.",
       "kind": "skill",
       "topics": [
         "geroscience",
@@ -2833,7 +2833,7 @@
     {
       "id": "combination_therapy_design",
       "title": "Design of combinations and multi-intervention trials",
-      "summary": "Interaction models, dose/schedule optimization, factorial/adaptive designs, safety constraints and component attribution. It is necessary for the transition from individual repairs to a system set of interventions.",
+      "summary": "- Interaction models\n- Dose/schedule optimization\n- Factorial/adaptive designs\n- Safety constraints\n- Component attribution.\n\nIt is necessary for the transition from individual repairs to a system set of interventions.",
       "kind": "skill",
       "topics": [
         "research_clinical",
@@ -2860,7 +2860,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of design of combinations and multi-intervention trials: Interaction models, dose/schedule optimization, factorial/adaptive designs, safety constraints and component attribution.",
+        "understand": "Explain the main concepts, assumptions and limitations of design of combinations and multi-intervention trials:\n\n- Interaction models\n- Dose/schedule optimization\n- Factorial/adaptive designs\n- Safety constraints\n- Component attribution.",
         "apply": "Complete a scoped task in design of combinations and multi-intervention trials, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for design of combinations and multi-intervention trials; state the assumptions, checks and limitations."
@@ -2910,7 +2910,7 @@
     {
       "id": "nad_redox_interventions",
       "title": "NAD+ and redox restoration",
-      "summary": "NAD biosynthesis/consumption, redox state, PARP, sirtuins and tissue-specific effects of NAD precursors.",
+      "summary": "- NAD biosynthesis/consumption\n- Redox state\n- PARP\n- Sirtuins\n- Tissue-specific effects of NAD precursors.",
       "kind": "research_direction",
       "topics": [
         "geroscience",
@@ -2945,7 +2945,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of nad+ and redox restoration: NAD biosynthesis/consumption, redox state, PARP, sirtuins and tissue-specific effects of NAD precursors.",
+        "understand": "Explain the main concepts, assumptions and limitations of nad+ and redox restoration:\n\n- NAD biosynthesis/consumption\n- Redox state\n- PARP\n- Sirtuins\n- Tissue-specific effects of NAD precursors.",
         "apply": "Complete a scoped task in nad+ and redox restoration, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for nad+ and redox restoration; state the assumptions, checks and limitations."
@@ -3061,7 +3061,7 @@
     {
       "id": "genome_maintenance_somatic_control",
       "title": "Genome maintenance and somatic clone control",
-      "summary": "DNA repair, replication stress, somatic mutation detection, clonal hematopoiesis, lineage dynamics and prevention of pathological clonal expansion.",
+      "summary": "- DNA repair\n- Replication stress\n- Somatic mutation detection\n- Clonal hematopoiesis\n- Lineage dynamics\n- Prevention of pathological clonal expansion.",
       "kind": "research_direction",
       "topics": [
         "geroscience",
@@ -3096,7 +3096,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of genome maintenance and somatic clone control: DNA repair, replication stress, somatic mutation detection, clonal hematopoiesis, lineage dynamics and prevention of pathological clonal expansion.",
+        "understand": "Explain the main concepts, assumptions and limitations of genome maintenance and somatic clone control:\n\n- DNA repair\n- Replication stress\n- Somatic mutation detection\n- Clonal hematopoiesis\n- Lineage dynamics\n- Prevention of pathological clonal expansion.",
         "apply": "Complete a scoped task in genome maintenance and somatic clone control, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for genome maintenance and somatic clone control; state the assumptions, checks and limitations."
@@ -3183,7 +3183,7 @@
     {
       "id": "immune_inflammaging_rejuvenation",
       "title": "Inflammaging, immunosenescence, HSC and thymus rejuvenation",
-      "summary": "Chronic inflammation, myeloid bias, T-cell repertoire, thymic epithelial cells, HSC quality and immune surveillance recovery.",
+      "summary": "- Chronic inflammation\n- Myeloid bias\n- T-cell repertoire\n- Thymic epithelial cells\n- HSC quality\n- Immune surveillance recovery.",
       "kind": "research_direction",
       "topics": [
         "geroscience",
@@ -3218,7 +3218,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of inflammaging, immunosenescence, hsc and thymus rejuvenation: Chronic inflammation, myeloid bias, T-cell repertoire, thymic epithelial cells, HSC quality and immune surveillance recovery.",
+        "understand": "Explain the main concepts, assumptions and limitations of inflammaging, immunosenescence, hsc and thymus rejuvenation:\n\n- Chronic inflammation\n- Myeloid bias\n- T-cell repertoire\n- Thymic epithelial cells\n- HSC quality\n- Immune surveillance recovery.",
         "apply": "Integrate the required component skills in a documented project: Inflammaging, immunosenescence, HSC and thymus rejuvenation. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for inflammaging, immunosenescence, hsc and thymus rejuvenation; state the assumptions, checks and limitations."
@@ -3226,7 +3226,7 @@
     {
       "id": "microbiome_longevity",
       "title": "Microbiome manipulation for healthy aging",
-      "summary": "Host-microbe interactions, barrier integrity, microbial metabolites, diet, phages/probiotics and causal intervention design.",
+      "summary": "- Host-microbe interactions\n- Barrier integrity\n- Microbial metabolites\n- Diet\n- Phages/probiotics\n- Causal intervention design.",
       "kind": "research_direction",
       "topics": [
         "geroscience",
@@ -3261,7 +3261,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of microbiome manipulation for healthy aging: Host-microbe interactions, barrier integrity, microbial metabolites, diet, phages/probiotics and causal intervention design.",
+        "understand": "Explain the main concepts, assumptions and limitations of microbiome manipulation for healthy aging:\n\n- Host-microbe interactions\n- Barrier integrity\n- Microbial metabolites\n- Diet\n- Phages/probiotics\n- Causal intervention design.",
         "apply": "Complete a scoped task in microbiome manipulation for healthy aging, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for microbiome manipulation for healthy aging; state the assumptions, checks and limitations."
@@ -3298,7 +3298,7 @@
     {
       "id": "stem_cell_regeneration",
       "title": "Stem-cell rejuvenation and regenerative signaling",
-      "summary": "Aged stem-cell niches, quiescence/activation, lineage bias, Wnt/Notch/TGF-β and tissue regenerative function restoration.",
+      "summary": "- Aged stem-cell niches\n- Quiescence/activation\n- Lineage bias\n- Wnt/Notch/TGF-β\n- Tissue regenerative function restoration.",
       "kind": "research_direction",
       "topics": [
         "geroscience",
@@ -3326,7 +3326,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of stem-cell rejuvenation and regenerative signaling: Aged stem-cell niches, quiescence/activation, lineage bias, Wnt/Notch/TGF-β and tissue regenerative function restoration.",
+        "understand": "Explain the main concepts, assumptions and limitations of stem-cell rejuvenation and regenerative signaling:\n\n- Aged stem-cell niches\n- Quiescence/activation\n- Lineage bias\n- Wnt/Notch/TGF-β\n- Tissue regenerative function restoration.",
         "apply": "Complete a scoped task in stem-cell rejuvenation and regenerative signaling, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for stem-cell rejuvenation and regenerative signaling; state the assumptions, checks and limitations."
@@ -3370,7 +3370,7 @@
     {
       "id": "ecm_crosslinks_fibrosis",
       "title": "ECM rejuvenation, cross-links, AGE and fibrosis",
-      "summary": "Matrix turnover, collagen/elastin damage, glycation cross-links, proteolysis, mechanotransduction and organ-specific fibrosis reversal.",
+      "summary": "- Matrix turnover\n- Collagen/elastin damage\n- Glycation cross-links\n- Proteolysis\n- Mechanotransduction\n- Organ-specific fibrosis reversal.",
       "kind": "research_direction",
       "topics": [
         "geroscience",
@@ -3398,7 +3398,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of ecm rejuvenation, cross-links, age and fibrosis: Matrix turnover, collagen/elastin damage, glycation cross-links, proteolysis, mechanotransduction and organ-specific fibrosis reversal.",
+        "understand": "Explain the main concepts, assumptions and limitations of ecm rejuvenation, cross-links, age and fibrosis:\n\n- Matrix turnover\n- Collagen/elastin damage\n- Glycation cross-links\n- Proteolysis\n- Mechanotransduction\n- Organ-specific fibrosis reversal.",
         "apply": "Complete a scoped task in ecm rejuvenation, cross-links, age and fibrosis, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for ecm rejuvenation, cross-links, age and fibrosis; state the assumptions, checks and limitations."
@@ -3406,7 +3406,7 @@
     {
       "id": "vascular_rejuvenation",
       "title": "Vascular rejuvenation and atherosclerosis reversal",
-      "summary": "Endothelium, lipid retention, inflammation, senescence, thrombosis, plaque imaging, and disease-specific vascular repair.",
+      "summary": "- Endothelium\n- Lipid retention\n- Inflammation\n- Senescence\n- Thrombosis\n- Plaque imaging\n- Disease-specific vascular repair.",
       "kind": "research_direction",
       "topics": [
         "geroscience",
@@ -3441,7 +3441,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of vascular rejuvenation and atherosclerosis reversal: Endothelium, lipid retention, inflammation, senescence, thrombosis, plaque imaging, and disease-specific vascular repair.",
+        "understand": "Explain the main concepts, assumptions and limitations of vascular rejuvenation and atherosclerosis reversal:\n\n- Endothelium\n- Lipid retention\n- Inflammation\n- Senescence\n- Thrombosis\n- Plaque imaging\n- Disease-specific vascular repair.",
         "apply": "Complete a scoped task in vascular rejuvenation and atherosclerosis reversal, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for vascular rejuvenation and atherosclerosis reversal; state the assumptions, checks and limitations."
@@ -3449,7 +3449,7 @@
     {
       "id": "cancer_proofing_surveillance",
       "title": "Cancer-proofing and tumor surveillance",
-      "summary": "Genome stability, early detection, immune surveillance, engineered immune cells and safety constraints for regenerative and reprogramming therapies.",
+      "summary": "- Genome stability\n- Early detection\n- Immune surveillance\n- Engineered immune cells\n- Safety constraints for regenerative and reprogramming therapies.",
       "kind": "research_direction",
       "topics": [
         "immunology_cancer",
@@ -3476,7 +3476,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of cancer-proofing and tumor surveillance: Genome stability, early detection, immune surveillance, engineered immune cells and safety constraints for regenerative and reprogramming therapies.",
+        "understand": "Explain the main concepts, assumptions and limitations of cancer-proofing and tumor surveillance:\n\n- Genome stability\n- Early detection\n- Immune surveillance\n- Engineered immune cells\n- Safety constraints for regenerative and reprogramming therapies.",
         "apply": "Complete a scoped task in cancer-proofing and tumor surveillance, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for cancer-proofing and tumor surveillance; state the assumptions, checks and limitations."
@@ -3555,7 +3555,7 @@
     {
       "id": "brain_microglial_rejuvenation",
       "title": "Brain rejuvenation, microglia and neuroregeneration",
-      "summary": "Neurons, synapses, myelin, microglia, neural stem cells, vasculature, and network integration in brain aging.",
+      "summary": "- Neurons\n- Synapses\n- Myelin\n- Microglia\n- Neural stem cells\n- Vasculature\n- Network integration in brain aging.",
       "kind": "research_direction",
       "topics": [
         "physiology_neuroscience",
@@ -3590,7 +3590,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of brain rejuvenation, microglia and neuroregeneration: Neurons, synapses, myelin, microglia, neural stem cells, vasculature, and network integration in brain aging.",
+        "understand": "Explain the main concepts, assumptions and limitations of brain rejuvenation, microglia and neuroregeneration:\n\n- Neurons\n- Synapses\n- Myelin\n- Microglia\n- Neural stem cells\n- Vasculature\n- Network integration in brain aging.",
         "apply": "Integrate the required component skills in a documented project: Brain rejuvenation, microglia and neuroregeneration. Use the component tasks and their quality criteria to assess readiness."
       },
       "practice": "Choose a component for a focused task, or complete the required components shown in the full-container path. Produce an annotated worked example using the linked material for brain rejuvenation, microglia and neuroregeneration; state the assumptions, checks and limitations."
@@ -3598,7 +3598,7 @@
     {
       "id": "cell_tissue_organ_replacement",
       "title": "Cell, tissue and organ replacement",
-      "summary": "Cell and tissue replacement, organoids, engineered grafts, stem-cell-derived organs, bioprinting and whole-organ engineering.",
+      "summary": "- Cell and tissue replacement\n- Organoids\n- Engineered grafts\n- Stem-cell-derived organs\n- Bioprinting\n- Whole-organ engineering.",
       "kind": "research_direction",
       "topics": [
         "regenerative_medicine"
@@ -3624,7 +3624,7 @@
       ],
       "parent_id": null,
       "outcomes": {
-        "understand": "Explain the main concepts, assumptions and limitations of cell, tissue and organ replacement: Cell and tissue replacement, organoids, engineered grafts, stem-cell-derived organs, bioprinting and whole-organ engineering.",
+        "understand": "Explain the main concepts, assumptions and limitations of cell, tissue and organ replacement:\n\n- Cell and tissue replacement\n- Organoids\n- Engineered grafts\n- Stem-cell-derived organs\n- Bioprinting\n- Whole-organ engineering.",
         "apply": "Complete a scoped task in cell, tissue and organ replacement, document the method and evaluate the result against an appropriate reference or control."
       },
       "practice": "Produce an annotated worked example using the linked material for cell, tissue and organ replacement; state the assumptions, checks and limitations."
@@ -3966,7 +3966,7 @@
     {
       "id": "introduction_longevity",
       "title": "Introduction to longevity",
-      "summary": "Aging mechanisms, healthspan goals, research tools and technological hypotheses.",
+      "summary": "- Aging mechanisms\n- Healthspan goals\n- Research tools\n- Technological hypotheses.",
       "kind": "discipline",
       "topics": [
         "geroscience"
@@ -4038,7 +4038,7 @@
     {
       "id": "longevity_biology_overview",
       "title": "Living systems and aging",
-      "summary": "Cells, tissues, homeostasis and the scope of aging biology.",
+      "summary": "- Cells\n- Tissues\n- Homeostasis\n- The scope of aging biology.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -4066,7 +4066,7 @@
     {
       "id": "longevity_mechanisms_overview",
       "title": "Why organisms age",
-      "summary": "Damage, regulation and evolutionary explanations of aging.",
+      "summary": "- Damage\n- Regulation\n- Evolutionary explanations of aging.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -4094,7 +4094,7 @@
     {
       "id": "longevity_evidence_overview",
       "title": "Reading longevity claims",
-      "summary": "Association, experimental causality and evidence in humans.",
+      "summary": "- Association\n- Experimental causality\n- Evidence in humans.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -4262,7 +4262,7 @@
     {
       "id": "r_bioconductor",
       "title": "R and Bioconductor data workflows",
-      "summary": "R data structures, data frames and Bioconductor experiment objects.",
+      "summary": "- R data structures\n- Data frames\n- Bioconductor experiment objects.",
       "kind": "skill",
       "topics": [
         "computing_data"
@@ -4299,7 +4299,7 @@
     {
       "id": "regression_glm",
       "title": "Regression and generalized linear models",
-      "summary": "Regression coefficients, link functions, covariate adjustment and residual checks.",
+      "summary": "- Regression coefficients\n- Link functions\n- Covariate adjustment\n- Residual checks.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -4327,7 +4327,7 @@
     {
       "id": "longitudinal_mixed_models",
       "title": "Longitudinal and mixed-effects analysis",
-      "summary": "Within-subject correlation, random effects and changes over time.",
+      "summary": "- Within-subject correlation\n- Random effects\n- Changes over time.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -4364,7 +4364,7 @@
     {
       "id": "survival_analysis",
       "title": "Survival, censoring and competing risks",
-      "summary": "Event times, censoring, survival curves and competing events.",
+      "summary": "- Event times\n- Censoring\n- Survival curves\n- Competing events.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -4431,7 +4431,7 @@
     {
       "id": "multiple_testing_batch",
       "title": "Multiple testing, confounding and batch effects",
-      "summary": "False discovery control, technical confounding and the limits of batch correction.",
+      "summary": "- False discovery control\n- Technical confounding\n- The limits of batch correction.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -4487,7 +4487,7 @@
     {
       "id": "galaxy_workflows",
       "title": "Galaxy workflows and data provenance",
-      "summary": "Datasets, histories, parameters and workflow provenance in Galaxy.",
+      "summary": "- Datasets\n- Histories\n- Parameters\n- Workflow provenance in Galaxy.",
       "kind": "skill",
       "topics": [
         "computing_data"
@@ -4514,7 +4514,7 @@
     {
       "id": "practical_epigenomics",
       "title": "Practical epigenomics",
-      "summary": "Methylation, accessibility and chromatin-occupancy measurements.",
+      "summary": "- Methylation\n- Accessibility\n- Chromatin-occupancy measurements.",
       "kind": "discipline",
       "topics": [
         "bioinformatics_omics"
@@ -4567,7 +4567,7 @@
     {
       "id": "dna_methylation_analysis",
       "title": "DNA methylation measurement and analysis",
-      "summary": "Bisulfite conversion, CpG coverage, methylation estimates and cell composition.",
+      "summary": "- Bisulfite conversion\n- CpG coverage\n- Methylation estimates\n- Cell composition.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4613,7 +4613,7 @@
     {
       "id": "chromatin_accessibility_analysis",
       "title": "Chromatin accessibility and ATAC-seq",
-      "summary": "Accessibility measurements, peak calling and library-quality metrics.",
+      "summary": "- Accessibility measurements\n- Peak calling\n- Library-quality metrics.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4640,7 +4640,7 @@
     {
       "id": "chromatin_occupancy_analysis",
       "title": "Chromatin occupancy and ChIP-seq",
-      "summary": "Immunoprecipitation, input controls, enrichment and peak interpretation.",
+      "summary": "- Immunoprecipitation\n- Input controls\n- Enrichment\n- Peak interpretation.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4668,7 +4668,7 @@
     {
       "id": "sequencing_qc",
       "title": "Sequencing quality control",
-      "summary": "Read quality, adapters, coverage and sample-level quality failures.",
+      "summary": "- Read quality\n- Adapters\n- Coverage\n- Sample-level quality failures.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4695,7 +4695,7 @@
     {
       "id": "rna_counts_design",
       "title": "RNA-seq counts and experimental contrasts",
-      "summary": "Count matrices, biological replication and design matrices.",
+      "summary": "- Count matrices\n- Biological replication\n- Design matrices.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4742,7 +4742,7 @@
     {
       "id": "rna_differential_expression",
       "title": "Differential expression and pathway interpretation",
-      "summary": "Count normalization, dispersion, contrasts and enrichment biases.",
+      "summary": "- Count normalization\n- Dispersion\n- Contrasts\n- Enrichment biases.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4819,7 +4819,7 @@
     {
       "id": "single_cell_qc_annotation",
       "title": "Single-cell QC and cell annotation",
-      "summary": "Cell filtering, normalization, doublets and reference-based annotation.",
+      "summary": "- Cell filtering\n- Normalization\n- Doublets\n- Reference-based annotation.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4875,7 +4875,7 @@
     {
       "id": "spatial_omics_analysis",
       "title": "Spatial omics and tissue context",
-      "summary": "Spatial sampling, spots, segmentation and tissue-context effects.",
+      "summary": "- Spatial sampling\n- Spots\n- Segmentation\n- Tissue-context effects.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4903,7 +4903,7 @@
     {
       "id": "metagenomic_analysis",
       "title": "Metagenomics and microbiome data analysis",
-      "summary": "Taxonomic and functional profiling, contamination and compositional data.",
+      "summary": "- Taxonomic and functional profiling\n- Contamination\n- Compositional data.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -4931,7 +4931,7 @@
     {
       "id": "protein_structure_interpretation",
       "title": "Interpreting protein structures",
-      "summary": "Structural domains, interactions and uncertainty in predicted structures.",
+      "summary": "- Structural domains\n- Interactions\n- Uncertainty in predicted structures.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -4959,7 +4959,7 @@
     {
       "id": "molecular_docking",
       "title": "Molecular docking and scoring",
-      "summary": "Pose search, scoring, receptor preparation and limitations of affinity inference.",
+      "summary": "- Pose search\n- Scoring\n- Receptor preparation\n- Limitations of affinity inference.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -4986,7 +4986,7 @@
     {
       "id": "molecular_dynamics",
       "title": "Molecular dynamics and trajectory analysis",
-      "summary": "Force fields, ensembles, equilibration and sampling limitations.",
+      "summary": "- Force fields\n- Ensembles\n- Equilibration\n- Sampling limitations.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -5014,7 +5014,7 @@
     {
       "id": "molecular_free_energy",
       "title": "Free-energy methods and uncertainty",
-      "summary": "Thermodynamic cycles, alchemical transformations and convergence.",
+      "summary": "- Thermodynamic cycles\n- Alchemical transformations\n- Convergence.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -5042,7 +5042,7 @@
     {
       "id": "fluorescence_microscopy",
       "title": "Fluorescence microscopy and acquisition",
-      "summary": "Resolution, fluorescence, photobleaching and detector limitations.",
+      "summary": "- Resolution\n- Fluorescence\n- Photobleaching\n- Detector limitations.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -5070,7 +5070,7 @@
     {
       "id": "flow_panel_design",
       "title": "Flow cytometry panels and controls",
-      "summary": "Fluorophore overlap, compensation, biological controls and panel design.",
+      "summary": "- Fluorophore overlap\n- Compensation\n- Biological controls\n- Panel design.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -5151,7 +5151,7 @@
     {
       "id": "cell_sorting",
       "title": "Cell sorting and post-sort quality",
-      "summary": "Sorting purity, yield, viability and sample-handling tradeoffs.",
+      "summary": "- Sorting purity\n- Yield\n- Viability\n- Sample-handling tradeoffs.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -5187,7 +5187,7 @@
     {
       "id": "mass_spectrometry_qc",
       "title": "Mass spectrometry and analytical QC",
-      "summary": "Ionization, separation, spectra, standards and measurement uncertainty.",
+      "summary": "- Ionization\n- Separation\n- Spectra\n- Standards\n- Measurement uncertainty.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -5224,7 +5224,7 @@
     {
       "id": "proteomics_analysis",
       "title": "Proteomics identification and quantification",
-      "summary": "Peptide identification, protein inference and quantitative proteomics.",
+      "summary": "- Peptide identification\n- Protein inference\n- Quantitative proteomics.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -5252,7 +5252,7 @@
     {
       "id": "metabolomics_analysis",
       "title": "Metabolomics processing and interpretation",
-      "summary": "Feature detection, metabolite annotation and pathway interpretation limits.",
+      "summary": "- Feature detection\n- Metabolite annotation\n- Pathway interpretation limits.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -5289,7 +5289,7 @@
     {
       "id": "lipidomics_analysis",
       "title": "Lipidomics identification and analysis",
-      "summary": "Lipid classes, isomers, adducts and identification confidence.",
+      "summary": "- Lipid classes\n- Isomers\n- Adducts\n- Identification confidence.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -5363,7 +5363,7 @@
     {
       "id": "drug_hit_validation",
       "title": "Hit discovery and validation",
-      "summary": "Primary screens, counter-screens, assay interference and reproducible hits.",
+      "summary": "- Primary screens\n- Counter-screens\n- Assay interference\n- Reproducible hits.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -5428,7 +5428,7 @@
     {
       "id": "adme_pkpd",
       "title": "ADME and PK/PD analysis",
-      "summary": "Absorption, distribution, clearance, exposure and response.",
+      "summary": "- Absorption\n- Distribution\n- Clearance\n- Exposure\n- Response.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -5456,7 +5456,7 @@
     {
       "id": "preclinical_safety",
       "title": "Preclinical efficacy and toxicology",
-      "summary": "Model relevance, dose selection, safety margins and translational uncertainty.",
+      "summary": "- Model relevance\n- Dose selection\n- Safety margins\n- Translational uncertainty.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -5502,7 +5502,7 @@
     {
       "id": "clinical_development",
       "title": "Clinical translation of a candidate intervention",
-      "summary": "Development phases, context of use, endpoints and benefit-risk assessment.",
+      "summary": "- Development phases\n- Context of use\n- Endpoints\n- Benefit-risk assessment.",
       "kind": "skill",
       "topics": [
         "chemistry_pharmacology"
@@ -5538,7 +5538,7 @@
     {
       "id": "bioproduct_development",
       "title": "Reproducible biological product development",
-      "summary": "Product identity, potency, process consistency and scale-up.",
+      "summary": "- Product identity\n- Potency\n- Process consistency\n- Scale-up.",
       "kind": "discipline",
       "topics": [
         "regenerative_medicine"
@@ -5575,7 +5575,7 @@
     {
       "id": "product_quality_attributes",
       "title": "Identity, purity and potency",
-      "summary": "Product identity, purity, viability, potency and their assays.",
+      "summary": "- Product identity\n- Purity\n- Viability\n- Potency\n- Their assays.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -5612,7 +5612,7 @@
     {
       "id": "bioprocess_scaleup",
       "title": "Bioprocess development and scale-up",
-      "summary": "Process parameters, mass transfer, yield and comparability at scale.",
+      "summary": "- Process parameters\n- Mass transfer\n- Yield\n- Comparability at scale.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -5649,7 +5649,7 @@
     {
       "id": "batch_release_comparability",
       "title": "Batch release and comparability",
-      "summary": "Specifications, reference standards, sampling and batch-to-batch variability.",
+      "summary": "- Specifications\n- Reference standards\n- Sampling\n- Batch-to-batch variability.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -5722,7 +5722,7 @@
     {
       "id": "gene_expression_control",
       "title": "Gene-expression cassettes and control",
-      "summary": "Promoters, regulatory elements, transgene expression and controllability.",
+      "summary": "- Promoters\n- Regulatory elements\n- Transgene expression\n- Controllability.",
       "kind": "skill",
       "topics": [
         "genetic_synthetic_engineering"
@@ -5760,7 +5760,7 @@
     {
       "id": "viral_gene_delivery",
       "title": "Viral gene-delivery platforms",
-      "summary": "AAV and lentiviral vector properties, tropism, capacity and persistence.",
+      "summary": "- AAV and lentiviral vector properties\n- Tropism\n- Capacity\n- Persistence.",
       "kind": "skill",
       "topics": [
         "genetic_synthetic_engineering"
@@ -5797,7 +5797,7 @@
     {
       "id": "nonviral_gene_delivery",
       "title": "Nonviral delivery and formulation",
-      "summary": "Nucleic-acid delivery barriers, nanoparticles, uptake and endosomal escape.",
+      "summary": "- Nucleic-acid delivery barriers\n- Nanoparticles\n- Uptake\n- Endosomal escape.",
       "kind": "skill",
       "topics": [
         "genetic_synthetic_engineering"
@@ -5834,7 +5834,7 @@
     {
       "id": "delivery_targeting",
       "title": "Tissue targeting and expression specificity",
-      "summary": "Tissue tropism, targeting, expression restriction and off-target exposure.",
+      "summary": "- Tissue tropism\n- Targeting\n- Expression restriction\n- Off-target exposure.",
       "kind": "skill",
       "topics": [
         "genetic_synthetic_engineering"
@@ -5871,7 +5871,7 @@
     {
       "id": "delivery_biodistribution_safety",
       "title": "Biodistribution and immunogenicity",
-      "summary": "Distribution, persistence, immune responses and unintended tissue exposure.",
+      "summary": "- Distribution\n- Persistence\n- Immune responses\n- Unintended tissue exposure.",
       "kind": "skill",
       "topics": [
         "genetic_synthetic_engineering"
@@ -5899,7 +5899,7 @@
     {
       "id": "ipsc_maintenance_qc",
       "title": "iPSC maintenance and quality control",
-      "summary": "Identity, genomic stability, contamination and undifferentiated-state checks.",
+      "summary": "- Identity\n- Genomic stability\n- Contamination\n- Undifferentiated-state checks.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -5936,7 +5936,7 @@
     {
       "id": "pluripotent_reprogramming",
       "title": "Reprogramming to pluripotency",
-      "summary": "Reprogramming, pluripotency and preservation or loss of age-associated features.",
+      "summary": "- Reprogramming\n- Pluripotency\n- Preservation or loss of age-associated features.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -5972,7 +5972,7 @@
     {
       "id": "directed_differentiation",
       "title": "Directed differentiation and lineage identity",
-      "summary": "Lineage specification, differentiation efficiency and residual pluripotent cells.",
+      "summary": "- Lineage specification\n- Differentiation efficiency\n- Residual pluripotent cells.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6008,7 +6008,7 @@
     {
       "id": "organoid_culture_models",
       "title": "Organoid culture and model selection",
-      "summary": "Self-organization, organoid heterogeneity and choice of reference tissue.",
+      "summary": "- Self-organization\n- Organoid heterogeneity\n- Choice of reference tissue.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6081,7 +6081,7 @@
     {
       "id": "transplant_rejection_tolerance",
       "title": "Transplant rejection and tolerance",
-      "summary": "Allorecognition, rejection mechanisms and immunological tolerance.",
+      "summary": "- Allorecognition\n- Rejection mechanisms\n- Immunological tolerance.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6117,7 +6117,7 @@
     {
       "id": "transplant_immunosuppression",
       "title": "Immunosuppression and graft monitoring",
-      "summary": "Immune control, infection tradeoffs and monitoring of graft function.",
+      "summary": "- Immune control\n- Infection tradeoffs\n- Monitoring of graft function.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6153,7 +6153,7 @@
     {
       "id": "donor_engineering",
       "title": "Donor engineering and compatibility",
-      "summary": "Donor genetic modifications, compatibility and limits of animal-to-human translation.",
+      "summary": "- Donor genetic modifications\n- Compatibility\n- Limits of animal-to-human translation.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6180,7 +6180,7 @@
     {
       "id": "xeno_infection_surveillance",
       "title": "Xenotransplant infection surveillance",
-      "summary": "Zoonotic risk, source-animal characterization and longitudinal surveillance.",
+      "summary": "- Zoonotic risk\n- Source-animal characterization\n- Longitudinal surveillance.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6216,7 +6216,7 @@
     {
       "id": "organ_perfusion_preservation",
       "title": "Organ perfusion and preservation",
-      "summary": "Ischemic injury, perfusion, preservation and recovery of organ function.",
+      "summary": "- Ischemic injury\n- Perfusion\n- Preservation\n- Recovery of organ function.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6252,7 +6252,7 @@
     {
       "id": "graft_function_assessment",
       "title": "Graft function and integration",
-      "summary": "Organ-specific graft function, vascular integration and longitudinal failure.",
+      "summary": "- Organ-specific graft function\n- Vascular integration\n- Longitudinal failure.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6288,7 +6288,7 @@
     {
       "id": "transplant_surgical_research",
       "title": "Surgical research planning for transplantation",
-      "summary": "Anastomosis, perfusion continuity and perioperative confounding at a conceptual level.",
+      "summary": "- Anastomosis\n- Perfusion continuity\n- Perioperative confounding at a conceptual level.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -6360,7 +6360,7 @@
     {
       "id": "senescence_measurement",
       "title": "Measuring senescence and SASP",
-      "summary": "Heterogeneity, marker specificity and beneficial as well as pathological senescence.",
+      "summary": "- Heterogeneity\n- Marker specificity\n- Beneficial as well as pathological senescence.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -6432,7 +6432,7 @@
     {
       "id": "mitochondrial_function_measurement",
       "title": "Measuring mitochondrial function",
-      "summary": "Respiration, membrane potential, mass, redox state and cell viability.",
+      "summary": "- Respiration\n- Membrane potential\n- Mass\n- Redox state\n- Cell viability.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -6468,7 +6468,7 @@
     {
       "id": "dna_damage_repair_assays",
       "title": "DNA damage and repair assays",
-      "summary": "DNA damage, repair activity and accumulated mutations.",
+      "summary": "- DNA damage\n- Repair activity\n- Accumulated mutations.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -6541,7 +6541,7 @@
     {
       "id": "histology_pathology",
       "title": "Histology and quantitative pathology",
-      "summary": "Tissue organization, sampling artifacts and histopathological changes.",
+      "summary": "- Tissue organization\n- Sampling artifacts\n- Histopathological changes.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -6578,7 +6578,7 @@
     {
       "id": "electrophysiology",
       "title": "Electrophysiology and neural recordings",
-      "summary": "Membrane potentials, excitability, synaptic signals and recording artifacts.",
+      "summary": "- Membrane potentials\n- Excitability\n- Synaptic signals\n- Recording artifacts.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -6606,7 +6606,7 @@
     {
       "id": "cognitive_behavioral_assessment",
       "title": "Behavioral and cognitive assessment",
-      "summary": "Construct validity, learning effects, blinding and behavioral confounders.",
+      "summary": "- Construct validity\n- Learning effects\n- Blinding\n- Behavioral confounders.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -6642,7 +6642,7 @@
     {
       "id": "immune_aging_phenotyping",
       "title": "Immune aging and immunophenotyping",
-      "summary": "Immune-cell composition, activation, exhaustion and age-associated functional changes.",
+      "summary": "- Immune-cell composition\n- Activation\n- Exhaustion\n- Age-associated functional changes.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -6687,7 +6687,7 @@
     {
       "id": "hsc_niche_aging",
       "title": "HSC, hematopoiesis and the aging niche",
-      "summary": "Stem-cell quiescence, lineage bias, niche signals and clonal expansion.",
+      "summary": "- Stem-cell quiescence\n- Lineage bias\n- Niche signals\n- Clonal expansion.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -6722,7 +6722,7 @@
     {
       "id": "thymus_regeneration",
       "title": "Thymic aging and regeneration",
-      "summary": "Thymic epithelium, T-cell development, involution and regeneration barriers.",
+      "summary": "- Thymic epithelium\n- T-cell development\n- Involution\n- Regeneration barriers.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -6758,7 +6758,7 @@
     {
       "id": "tcell_repertoire",
       "title": "T-cell repertoire and immune competence",
-      "summary": "Repertoire diversity, clonal expansion and immune-response competence.",
+      "summary": "- Repertoire diversity\n- Clonal expansion\n- Immune-response competence.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -6786,7 +6786,7 @@
     {
       "id": "inflammaging_interventions",
       "title": "Inflammaging and inflammatory resolution",
-      "summary": "Persistent inflammation, innate sensing and resolution mechanisms.",
+      "summary": "- Persistent inflammation\n- Innate sensing\n- Resolution mechanisms.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -6822,7 +6822,7 @@
     {
       "id": "microglial_aging",
       "title": "Microglial aging and neuroinflammation",
-      "summary": "Microglial homeostasis, inflammatory states and interactions with neurons.",
+      "summary": "- Microglial homeostasis\n- Inflammatory states\n- Interactions with neurons.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -6858,7 +6858,7 @@
     {
       "id": "synaptic_aging",
       "title": "Synaptic aging and circuit function",
-      "summary": "Synaptic plasticity, circuit activity and functional impairment with age.",
+      "summary": "- Synaptic plasticity\n- Circuit activity\n- Functional impairment with age.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -6886,7 +6886,7 @@
     {
       "id": "myelin_aging",
       "title": "Myelin aging and remyelination",
-      "summary": "Oligodendrocytes, myelin maintenance and regeneration constraints.",
+      "summary": "- Oligodendrocytes\n- Myelin maintenance\n- Regeneration constraints.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -6957,7 +6957,7 @@
     {
       "id": "neurovascular_aging",
       "title": "Neurovascular aging and barrier function",
-      "summary": "Neurovascular coupling, perfusion and blood-brain barrier integrity.",
+      "summary": "- Neurovascular coupling\n- Perfusion\n- Blood-brain barrier integrity.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -6994,7 +6994,7 @@
     {
       "id": "neural_graft_integration",
       "title": "Neural graft maturation and circuit integration",
-      "summary": "Graft identity, maturation, connectivity and functional integration.",
+      "summary": "- Graft identity\n- Maturation\n- Connectivity\n- Functional integration.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7030,7 +7030,7 @@
     {
       "id": "healthspan_function",
       "title": "Organismal function and healthspan",
-      "summary": "Lifespan, disease burden, function, frailty and resilience.",
+      "summary": "- Lifespan\n- Disease burden\n- Function\n- Frailty\n- Resilience.",
       "kind": "discipline",
       "topics": [
         "research_clinical"
@@ -7093,7 +7093,7 @@
     {
       "id": "frailty_resilience",
       "title": "Frailty, reserve and resilience",
-      "summary": "Accumulated deficits, functional reserve and recovery after a stressor.",
+      "summary": "- Accumulated deficits\n- Functional reserve\n- Recovery after a stressor.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -7138,7 +7138,7 @@
     {
       "id": "lifespan_study_design",
       "title": "Lifespan and healthspan study design",
-      "summary": "Species, sex, background, intervention timing, mortality and functional follow-up.",
+      "summary": "- Species\n- Sex\n- Background\n- Intervention timing\n- Mortality\n- Functional follow-up.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -7175,7 +7175,7 @@
     {
       "id": "outcome_interpretation",
       "title": "Interpreting intervention outcomes",
-      "summary": "Molecular response, functional benefit, adverse effects and survival.",
+      "summary": "- Molecular response\n- Functional benefit\n- Adverse effects\n- Survival.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -7256,7 +7256,7 @@
     {
       "id": "invertebrate_aging_models",
       "title": "Invertebrate aging models",
-      "summary": "Genetic background, husbandry and lifespan/healthspan readouts in invertebrates.",
+      "summary": "- Genetic background\n- Husbandry\n- Lifespan/healthspan readouts in invertebrates.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -7293,7 +7293,7 @@
     {
       "id": "mammalian_aging_models",
       "title": "Mammalian aging studies",
-      "summary": "Aged cohorts, sex and strain effects, husbandry, pathology and reproducibility.",
+      "summary": "- Aged cohorts\n- Sex and strain effects\n- Husbandry\n- Pathology\n- Reproducibility.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -7330,7 +7330,7 @@
     {
       "id": "population_aging",
       "title": "Human populations and aging",
-      "summary": "Cohort design, selection, population heterogeneity and age-related trajectories.",
+      "summary": "- Cohort design\n- Selection\n- Population heterogeneity\n- Age-related trajectories.",
       "kind": "discipline",
       "topics": [
         "research_clinical"
@@ -7367,7 +7367,7 @@
     {
       "id": "aging_epidemiology",
       "title": "Epidemiology of aging",
-      "summary": "Incidence, prevalence, selection and observational study designs.",
+      "summary": "- Incidence\n- Prevalence\n- Selection\n- Observational study designs.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -7395,7 +7395,7 @@
     {
       "id": "longitudinal_aging_cohorts",
       "title": "Longitudinal aging cohorts",
-      "summary": "Repeated observations, attrition, cohort effects and time-varying exposures.",
+      "summary": "- Repeated observations\n- Attrition\n- Cohort effects\n- Time-varying exposures.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -7432,7 +7432,7 @@
     {
       "id": "longevity_population_comparisons",
       "title": "Longevity and population comparisons",
-      "summary": "Survival selection, birth-cohort differences and genetic or environmental explanations.",
+      "summary": "- Survival selection\n- Birth-cohort differences\n- Genetic or environmental explanations.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -7469,7 +7469,7 @@
     {
       "id": "human_aging_heterogeneity",
       "title": "Heterogeneity and generalizability",
-      "summary": "Sex, ancestry, environment, multimorbidity and medication effects on aging studies.",
+      "summary": "- Sex\n- Ancestry\n- Environment\n- Multimorbidity\n- Medication effects on aging studies.",
       "kind": "skill",
       "topics": [
         "research_clinical"
@@ -7541,7 +7541,7 @@
     {
       "id": "muscle_sarcopenia",
       "title": "Muscle aging and sarcopenia",
-      "summary": "Muscle mass, strength, neuromuscular function and age-related loss of reserve.",
+      "summary": "- Muscle mass\n- Strength\n- Neuromuscular function\n- Age-related loss of reserve.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7577,7 +7577,7 @@
     {
       "id": "bone_joint_aging",
       "title": "Bone and joint aging",
-      "summary": "Bone remodeling, cartilage, mechanical loading and age-related structural changes.",
+      "summary": "- Bone remodeling\n- Cartilage\n- Mechanical loading\n- Age-related structural changes.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7614,7 +7614,7 @@
     {
       "id": "cardiac_aging",
       "title": "Cardiac aging and reserve",
-      "summary": "Cardiac output, electrophysiology, fibrosis and stress-dependent reserve.",
+      "summary": "- Cardiac output\n- Electrophysiology\n- Fibrosis\n- Stress-dependent reserve.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7642,7 +7642,7 @@
     {
       "id": "renal_aging",
       "title": "Renal aging and function",
-      "summary": "Filtration, tubular function, fluid balance and renal reserve.",
+      "summary": "- Filtration\n- Tubular function\n- Fluid balance\n- Renal reserve.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7670,7 +7670,7 @@
     {
       "id": "pulmonary_aging",
       "title": "Pulmonary aging and function",
-      "summary": "Ventilation, gas exchange, tissue mechanics and age-related pulmonary changes.",
+      "summary": "- Ventilation\n- Gas exchange\n- Tissue mechanics\n- Age-related pulmonary changes.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7698,7 +7698,7 @@
     {
       "id": "hepatic_aging",
       "title": "Liver aging and metabolic function",
-      "summary": "Liver metabolism, detoxification, regeneration and fibrosis.",
+      "summary": "- Liver metabolism\n- Detoxification\n- Regeneration\n- Fibrosis.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7735,7 +7735,7 @@
     {
       "id": "sensory_aging",
       "title": "Sensory aging: vision and hearing",
-      "summary": "Sensory transduction, neural processing and age-related functional decline.",
+      "summary": "- Sensory transduction\n- Neural processing\n- Age-related functional decline.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7808,7 +7808,7 @@
     {
       "id": "reproductive_endocrinology",
       "title": "Reproductive endocrinology",
-      "summary": "The hypothalamic-pituitary-gonadal axis, feedback and endocrine trajectories.",
+      "summary": "- The hypothalamic-pituitary-gonadal axis\n- Feedback\n- Endocrine trajectories.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7845,7 +7845,7 @@
     {
       "id": "ovarian_reserve_niche",
       "title": "Ovarian reserve and somatic niche",
-      "summary": "Follicle dynamics, oocyte-supporting cells and reserve measurement limitations.",
+      "summary": "- Follicle dynamics\n- Oocyte-supporting cells\n- Reserve measurement limitations.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7881,7 +7881,7 @@
     {
       "id": "menopause_systemic_aging",
       "title": "Menopause and systemic aging",
-      "summary": "Chronological aging, ovarian aging and associated systemic changes.",
+      "summary": "- Chronological aging\n- Ovarian aging\n- Associated systemic changes.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -7916,7 +7916,7 @@
     {
       "id": "male_reproductive_aging",
       "title": "Male reproductive tissue and gamete aging",
-      "summary": "Spermatogenesis, somatic support and age-related endocrine and gamete changes.",
+      "summary": "- Spermatogenesis\n- Somatic support\n- Age-related endocrine and gamete changes.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -8006,7 +8006,7 @@
     {
       "id": "aggregate_deposition_measurement",
       "title": "Measuring extracellular deposits",
-      "summary": "Sampling, staining, imaging and biochemical measures of deposited aggregates.",
+      "summary": "- Sampling\n- Staining\n- Imaging\n- Biochemical measures of deposited aggregates.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -8051,7 +8051,7 @@
     {
       "id": "antibody_enzyme_clearance",
       "title": "Antibody and enzyme clearance strategies",
-      "summary": "Target recognition, clearance mechanisms and tissue-specific adverse effects.",
+      "summary": "- Target recognition\n- Clearance mechanisms\n- Tissue-specific adverse effects.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -8133,7 +8133,7 @@
     {
       "id": "stress_adaptation_hormesis",
       "title": "Stress adaptation and hormesis",
-      "summary": "Dose-dependent stress responses, recovery and limits of hormesis claims.",
+      "summary": "- Dose-dependent stress responses\n- Recovery\n- Limits of hormesis claims.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -8161,7 +8161,7 @@
     {
       "id": "circadian_sleep_biology",
       "title": "Circadian rhythms and sleep",
-      "summary": "Biological timing, sleep architecture and physiological rhythms.",
+      "summary": "- Biological timing\n- Sleep architecture\n- Physiological rhythms.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -8226,7 +8226,7 @@
     {
       "id": "nutrition_aging_studies",
       "title": "Nutrition and aging study design",
-      "summary": "Energy balance, nutrient composition and confounding in dietary research.",
+      "summary": "- Energy balance\n- Nutrient composition\n- Confounding in dietary research.",
       "kind": "skill",
       "topics": [
         "physiology_neuroscience"
@@ -8254,7 +8254,7 @@
     {
       "id": "transport_thermal_biophysics",
       "title": "Transport, perfusion and thermal biophysics",
-      "summary": "Diffusion, convection, heat transfer and transport limits in tissues.",
+      "summary": "- Diffusion\n- Convection\n- Heat transfer\n- Transport limits in tissues.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -8290,7 +8290,7 @@
     {
       "id": "matrix_mechanics_measurement",
       "title": "Measuring matrix mechanics and fibrosis",
-      "summary": "Stiffness, cross-link chemistry, matrix abundance and organ function.",
+      "summary": "- Stiffness\n- Cross-link chemistry\n- Matrix abundance\n- Organ function.",
       "kind": "skill",
       "topics": [
         "regenerative_medicine"
@@ -8327,7 +8327,7 @@
     {
       "id": "methylation_clock_reproduction",
       "title": "Reproducing a DNA-methylation clock",
-      "summary": "Methylation predictors, regularization, cell-composition effects and external validation.",
+      "summary": "- Methylation predictors\n- Regularization\n- Cell-composition effects\n- External validation.",
       "kind": "skill",
       "topics": [
         "ml_ai"
@@ -8381,7 +8381,7 @@
     {
       "id": "clinical_clock_reproduction",
       "title": "Reproducing a clinical-data aging clock",
-      "summary": "Clinical predictors, missing data and population transportability of age models.",
+      "summary": "- Clinical predictors\n- Missing data\n- Population transportability of age models.",
       "kind": "skill",
       "topics": [
         "ml_ai"
@@ -8426,7 +8426,7 @@
     {
       "id": "clock_external_validation",
       "title": "External validation of aging clocks",
-      "summary": "Chronological prediction, prognostic validity and response to intervention.",
+      "summary": "- Chronological prediction\n- Prognostic validity\n- Response to intervention.",
       "kind": "skill",
       "topics": [
         "ml_ai"
@@ -8565,7 +8565,7 @@
     {
       "id": "virology_foundations",
       "title": "Virology for longevity research",
-      "summary": "Viral structure, replication, host responses and assay interpretation for gene-delivery and infection-related research.",
+      "summary": "- Viral structure\n- Replication\n- Host responses\n- Assay interpretation for gene-delivery and infection-related research.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology"
@@ -8604,7 +8604,7 @@
     {
       "id": "viral_structure_replication",
       "title": "Viral structure and replication",
-      "summary": "Genome classes, entry, replication, assembly and release of viruses.",
+      "summary": "- Genome classes\n- Entry\n- Replication\n- Assembly\n- Release of viruses.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -8643,7 +8643,7 @@
     {
       "id": "host_virus_interactions",
       "title": "Host-virus interactions and immune responses",
-      "summary": "Tropism, innate recognition, restriction factors and adaptive responses.",
+      "summary": "- Tropism\n- Innate recognition\n- Restriction factors\n- Adaptive responses.",
       "kind": "skill",
       "topics": [
         "immunology_cancer"
@@ -8672,7 +8672,7 @@
     {
       "id": "viral_persistence_aging",
       "title": "Viral persistence and aging research",
-      "summary": "Latent and persistent infection, immune history and confounding in aging cohorts.",
+      "summary": "- Latent and persistent infection\n- Immune history\n- Confounding in aging cohorts.",
       "kind": "skill",
       "topics": [
         "immunology_cancer"
@@ -8771,7 +8771,7 @@
     {
       "id": "transposable_elements_aging",
       "title": "Transposable elements and aging",
-      "summary": "Mobile genetic elements, epigenetic control, repeat-aware analysis and tests of links to senescence and inflammation.",
+      "summary": "- Mobile genetic elements\n- Epigenetic control\n- Repeat-aware analysis\n- Tests of links to senescence and inflammation.",
       "kind": "discipline",
       "topics": [
         "molecular_cell_biology"
@@ -8819,7 +8819,7 @@
     {
       "id": "mobile_genetic_elements",
       "title": "Mobile genetic elements",
-      "summary": "DNA transposons, retrotransposons, autonomous and non-autonomous elements, and their genomic effects.",
+      "summary": "- DNA transposons\n- Retrotransposons\n- Autonomous and non-autonomous elements\n- Their genomic effects.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -8857,7 +8857,7 @@
     {
       "id": "transposon_epigenetic_silencing",
       "title": "Epigenetic suppression of transposable elements",
-      "summary": "Heterochromatin, methylation and RNA-mediated control of mobile elements.",
+      "summary": "- Heterochromatin\n- Methylation\n- RNA-mediated control of mobile elements.",
       "kind": "skill",
       "topics": [
         "molecular_cell_biology"
@@ -8895,7 +8895,7 @@
     {
       "id": "repetitive_sequence_analysis",
       "title": "Repeat-aware sequencing analysis",
-      "summary": "TE annotations, genome builds, multimapping, family-level estimates and ambiguous reads.",
+      "summary": "- TE annotations\n- Genome builds\n- Multimapping\n- Family-level estimates\n- Ambiguous reads.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -9074,7 +9074,7 @@
     {
       "id": "aging_gene_evidence",
       "title": "Curating aging-gene evidence",
-      "summary": "GenAge and Open Genes records, species, experimental context and primary evidence.",
+      "summary": "- GenAge and Open Genes records\n- Species\n- Experimental context\n- Primary evidence.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -9170,7 +9170,7 @@
     {
       "id": "gene_identifiers_pathways",
       "title": "Gene identifiers and pathway databases",
-      "summary": "Identifier mapping, organism/version control, GO and Reactome annotations and enrichment backgrounds.",
+      "summary": "- Identifier mapping\n- Organism/version control\n- GO and Reactome annotations\n- Enrichment backgrounds.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -9290,7 +9290,7 @@
     {
       "id": "public_omics_data_retrieval",
       "title": "Retrieving public aging omics data",
-      "summary": "GEO accessions, sample metadata, processed versus raw data and GTEx tissue context.",
+      "summary": "- GEO accessions\n- Sample metadata\n- Processed versus raw data\n- GTEx tissue context.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -9379,7 +9379,7 @@
     {
       "id": "human_cohort_data_selection",
       "title": "Choosing human aging and mortality data",
-      "summary": "HMD mortality measures, UK Biobank metadata, population coverage and access requirements.",
+      "summary": "- HMD mortality measures\n- UK Biobank metadata\n- Population coverage\n- Access requirements.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -9469,7 +9469,7 @@
     {
       "id": "genetic_combination_evidence",
       "title": "Genetic longevity combinations in SynergyAge",
-      "summary": "Single and combined genetic perturbations, matched controls and model-organism lifespan measurements.",
+      "summary": "- Single and combined genetic perturbations\n- Matched controls\n- Model-organism lifespan measurements.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -9549,7 +9549,7 @@
     {
       "id": "clinical_trial_registry_review",
       "title": "Reading geroscience trial registries",
-      "summary": "Trial registration, phase, population, outcomes, dates, result posting and publication links.",
+      "summary": "- Trial registration\n- Phase\n- Population\n- Outcomes\n- Dates\n- Result posting\n- Publication links.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -9627,7 +9627,7 @@
     {
       "id": "research_data_sql",
       "title": "SQL and research data organization",
-      "summary": "Relational design, queries, ingestion and integrity checks for reproducible biomedical datasets.",
+      "summary": "- Relational design\n- Queries\n- Ingestion\n- Integrity checks for reproducible biomedical datasets.",
       "kind": "discipline",
       "topics": [
         "computing_data"
@@ -9665,7 +9665,7 @@
     {
       "id": "relational_research_schema",
       "title": "Relational schemas for research data",
-      "summary": "Entities, keys, relationships, units, missing values and provenance records.",
+      "summary": "- Entities\n- Keys\n- Relationships\n- Units\n- Missing values\n- Provenance records.",
       "kind": "skill",
       "topics": [
         "computing_data"
@@ -9754,7 +9754,7 @@
     {
       "id": "sql_queries_joins",
       "title": "SQL queries, joins and aggregation",
-      "summary": "SELECT, filtering, joins, grouping, null handling and query-result checks.",
+      "summary": "- SELECT\n- Filtering\n- Joins\n- Grouping\n- Null handling\n- Query-result checks.",
       "kind": "skill",
       "topics": [
         "computing_data"
@@ -9851,7 +9851,7 @@
     {
       "id": "reproducible_database_ingestion",
       "title": "Reproducible database ingestion and validation",
-      "summary": "Versioned imports, transactions, source manifests and database integrity tests.",
+      "summary": "- Versioned imports\n- Transactions\n- Source manifests\n- Database integrity tests.",
       "kind": "skill",
       "topics": [
         "computing_data"
@@ -9940,7 +9940,7 @@
     {
       "id": "gene_network_analysis",
       "title": "Construction and analysis of gene networks",
-      "summary": "Coexpression and regulatory networks, modules, stability and comparison of age-related states.",
+      "summary": "- Coexpression and regulatory networks\n- Modules\n- Stability\n- Comparison of age-related states.",
       "kind": "discipline",
       "topics": [
         "bioinformatics_omics"
@@ -9988,7 +9988,7 @@
     {
       "id": "coexpression_networks",
       "title": "Gene coexpression networks",
-      "summary": "Expression matrices, correlation, network construction and modules.",
+      "summary": "- Expression matrices\n- Correlation\n- Network construction\n- Modules.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -10085,7 +10085,7 @@
     {
       "id": "regulatory_network_inference",
       "title": "Inferring gene regulatory networks",
-      "summary": "Candidate regulators, directed predictive models and inferred regulatory edges.",
+      "summary": "- Candidate regulators\n- Directed predictive models\n- Inferred regulatory edges.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -10124,7 +10124,7 @@
     {
       "id": "network_modules_topology",
       "title": "Network modules and topology",
-      "summary": "Adjacency representations, graph communities, hubs and module interpretation.",
+      "summary": "- Adjacency representations\n- Graph communities\n- Hubs\n- Module interpretation.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -10173,7 +10173,7 @@
     {
       "id": "network_validation_uncertainty",
       "title": "Validating inferred biological networks",
-      "summary": "Sampling stability, null models, held-out evidence and perturbational validation.",
+      "summary": "- Sampling stability\n- Null models\n- Held-out evidence\n- Perturbational validation.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -10261,7 +10261,7 @@
     {
       "id": "network_comparison_aging",
       "title": "Comparing gene networks across aging states",
-      "summary": "Age-group and longitudinal network comparison, compositional confounding and functional interpretation.",
+      "summary": "- Age-group and longitudinal network comparison\n- Compositional confounding\n- Functional interpretation.",
       "kind": "skill",
       "topics": [
         "bioinformatics_omics"
@@ -10349,7 +10349,7 @@
     {
       "id": "bayesian_inference",
       "title": "Bayesian inference and prior sensitivity",
-      "summary": "Priors, likelihoods, posterior distributions, credible intervals and sensitivity to assumptions.",
+      "summary": "- Priors\n- Likelihoods\n- Posterior distributions\n- Credible intervals\n- Sensitivity to assumptions.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10409,7 +10409,7 @@
     {
       "id": "bayesian_model_checking",
       "title": "Bayesian computation and model checking",
-      "summary": "Posterior computation, sampling diagnostics and prior/posterior predictive checks.",
+      "summary": "- Posterior computation\n- Sampling diagnostics\n- Prior/posterior predictive checks.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10487,7 +10487,7 @@
     {
       "id": "time_series_analysis",
       "title": "Time-series dependence and validation",
-      "summary": "Autocorrelation, trends, sampling intervals, stationarity and temporal validation.",
+      "summary": "- Autocorrelation\n- Trends\n- Sampling intervals\n- Stationarity\n- Temporal validation.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10574,7 +10574,7 @@
     {
       "id": "physiological_time_series",
       "title": "Physiological time series and recovery",
-      "summary": "Repeated physiological signals, sampling, confounders and recovery dynamics.",
+      "summary": "- Repeated physiological signals\n- Sampling\n- Confounders\n- Recovery dynamics.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10661,7 +10661,7 @@
     {
       "id": "physical_aging_models",
       "title": "Physical and dynamical models of aging",
-      "summary": "Stochastic dynamics, mortality models, critical transitions and careful use of physical or information-theoretic analogies.",
+      "summary": "- Stochastic dynamics\n- Mortality models\n- Critical transitions\n- Careful use of physical or information-theoretic analogies.",
       "kind": "discipline",
       "topics": [
         "quantitative_sciences"
@@ -10708,7 +10708,7 @@
     {
       "id": "thermodynamic_information_models",
       "title": "Thermodynamic and information-based aging models",
-      "summary": "Thermodynamic entropy, statistical information measures and the assumptions needed to interpret biological data.",
+      "summary": "- Thermodynamic entropy\n- Statistical information measures\n- The assumptions needed to interpret biological data.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10746,7 +10746,7 @@
     {
       "id": "stochastic_aging_models",
       "title": "Stochastic models of aging dynamics",
-      "summary": "Noise, stochastic trajectories, relaxation and model-parameter interpretation.",
+      "summary": "- Noise\n- Stochastic trajectories\n- Relaxation\n- Model-parameter interpretation.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10813,7 +10813,7 @@
     {
       "id": "critical_transitions_resilience",
       "title": "Critical transitions and resilience modeling",
-      "summary": "Stability, recovery time, autocorrelation and limits of early-warning indicators.",
+      "summary": "- Stability\n- Recovery time\n- Autocorrelation\n- Limits of early-warning indicators.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10889,7 +10889,7 @@
     {
       "id": "mortality_law_modeling",
       "title": "Gompertz models and mortality trajectories",
-      "summary": "Age-specific mortality rates, parametric hazard models and extrapolation limits.",
+      "summary": "- Age-specific mortality rates\n- Parametric hazard models\n- Extrapolation limits.",
       "kind": "skill",
       "topics": [
         "quantitative_sciences"
@@ -10985,7 +10985,7 @@
     {
       "id": "aging_theories",
       "title": "Theories of aging",
-      "summary": "Evolutionary explanations, mechanistic hypotheses and the evidence needed to discriminate between models.",
+      "summary": "- Evolutionary explanations\n- Mechanistic hypotheses\n- The evidence needed to discriminate between models.",
       "kind": "discipline",
       "topics": [
         "geroscience"
@@ -11053,7 +11053,7 @@
     {
       "id": "evolutionary_aging_theories",
       "title": "Evolutionary theories of aging",
-      "summary": "Selection with age, mutation accumulation, antagonistic pleiotropy and life-history tradeoffs.",
+      "summary": "- Selection with age\n- Mutation accumulation\n- Antagonistic pleiotropy\n- Life-history tradeoffs.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -11101,7 +11101,7 @@
     {
       "id": "mechanistic_aging_hypotheses",
       "title": "Mechanistic hypotheses of aging",
-      "summary": "Damage accumulation, dysregulated programs, hyperfunction and interacting explanations.",
+      "summary": "- Damage accumulation\n- Dysregulated programs\n- Hyperfunction\n- Interacting explanations.",
       "kind": "skill",
       "topics": [
         "geroscience"
@@ -11139,7 +11139,7 @@
     {
       "id": "aging_theory_discrimination",
       "title": "Testing and comparing aging theories",
-      "summary": "Falsifiable predictions, causal perturbations, model comparison and conflicting evidence.",
+      "summary": "- Falsifiable predictions\n- Causal perturbations\n- Model comparison\n- Conflicting evidence.",
       "kind": "skill",
       "topics": [
         "geroscience"

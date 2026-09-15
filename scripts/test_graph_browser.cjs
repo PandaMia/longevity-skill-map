@@ -100,6 +100,31 @@ async function checkScrollPreference(page) {
   await change('auto');
   console.log('PASS optional device selection and persistence');
 }
+async function checkDescriptionLists(page) {
+  await search(page, 'eigenvalues');
+  assert.equal(await page.locator('#detail-title').textContent(), 'Linear algebra');
+  assert.deepEqual(await page.locator('#detail-body > .summary > ul > li').allTextContents(),
+    ['Vectors', 'Matrices', 'Linear transformations', 'Eigenvalues', 'Matrix decompositions.']);
+  assert.equal(await page.locator('#detail-body > .summary > p').textContent(), 'A shared prerequisite for multi-omics, ML, network models, and image analysis.');
+  await page.locator('#node-search').fill('eigenvalues');
+  assert(!(await page.locator('.search-result-snippet').first().textContent()).includes('- Vectors'));
+  await page.keyboard.press('Escape');
+  await page.screenshot({ path: join(screenshots, 'description-list-desktop.png') });
+  await page.setViewportSize({width: 390, height: 844}); await frames(page);
+  const card = await page.locator('#details').boundingBox();
+  assert(card.x >= 0 && card.x + card.width <= 390);
+  assert.equal(await page.locator('#detail-body > .summary > ul > li').count(), 5);
+  await page.screenshot({ path: join(screenshots, 'description-list-mobile.png') });
+  await page.setViewportSize({width: 1440, height: 960}); await frames(page);
+  const safe = await page.evaluate(() => {
+    const target = document.createElement('div');
+    GraphText.append(target, 'summary', '- <img src=x onerror=alert(1)>\n\nPlain text.');
+    return { images: target.querySelectorAll('img').length, text: target.querySelector('li').textContent };
+  });
+  assert.equal(safe.images, 0); assert.equal(safe.text, '<img src=x onerror=alert(1)>');
+  await page.locator('#close-details').click();
+  console.log('PASS semantic description lists, separate explanation, search previews, mobile layout and literal text');
+}
 async function checkCursors(page) {
   const toolbarCursor = await page.locator('#fit').evaluate(element => getComputedStyle(element).cursor);
   assert.equal(toolbarCursor, 'pointer');
@@ -157,6 +182,7 @@ async function checkActionZoom(page) {
     console.log('PASS WebGL startup; no SVG nodes; no idle render loop');
     await checkContentAtEveryScale(page);
     console.log('PASS titles, metadata and background edges at every scale');
+    await checkDescriptionLists(page);
     await checkActionZoom(page);
     console.log('PASS containers, search, components, relations and keyboard preserve zoom at 55% and 170%');
     await setScale(page, 1);

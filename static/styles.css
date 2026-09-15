@@ -174,3 +174,13 @@
       #info-toggle { padding: 7px 8px; gap: 4px; font-size: 12px; }
       .info-panel { width: min(360px, calc(100% - 16px)); max-height: calc(100% - 16px); }
     }
+
+    .formatted-text > p { margin: 0 0 .65em; }
+    .formatted-text > ul { margin: 0 0 .65em; padding-left: 22px; }
+    .formatted-text > ul > li + li { margin-top: 4px; }
+    .formatted-text > :last-child { margin-bottom: 0; }
+
+    .edge-tooltip { position: fixed; top: 0; left: 0; z-index: 20; max-width: min(300px, calc(100vw - 24px)); max-height: calc(100vh - 16px); overflow: hidden; padding: 9px 11px; border: 1px solid #d7deea; border-radius: 9px; background: #ffffff; color: #162033; box-shadow: 0 4px 16px rgba(5, 12, 28, .18); pointer-events: none; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+    .edge-tooltip strong, .edge-tooltip span { display: block; }
+    .edge-tooltip span { margin-top: 3px; color: #687386; font-size: 11px; }
+    .legend-note { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }

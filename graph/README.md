@@ -2,6 +2,22 @@
 
 The source of truth is [`longevity-skills.json`](./longevity-skills.json). It contains 278 nodes, 1,053 edges, 32 expandable containers, 28 research/integration targets and 6 school-level foundations.
 
+## Description formatting
+
+Descriptions remain strings in the API. Use explicit `- ` bullet lines for topic lists and a blank line before explanatory paragraphs. The detail panel renders them as semantic HTML lists; it never guesses list boundaries from commas or the word “and”. Compound concepts such as “acids and bases” should stay in a single item. The same format is supported in learning outcomes, exercise objectives/deliverables and evidence notes. Search previews flatten the formatting back into a readable sentence.
+
+Example `summary`:
+
+```text
+- Vectors
+- Matrices
+- Linear transformations
+- Eigenvalues
+- Matrix decompositions.
+
+A shared prerequisite for multi-omics, ML, network models, and image analysis.
+```
+
 ## Containers and components
 
 A component has `parent_id`; the parent retains its existing stable ID, title and overview resources. Containment is a presentation relationship, not a prerequisite. A component's path includes only the components explicitly required by its dependency edges. Other children of its parent are not automatically required.

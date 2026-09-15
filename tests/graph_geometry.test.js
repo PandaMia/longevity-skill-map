@@ -91,3 +91,55 @@ test('overscan reuses text batches without excluding cards after pan, zoom or re
   }
   assert(query({ tx: 0, ty: 0, scale: 1 }, 1440, 960).length < 200, 'zooming in must shrink a previously large overview batch');
 });
+
+test('edge picking uses a fixed pixel tolerance across zoom levels and keeps direction', async () => {
+  const { buildEdgeTiles, hitTestEdge } = await geometry;
+  const edge = { from: 'a', to: 'b', type: 'prerequisite' };
+  const tree = buildEdgeTiles([edge], new Map([['a', node('a', 0, 0)], ['b', node('b', 1000, 0)]]));
+  assert(tree.all().every(tile => tile.segments.every(segment => segment.edge === edge)));
+  for (const scale of [.025, .2, 1, 2.8]) {
+    const camera = { tx: -30, ty: 100, scale }, x = 500 * scale - 30;
+    assert.equal(hitTestEdge(tree, camera, x, 106), edge);
+    assert.equal(hitTestEdge(tree, camera, x, 110), null);
+    assert.equal(hitTestEdge(tree, camera, x, 100, { accepts: () => false }), null);
+  }
+});
+
+test('edge picking chooses the closest eligible line and rejects empty curve bounds', async () => {
+  const { buildEdgeTiles, hitTestEdge } = await geometry;
+  const a = { from: 'a', to: 'b' }, b = { from: 'c', to: 'd' };
+  const positions = new Map([['a', node('a', 0, 0)], ['b', node('b', 1000, 0)], ['c', node('c', 0, 6)], ['d', node('d', 1000, 6)]]);
+  const tree = buildEdgeTiles([a, b], positions), camera = { tx: 0, ty: 0, scale: 1 };
+  assert.equal(hitTestEdge(tree, camera, 500, 5), b);
+  assert.equal(hitTestEdge(tree, camera, 500, 5, { accepts: edge => edge === a }), a);
+  assert.equal(hitTestEdge(tree, camera, 500, 3), a, 'overlaps have a stable tie break');
+  const curve = buildEdgeTiles([a], new Map([['a', node('a', 0, 0)], ['b', node('b', 1000, 1000)]]));
+  assert.equal(hitTestEdge(curve, camera, 500, 100), null, 'bounding box alone is not a hit');
+});
+
+test('edge and card colors use the destination topic and its current path role', async () => {
+  const { nodeColor } = await geometry;
+  const topics = new Map([['source', '#2563eb'], ['destination', '#db2777']]);
+  const target = {topics: ['destination', 'source']};
+  assert.equal(nodeColor(target, topics), '#db2777');
+  assert.equal(nodeColor(target, topics, {active: true}), '#db2777');
+  assert.equal(nodeColor(target, topics, {path: true}), '#22c55e');
+  assert.equal(nodeColor(target, topics, {path: true, target: true}), '#38bdf8');
+});
+
+test('edge picking work stays local when distant graph sections are added', async () => {
+  const { buildEdgeTiles, hitTestEdge } = await geometry;
+  const edge = {from: 'a', to: 'b'}, positions = new Map([['a', node('a', 0, 0)], ['b', node('b', 1000, 0)]]);
+  const all = [edge];
+  const count = tree => {
+    let visited = 0;
+    assert.equal(hitTestEdge(tree, {tx: 0, ty: 0, scale: 1}, 500, 0, { accepts() { visited++; return true; } }), edge);
+    return visited;
+  };
+  const small = count(buildEdgeTiles(all, positions));
+  for (let i = 0; i < 2000; i++) {
+    const from = `s${i}`, to = `t${i}`, x = 20000 + i * 1500;
+    positions.set(from, node(from, x, 0)); positions.set(to, node(to, x + 1000, 0)); all.push({from, to});
+  }
+  assert.equal(count(buildEdgeTiles(all, positions)), small);
+});

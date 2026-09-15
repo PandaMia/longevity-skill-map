@@ -53,6 +53,8 @@ Opening or closing containers, selecting skills, search results, related skills,
 | Trackpad pinch, mouse wheel, Ctrl + scroll, or toolbar **+ / −** | Zoom around the pointer (toolbar buttons use the viewport center) |
 | **Fit graph** | Fit the full map or the locked path in view |
 | **+ / −** on a container | Expand or collapse its components |
+| Hover a connection | Show its source and destination near the pointer |
+| Click a connection | Select its destination, keeping the current zoom |
 | **Legend** | Explain topic colors, status dots and edge styles |
 | Arrow keys and Enter in search | Select a search result |
 | Tab to the graph, then arrow keys | Browse skills, including offscreen nodes |

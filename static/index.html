@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Longevity Skill Map</title>
-  <link rel="stylesheet" href="/static/styles.css?v=20260914-trackpad">
+  <link rel="stylesheet" href="/static/styles.css?v=20260914-edge-navigation">
 </head>
 <body>
   <div id="app">
@@ -46,6 +46,9 @@
         <span id="graph-keyboard-node" class="visually-hidden" role="option" aria-selected="false"></span>
       </div>
       <p id="graph-keyboard-help" class="visually-hidden">Use arrow keys to browse skills, Enter or Space to open a skill, and plus or minus to expand or collapse a container. You can also search for any skill above.</p>
+      <div id="edge-tooltip" class="edge-tooltip" role="tooltip" hidden>
+        <strong id="edge-tooltip-title"></strong><span id="edge-tooltip-source"></span>
+      </div>
       <section id="path-panel" class="path-panel" hidden aria-label="Locked learning path">
         <div class="path-heading"><span class="path-eyebrow">LOCKED LEARNING PATH</span><button id="reset-path" type="button">Reset path</button></div>
         <strong id="path-target"></strong><p id="path-summary" aria-live="polite"></p>
@@ -96,6 +99,7 @@
               <div class="edge-legend-item"><i class="legend-line recommended"></i><span>recommended</span></div>
               <div class="edge-legend-item"><i class="legend-line applied"></i><span>applied in</span></div>
             </div>
+            <p class="legend-note">Edge colors match their destination nodes. Hover for the target; click to follow.</p>
           </section>
           <section class="legend-section">
             <h3>Status dots</h3>
@@ -111,9 +115,10 @@
   </div>
   <script src="/static/graph-view.js?v=20260910-visible-content" defer></script>
   <script src="/static/graph-interactions.js?v=20260910-visible-content" defer></script>
-  <script src="/static/graph-renderer.js?v=20260910-soft-edges" defer></script>
+  <script src="/static/graph-renderer.js?v=20260914-compact-arrows-v2" defer></script>
   <script src="/static/graph-touch.js?v=20260913-touch" defer></script>
   <script src="/static/graph-wheel.js?v=20260914-trackpad" defer></script>
-  <script src="/static/app.js?v=20260914-trackpad" defer></script>
+  <script src="/static/graph-text.js?v=20260914-lists" defer></script>
+  <script src="/static/app.js?v=20260914-edge-navigation" defer></script>
 </body>
 </html>

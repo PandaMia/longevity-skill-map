@@ -20,6 +20,18 @@ A GPU backend alone is insufficient: geometry, labels, hit testing and the overv
 
 Text scales with its card and remains present in the overview. Opening/collapsing containers, searching, following related skills or path steps, and keyboard navigation preserve the current zoom; navigation pans to reveal the target. Only explicit zoom controls/gestures and **Fit graph** change the scale after startup. Use **Fit graph** explicitly to fit the graph or path; **Lock learning path** does not fit or zoom the camera.
 
+## Edge interaction and color
+
+Edges and arrowheads use the current destination-node outline color: normally its primary topic, green for a required path node, or blue for the locked target. Color is stored in GPU vertex data so differently colored edges still share tile draw calls. The Canvas2D fallback uses the same color mapping. Ordinary edges retain their low opacity; hover/selection changes opacity and width. Direct edge hover adds highlighting only while a node is selected; without a selection, its tooltip and click navigation still work. Hovering a node in the unselected map continues to highlight its incident edges.
+
+Pointer hit testing queries fine edge tiles and checks distance to their actual segments using a constant pixel tolerance. Node cards take priority over edges drawn behind them. The closest eligible edge wins, with a deterministic tie break at overlaps. Hover processing runs at most once per animation frame. The white tooltip shows the destination and source, stays inside the viewport and never captures pointer events.
+
+Arrowheads share the same size across ordinary, selected and hovered edges, independently of stroke width. Their length decreases from 8 to 4 CSS pixels when zooming out, using the same geometry in WebGL and Canvas2D without rebuilding edge meshes.
+
+Clicking/tapping a connection follows its arrow to the visible destination and pans to reveal it without changing zoom. Starting a drag on an edge still pans the map. During selection, edge interaction follows the highlighted relationships and mastery-depth filter. In a locked path, only path edges with an explorable destination respond; edge navigation never retargets or unlocks the path. Navigation, layout/selection changes and leaving the graph dismiss the tooltip.
+
+Run `npm run test:edges` for WebGL/Canvas edge-hover, target selection, dragging, zoom preservation, dark-theme tooltip and locked-path checks. Geometry tests verify picking tolerance, local search cost, overlap handling and destination color mapping.
+
 ## Trackpad and mouse scrolling
 
 `graph-wheel.js` classifies scrolling using delta units, legacy wheel-notch hints where available, horizontal/precise motion and delta magnitude. It keeps its decision across an accelerated/inertial burst rather than changing behavior when a trackpad's deltas grow. Clear mouse-wheel evidence can switch back immediately. Pinch and explicit Shift-pan bypass classification. The optional **Info → Scroll device** preference is stored locally and can force either behavior for ambiguous devices.

@@ -1,5 +1,9 @@
     (() => {
       const surface = document.getElementById("graph");
+      const edgeTooltip = document.getElementById("edge-tooltip");
+      const edgeTooltipTitle = document.getElementById("edge-tooltip-title");
+      const edgeTooltipSource = document.getElementById("edge-tooltip-source");
+      let pointerFrame = null, pointerPosition = null, tooltipEdge = null, tooltipWidth = 0, tooltipHeight = 0;
       const loading = document.getElementById("loading");
       const errorBox = document.getElementById("error");
       const details = document.getElementById("details");
@@ -70,6 +74,7 @@
         return { x: event.clientX - rect.left, y: event.clientY - rect.top };
       }
       function finishNavigation() {
+        clearEdgeFeedback();
         state.panning = false; state.navigating = false;
         clearTimeout(navigationTimer);
         surface.classList.remove("is-panning", "is-navigating", "is-over-node");
@@ -80,7 +85,7 @@
           state.navigating = true;
           surface.classList.add("is-navigating");
           surface.classList.remove("is-over-node");
-          clearHighlight();
+          clearHighlight(); clearEdgeFeedback();
         }
         clearTimeout(navigationTimer);
         navigationTimer = setTimeout(() => {
@@ -170,7 +175,7 @@
           const normalized = normalizeSearchText(value);
           return terms.some(term => normalized.includes(term));
         }) || node.summary;
-        const compact = content.replace(/\s+/g, " ").trim();
+        const compact = GraphText.plainText(content);
         if (compact.length <= 170) return compact;
 
         const normalized = normalizeSearchText(compact);
@@ -302,6 +307,7 @@
       }
 
       function renderGraph(graph, fit = false) {
+        clearEdgeFeedback();
         if (state.graph !== graph) sourceNodes = new Map(graph.nodes.map(node => [node.id, node]));
         state.graph = graph;
         state.view = GraphView.createView(graph, state.expanded, state.path);
@@ -329,10 +335,59 @@
       }
 
       function applyHighlight() {
+        clearEdgeFeedback();
         if (!graphRenderer || !state.view) return;
         graphRenderer.setHighlight(state.activeNode, state.path, state.depth);
         graphRenderer.setHover(state.hoverNode);
         updateKeyboardNode();
+      }
+
+      function clearEdgeFeedback() {
+        if (pointerFrame !== null) cancelAnimationFrame(pointerFrame);
+        pointerFrame = null; pointerPosition = null;
+        if (tooltipEdge) {
+          tooltipEdge = null; edgeTooltip.hidden = true;
+          surface.setAttribute("aria-describedby", "graph-keyboard-help");
+          graphRenderer?.setEdgeHover(null);
+        }
+      }
+      function showEdgeTooltip(edge, point) {
+        if (tooltipEdge !== edge) {
+          tooltipEdge = edge;
+          edgeTooltipTitle.textContent = `→ ${sourceNodes.get(edge.to)?.title || edge.to}`;
+          edgeTooltipSource.textContent = `From ${sourceNodes.get(edge.from)?.title || edge.from}`;
+          edgeTooltip.dataset.from = edge.from; edgeTooltip.dataset.to = edge.to;
+          edgeTooltip.hidden = false;
+          tooltipWidth = edgeTooltip.offsetWidth; tooltipHeight = edgeTooltip.offsetHeight;
+          surface.setAttribute("aria-describedby", "graph-keyboard-help edge-tooltip");
+          graphRenderer.setEdgeHover(edge);
+        }
+        const gap = 14, margin = 8;
+        let x = point.x + gap, y = point.y + gap;
+        if (x + tooltipWidth > window.innerWidth - margin) x = point.x - tooltipWidth - gap;
+        if (y + tooltipHeight > window.innerHeight - margin) y = point.y - tooltipHeight - gap;
+        x = Math.max(margin, Math.min(x, window.innerWidth - tooltipWidth - margin));
+        y = Math.max(margin, Math.min(y, window.innerHeight - tooltipHeight - margin));
+        edgeTooltip.style.transform = `translate(${x}px, ${y}px)`;
+      }
+      function queuePointerFeedback(x, y) {
+        if (state.panning || state.navigating || recentTouch() || !graphRenderer) return;
+        pointerPosition = { x, y };
+        if (pointerFrame !== null) return;
+        pointerFrame = requestAnimationFrame(() => {
+          pointerFrame = null;
+          const point = pointerPosition; pointerPosition = null;
+          if (!point || state.panning || state.navigating || recentTouch()) return;
+          const node = graphRenderer.hitTest(point.x, point.y);
+          if (node) {
+            clearEdgeFeedback(); highlightNode(node.id);
+          } else {
+            clearHighlight();
+            const edge = graphRenderer.hitTestEdge(point.x, point.y);
+            if (edge) showEdgeTooltip(edge, point); else clearEdgeFeedback();
+          }
+          surface.classList.toggle("is-over-node", Boolean(node || tooltipEdge));
+        });
       }
 
       function highlightNode(nodeId) {
@@ -347,6 +402,7 @@
       }
 
       function applyTransform() {
+        clearEdgeFeedback();
         graphRenderer?.setTransform(state.tx, state.ty, state.scale);
       }
 
@@ -428,8 +484,15 @@
         state.gestureScale = 1;
       }, { passive: false });
 
+      function interactionHit(clientX, clientY) {
+        const node = graphRenderer?.hitTest(clientX, clientY);
+        if (node) return node;
+        const edge = graphRenderer?.hitTestEdge(clientX, clientY);
+        return edge ? { id: edge.to, edge } : null;
+      }
       function activateHit(hit) {
-        if (hit?.toggle) toggleContainer(hit.id);
+        if (hit?.edge) openNode(hit.id, true);
+        else if (hit?.toggle) toggleContainer(hit.id);
         else if (hit) openNode(hit.id);
         else closeDetails();
       }
@@ -471,9 +534,7 @@
         }
         if (touchController.active || recentTouch()) return;
         if (mousePointerId === null) {
-          const hit = graphRenderer?.hitTest(event.clientX, event.clientY);
-          surface.classList.toggle("is-over-node", Boolean(hit));
-          if (hit) highlightNode(hit.id); else clearHighlight();
+          queuePointerFeedback(event.clientX, event.clientY);
           return;
         }
         if (event.pointerId !== mousePointerId) return;
@@ -494,9 +555,9 @@
             finishNavigation(); state.moved = false;
             if (tap) {
               const rect = surface.getBoundingClientRect();
-              const start = graphRenderer.hitTest(rect.left + tap.start.x, rect.top + tap.start.y);
-              const end = graphRenderer.hitTest(rect.left + tap.end.x, rect.top + tap.end.y);
-              if (start?.id === end?.id && start?.toggle === end?.toggle) activateHit(end);
+              const start = interactionHit(rect.left + tap.start.x, rect.top + tap.start.y);
+              const end = interactionHit(rect.left + tap.end.x, rect.top + tap.end.y);
+              if (start?.id === end?.id && start?.toggle === end?.toggle && start?.edge === end?.edge) activateHit(end);
             }
           }
           return;
@@ -515,7 +576,7 @@
         // clicks, especially after a pinch or after one finger was lifted.
         if (event.pointerType === "touch" || event.sourceCapabilities?.firesTouchEvents || (recentTouch() && event.detail > 0)) return;
         if (state.moved) return;
-        activateHit(graphRenderer?.hitTest(event.clientX, event.clientY));
+        activateHit(interactionHit(event.clientX, event.clientY));
       });
       function cancelNavigation() {
         if (touchController.active) lastTouchTime = performance.now();
@@ -540,7 +601,7 @@
       }
       surface.addEventListener("pointerleave", () => {
         surface.classList.remove("is-over-node");
-        clearHighlight();
+        clearHighlight(); clearEdgeFeedback();
       });
       surface.addEventListener("focus", () => {
         if (!surface.matches(":focus-visible")) return;
@@ -548,7 +609,8 @@
         updateKeyboardNode();
         if (keyboardNodeId) { focusNode(keyboardNodeId); highlightNode(keyboardNodeId); }
       });
-      surface.addEventListener("blur", clearHighlight);
+      surface.addEventListener("blur", () => { clearHighlight(); clearEdgeFeedback(); });
+      window.addEventListener("resize", clearEdgeFeedback);
       surface.addEventListener("keydown", event => {
         if (!state.view) return;
         const nodes = state.view.nodes.filter(node => canExplore(node.id) || state.path?.container_ids.includes(node.id));
@@ -571,10 +633,7 @@
       });
 
       function appendText(parent, className, text) {
-        const element = document.createElement("p");
-        element.className = className;
-        element.textContent = text;
-        parent.append(element);
+        return GraphText.append(parent, className, text);
       }
 
       function makeSection(title) {

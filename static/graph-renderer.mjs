@@ -1,8 +1,10 @@
 import { WebGLRenderer, Container, Graphics, BitmapText, BitmapFont, Buffer, BufferUsage, Geometry, Mesh, Shader } from 'pixi.js';
 import { overviewMesh } from './graph-overview.mjs';
-import { buildEdgeTiles, coarsenEdgeTiles, createNodeWindow, nodeIndex, hitTest, viewportBounds, highlightState, CARD_DETAIL_SCALE } from './graph-geometry.mjs';
+import { buildEdgeTiles, coarsenEdgeTiles, createNodeWindow, nodeIndex, hitTest, hitTestEdge, nodeColor, viewportBounds, highlightState, CARD_DETAIL_SCALE } from './graph-geometry.mjs';
 
 const BASE_EDGE_ALPHA = .12;
+// Arrowheads stay independent of selection stroke width and shrink in overview.
+const arrowSize = scale => 8 * Math.max(.5, Math.min(1, Math.sqrt(scale)));
 
 const vertex = `
 precision highp float;
@@ -10,35 +12,42 @@ in vec2 aPosition;
 in vec2 aNormal;
 in float aDistance;
 in vec2 aPattern;
+in vec3 aEdgeColor;
 uniform mat3 uProjectionMatrix;
 uniform mat3 uWorldTransformMatrix;
 uniform mat3 uTransformMatrix;
 uniform float uScale;
 uniform float uWidth;
+uniform float uArrowSize;
 out float vDistance;
 out vec2 vPattern;
+out vec3 vEdgeColor;
 void main() {
-  vec2 position = aPosition + aNormal * (uWidth * .5 / uScale);
+  float offset = aDistance < 0.0 ? uArrowSize / 10.0 : uWidth * .5;
+  vec2 position = aPosition + aNormal * (offset / uScale);
   vec3 projected = uProjectionMatrix * uWorldTransformMatrix * uTransformMatrix * vec3(position, 1.0);
   gl_Position = vec4(projected.xy, 0.0, 1.0);
   vDistance = aDistance * uScale;
   vPattern = aPattern;
+  vEdgeColor = aEdgeColor;
 }`;
 const fragment = `
 precision highp float;
 in float vDistance;
 in vec2 vPattern;
-uniform vec4 uEdgeColor;
+in vec3 vEdgeColor;
+uniform float uEdgeAlpha;
 out vec4 finalColor;
 void main() {
   if (vPattern.x > 0.0 && mod(vDistance, vPattern.x) > vPattern.y) discard;
-  finalColor = vec4(uEdgeColor.rgb * uEdgeColor.a, uEdgeColor.a);
+  finalColor = vec4(vEdgeColor * uEdgeAlpha, uEdgeAlpha);
 }`;
 
-function edgeShader(width, color, alpha) {
+function edgeShader(width, alpha) {
   return Shader.from({ gl: { vertex, fragment }, resources: { styleUniforms: {
     uScale: { value: 1, type: 'f32' }, uWidth: { value: width, type: 'f32' },
-    uEdgeColor: { value: [...rgb(color), alpha], type: 'vec4<f32>' }
+    uArrowSize: { value: arrowSize(1), type: 'f32' },
+    uEdgeAlpha: { value: alpha, type: 'f32' }
   } } });
 }
 function rgb(hex) { return [16, 8, 0].map(shift => ((Number.parseInt(hex.slice(1), 16) >> shift) & 255) / 255); }
@@ -46,35 +55,40 @@ function mix(first, second, ratio) {
   const a = rgb(first), b = rgb(second);
   return '#' + a.map((v, i) => Math.round((v * ratio + b[i] * (1 - ratio)) * 255).toString(16).padStart(2, '0')).join('');
 }
-function edgeMesh(tile, shader) {
+function edgeMesh(tile, shader, colors) {
   const arrowCount = tile.segments.reduce((count, segment) => count + Number(segment.arrow), 0);
-  const data = new Float32Array((tile.segments.length * 4 + arrowCount * 3) * 7);
+  const data = new Float32Array((tile.segments.length * 4 + arrowCount * 3) * 10);
   const indices = new Uint32Array(tile.segments.length * 6 + arrowCount * 3);
-  let cursor = 0, indexCursor = 0;
+  let cursor = 0, indexCursor = 0, color;
+  const fallback = rgb("#64748b");
   function point(x, y, nx, ny, distance, pattern) {
     data[cursor++] = x; data[cursor++] = y; data[cursor++] = nx; data[cursor++] = ny;
     data[cursor++] = distance; data[cursor++] = pattern[0]; data[cursor++] = pattern[1];
+    data[cursor++] = color[0]; data[cursor++] = color[1]; data[cursor++] = color[2];
   }
   for (const s of tile.segments) {
+    color = colors.get(s.edge)?.rgb || fallback;
     const length = Math.hypot(s.x2 - s.x1, s.y2 - s.y1), dx = (s.x2 - s.x1) / length, dy = (s.y2 - s.y1) / length;
-    let base = cursor / 7;
+    let base = cursor / 10;
     point(s.x1, s.y1, -dy, dx, s.distance, s.pattern); point(s.x1, s.y1, dy, -dx, s.distance, s.pattern);
     point(s.x2, s.y2, -dy, dx, s.distance + length, s.pattern); point(s.x2, s.y2, dy, -dx, s.distance + length, s.pattern);
     indices.set([base, base + 1, base + 2, base + 2, base + 1, base + 3], indexCursor); indexCursor += 6;
     if (s.arrow) {
-      base = cursor / 7;
-      point(s.x2, s.y2, 0, 0, 0, [0, 0]);
-      point(s.x2, s.y2, -10 * dx + 5 * dy, -10 * dy - 5 * dx, 0, [0, 0]);
-      point(s.x2, s.y2, -10 * dx - 5 * dy, -10 * dy + 5 * dx, 0, [0, 0]);
+      base = cursor / 10;
+      // Negative distance marks solid arrow vertices without another attribute.
+      point(s.x2, s.y2, 0, 0, -1, [0, 0]);
+      point(s.x2, s.y2, -10 * dx + 5 * dy, -10 * dy - 5 * dx, -1, [0, 0]);
+      point(s.x2, s.y2, -10 * dx - 5 * dy, -10 * dy + 5 * dx, -1, [0, 0]);
       indices.set([base, base + 1, base + 2], indexCursor); indexCursor += 3;
     }
   }
   const buffer = new Buffer({ data, usage: BufferUsage.VERTEX });
   const geometry = new Geometry({ attributes: {
-    aPosition: { buffer, format: 'float32x2', stride: 28, offset: 0 },
-    aNormal: { buffer, format: 'float32x2', stride: 28, offset: 8 },
-    aDistance: { buffer, format: 'float32', stride: 28, offset: 16 },
-    aPattern: { buffer, format: 'float32x2', stride: 28, offset: 20 }
+    aPosition: { buffer, format: 'float32x2', stride: 40, offset: 0 },
+    aNormal: { buffer, format: 'float32x2', stride: 40, offset: 8 },
+    aDistance: { buffer, format: 'float32', stride: 40, offset: 16 },
+    aPattern: { buffer, format: 'float32x2', stride: 40, offset: 20 },
+    aEdgeColor: { buffer, format: 'float32x3', stride: 40, offset: 28 }
   }, indexBuffer: indices });
   const mesh = new Mesh({ geometry, shader });
   mesh.eventMode = 'none';
@@ -108,7 +122,8 @@ export async function create({ element, onContextChange = () => {} }) {
   let index = nodeIndex([]), edges, coarseEdges, selectedEdges, hoverEdges, positions = new Map();
   let queryNodeWindow = createNodeWindow(index);
   let selection = { nodes: new Map(), related: new Set(), dimmed: false }, expanded = new Set(), path = null;
-  let hovered = null, hoverDirty = true, disposed = false;
+  let hovered = null, hoveredEdge = null, hasActiveNode = false, hoverDirty = true, disposed = false;
+  let interactiveEdges = new Set(), edgeColors = new Map(), nodeColors = new Map();
   const hoverSet = new Set(), nodeHandles = new Map();
   const nodeCache = new Map(), tileCaches = [new Map(), new Map(), new Map()];
   let visibleNodes = new Set(), visibleTiles = [new Set(), new Set(), new Set()];
@@ -141,7 +156,7 @@ export async function create({ element, onContextChange = () => {} }) {
     if (renderer) {
       tileCaches.forEach((_, i) => resetTiles(i));
       shaders.forEach(shader => shader.destroy());
-      shaders = [edgeShader(1.25, palette.edge, BASE_EDGE_ALPHA), edgeShader(3, '#22c55e', 1), edgeShader(2, '#22c55e', .8)];
+      shaders = [edgeShader(1.25, BASE_EDGE_ALPHA), edgeShader(3, 1), edgeShader(2, .8)];
       resetNodes(); resetOverview(); buildBackground();
     }
     interactions.invalidate();
@@ -229,7 +244,7 @@ export async function create({ element, onContextChange = () => {} }) {
     // The shared overview mesh draws the card background below these labels.
     if (!detailed) return;
     if (!group.shape) { group.shape = new Graphics(); group.addChildAt(group.shape, 0); }
-    const color = flags.target ? '#38bdf8' : flags.path ? '#22c55e' : group.color;
+    const color = nodeColor(node, topics, flags);
     const stroke = flags.active ? 5 : flags.target || hover ? 4 : flags.path ? 3 : 2;
     const g = group.shape.clear(), x = -node.width / 2;
     g.roundRect(x, -44, node.width, 88, 10)
@@ -268,7 +283,7 @@ export async function create({ element, onContextChange = () => {} }) {
     if (tree) for (const tile of tree.search(bounds)) {
       next.add(tile.key);
       let mesh = cache.get(tile.key);
-      if (!mesh) { mesh = edgeMesh(tile, shaders[which]); cache.set(tile.key, mesh); layers[which + 2].addChild(mesh); }
+      if (!mesh) { mesh = edgeMesh(tile, shaders[which], edgeColors); cache.set(tile.key, mesh); layers[which + 2].addChild(mesh); }
       mesh.visible = true;
     }
     for (const key of visibleTiles[which]) if (!next.has(key)) cache.get(key).visible = false;
@@ -280,12 +295,17 @@ export async function create({ element, onContextChange = () => {} }) {
     const started = performance.now(), bounds = viewportBounds(camera, width, height);
     const detailed = camera.scale >= CARD_DETAIL_SCALE;
     const visible = queryNodeWindow(camera, width, height);
-    if (hoverDirty) { hoverEdges = buildEdgeTiles(selection.dimmed ? [] : hoverSet, positions); if (renderer) resetTiles(2); hoverDirty = false; }
+    if (hoverDirty) { hoverEdges = buildEdgeTiles(hoveredEdge ? [hoveredEdge] : selection.dimmed ? [] : hoverSet, positions); if (renderer) resetTiles(2); hoverDirty = false; }
     if (renderer) {
       world.position.set(camera.tx, camera.ty); world.scale.set(camera.scale);
       for (const layer of layers.slice(0, 2)) for (const child of layer.children) child.visible = intersects(child.graphBounds, bounds);
-      shaders.forEach(shader => { shader.resources.styleUniforms.uniforms.uScale = camera.scale; });
-      shaders[0].resources.styleUniforms.uniforms.uEdgeColor = [...rgb(palette.edge), selection.dimmed ? .035 : BASE_EDGE_ALPHA];
+      shaders.forEach(shader => {
+        shader.resources.styleUniforms.uniforms.uScale = camera.scale;
+        shader.resources.styleUniforms.uniforms.uArrowSize = arrowSize(camera.scale);
+      });
+      shaders[0].resources.styleUniforms.uniforms.uEdgeAlpha = selection.dimmed ? .035 : BASE_EDGE_ALPHA;
+      shaders[2].resources.styleUniforms.uniforms.uWidth = hoveredEdge ? 4 : 2;
+      shaders[2].resources.styleUniforms.uniforms.uEdgeAlpha = hoveredEdge ? 1 : .8;
       paintTiles(0, detailed ? edges : coarseEdges, bounds);
       paintTiles(1, selectedEdges, bounds);
       paintTiles(2, hoverEdges, bounds);
@@ -313,6 +333,7 @@ export async function create({ element, onContextChange = () => {} }) {
 
   function drawCanvas(bounds, visible) {
     const c = context, resolution = canvas.width / width;
+    const arrowLength = arrowSize(camera.scale) / camera.scale;
     c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, canvas.width, canvas.height);
     c.setTransform(resolution * camera.scale, 0, 0, resolution * camera.scale, resolution * camera.tx, resolution * camera.ty);
     for (const lane of view.lanes) {
@@ -325,27 +346,29 @@ export async function create({ element, onContextChange = () => {} }) {
       const color = topics.get(box.topic) || '#64748b';
       c.beginPath(); c.roundRect(box.x, box.y, box.width, box.height, 16); c.fillStyle = mix(color, palette.surface, .06); c.fill(); c.strokeStyle = color; c.lineWidth = 1.5; c.stroke();
     }
-    function lines(tree, color, alpha, lineWidth) {
+    function lines(tree, alpha, lineWidth) {
       if (!tree) return;
-      c.strokeStyle = color; c.fillStyle = color; c.globalAlpha = alpha; c.lineWidth = lineWidth / camera.scale;
+      c.globalAlpha = alpha; c.lineWidth = lineWidth / camera.scale;
       for (const tile of tree.search(bounds)) for (const s of tile.segments) {
+        c.strokeStyle = c.fillStyle = edgeColors.get(s.edge)?.hex || "#64748b";
         c.setLineDash(s.pattern[0] ? [s.pattern[1] / camera.scale, (s.pattern[0] - s.pattern[1]) / camera.scale] : []);
         c.lineDashOffset = -s.distance; c.beginPath(); c.moveTo(s.x1, s.y1); c.lineTo(s.x2, s.y2); c.stroke();
         if (s.arrow) {
-          const angle = Math.atan2(s.y2 - s.y1, s.x2 - s.x1), size = 6 * lineWidth / camera.scale;
-          c.beginPath(); c.moveTo(s.x2, s.y2); c.lineTo(s.x2 - Math.cos(angle - .45) * size, s.y2 - Math.sin(angle - .45) * size);
-          c.lineTo(s.x2 - Math.cos(angle + .45) * size, s.y2 - Math.sin(angle + .45) * size); c.fill();
+          const angle = Math.atan2(s.y2 - s.y1, s.x2 - s.x1), dx = Math.cos(angle), dy = Math.sin(angle);
+          c.beginPath(); c.moveTo(s.x2, s.y2);
+          c.lineTo(s.x2 - dx * arrowLength + dy * arrowLength / 2, s.y2 - dy * arrowLength - dx * arrowLength / 2);
+          c.lineTo(s.x2 - dx * arrowLength - dy * arrowLength / 2, s.y2 - dy * arrowLength + dx * arrowLength / 2); c.fill();
         }
       }
       c.setLineDash([]); c.globalAlpha = 1;
     }
-    lines(edges, palette.edge, selection.dimmed ? .035 : BASE_EDGE_ALPHA, 1.25);
-    lines(selectedEdges, '#22c55e', 1, 3); lines(hoverEdges, '#22c55e', .8, 2);
+    lines(edges, selection.dimmed ? .035 : BASE_EDGE_ALPHA, 1.25);
+    lines(selectedEdges, 1, 3); lines(hoverEdges, hoveredEdge ? 1 : .8, hoveredEdge ? 4 : 2);
     for (const { node } of visible) {
       const flags = selection.nodes.get(node.id) || {}, color = topics.get(node.topics[0]) || '#64748b', x = node.x - node.width / 2;
       c.globalAlpha = flags.dimmed ? .25 : 1;
       c.beginPath(); c.roundRect(x, node.y - 44, node.width, 88, 10); c.fillStyle = node.children.length ? mix(color, palette.surface, .1) : palette.surface; c.fill();
-      c.strokeStyle = flags.target ? '#38bdf8' : flags.path ? '#22c55e' : color;
+      c.strokeStyle = nodeColor(node, topics, flags);
       c.lineWidth = flags.active ? 5 : hovered === node.id ? 4 : flags.path ? 3 : 2; c.stroke();
       c.fillStyle = status[node.status] || '#94a3b8'; c.beginPath(); c.arc(node.x + node.width / 2 - 14, node.y - 30, 5, 0, Math.PI * 2); c.fill();
       c.fillStyle = palette.text; c.font = 'bold 12.5px Arial';
@@ -357,12 +380,23 @@ export async function create({ element, onContextChange = () => {} }) {
   }
 
   function refreshHover(depth) {
-    hoverSet.clear(); hovered = null; hoverDirty = true;
+    hoverSet.clear(); hovered = null; hoveredEdge = null; hoverDirty = true;
     interactions.setGraph(nodeHandles, view.edges.filter(edge => edge.indices.some(i => depth === 'apply' || graph.edges[i].min_depth !== 'apply')).map(edge => ({ edge, element: edge })));
   }
   function setHighlight(activeId, nextPath, depth) {
+    hasActiveNode = Boolean(activeId);
     selection = highlightState(graph, view, activeId, nextPath, depth);
+    const nextColors = new Map(view.nodes.map(node => {
+      const hex = nodeColor(node, topics, selection.nodes.get(node.id));
+      return [node.id, { hex, rgb: rgb(hex) }];
+    }));
+    const colorsChanged = nextColors.size !== nodeColors.size || [...nextColors].some(([id, color]) => color.hex !== nodeColors.get(id)?.hex);
+    nodeColors = nextColors;
+    edgeColors = new Map(view.edges.map(edge => [edge, nodeColors.get(edge.to)]));
+    interactiveEdges = new Set(view.edges.filter(edge => selection.nodes.get(edge.to)?.allowed &&
+      (selection.dimmed ? selection.related.has(edge) : edge.indices.some(i => depth === 'apply' || graph.edges[i].min_depth !== 'apply'))));
     selectedEdges = buildEdgeTiles(selection.related, positions);
+    if (colorsChanged && renderer) resetTiles(0);
     if (renderer) { resetTiles(1); resetOverview(); }
     refreshHover(depth); interactions.invalidate();
   }
@@ -383,15 +417,26 @@ export async function create({ element, onContextChange = () => {} }) {
     },
     setHighlight,
     setHover(id) { interactions.setHover(id); },
+    setEdgeHover(edge) {
+      const next = hasActiveNode && interactiveEdges.has(edge) ? edge : null;
+      if (next === hoveredEdge) return;
+      hoveredEdge = next; hoverDirty = true; interactions.invalidate();
+    },
     setTransform(tx, ty, scale) { interactions.setTransform(tx, ty, scale); },
     hitTest(clientX, clientY) { const rect = element.getBoundingClientRect(); return hitTest(index, camera, clientX - rect.left, clientY - rect.top); },
+    hitTestEdge(clientX, clientY) {
+      const rect = element.getBoundingClientRect(), x = clientX - rect.left, y = clientY - rect.top;
+      if (hitTest(index, camera, x, y)) return null;
+      return hitTestEdge(edges, camera, x, y, { accepts: edge => interactiveEdges.has(edge) });
+    },
     getCamera() { return { ...camera }; },
     getMetrics() {
       const visibleLabelNodes = renderer ? [...visibleNodes].filter(id => {
         const group = nodeCache.get(id);
         return layers[6].visible && group.visible && group.titleLabel.visible && group.metaLabel.visible;
       }).length : metrics.visibleNodes;
-      return { ...metrics, visibleLabelNodes, visibleBaseEdgeTiles: renderer ? visibleTiles[0].size : edges?.search(viewportBounds(camera, width, height)).length || 0,
+      return { ...metrics, hoveredEdge: hoveredEdge ? { from: hoveredEdge.from, to: hoveredEdge.to } : null, visibleLabelNodes, visibleBaseEdgeTiles: renderer ? visibleTiles[0].size : edges?.search(viewportBounds(camera, width, height)).length || 0,
+        visibleHoverEdgeTiles: renderer ? visibleTiles[2].size : hoverEdges?.search(viewportBounds(camera, width, height)).length || 0,
         cachedEdgeTiles: tileCaches.reduce((sum, cache) => sum + cache.size, 0) };
     },
     dispose() {
