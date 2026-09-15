@@ -143,7 +143,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertNotIn("${graph.layout_version}", javascript)
         self.assertNotIn("text-overflow: ellipsis", css)
         self.assertNotIn("-webkit-line-clamp", css)
-        self.assertIn("if (event.ctrlKey)", javascript)
+        self.assertIn('action === "pinch"', javascript)
         self.assertIn("state.tx -= event.deltaX", javascript)
         self.assertIn('addEventListener("gesturechange"', javascript)
 

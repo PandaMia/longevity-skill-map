@@ -14,6 +14,17 @@
       const infoPanel = document.getElementById("info-panel");
       const infoToggle = document.getElementById("info-toggle");
       const closeInfo = document.getElementById("close-info");
+      const scrollDeviceSelect = document.getElementById("scroll-device");
+      const scrollDeviceKey = "longevity-map-scroll-device-v1";
+      const wheelRouter = GraphWheel.createRouter();
+      try {
+        const savedDevice = localStorage.getItem(scrollDeviceKey);
+        if (["auto", "mouse", "trackpad"].includes(savedDevice)) scrollDeviceSelect.value = savedDevice;
+      } catch { /* Automatic detection also works without browser storage. */ }
+      scrollDeviceSelect.addEventListener("change", () => {
+        wheelRouter.reset();
+        try { localStorage.setItem(scrollDeviceKey, scrollDeviceSelect.value); } catch { /* Optional preference. */ }
+      });
       const infoSeenKey = "longevity-map-info-seen-v1";
       try {
         if (localStorage.getItem(infoSeenKey) === "1") {
@@ -374,19 +385,19 @@
       surface.addEventListener("wheel", event => {
         event.preventDefault();
         if (recentTouch() || ignoreNativeGesture) return;
+        const action = wheelRouter.route(event, scrollDeviceSelect.value);
+        if (action === "none") return;
         const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? surface.clientHeight : 1;
-        if ((!event.deltaX && !event.deltaY) || ((!event.shiftKey || event.ctrlKey) && !event.deltaY)) return;
         pauseHoverForNavigation();
-        if (event.ctrlKey) {
-          // Keep the existing trackpad-pinch sensitivity.
+        if (action === "pinch") {
+          // Chromium trackpad pinch (or explicit Ctrl + wheel).
           zoomAt(event.clientX, event.clientY, Math.exp(-event.deltaY * unit * .01));
-        } else if (event.shiftKey) {
-          // Explicit modifier for trackpad/wheel panning; ordinary wheel zooms.
+        } else if (action === "pan") {
+          // Two-finger scrolling keeps both axes and the current scale.
           state.tx -= event.deltaX * unit;
           state.ty -= event.deltaY * unit;
           applyTransform();
         } else {
-          // Normalize Windows/Firefox line deltas and cap unusually large ticks.
           const delta = Math.max(-300, Math.min(300, event.deltaY * unit));
           zoomAt(event.clientX, event.clientY, Math.exp(-delta * .002));
         }

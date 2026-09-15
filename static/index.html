@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Longevity Skill Map</title>
-  <link rel="stylesheet" href="/static/styles.css?v=20260913-touch">
+  <link rel="stylesheet" href="/static/styles.css?v=20260914-trackpad">
 </head>
 <body>
   <div id="app">
@@ -77,7 +77,10 @@
             <li><strong>Build a learning path.</strong> Choose your depth, select a target and click <b>Lock learning path</b> to highlight its prerequisites.</li>
           </ul>
           <p class="info-topics">Colors show subject areas. A skill inside a container can belong to a different subject area.</p>
-          <p class="info-navigation">Scroll to zoom · Drag to move</p>
+          <label class="scroll-device-control" for="scroll-device">Scroll device
+            <select id="scroll-device"><option value="auto">Auto</option><option value="mouse">Mouse</option><option value="trackpad">Trackpad</option></select>
+          </label>
+          <p class="info-navigation">Mouse wheel: zoom · Trackpad scroll: pan</p>
         </div>
       </aside>
       <aside id="legend-panel" class="legend-panel" hidden aria-label="Legend">
@@ -110,6 +113,7 @@
   <script src="/static/graph-interactions.js?v=20260910-visible-content" defer></script>
   <script src="/static/graph-renderer.js?v=20260910-soft-edges" defer></script>
   <script src="/static/graph-touch.js?v=20260913-touch" defer></script>
-  <script src="/static/app.js?v=20260913-touch" defer></script>
+  <script src="/static/graph-wheel.js?v=20260914-trackpad" defer></script>
+  <script src="/static/app.js?v=20260914-trackpad" defer></script>
 </body>
 </html>

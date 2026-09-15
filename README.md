@@ -49,7 +49,8 @@ Opening or closing containers, selecting skills, search results, related skills,
 | Drag the background or Shift + scroll | Pan the map |
 | One finger on a phone | Pan; tap a node to open it |
 | Two fingers on a phone | Pinch and move around the midpoint between the fingers |
-| Scroll, pinch, Ctrl + scroll, or toolbar **+ / −** | Zoom around the pointer (toolbar buttons use the viewport center) |
+| Two-finger trackpad scroll | Pan the map in either direction |
+| Trackpad pinch, mouse wheel, Ctrl + scroll, or toolbar **+ / −** | Zoom around the pointer (toolbar buttons use the viewport center) |
 | **Fit graph** | Fit the full map or the locked path in view |
 | **+ / −** on a container | Expand or collapse its components |
 | **Legend** | Explain topic colors, status dots and edge styles |
@@ -58,6 +59,8 @@ Opening or closing containers, selecting skills, search results, related skills,
 | Enter or Space on the graph | Open the focused skill |
 | + / − on the focused container | Expand or collapse its components |
 | Escape | Dismiss search suggestions, details or the legend |
+
+If your browser misidentifies the scrolling device, select **Mouse** or **Trackpad** under **Info → Scroll device**. **Auto** is the default and supports switching between devices.
 
 ## Research coverage
 

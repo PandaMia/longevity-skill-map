@@ -66,6 +66,9 @@
     .info-features li + li { margin-top: 12px; }
     .info-features li::marker { color: light-dark(#0284c7, #38bdf8); }
     .info-topics { margin: 16px 0 0; padding: 10px 12px; border-radius: 8px; background: color-mix(in srgb, var(--accent-2) 9%, var(--surface-2)); }
+    .scroll-device-control { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; color: var(--muted); font-size: 12px; }
+    .scroll-device-control select { min-height: 34px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-2); color: var(--text); font: inherit; }
+    .scroll-device-control select:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
     .info-navigation { margin: 14px 0 0; color: var(--muted); font-size: 11px; }
     .panel-head { display: flex; align-items: flex-start; gap: 12px; padding: 18px; border-bottom: 1px solid var(--border); }
     .legend-panel-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
@@ -163,7 +166,7 @@
       #node-search { height: 44px; font-size: 16px; }
       .toolbar { grid-area: tools; min-width: 0; width: 100%; margin-left: 0; justify-content: flex-end; }
       .depth-control { margin-right: auto; min-width: 0; }
-      .depth-control select { font-size: 16px; }
+      .depth-control select, .scroll-device-control select { font-size: 16px; }
     }
     @media (max-width: 760px) {
       .search-results { width: 100%; max-height: min(620px, calc(100dvh - 70px)); }

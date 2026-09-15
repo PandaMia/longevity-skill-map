@@ -76,6 +76,30 @@ async function checkInfoPanel(page) {
   await page.emulateMedia({ colorScheme: 'light' }); await frames(page);
   console.log('PASS compact Info, first-visit marker, Legend switching, Escape, focus and responsive toolbar');
 }
+async function checkScrollPreference(page) {
+  const device = page.locator('#scroll-device');
+  const change = async value => {
+    await page.locator('#info-toggle').click();
+    await device.selectOption(value);
+    await page.locator('#close-info').click();
+  };
+  await change('mouse');
+  let before = await page.evaluate(() => testRenderer.getCamera());
+  await page.locator('#graph').dispatchEvent('wheel', { deltaY: 3, clientX: 450, clientY: 400 }); await frames(page);
+  let after = await page.evaluate(() => testRenderer.getCamera());
+  assert(after.scale < before.scale, 'manual Mouse makes even ambiguous smooth-wheel deltas zoom');
+  await change('trackpad'); before = after;
+  await page.locator('#graph').dispatchEvent('wheel', { deltaX: 11, deltaY: 100, clientX: 450, clientY: 400 }); await frames(page);
+  after = await page.evaluate(() => testRenderer.getCamera());
+  assert.equal(after.scale, before.scale); assert.equal(after.tx, before.tx - 11); assert.equal(after.ty, before.ty - 100);
+  before = after;
+  await page.locator('#graph').dispatchEvent('wheel', { ctrlKey: true, deltaY: -10, clientX: 450, clientY: 400 }); await frames(page);
+  assert((await page.evaluate(() => testRenderer.getCamera())).scale > before.scale, 'pinch still works with a device override');
+  await page.reload(); await page.waitForFunction(() => window.testRenderer && document.getElementById('loading').hidden); await frames(page);
+  assert.equal(await device.inputValue(), 'trackpad', 'scroll device preference persists across reloads');
+  await change('auto');
+  console.log('PASS optional device selection and persistence');
+}
 async function checkCursors(page) {
   const toolbarCursor = await page.locator('#fit').evaluate(element => getComputedStyle(element).cursor);
   assert.equal(toolbarCursor, 'pointer');
@@ -206,10 +230,33 @@ async function checkActionZoom(page) {
       assert(Math.abs(after.scale / previous.scale - Math.exp(-48 * .002)) < 1e-10, 'pixel, line and page wheel units must agree');
     }
     await page.locator('#graph').dispatchEvent('wheel', { deltaX: 100, deltaY: 0, clientX: rect.x + px, clientY: rect.y + py }); await frames(page);
-    assert.deepEqual(await page.evaluate(() => testRenderer.getCamera()), after, 'horizontal-only scrolling must not pan the map');
+    let scrolled = await page.evaluate(() => testRenderer.getCamera());
+    assert.equal(scrolled.tx, after.tx - 100); assert.equal(scrolled.ty, after.ty); assert.equal(scrolled.scale, after.scale);
+    after = scrolled;
+    for (const [deltaX, deltaY] of [[0, 6], [0, 18], [0, 100], [0, 160], [35, 60], [50, 0], [0, 5], [0, .5]]) {
+      await page.locator('#graph').evaluate((element, { deltaX, deltaY, px, py }) => {
+        const event = new WheelEvent('wheel', { bubbles: true, cancelable: true, deltaX, deltaY, clientX: px, clientY: py });
+        Object.defineProperty(event, 'wheelDeltaY', { value: -3 * deltaY });
+        element.dispatchEvent(event);
+      }, { deltaX, deltaY, px: rect.x + px, py: rect.y + py });
+      await frames(page);
+      scrolled = await page.evaluate(() => testRenderer.getCamera());
+      assert.equal(scrolled.scale, after.scale, 'trackpad scroll and inertia must not change scale');
+      assert(Math.abs(scrolled.tx - (after.tx - deltaX)) < .001 && Math.abs(scrolled.ty - (after.ty - deltaY)) < .001);
+      after = scrolled;
+    }
+    const beforeMouseSwitch = after;
+    await page.evaluate(() => { window.lastWheelSample = null; document.addEventListener('wheel', e => {
+      window.lastWheelSample = { x: e.deltaX, y: e.deltaY, mode: e.deltaMode, legacy: e.wheelDeltaY, ctrl: e.ctrlKey, shift: e.shiftKey, target: e.target.tagName };
+    }, { once: true, capture: true }); });
+    await page.mouse.wheel(0, -100); await frames(page, 3);
+    after = await page.evaluate(() => testRenderer.getCamera());
+    assert(after.scale > beforeMouseSwitch.scale, `switching from trackpad to a mouse notch restores zoom: ${JSON.stringify({beforeMouseSwitch, after, input: await page.evaluate(() => window.lastWheelSample)})}`);
+    const beforePinchScale = after.scale;
     const wx = (px - after.tx) / after.scale, wy = (py - after.ty) / after.scale;
     await page.locator('#graph').dispatchEvent('wheel', { clientX: rect.x + px, clientY: rect.y + py, ctrlKey: true, deltaY: -20 }); await frames(page);
     after = await page.evaluate(() => testRenderer.getCamera());
+    assert(after.scale > beforePinchScale, 'trackpad pinch must zoom');
     assert(Math.abs((px - after.tx) / after.scale - wx) < .001); assert(Math.abs((py - after.ty) / after.scale - wy) < .001);
     await page.setViewportSize({ width: 1280, height: 800 }); await frames(page);
     assert.deepEqual(await page.evaluate(() => testRenderer.getCamera()), after, 'resize must preserve camera');
@@ -232,7 +279,7 @@ async function checkActionZoom(page) {
     await gesture(page, 'gestureend', { scale: 1.1 }); await frames(page);
     const afterGesture = await page.evaluate(() => testRenderer.getCamera());
     assert(Math.abs(afterGesture.scale / beforeGesture.scale - 1.1) < 1e-10, 'desktop Safari trackpad pinch remains enabled');
-    console.log('PASS mouse-wheel zoom, delta modes, Shift-wheel pan, drag, anchored pinch zoom and resize');
+    console.log('PASS mouse-wheel zoom, trackpad scroll/inertia, device switching, pinch, drag and resize');
 
     await page.locator('#graph').focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); await page.keyboard.press('Enter');
     await page.waitForFunction(() => document.getElementById('detail-title').textContent !== 'Loading…');
@@ -257,6 +304,7 @@ async function checkActionZoom(page) {
     assert.equal(overview.visibleLabelNodes, overview.visibleNodes);
     assert(overview.visibleBaseEdgeTiles > 0);
     console.log('PASS GPU context recovery and overview content');
+    await checkScrollPreference(page);
     assert.deepEqual(errors, []);
     await page.close();
   } finally { await browser.close(); }
